@@ -1,0 +1,125 @@
+name: PayU FinOps
+description: >-
+  Financial operations guidance for teams integrating with PayU APIs. Covers
+  cost drivers, optimization strategies, monitoring, and governance for API
+  consumption across PayU's regional platforms (Europe, India, Latin America,
+  and Enterprise/PaymentsOS).
+url: https://corporate.payu.com/developer-documentation/
+costDrivers:
+  - driver: Transaction Fees
+    description: >-
+      PayU earns revenue primarily through per-transaction percentage fees.
+      Each successful payment processed via the API incurs a fee that varies
+      by region, payment method, and merchant volume tier. Higher volumes
+      typically unlock lower negotiated rates.
+    optimization: >-
+      Negotiate volume-based rate tiers during contract renewal. Monitor
+      transaction counts and volumes monthly to identify whether volume
+      thresholds for better rates have been crossed.
+
+  - driver: Payment Method Mix
+    description: >-
+      Different payment methods carry different processing fees. Card payments,
+      BLIK, bank transfers, and wallets each have distinct cost profiles.
+      Local payment methods in emerging markets may have variable fees.
+    optimization: >-
+      Analyze payment method distribution. Where acceptable to users, surface
+      lower-cost payment methods prominently in checkout flows. Use the PayU
+      Pricing API (LatAm) to query real-time financing costs.
+
+  - driver: Refunds and Chargebacks
+    description: >-
+      Refunds and chargebacks incur operational costs and potentially reverse
+      transaction fees depending on PayU's regional policies. High chargeback
+      rates can trigger account review or fee penalties.
+    optimization: >-
+      Implement robust fraud detection (leverage PayU's anti-fraud tools) to
+      minimize chargebacks. Process refunds promptly to avoid escalation to
+      chargebacks.
+
+  - driver: Installment Financing (LatAm)
+    description: >-
+      When merchants offer interest-free installments (MSI in Mexico and
+      Argentina), the merchant absorbs the financing cost. Standard
+      installments shift interest costs to the buyer.
+    optimization: >-
+      Use the PayU Pricing API to compare financing costs before enabling
+      MSI promotions. Limit MSI to high-margin product categories or
+      when required competitively.
+
+  - driver: Currency Conversion
+    description: >-
+      Multi-currency pricing (MCP) and cross-border payments may involve
+      currency conversion spreads. PayU provides FX rate endpoints for
+      ECB reference rates and partner-specific rates.
+    optimization: >-
+      Monitor FX rates via the /api/v2_1/fx-providers/ecb/fx-rates endpoint.
+      Settle in local currencies where possible to avoid unnecessary conversion
+      costs.
+
+  - driver: Marketplace Payouts
+    description: >-
+      Marketplace operators using the Marketplace API incur fees on fund
+      transfers between marketplace and sellers. Seller verification (KYC/AML)
+      processes may involve one-time or periodic costs.
+    optimization: >-
+      Batch payouts where operationally possible to reduce per-transfer fees.
+      Complete seller verification early to avoid operational delays.
+
+monitoring:
+  - tool: PayU Reporting APIs
+    description: >-
+      Use built-in reporting endpoints to pull transaction history, settlement
+      data, and refund summaries. Europe API: GET /api/v2_1/orders,
+      Enterprise API: settlement reports via PaymentsOS.
+  - tool: PayU Enterprise Analytics
+    description: >-
+      PayU Enterprise (PaymentsOS) includes payment analytics and performance
+      insights dashboards for routing, acceptance rates, and provider costs.
+  - tool: Status Pages
+    description: >-
+      Monitor regional status pages to distinguish payment failures caused by
+      PayU platform issues from API misuse or traffic anomalies.
+    urls:
+      europe: https://status.secure.payu.com/
+      hub: https://status.paymentsos.com/
+      latam: https://status.payulatam.com/
+      india: https://pp2admin.payu.in/
+
+governance:
+  - action: Credential Management
+    description: >-
+      Rotate client_id/client_secret (Europe OAuth 2.0), Merchant API Keys
+      (Latam HMAC), and Enterprise API keys on a regular schedule. Never
+      embed credentials in client-side code. Use environment variables or
+      secrets management services.
+
+  - action: Sandbox vs Production Separation
+    description: >-
+      Maintain strict separation between sandbox and production credentials.
+      All integration and load testing must occur in the sandbox environment
+      to avoid incurring live transaction fees.
+
+  - action: OAuth Token Lifecycle
+    description: >-
+      For the Europe API, cache tokens for their full 43,199-second (~12-hour)
+      validity. Track expiry and refresh proactively rather than on failure to
+      prevent failed transactions and unnecessary token-endpoint calls.
+
+  - action: Cost Allocation Tags
+    description: >-
+      Use PayU's shop/merchant unit identifiers (shopId, merchant units)
+      to attribute transaction costs to business units or product lines for
+      internal chargebacks and P&L reporting.
+
+  - action: Chargeback Rate Tracking
+    description: >-
+      Set up alerts when chargeback rates approach payment network thresholds
+      (typically 1% of transactions). High chargeback rates may trigger
+      additional fees or account restrictions.
+
+  - action: Volume Review Cadence
+    description: >-
+      Review monthly transaction volumes against contracted tiers. Submit
+      renegotiation requests when volumes consistently exceed tier thresholds
+      to ensure optimal pricing.

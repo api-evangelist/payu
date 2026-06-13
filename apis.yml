@@ -1,0 +1,151 @@
+aid: payu
+name: PayU
+description: >-
+  PayU is a global payment platform operating in 50+ emerging markets across
+  Central & Eastern Europe, Latin America, the Middle East, and Africa. It
+  provides REST APIs for payment processing, order management, refunds, payouts,
+  subscriptions, fraud detection, checkout optimization, marketplace operations,
+  tokenization, and financial services. PayU processes 4 million transactions
+  daily for 450,000+ merchants through 450+ local payment methods.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Payments
+  - Payment Processing
+  - Fintech
+  - Financial Services
+  - Subscriptions
+  - Fraud Detection
+  - Checkout
+  - Marketplace
+  - Tokenization
+  - Emerging Markets
+apis:
+  - aid: payu:payu-europe-rest-api
+    name: PayU Europe REST API
+    description: >-
+      REST API for payment processing in Central & Eastern Europe. Supports
+      order creation and management, payment method retrieval, refunds, payouts,
+      card tokenization, marketplace operations, multi-currency pricing, BLIK
+      payments, and 3DS 2.0 authentication.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.payu.com/europe/api/
+    baseURL: https://secure.payu.com
+    tags:
+      - Payments
+      - Europe
+      - Orders
+      - Refunds
+      - Payouts
+      - Marketplace
+      - Tokenization
+    properties:
+      - type: Documentation
+        url: https://developers.payu.com/europe/docs/get-started/apis/
+      - type: OpenAPI
+        url: https://developers.payu.com/europe/api/
+    contact:
+      - FN: PayU Europe Developer Support
+        url: https://developers.payu.com/europe/
+
+  - aid: payu:payu-india-rest-api
+    name: PayU India REST API
+    description: >-
+      REST API for payment processing in India. Supports hosted checkout,
+      payment links, recurring payments, subscription management, save cards /
+      vault, split settlements, wallet operations, cross-border payments,
+      pre-authorization, payouts, and settlement reporting.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.payu.in/reference/introduction-api-reference
+    baseURL: https://info.payu.in
+    tags:
+      - Payments
+      - India
+      - Checkout
+      - Subscriptions
+      - Payouts
+      - Settlements
+    properties:
+      - type: Documentation
+        url: https://docs.payu.in/
+    contact:
+      - FN: PayU India Developer Support
+        url: https://docs.payu.in/
+
+  - aid: payu:payu-latam-payments-api
+    name: PayU Latam Payments API
+    description: >-
+      REST API for payment processing across Latin America including Argentina,
+      Brazil, Chile, Colombia, Mexico, and Peru. Supports payments, refunds,
+      recurring charges, installment financing, and the Pricing API for
+      querying available financing options and costs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
+    baseURL: https://api.payulatam.com
+    tags:
+      - Payments
+      - Latin America
+      - Installments
+      - Pricing
+      - Refunds
+    properties:
+      - type: Documentation
+        url: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
+    contact:
+      - FN: PayU Latam Developer Support
+        url: https://developers.payulatam.com/
+
+  - aid: payu:payu-enterprise-api
+    name: PayU Enterprise API (PaymentsOS)
+    description: >-
+      Enterprise-grade payment orchestration API powered by PaymentsOS. Provides
+      a single entry point for processing payments across multiple provider
+      connections with dynamic routing. Supports charge, authorize/capture,
+      void, refund, and credit operations, as well as risk management,
+      network tokens, webhooks, and settlement reporting.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.paymentsos.com/docs.html
+    baseURL: https://api.paymentsos.com
+    tags:
+      - Payments
+      - Orchestration
+      - Enterprise
+      - Routing
+      - Webhooks
+      - Risk Management
+    properties:
+      - type: Documentation
+        url: https://developers.paymentsos.com/docs.html
+    contact:
+      - FN: PayU Enterprise Developer Support
+        url: https://developers.paymentsos.com/
+
+common:
+  - type: Website
+    url: https://corporate.payu.com/
+  - type: Documentation
+    url: https://corporate.payu.com/developer-documentation/
+  - type: GitHubOrg
+    url: https://github.com/PayU
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/payu/
+  - type: Blog
+    url: https://corporate.payu.com/blog/
+  - type: Pricing
+    url: https://corporate.payu.com/contact-us/
+  - type: StatusPage
+    url: https://status.paymentsos.com/
+  - type: X
+    url: https://twitter.com/PayUindia
+  - type: Plans
+    url: plans/payu-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/payu-rate-limits.yml
+  - type: FinOps
+    url: finops/payu-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

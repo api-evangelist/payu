@@ -1,0 +1,85 @@
+name: PayU API Rate Limits
+description: >-
+  PayU does not publicly document specific rate limits for its REST APIs.
+  Limits are enforced at the API gateway level and may be communicated to
+  merchants during onboarding or upon request. The following represents known
+  and inferred constraints based on PayU's public documentation and common
+  payment API practices.
+url: https://developers.payu.com/europe/api/
+rateLimits:
+  - api: PayU Europe REST API v2.1
+    notes: >-
+      No public rate limit thresholds documented. PayU Europe documentation
+      does not specify requests-per-second or daily call limits. Merchants
+      experiencing throttling should contact PayU support.
+    authentication:
+      type: OAuth 2.0
+      tokenEndpoint: /pl/standard/user/oauth/authorize
+      grantTypes:
+        - client_credentials
+        - trusted_merchant
+        - partner
+      tokenValidity: 43199 seconds (~12 hours)
+    environments:
+      production: https://secure.payu.com
+      sandbox: https://secure.snd.payu.com
+    knownBehaviors:
+      - OAuth access tokens expire after 43,199 seconds; clients must
+        refresh tokens proactively.
+      - Retry-after headers may be returned on 429 responses; honor them.
+      - The sandbox environment availability can be checked at
+        https://status.secure.payu.com/
+
+  - api: PayU India REST API
+    notes: >-
+      No public rate limit thresholds documented for the India API. Test
+      environment has known limitations (no UPI flows, certain refund scenarios,
+      and omnichannel features unsupported in sandbox).
+    authentication:
+      type: API Key / HMAC-SHA512 hash (varies by endpoint)
+      notes: >-
+        Static test key used in test environment. Production credentials
+        issued after merchant onboarding.
+    environments:
+      production: https://info.payu.in
+      sandbox: https://test.payu.in
+
+  - api: PayU Latam Payments API
+    notes: >-
+      No public rate limit thresholds documented. HMAC-SHA256 authentication
+      is required; each request must include a freshly computed signature.
+    authentication:
+      type: HMAC-SHA256
+      header: Authorization
+      format: "Hmac {MerchantPublicKey}:{Base64(HMAC-SHA256(MerchantApiKey, ContentToSign))}"
+      dateHeader: Date (RFC 2616) or x-hmac-date
+    environments:
+      production: https://api.payulatam.com
+      sandbox: https://sandbox.api.payulatam.com
+
+  - api: PayU Enterprise API (PaymentsOS)
+    notes: >-
+      No public rate limit thresholds documented. Enterprise SLA and rate
+      limits are agreed upon during contract negotiation.
+    authentication:
+      type: API Key
+      notes: >-
+        Non-repudiation API authentication with end-to-end encryption and
+        IP address restrictions available.
+    environments:
+      production: https://api.paymentsos.com
+      sandbox: Available; see developer portal for sandbox credentials
+    statusPage: https://status.paymentsos.com/
+
+bestPractices:
+  - Cache OAuth 2.0 tokens for the full 43,199-second validity period to
+    minimize token-endpoint calls.
+  - Implement exponential back-off with jitter on 429 and 5xx responses.
+  - Use sandbox environments for load testing before production traffic.
+  - Monitor the appropriate regional status page before concluding rate
+    limiting is the cause of failures.
+statusPages:
+  europe: https://status.secure.payu.com/
+  hub: https://status.paymentsos.com/
+  latam: https://status.payulatam.com/
+  india: https://pp2admin.payu.in/

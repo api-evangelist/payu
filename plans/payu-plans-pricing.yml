@@ -1,0 +1,76 @@
+name: PayU Plans & Pricing
+description: >-
+  PayU does not publicly publish fixed tiered plans with listed prices.
+  Pricing is transaction-based and negotiated depending on region, payment
+  volume, and payment methods used. Merchants contact PayU sales or sign up
+  via regional portals to receive customized rates. The following reflects
+  PayU's general commercial model across regions.
+url: https://corporate.payu.com/contact-us/
+plans:
+  - name: Standard Merchant Account
+    description: >-
+      Transaction-fee-based account for merchants processing payments in
+      supported PayU markets. Fees vary by region, payment method, and volume.
+      Access to REST API, sandbox environment, hosted checkout, and payment
+      links.
+    audience: SMBs and individual merchants
+    features:
+      - Hosted Checkout Page
+      - Payment Links
+      - Payment Methods (450+ local methods)
+      - Sandbox / Test Environment
+      - Basic Reporting
+      - REST API Access
+      - Developer Documentation
+      - 3DS 2.0 Support
+    pricing:
+      model: Transaction fee (percentage per transaction)
+      notes: >-
+        Rates vary by region and payment method. Contact PayU regional sales for
+        exact rates. India rates are publicly disclosed on the PayU India
+        website.
+
+  - name: Enterprise / PayU Enterprise (PaymentsOS)
+    description: >-
+      Full-featured enterprise payment orchestration plan for large merchants
+      and marketplaces needing multi-provider routing, advanced fraud tools,
+      network tokens, and settlement reporting via a single API integration.
+    audience: Enterprise merchants, marketplaces, platforms
+    features:
+      - Payment Orchestration (multi-provider routing)
+      - Dynamic Routing (by fee, acceptance rate, response time)
+      - 450+ Payment Methods
+      - Card Tokenization / Network Tokens
+      - Risk Management & Fraud Detection
+      - Marketplace / Multi-Seller Support
+      - Webhooks
+      - Settlement & Transaction Reporting
+      - SLA-backed Support
+      - Dedicated Account Management
+    pricing:
+      model: Custom / negotiated
+      notes: >-
+        Enterprise pricing is custom. Contact PayU sales at
+        https://corporate.payu.com/contact-us/ for a tailored quote.
+
+  - name: PayU Latam Installment Financing (Pricing API)
+    description: >-
+      Latin American merchants can query available financing/installment options
+      for customers via the Pricing API. Interest costs vary by plan type and
+      country.
+    audience: LatAm merchants offering installment payments
+    features:
+      - Standard Installments (payer bears interest)
+      - Interest-Free Installments / MSI (merchant bears interest — Argentina & Mexico)
+      - Specific Promotions by promotion ID (Argentina, Colombia, Mexico, Peru)
+    pricing:
+      model: Variable; interest absorbed by payer or merchant depending on plan
+      notes: >-
+        Mexico MSI minimum purchase amounts: $300 MXN (3 months) to
+        $1,800 MXN (18 months). Use the Pricing API endpoint at
+        https://api.payulatam.com/payments-api/rest/v4.9/pricing to query
+        live rates.
+notes: >-
+  PayU pricing information is not comprehensively published publicly.
+  Contact regional offices for current rates. The Developer sandbox and
+  test environment are available at no cost for integration testing.
