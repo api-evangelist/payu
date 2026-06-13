@@ -1,0 +1,4620 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json",
+  "title": "PayU GPO Europe REST API - JSON Schemas",
+  "description": "JSON Schema definitions extracted from the PayU GPO Europe REST API OpenAPI 3.1.0 specification (version 2.1.0)",
+  "$defs": {
+    "200": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "verificationId": {
+          "type": "string",
+          "description": "",
+          "example": "5002500000BVmycAAD"
+        },
+        "verificationType": {
+          "type": "string",
+          "description": "",
+          "example": "FULL"
+        },
+        "verificationTransferStatus": {
+          "type": "string",
+          "description": "Indicates status of the verification transfer.\n* **Success** - transfer was received by PayU.\n* **Failure** - PayU did not received funds\n* **Matched** - transfer has been matched properly.\n* **null** - did not have enough information about the transfer.\n",
+          "enum": [
+            "Success",
+            "Failure",
+            "Matched",
+            "null"
+          ],
+          "example": "null"
+        },
+        "processType": {
+          "type": "string",
+          "description": "Type of the process.",
+          "enum": [
+            "OCCASIONAL",
+            "REGULAR"
+          ],
+          "example": "OCCASIONAL"
+        },
+        "status": {
+          "type": "string",
+          "description": "Possible statuses: <ul> <li><b>POSITIVE</b> - indicates that the seller is accepted and can process transactions with PayU.</li> <li><b>NEGATIVE</b> - indicates that the seller is rejected and can't process transactions with PayU. There is an error code always send for negative scenario.</li> <li><b>REJECTED</b> -  indicates that provided data must be corrected.</li> <li><b>WAITING_FOR_DATA</b> - waiting for data is sent in the notification when the verification was initialized but the request to start verification was not yet received. Provide the necessary data and documents according to the type of submerchant and send POST request on <code complete</code> endpoint.</li> <li><b>WAITING_FOR_VERIFICATION</b> - waiting for verification indicates that data and documents submitted to PayU will be verified by PayU or  currently being verified. Wait for notification about status change.</li> <li><b>CANCELED</b> - canceled. Initiate new verification when it is necessary. Marketplace can not cancel verification intialized by PayU or after sending complete information.</li> </ul>",
+          "example": "REJECTED"
+        },
+        "sellerId": {
+          "type": "string",
+          "description": "",
+          "example": "123456test12"
+        },
+        "note": {
+          "type": "string",
+          "description": "",
+          "example": null
+        },
+        "errors": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "description": "Group of fields that indicate which data/document the error code applies to.",
+                "properties": {
+                  "itemType": {
+                    "type": "string",
+                    "description": "",
+                    "enum": [
+                      "SELLER",
+                      "SELLER_DOCUMENT",
+                      "ASSOCIATE",
+                      "ASSOCIATE_DOCUMENT",
+                      "PAYOUT_ACCOUNT"
+                    ],
+                    "example": "SELLER_DOCUMENT"
+                  },
+                  "itemProperties": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "documentType": {
+                        "type": "string",
+                        "description": "",
+                        "enum": [
+                          "ID_CARD",
+                          "PASSPORT",
+                          "DRIVING_LICENCE",
+                          "RESIDENCE_PERMIT",
+                          "OTHER"
+                        ],
+                        "example": "PEP_STATEMENT"
+                      },
+                      "documentId": {
+                        "type": "string",
+                        "description": "",
+                        "example": "2"
+                      },
+                      "associateId": {
+                        "type": "string",
+                        "description": "",
+                        "example": null
+                      }
+                    }
+                  }
+                }
+              },
+              "code": {
+                "type": "string",
+                "description": "Error Code.",
+                "example": "006"
+              }
+            }
+          }
+        },
+        "updateDate": {
+          "type": "string",
+          "description": "",
+          "example": "2020-04-03T09:14:06.000Z"
+        },
+        "createDate": {
+          "type": "string",
+          "description": "",
+          "example": "2020-04-03T06:36:15.000Z"
+        }
+      }
+    },
+    "400": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "string",
+              "description": "Error type."
+            },
+            "severity": {
+              "type": "string",
+              "description": "error severity type."
+            },
+            "code": {
+              "type": "string",
+              "description": "Identification code of specific error."
+            },
+            "codeLiteral": {
+              "type": "string",
+              "description": "Cause of the error."
+            },
+            "statusDesc": {
+              "type": "string",
+              "description": "Error description."
+            }
+          }
+        }
+      }
+    },
+    "401": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "string",
+              "description": "Error type."
+            },
+            "code": {
+              "type": "string",
+              "description": "Identification code of specific error."
+            },
+            "codeLiteral": {
+              "type": "string",
+              "description": "Cause of the error."
+            },
+            "statusDesc": {
+              "type": "string",
+              "description": "Error description."
+            }
+          }
+        }
+      }
+    },
+    "403": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error type.",
+              "enum": [
+                "access_denied"
+              ]
+            },
+            "error_description": {
+              "type": "string",
+              "description": "Description of error.",
+              "enum": [
+                "Access is denied"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "404": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "string",
+              "description": "Error type."
+            },
+            "severity": {
+              "type": "string",
+              "description": "error severity type."
+            },
+            "statusDesc": {
+              "type": "string",
+              "description": "Error description."
+            }
+          }
+        }
+      }
+    },
+    "409": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error type.",
+              "example": "409"
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message."
+            }
+          }
+        }
+      }
+    },
+    "500": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "string",
+              "description": "Error type."
+            },
+            "code": {
+              "type": "string",
+              "description": "Identification code of specific error."
+            },
+            "codeLiteral": {
+              "type": "string",
+              "description": "Cause of the error."
+            },
+            "statusDesc": {
+              "type": "string",
+              "description": "Error description."
+            }
+          }
+        }
+      }
+    },
+    "ClientCredentials": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret"
+      ],
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "example": "client_credentials",
+          "enum": [
+            "client_credenitals"
+          ],
+          "description": "Authorization mode"
+        },
+        "client_id": {
+          "type": "string",
+          "example": "145227",
+          "description": "Merchant's POS identifier in PayU's system. Can be found in PayU's merchant panel"
+        },
+        "client_secret": {
+          "type": "string",
+          "example": "12f071174cb7eb79d4aac5bc2f07563f",
+          "description": "Merchant's secret key. Can be found in PayU's merchant panel"
+        }
+      }
+    },
+    "TrustedMerchant": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret",
+        "email",
+        "ext_customer_id"
+      ],
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "example": "trusted_merchant",
+          "enum": [
+            "trusted_merchant"
+          ],
+          "description": "Authorization mode"
+        },
+        "client_id": {
+          "type": "string",
+          "example": "145227",
+          "description": "Merchant's POS identifier in PayU's system. Can be found in PayU's merchant panel"
+        },
+        "client_secret": {
+          "type": "string",
+          "example": "12f071174cb7eb79d4aac5bc2f07563f",
+          "description": "Merchant's secret key. Can be found in PayU's merchant panel"
+        },
+        "email": {
+          "type": "string",
+          "description": "Customer's email address in merchant's system"
+        },
+        "ext_customer_id": {
+          "type": "string",
+          "description": "Customer's identifier in the merchant's system"
+        }
+      }
+    },
+    "Partner": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret",
+        "firm_id"
+      ],
+      "description": "only usable with special Technical Partner priviliges that allow management of Firms, URLs, Shops and POSes created and managed by Partner",
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "example": "partner",
+          "enum": [
+            "partner"
+          ],
+          "description": "Authorization mode"
+        },
+        "client_id": {
+          "type": "string",
+          "example": "145227",
+          "description": "Partners client_id"
+        },
+        "client_secret": {
+          "type": "string",
+          "example": "12f071174cb7eb79d4aac5bc2f07563f",
+          "description": "Partners client_secret"
+        },
+        "firm_id": {
+          "type": "string",
+          "example": "p3BiPgVO",
+          "description": "publicFirmId created by Partner that will be managed"
+        }
+      }
+    },
+    "blikTokens": {
+      "type": "array",
+      "description": "Section containing saved BLIK tokens",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "BLIK token value."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "UID",
+              "PAYID"
+            ],
+            "description": "Type of the token. Either UID for normal transactions or PAYID for recurring payments."
+          },
+          "brandImageUrl": {
+            "type": "string",
+            "example": "https://static.payu.com/images/mobile/logos/pbl_blik.png"
+          },
+          "bankApplicationReferences": {
+            "type": "array",
+            "description": "Array containing objects about available installments options.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Unique key for assignment of particular banking application to a token. The value of this field is inserted in the order in payMethod.blikData.appKey field.",
+                  "example": 11111
+                },
+                "label": {
+                  "type": "string",
+                  "description": "The value of the label for assigning a particular banking application to a token. A list of values for these fields is presented to the customer for selection when paying with the UID token.",
+                  "example": "BLIK label"
+                }
+              }
+            }
+          },
+          "recurring": {
+            "type": "object",
+            "description": "Contains information about the recurring payment.",
+            "properties": {
+              "aliasLabel": {
+                "type": "string",
+                "description": "BLIK recurring payment title."
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the recurring payment.",
+                "enum": [
+                  "O"
+                ]
+              },
+              "initializationDate": {
+                "type": "string",
+                "description": "Date of the first transaction in the recurring payment cycle without the customer confirmation.",
+                "example": "2026-10-01T00:00:00+02:00",
+                "format": "yyyy-MM-dd'T'HH:mm:ssXXX"
+              },
+              "expirationDate": {
+                "type": "string",
+                "description": "Expiration date of the PAYID token. Maximum date is 10 years from the creation date of the token. If the value is not provided, token will be valid indifinitely.",
+                "example": "2026-10-01T00:00:00+02:00",
+                "format": "yyyy-MM-dd'T'HH:mm:ssXXX"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cardTokens": {
+      "type": "array",
+      "description": "Section containing saved card tokens",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "TOKC_XATB7DF8ACXYTVQIPLWTVPFRKQE"
+          },
+          "brandImageUrl": {
+            "type": "string",
+            "example": "https://static.payu.com/images/mobile/visa.png"
+          },
+          "preferred": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "NEW",
+              "ACTIVE",
+              "EXPIRED"
+            ],
+            "example": "ACTIVE"
+          },
+          "cardExpirationYear": {
+            "type": "integer",
+            "example": 2026
+          },
+          "cardExpirationMonth": {
+            "type": "integer",
+            "example": 7
+          },
+          "cardNumberMasked": {
+            "type": "string",
+            "example": "411111******1111"
+          },
+          "cardScheme": {
+            "type": "string",
+            "example": "VS"
+          },
+          "cardBrand": {
+            "type": "string",
+            "example": "VISA"
+          }
+        }
+      }
+    },
+    "mastercardFeature": {
+      "type": "object",
+      "description": "Click to Pay Mastercard feature.",
+      "title": "mastercard",
+      "properties": {
+        "status": {
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ],
+          "type": "string",
+          "description": "Status of the Click to Pay feature for Mastercard.",
+          "example": "ENABLED"
+        },
+        "dpaId": {
+          "type": "string",
+          "description": "Merchant ID in Mastercard Click to Pay.",
+          "example": "jI8iGo86"
+        }
+      }
+    },
+    "visaFeature": {
+      "type": "object",
+      "description": "Click to Pay feature.",
+      "title": "visa",
+      "properties": {
+        "status": {
+          "Enum": [
+            "ENABLED",
+            "DISABLED"
+          ],
+          "type": "string",
+          "description": "Status of the Click to Pay feature for Visa.",
+          "example": "ENABLED"
+        },
+        "dpaId": {
+          "type": "string",
+          "description": "Merchant ID in Visa Click to Pay.",
+          "example": "jI8iGo86"
+        },
+        "acquirerBIN": {
+          "type": "string",
+          "description": "Acquirer Bank Identification Number for Click to Pay transactions.",
+          "example": 123456
+        },
+        "acquirerMerchantId": {
+          "type": "string",
+          "description": "Acquirer Merchant ID for Click to Pay transactions.",
+          "example": "MARCH01"
+        }
+      }
+    },
+    "clickToPayFeature": {
+      "type": "object",
+      "description": "Click to Pay feature.",
+      "title": "clickToPay",
+      "properties": {
+        "brandImageUrl": {
+          "type": "string",
+          "description": "URL of the Click to Pay brand image.",
+          "example": "https://static.payu.com/images/mobile/logos/pbl_cpt_on.png"
+        },
+        "mastercard": {
+          "$ref": "#/components/schemas/mastercardFeature"
+        },
+        "visa": {
+          "$ref": "#/components/schemas/visaFeature"
+        }
+      }
+    },
+    "payByLinks": {
+      "type": "array",
+      "description": "Section containing available PayByLink payment methods",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "sgb",
+            "description": "<code>payType</code> value. You can find available values <b><a href=\"/europe/docs/get-started/introduction/#paymethods\" target=\"_blank\">here</a></b>."
+          },
+          "brandImageUrl": {
+            "type": "string",
+            "example": "https://static.payu.com/images/mobile/logos/pbl_sgb_off.png",
+            "description": "Link to <code><payType</code> logo graphic on PayU server."
+          },
+          "name": {
+            "type": "string",
+            "example": "SGB Bank",
+            "description": "Name of <code>payType</code> set by PayU"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED",
+              "TEMPORARY_DISABLED"
+            ],
+            "example": "DISABLED"
+          },
+          "minAmount": {
+            "type": "number",
+            "example": 50
+          },
+          "maxAmount": {
+            "type": "number",
+            "example": 99999999
+          },
+          "features": {
+            "type": "object",
+            "description": "List of features available.",
+            "properties": {
+              "clickToPay": {
+                "$ref": "#/components/schemas/clickToPayFeature"
+              }
+            }
+          }
+        }
+      }
+    },
+    "donation": {
+      "type": "object",
+      "description": "Section containing data of donation added to the order.",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "description": "Donation amount in pennies.",
+          "example": 500
+        },
+        "organizationId": {
+          "type": "string",
+          "description": "Charity identifier provided by PayU."
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "description": "Section containing delivery address. For a list of parameters, see section delivery",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Full street address, incl. apartment number. <b>Section recommended for the 3DS 2 authentication</b>.",
+          "maxLength": 255
+        },
+        "postalBox": {
+          "type": "string",
+          "description": "Postal box",
+          "maxLength": 255
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code. <b>Section recommended for the 3DS 2 authentication</b>.",
+          "maxLength": 255
+        },
+        "city": {
+          "type": "string",
+          "description": "City, <b>section recommended for the 3DS 2 authentication</b>.",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "description": "Country principal subdivision like \"state\" or \"province\". If provided, must be a valid ISO 3166-2 code (e.g. \"UT\" for Utah in the USA or \"30\" for \"Wielkopolskie\" in Poland). <b>Section recommended for the 3DS 2 authentication</b>.",
+          "example": "30",
+          "maxLength": 255
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Two-letter country code compliant with <b><a href=\"https://www.iso.org/iso-3166-country-codes.html\">ISO-3166</a></b>. <b>Section recommended for the 3DS 2 authentication</b>."
+        },
+        "name": {
+          "type": "string",
+          "description": "Address description",
+          "maxLength": 255
+        },
+        "recipientName": {
+          "type": "string",
+          "description": "Recipient name",
+          "maxLength": 255
+        },
+        "recipientEmail": {
+          "type": "string",
+          "description": "Ecipient email"
+        },
+        "recipientPhone": {
+          "type": "string",
+          "description": "Recipient phone number"
+        }
+      }
+    },
+    "buyer": {
+      "type": "object",
+      "description": "Section containing buyer data.",
+      "properties": {
+        "extCustomerId": {
+          "type": "string",
+          "description": "ID of the customer used in merchant system",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "email": {
+          "type": "string",
+          "description": "Buyer's email address. **Required for Installments (PL), Pay Later (PL), Pay Later with Twisto (CZ), 3DS 2 authentication.**",
+          "example": "email@email.com",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "phone": {
+          "type": "string",
+          "description": "Buyer's telephone number. Please use +[country code] [number] format. **Required for Pay Later with Twisto (CZ), 3DS 2 authentication.**",
+          "example": "+48 225108001",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "firstName": {
+          "type": "string",
+          "description": "Buyer's first name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)** </br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.",
+          "example": "John",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Buyer's last name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)**</br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.",
+          "example": "Doe",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "nin": {
+          "type": "string",
+          "description": "National Identification Number",
+          "example": 123456789
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code, ISO-639-1 compliant. Denotes the language version of PayU hosted payment page and of e-mail messages sent from PayU to the payer.",
+          "example": "pl"
+        },
+        "birthDate": {
+          "type": "string",
+          "description": "Buyer's date of birth. **Required for AFT card authorization (Account Funding Transaction)**.",
+          "format": "ISO 8601",
+          "example": "2006-12-03T00:00:00.000+01:00"
+        },
+        "delivery": {
+          "description": "**Section recommended for the 3DS 2 authentication.**",
+          "$ref": "#/components/schemas/delivery"
+        }
+      }
+    },
+    "shippingMethods": {
+      "type": "array",
+      "description": "Array of objects related to shipping method.",
+      "items": {
+        "type": "object",
+        "required": [
+          "country",
+          "price",
+          "name"
+        ],
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Two-letter shipping country code compliant with <b><a href=\"https://www.iso.org/iso-3166-country-codes.html\">ISO-3166</a></b>.",
+            "example": "PL"
+          },
+          "price": {
+            "type": "number",
+            "description": "Shipping price.",
+            "example": 250
+          },
+          "name": {
+            "type": "string",
+            "description": "Shipping method name",
+            "example": "Postal package"
+          }
+        }
+      }
+    },
+    "products": {
+      "type": "array",
+      "description": "Section containing data of the ordered products. Section <code>products</code> is an array of objects of type product.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "unitPrice",
+          "quantity"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the product.",
+            "example": "My product",
+            "maxLength": 255
+          },
+          "unitPrice": {
+            "type": "string",
+            "description": "Unit price.",
+            "example": 999
+          },
+          "quantity": {
+            "type": "string",
+            "description": "Quantity of given product",
+            "example": 4
+          },
+          "virtual": {
+            "type": "boolean",
+            "description": "Product type, which can be virtual or material. **Even if sent, the virtual parameter is not returned in PAYU notifications.**",
+            "example": true
+          }
+        }
+      }
+    },
+    "shoppingCarts": {
+      "type": "array",
+      "description": "Array of objects related to transaction identification.",
+      "items": {
+        "type": "object",
+        "required": [
+          "extCustomerId",
+          "amount",
+          "products"
+        ],
+        "properties": {
+          "extCustomerId": {
+            "type": "string",
+            "description": "Submerchant identifier",
+            "example": "ext-customer-1",
+            "maxLength": 1024
+          },
+          "amount": {
+            "type": "number",
+            "description": "Total amount for given submerchant",
+            "example": 24950
+          },
+          "fee": {
+            "type": "string",
+            "description": "Marketplace fee. Value should be in range <0, amount>",
+            "example": 250
+          },
+          "shippingMethods": {
+            "$ref": "#/components/schemas/shippingMethods"
+          },
+          "products": {
+            "$ref": "#/components/schemas/products"
+          }
+        }
+      }
+    },
+    "clickToPayVisa": {
+      "type": "object",
+      "title": "visa",
+      "description": "Click to Pay data for Visa.",
+      "required": [
+        "srcCorrelationId"
+      ],
+      "properties": {
+        "srcCorrelationId": {
+          "type": "string",
+          "description": "A transaction identifier.",
+          "example": "123e4567-e89b-12d3-a456-426614174000"
+        }
+      }
+    },
+    "clickToPayMastercard": {
+      "type": "object",
+      "title": "mastercard",
+      "description": "Click to Pay data for Mastercard.",
+      "required": [
+        "srcCorrelationId",
+        "srcDigitalCardId"
+      ],
+      "properties": {
+        "srcCorrelationId": {
+          "type": "string",
+          "description": "A transaction identifier.",
+          "example": "123e4567-e89b-12d3-a456-426614174000"
+        },
+        "srcDigitalCardId": {
+          "type": "string",
+          "description": "A srcDigitalCardId is a unique identifier that represents the token associated with a card enrolled in Mastercard Checkout Solutions (MCS)",
+          "example": "DCID-111"
+        }
+      }
+    },
+    "clickToPay": {
+      "type": "object",
+      "description": "ClickToPay details. When this node is used, set `type` to `PBL` and `value` to `c`. Provide exactly one option: `visa` or `mastercard` (not both).",
+      "oneOf": [
+        {
+          "title": "Visa",
+          "type": "object",
+          "required": [
+            "visa"
+          ],
+          "properties": {
+            "visa": {
+              "$ref": "#/components/schemas/clickToPayVisa"
+            }
+          }
+        },
+        {
+          "title": "Mastercard",
+          "type": "object",
+          "required": [
+            "mastercard"
+          ],
+          "properties": {
+            "mastercard": {
+              "$ref": "#/components/schemas/clickToPayMastercard"
+            }
+          }
+        }
+      ]
+    },
+    "cardPlainData": {
+      "type": "object",
+      "description": "",
+      "required": [],
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "",
+          "example": "5100052384536818"
+        },
+        "expirationMonth": {
+          "type": "string",
+          "description": "",
+          "example": "02"
+        },
+        "expirationYear": {
+          "type": "string",
+          "description": "",
+          "example": "29"
+        },
+        "cvv": {
+          "type": "string",
+          "description": "",
+          "example": "123"
+        },
+        "firstTransactionId": {
+          "type": "string",
+          "description": "",
+          "example": "MCC0111LL1121"
+        }
+      }
+    },
+    "specificData": {
+      "type": "array",
+      "description": "Additional data for some Visa Checkout integrations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blikData": {
+      "type": "object",
+      "description": "Additional data for BLIK payment with T6 or token.",
+      "properties": {
+        "aliasLabelProposal": {
+          "type": "string",
+          "description": "Label proposal associated with given mobile application. This field can be used only during token registration.</br><b>Required for the BLIK Recurring</b>."
+        },
+        "registerTokenValue": {
+          "type": "string",
+          "description": "UID/PAYID token value assigned by the merchant. This field can be used only during token registration."
+        },
+        "register": {
+          "type": "boolean",
+          "description": "Set to `true` specifies that an alias registration request will be sent. Set to false will result in payment with a T6 authorization code without token registration."
+        },
+        "appKey": {
+          "type": "string",
+          "description": "The identifier of the customer's chosen bank mobile application within which the transaction authorization will take place."
+        },
+        "recommendedAuthLevel": {
+          "type": "string",
+          "description": "The proposed level of transaction authorisation. A value of `NO_CONFIRMATION` means no need for transaction confirmation. In case of recurring payments, the value of `NO_CONFIRMATION` means that the merchant is aware of potential fraud risk, accepts it and takes full responsibility for potential fraudulent transactions.",
+          "enum": [
+            "NO_CONFIRMATION",
+            "REQUIRED_CONFIRMATION"
+          ]
+        },
+        "countryCode": {
+          "type": "string",
+          "enum": [
+            "PL",
+            "SK"
+          ],
+          "example": "PL",
+          "description": "Indicates the market where the BLIK payment will be initiated. If the field is not provided, the default value will be **PL**."
+        },
+        "recurring": {
+          "type": "object",
+          "description": "Contains information about the recurring payment.",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "enum",
+              "description": "Type of the recurring payment. <b>Required for the recurring payment.</b>",
+              "enum": [
+                "O"
+              ]
+            },
+            "initializationDate": {
+              "type": "string",
+              "description": "Date of the first transaction in the recurring payment cycle without the customer confirmation.",
+              "example": "2026-10-01T00:00:00+02:00",
+              "format": "yyyy-MM-dd'T'HH:mm:ssXXX"
+            },
+            "expirationDate": {
+              "type": "string",
+              "description": "Expiration date of the PAYID token. Maximum date is 10 years from the creation date of the token. If the value is not provided, token will be valid indifinitely.",
+              "example": "2026-10-01T00:00:00+02:00",
+              "format": "yyyy-MM-dd'T'HH:mm:ssXXX"
+            },
+            "authorizeDespiteRecurringNotSupported": {
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates if BLIK transaction should be processed even if Buyers bank do not support recurring feature in BLIK payment. <b>In such case, only a single transaction will be processed</b>."
+            }
+          }
+        }
+      }
+    },
+    "threeDsData": {
+      "type": "object",
+      "description": "Object containing result data from 3DS process.",
+      "required": [
+        "status3Ds",
+        "dsTransactionId"
+      ],
+      "properties": {
+        "status3Ds": {
+          "type": "enum",
+          "description": "3DS status. Following values are allowed to be used:<ul><li><b>Y</b> - successful 3DS2 authentication,</li><li><b>A</b> - 3DS2 authentication attempt.</li></ul>",
+          "enum": [
+            "Y",
+            "A"
+          ],
+          "example": "Y"
+        },
+        "status3DsDescription": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "description": "Description related to 3DS result. Passing this parameter as a additional description with the MPI will allow better potential customer support from BOK.",
+          "example": "Authentication successful"
+        },
+        "xid": {
+          "type": "string",
+          "description": "Unique identifier of 3DS transaction given by the shop. Field required within 3DS version 1 section. This field <b>should not</b> be sent when attempting 3DS2.x authentication. <ul><li><b>[1 .. 20] characters</b> - for value in plain text,</li><li><b>{28} characters</b> - for Base64encoded value,</li><li><b>{40} characters</b> - for HEXencoded value.</li></ul>"
+        },
+        "dsTransactionId": {
+          "type": "string",
+          "description": "Field required within 3DS2.x section. This field should not be sent when attempting 3DS version 1 authentication.",
+          "minLength": 1,
+          "maxLength": 36,
+          "example": "3b31b19d-1c06-4ea4-a85a-00af10c66588"
+        },
+        "eciCode": {
+          "type": "enum",
+          "description": "E-commerce Indicator / UCAF. Values can be passed with \"0\", e.g. \"04\", \"05\", etc. It should be passed always if the MPI provided this information.",
+          "enum": [
+            5,
+            6,
+            7,
+            2,
+            1,
+            0
+          ],
+          "example": 5
+        },
+        "cavv": {
+          "type": "string",
+          "description": "3DS cryptogram. It should be passed always if the MPI provided this information.",
+          "minLength": 1,
+          "maxLength": 200,
+          "example": "AAABBBEAUAAAABgICABQAAAAAAA="
+        },
+        "tavv": {
+          "type": "string",
+          "description": "Token Authentication Verification Value (TAVV) from external provider.",
+          "example": "AgAAABBEAUAAAABg8CABQAAQEAAA="
+        }
+      }
+    },
+    "payMethod": {
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Payment method type.",
+          "enum": [
+            "PBL",
+            "CARD_TOKEN",
+            "PAYMENT_WALL",
+            "BLIK_AUTHORIZATION_CODE",
+            "BLIK_TOKEN",
+            "TRANSPARENT"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Payment type for PBL, CARD_TOKEN.",
+          "example": "c"
+        },
+        "clickToPay": {
+          "description": "ClickToPay details. When this node is used, set `type` to `PBL` and `value` to `c`. Provide exactly one option: `visa` or `mastercard` (not both).",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/clickToPay"
+            }
+          ]
+        },
+        "authorizationCode": {
+          "type": "string",
+          "description": "Optional, usage differs depending on payment method. For BLIK integrated transparently: enables to collect 6-digit BLIK code on your website instead of redirecting to BLIK.",
+          "example": "777123"
+        },
+        "authorizationType": {
+          "type": "string",
+          "description": "Applicable only to card-based payments, incl. Apple Pay, Google Pay.",
+          "default": "AUTHORIZATION",
+          "enum": [
+            "PRE_AUTHORIZATION",
+            "AUTHORIZATION"
+          ]
+        },
+        "card": {
+          "$ref": "#/components/schemas/cardPlainData"
+        },
+        "specificData": {
+          "$ref": "#/components/schemas/specificData"
+        },
+        "amount": {
+          "type": "string",
+          "description": "Additional information required for Marketplace integration - must be equal to `totalAmount` as sum of amount parameters objects in `shoppingCards` array"
+        },
+        "blikData": {
+          "$ref": "#/components/schemas/blikData"
+        },
+        "threeDsData": {
+          "$ref": "#/components/schemas/threeDsData"
+        },
+        "sourcePaymentFlow": {
+          "type": "enum",
+          "description": "Indicates digital wallet.",
+          "example": "VISA_MOBILE",
+          "enum": [
+            "APPLE_PAY",
+            "CARDS",
+            "MDES",
+            "GOOGLE_PAY",
+            "VISA_MOBILE",
+            "VTS"
+          ]
+        },
+        "cardInstallments": {
+          "type": "object",
+          "description": "For merchants operating on the Romanian market (Requires contact with a Payu representative first).",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Card installments program obtained by retrieving [Installments Options](#tag/Card-Installments/operation/retrieve-card-installments).",
+              "example": "BRD_INSTALLMENTS"
+            },
+            "number": {
+              "type": "integer",
+              "description": "Selected amount of card installments, obtained by [retrieving Installments Options](#tag/Card-Installments/operation/retrieve-card-installments).",
+              "example": 6
+            }
+          }
+        }
+      }
+    },
+    "payMethods": {
+      "type": "object",
+      "description": "Section allows to directly invoke payment method. Section <code>payMethods</code> is one object of <code>payMethod</code> type.",
+      "properties": {
+        "payMethod": {
+          "$ref": "#/components/schemas/payMethod"
+        }
+      }
+    },
+    "mcpData": {
+      "type": "object",
+      "description": "Section allows to pass currency conversion details if you chose to use Multi-Currency Pricing.",
+      "required": [
+        "mcpCurrency",
+        "mcpAmount",
+        "mcpRate",
+        "mcpFxTableId",
+        "mcpPartnerId"
+      ],
+      "properties": {
+        "mcpCurrency": {
+          "type": "string",
+          "description": "termCurrency from the rate table.",
+          "example": "EUR"
+        },
+        "mcpAmount": {
+          "type": "string",
+          "description": "baseCurrency amount converted to termCurrency.",
+          "example": 10000
+        },
+        "mcpRate": {
+          "type": "string",
+          "description": "Applied conversion rate.",
+          "example": 4.2556
+        },
+        "mcpFxTableId": {
+          "type": "string",
+          "description": "Applied FX rate table id.",
+          "example": 132331
+        },
+        "mcpPartnerId": {
+          "type": "string",
+          "description": "Id provided by PayU.",
+          "example": "6283a549-8b1a-430d-8a62-eea64327440e"
+        }
+      }
+    },
+    "exemption": {
+      "type": "object",
+      "required": [
+        "value",
+        "rejectionHandling"
+      ],
+      "description": "Merchant's preference regarding SCA exemption to be used to exempt card payment from 3DS authentication. Exclusive with challengeRequested. Requires additional configuration to be enabled.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Either LOW_RISK (also known as TRA - transaction risk analysis compliant with SCA requirements has been performed by the merchant) or LOW_VALUE (low value payment, up to 30 EUR or equivalent in other currency)",
+          "enum": [
+            "LOW_RISK",
+            "LOW_VALUE"
+          ],
+          "example": "LOW_RISK"
+        },
+        "rejectionHandling": {
+          "type": "string",
+          "description": "Either PERFORM_AUTHENTICATION (PayU will return response with WARNING_CONTINUE_3DS and redirection URL code if exemption cannot be applied) or DECLINE (PayU will decline the payment if exemption cannot be applied - error message will be returned synchronously in OrderCreateResponse)",
+          "enum": [
+            "PERFORM_AUTHENTICATION",
+            "DECLINE"
+          ],
+          "example": "PERFORM_AUTHENTICATION"
+        },
+        "riskScore": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Risk score assigned by merchant's antifraud tool. For informative purposes only.",
+          "example": "120 - low risk score calculated in Merchants antifraud tool"
+        }
+      }
+    },
+    "browser": {
+      "type": "object",
+      "description": "Browser data required for 3DS 2 browser flow. If not provided, these data will be collected by PayU. It is strongly recommended to include it when charging a stored card (multi-use token), because in some cases it will spare you redirection to PayU's authentication page.",
+      "required": [
+        "acceptHeaders",
+        "requestIP",
+        "screenWidth",
+        "javaEnabled",
+        "timezoneOffset",
+        "screenHeight",
+        "userAgent",
+        "colorDepth",
+        "language"
+      ],
+      "properties": {
+        "acceptHeaders": {
+          "type": "string",
+          "description": "Exact content of the HTTP accept headers as sent from the payer's browser."
+        },
+        "requestIP": {
+          "type": "string",
+          "description": "IP address of the browser as returned by the HTTP headers.",
+          "example": "127.0.0.1"
+        },
+        "screenWidth": {
+          "type": "string",
+          "description": "Total width of the payer's screen in pixels. Obtained from the screen.width HTML DOM property.",
+          "example": 1920
+        },
+        "javaEnabled": {
+          "type": "boolean",
+          "description": "Obtained from the navigator HTML DOM object.",
+          "example": false
+        },
+        "timezoneOffset": {
+          "type": "string",
+          "description": "Obtained from the getTimezoneOffset() method applied to Date object.",
+          "example": 1
+        },
+        "screenHeight": {
+          "type": "string",
+          "description": "Obtained from the navigator HTML DOM object.",
+          "example": 1280
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "Exact content of the HTTP user-agent header.",
+          "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+        },
+        "colorDepth": {
+          "type": "string",
+          "description": "Obtained from payer's browser using the screen.colorDepth HTML DOM property.",
+          "example": 32
+        },
+        "language": {
+          "type": "string",
+          "description": "Obtained from payer's browser using the navigator.language HTML DOM property. Max. 8 chars.",
+          "example": "pl_PL"
+        }
+      }
+    },
+    "sdkEphemPubKey": {
+      "type": "object",
+      "description": "Public key component of the ephemeral key pair generated by the 3DS SDK and used to establish session keys between the 3DS SDK and the issuer.",
+      "properties": {
+        "y": {
+          "type": "string",
+          "example": "MRy7wofaw77myc7hZef23hmmEOE"
+        },
+        "x": {
+          "type": "string",
+          "example": "MRy7wofaw77myc7hZef23hmmEOE"
+        },
+        "kty": {
+          "type": "string",
+          "example": "EC"
+        },
+        "crv": {
+          "type": "string",
+          "example": "P-256"
+        }
+      }
+    },
+    "sdk": {
+      "type": "object",
+      "description": "Required if 3DS 2 is to be natively supported in your mobile app. Content needs to be generated by a certified 3DS 2 SDK. This information is not required, but it is strongly recommended to include it when charging a stored card (multi-use token).",
+      "required": [
+        "sdkReferenceNumber",
+        "sdkMaxTimeout",
+        "sdkAppID",
+        "sdkEncData",
+        "sdkTransID",
+        "sdkEphemPubKey"
+      ],
+      "properties": {
+        "sdkReferenceNumber": {
+          "type": "string",
+          "example": "DS_LOA_SDK_ADBV_739485_94783"
+        },
+        "sdkMaxTimeout": {
+          "type": "string",
+          "description": "Indicates the maximum amount of time (in minutes) for all exchanges. The field shall have value greater or equal to 05.",
+          "example": 30
+        },
+        "sdkAppID": {
+          "type": "string",
+          "example": "9063b12c-fcde-43c7-b28e-8d0af5520e8a"
+        },
+        "sdkEncData": {
+          "type": "string",
+          "description": "Data encrypted by the 3DS SDK.",
+          "example": "9063b12c-fcde-43c7-b28e-8d0af5520e8a"
+        },
+        "sdkTransID": {
+          "type": "string",
+          "example": "b60c9879-ac77-4918-a317-7b01c4317053/8Q==."
+        },
+        "sdkEphemPubKey": {
+          "$ref": "#/components/schemas/sdkEphemPubKey"
+        }
+      }
+    },
+    "merchantFunds": {
+      "type": "object",
+      "description": "Indicates whether merchant's own funding (e.g. a gift card) has been used to partially pay for the order. Sum of amounts provided here and of <totalAmount> field denote the real value of order in merchant's system.",
+      "required": [
+        "amount",
+        "currencyCode"
+      ],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "In pennies.",
+          "example": 100
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code compliant with ISO 4217.",
+          "example": "PLN"
+        }
+      }
+    },
+    "merchantRiskIndicator": {
+      "type": "object",
+      "description": "Set of fields helping to assess risk connected with the order itself (type of goods purchased, shipping method etc.).",
+      "properties": {
+        "orderType": {
+          "type": "string",
+          "enum": [
+            "PURCHASE",
+            "ACC_FUNDING",
+            "LOAN"
+          ],
+          "example": "LOAN"
+        },
+        "shipIndicator": {
+          "type": "string",
+          "enum": [
+            "BILLING_ADDRESS",
+            "VERIFIED_ADDRESS",
+            "OTHER_ADDRESS",
+            "SHIP_TO_STORE",
+            "DIGITAL_GOODS",
+            "TICKETS",
+            "NOT_SHIPPED"
+          ],
+          "description": "Indicates shipping method chosen for the order.",
+          "example": "TICKETS"
+        },
+        "preOrdered": {
+          "type": "boolean",
+          "description": "Indicates order for merchandise with a future availability or release date.",
+          "example": false
+        },
+        "preOrderedDate": {
+          "type": "string",
+          "example": "2019-03-27T10:57:59.000+01:00",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "ISO format applies."
+        },
+        "deliveryTimeFrame": {
+          "type": "string",
+          "enum": [
+            "ELECTRONIC",
+            "SAME_DAY",
+            "OVERNIGHT",
+            "TWO_OR_MORE_DAYS"
+          ],
+          "example": "OVERNIGHT"
+        },
+        "reordered": {
+          "type": "boolean",
+          "description": "Indicates if the same purchase has been ordered again.",
+          "example": false
+        },
+        "merchantFunds": {
+          "$ref": "#/components/schemas/merchantFunds"
+        }
+      }
+    },
+    "recurring": {
+      "type": "object",
+      "description": "Additional information in case of a recurring payment.",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "The minimum number of days between recurring payments (e.g. setting it to <b>7</b> for a weekly cycle). However, according to the recommendations of card schemes, when dealing with recurring payments that have a variable frequency, it's advised to use a value of <b>1</b> for this parameter.",
+          "example": "7"
+        },
+        "expiry": {
+          "type": "string",
+          "format": "2025-03-27T00:00:00.000Z",
+          "description": "Date after no further recurring payments will be performed. According to recommendation by the card schemes, in cases where there is no established expiry or end date of recurring (e.g. subscriptions), the value of \"9999-12-31T00:00:00Z\" should be used.",
+          "example": "2025-03-27T00:00:00.000Z"
+        }
+      }
+    },
+    "accountInformation": {
+      "type": "object",
+      "description": "Informations about cardholders account.",
+      "properties": {
+        "createDate": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date when the account has been created for the cardholder.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "suspiciousActivity": {
+          "type": "boolean",
+          "description": "Indicates whether merchant has experienced suspicious/fraudulent activity for this account.",
+          "example": false
+        },
+        "deliveryAddressFirstUsedDate": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date when the shipping address used for this order was first used.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "deliveryAdressUsageIndicator": {
+          "type": "string",
+          "enum": [
+            "THIS_TRANSACTION",
+            "LESS_THAN_30_DAYS",
+            "30_TO_60_DAYS",
+            "MORE_THAN_60_DAYS"
+          ],
+          "description": "Indicates when this shipping address was first used.",
+          "example": "THIS_TRANSACTION"
+        },
+        "pastOrdersYear": {
+          "type": "integer",
+          "description": "Orders created in merchant's system for this account in the past 12 months.",
+          "minimum": 1,
+          "maximum": 9999,
+          "example": 46
+        },
+        "pastOrdersDay": {
+          "type": "integer",
+          "description": "Orders created in merchant's system for this account in the last 24 hours.",
+          "minimum": 1,
+          "maximum": 9999,
+          "example": 125
+        },
+        "purchasesLastSixMonths": {
+          "type": "integer",
+          "description": "Fulfilled (successful) orders created in merchant's system for this account in the past 6 months.",
+          "minimum": 1,
+          "maximum": 9999,
+          "example": 12
+        },
+        "changeDate": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date when account details were last changed.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "changeIndicator": {
+          "type": "string",
+          "enum": [
+            "THIS_TRANSACTION",
+            "LESS_THAN_30_DAYS",
+            "30_TO_60_DAYS",
+            "MORE_THAN_60_DAYS"
+          ],
+          "description": "Indicates time when account information was last changed.",
+          "example": "THIS_TRANSACTION"
+        },
+        "passwordChanged": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date when account password was last changed.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "passwordChangeIndicator": {
+          "type": "string",
+          "enum": [
+            "NO_CHANGE",
+            "THIS_TRANSACTION",
+            "LESS_THAN_30_DAYS",
+            "30_TO_60_DAYS",
+            "MORE_THAN_60_DAYS"
+          ],
+          "description": "Indicates whether and when the password was last changed.",
+          "example": "NO_CHANGE"
+        },
+        "nameToRecipientMatch": {
+          "type": "boolean",
+          "description": "Indicates whether cardholder's name matches recipient's name.",
+          "example": true
+        },
+        "addCardAttemptsDay": {
+          "type": "string",
+          "description": "Indicates attempts to add a card to cardholder's account in merchant's system within last 24 hours.",
+          "example": 3
+        },
+        "authMethod": {
+          "type": "string",
+          "enum": [
+            "GUEST",
+            "LOGIN",
+            "FEDERATED_ID",
+            "THIRD_PARTY",
+            "ISSUER",
+            "FIDO"
+          ],
+          "description": "Authentication method used to recognize cardholder.",
+          "example": "GUEST"
+        },
+        "authDateTime": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date and time when authentication was performed.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "cardAddedDate": {
+          "type": "string",
+          "format": "2019-03-27T10:57:59.000+01:00",
+          "description": "Date when card account has been stored with merchant.",
+          "example": "2019-03-27T10:57:59.000+01:00"
+        },
+        "cardAddedIndicator": {
+          "type": "string",
+          "enum": [
+            "GUEST",
+            "THIS_TRANSACTION",
+            "LESS_THAN_30_DAYS",
+            "30_TO_60_DAYS",
+            "MORE_THAN_60_DAYS"
+          ],
+          "description": "Indicates if and when the card was stored with merchant.",
+          "example": "THIS_TRANSACTION"
+        }
+      }
+    },
+    "billingAddress": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "Full street address, incl. apartment number.",
+          "example": "Test Street"
+        },
+        "postalCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16,
+          "description": "Postal/ZIP code.",
+          "example": "01-000"
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "City name.",
+          "example": "Test City"
+        },
+        "state": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3,
+          "description": "Country principal subdivision like \"state\" or \"province\". If provided, must be a two-letter country code compliant with ISO-3166.",
+          "example": 30
+        },
+        "countryCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2,
+          "description": "Two-letter country code compliant with ISO-3166.",
+          "example": "PL"
+        }
+      }
+    },
+    "cardholder": {
+      "type": "object",
+      "description": "Describes cardholder's account data in merchant's possession, including details of account run for the cardholder in merchant's system **You have to use ISO/IEC 8859-1 encoding**.</br></br>You can use this field for providing cardholder name for AFT card authorization (Account Funding Transaction) instead of using buyer's first and last name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Cardholder name and surname.",
+          "example": "John Doe"
+        },
+        "accountInformation": {
+          "$ref": "#/components/schemas/accountInformation"
+        },
+        "billingAddress": {
+          "$ref": "#/components/schemas/billingAddress"
+        }
+      }
+    },
+    "threeDsAuthentication": {
+      "type": "object",
+      "description": "Contains optional fields required by 3DS 2 authentication protocol.",
+      "properties": {
+        "challengeRequested": {
+          "type": "string",
+          "description": "Merchant's preference regarding 3DS 2 challenge. Exclusive with exemption. Maybe overridden by PayU.",
+          "enum": [
+            "YES",
+            "NO",
+            "MANDATE"
+          ]
+        },
+        "exemption": {
+          "$ref": "#/components/schemas/exemption"
+        },
+        "browser": {
+          "$ref": "#/components/schemas/browser"
+        },
+        "sdk": {
+          "$ref": "#/components/schemas/sdk"
+        },
+        "merchantRiskIndicator": {
+          "$ref": "#/components/schemas/merchantRiskIndicator"
+        },
+        "recurring": {
+          "$ref": "#/components/schemas/recurring"
+        },
+        "cardholder": {
+          "$ref": "#/components/schemas/cardholder"
+        }
+      }
+    },
+    "riskData": {
+      "type": "object",
+      "description": "Contains optional fields required for risk analysis purposes. **Required for BLIK with authorization code or token.**",
+      "required": [
+        "browser"
+      ],
+      "properties": {
+        "browser": {
+          "$ref": "#/components/schemas/browser"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "description": "Section containing data about shipping address. Section <shippingMethod.address> is a single object of type address",
+      "properties": {
+        "pointId": {
+          "type": "string",
+          "description": "The full name of the pickup point, including its unique identifier.",
+          "example": "Parcel locker POZ29A"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street name, possibly including house and flat number."
+        },
+        "streetNo": {
+          "type": "string",
+          "description": "Street number"
+        },
+        "flatNo": {
+          "type": "string",
+          "description": "Flat number"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal Code"
+        },
+        "city": {
+          "type": "string",
+          "description": "City"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Two-letter country code compliant with ISO-3166."
+        }
+      }
+    },
+    "shippingMethod": {
+      "type": "object",
+      "description": "Section containing data of shipping method. Section <shippingMethod> is a single object of type shippingMethod.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of shipment",
+          "enum": [
+            "COURIER",
+            "COLLECTION_POINT_PICKUP",
+            "PARCEL_LOCKER",
+            "STORE_PICKUP"
+          ]
+        },
+        "price": {
+          "type": "string",
+          "description": "Shipping cost"
+        },
+        "address": {
+          "$ref": "#/components/schemas/address"
+        }
+      }
+    },
+    "shoppingCart": {
+      "type": "array",
+      "description": "Section containing data of the ordered products. Section <credit.shoppingCarts> is an array of objects of type shoppingCart.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "shippingMethod": {
+            "$ref": "#/components/schemas/shippingMethod"
+          },
+          "products": {
+            "type": "array",
+            "description": "Section containing data of the ordered products. Section <code>products</code> is an array of objects of type product.",
+            "required": [
+              "name",
+              "unitPrice",
+              "quantity"
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the product"
+                },
+                "unitPrice": {
+                  "type": "string",
+                  "description": "Unit price"
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "Quantity of"
+                },
+                "virtual": {
+                  "type": "boolean",
+                  "description": "Product type, which can be virtual or material."
+                },
+                "listingDate": {
+                  "type": "string",
+                  "format": "2019-03-27T10:57:59.000+01:00",
+                  "description": "Marketplace date from which the product (or offer) is available, ISO format applies."
+                }
+              }
+            }
+          },
+          "extCustomerId": {
+            "type": "string",
+            "description": "Submerchant identifier. This field should be consistent with field extCustomerId in shoppingCarts section when order is placed in marketplace."
+          }
+        }
+      }
+    },
+    "credit": {
+      "type": "object",
+      "description": "Section containing credit data. This information is not required, but it is strongly recommended to include it. Otherwise the buyer will be prompted to provide missing data on provider page when payment by Installments or Pay later.",
+      "properties": {
+        "shoppingCarts": {
+          "$ref": "#/components/schemas/shoppingCart"
+        },
+        "applicant": {
+          "type": "object",
+          "description": "Section containing data of person applying for a credit.",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "Applicant's email address",
+              "example": "test@test.com"
+            },
+            "phone": {
+              "type": "string",
+              "description": "Applicant's phone number",
+              "example": 123456789
+            },
+            "firstName": {
+              "type": "string",
+              "description": "Applicant's first name",
+              "example": "Joe"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Applicant's last name",
+              "example": "Doe"
+            },
+            "language": {
+              "type": "string",
+              "description": "Language code, ISO-639-1 compliant. Denotes the language version of PayU hosted payment page and of e-mail messages sent from PayU to the payer.",
+              "example": "pl"
+            },
+            "nin": {
+              "type": "string",
+              "description": "National Identification Number",
+              "example": 123456789
+            },
+            "address": {
+              "type": "object",
+              "description": "Section containing data about applican's address.",
+              "properties": {
+                "street": {
+                  "type": "string",
+                  "description": "Street name, possibly including house and flat number.",
+                  "example": "Test Street"
+                },
+                "streetNo": {
+                  "type": "string",
+                  "description": "Street number",
+                  "example": 123
+                },
+                "flatNo": {
+                  "type": "string",
+                  "description": "Flat number",
+                  "example": 987
+                },
+                "postalCode": {
+                  "type": "string",
+                  "description": "Postal Code",
+                  "example": "01-000"
+                },
+                "city": {
+                  "type": "string",
+                  "description": "City",
+                  "example": "Test City"
+                },
+                "countryCode": {
+                  "type": "string",
+                  "description": "Two-letter country code compliant with ISO-3166.",
+                  "example": "PL"
+                }
+              }
+            },
+            "additionalInfo": {
+              "type": "object",
+              "description": "Additional information about person applying for credit.",
+              "properties": {
+                "hasSuccessfullyFinishedOrderInShop": {
+                  "type": "string",
+                  "description": "Information whether there were previous, successfully completed orders for applicant.",
+                  "example": "YES"
+                }
+              }
+            }
+          }
+        },
+        "klarnaAttachment": {
+          "type": "object",
+          "description": "Extra merchant data mandatory for merchants operating in certain segments. You will find more information about this object and its parameters on **[Klarna Documentation Page](https://docs.klarna.com/klarna-payments/additional-resources/use-cases/extra-merchant-data/)**.",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "submerchant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "submerchant ID when payment is created by Payment Facilitator for Submerchant"
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "cardInstallmentsOptions": {
+          "type": "object",
+          "description": "List of allowed installment numbers for any number of specific providers, eg. \"OPTIMO\": [1, 2, 3]. For merchants operating on the Romanian market (requires contact with a Payu representative first). Available providers: <ul><li>CARD_AVANTAJ</li><li>STAR_BT</li><li>UNICREDIT</li><li>BRD_INSTALLMENTS</li><li>RAIFFEISEN</li><li>GARANTI_RO</li><li>BCR_INSTALLMENTS</li><li>ALPHABANK_INSTALLMENTS</li><li>OPTIMO</li><li>CARD_EMAG</li></ul>",
+          "additionalProperties": {
+            "type": "array",
+            "example": [
+              1,
+              3,
+              5,
+              7,
+              9,
+              11,
+              13
+            ]
+          }
+        }
+      }
+    },
+    "properties": {
+      "type": "array",
+      "description": "Array of objects related to transaction identification.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Static value. The payment identifier, displayed on transaction statements as \"Trans ID\" and within the transaction search option in the Management Panel.",
+            "example": "PAYMENT_ID"
+          },
+          "value": {
+            "type": "string",
+            "description": "Transaction ID in PayU system.",
+            "example": "1234567890"
+          }
+        }
+      }
+    },
+    "Full": {
+      "type": "null",
+      "description": ""
+    },
+    "Partial": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "amount",
+        "currencyCode"
+      ],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "Amount you want to capture. Must be less than captured order amount. **Can be used only during partial capture**.",
+          "example": 900
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency of the order. **Can be used only during partial capture**",
+          "example": "EUR"
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "description": "Array of order objects.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "payMethod": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Payment method code",
+                    "example": "c"
+                  }
+                }
+              },
+              "paymentFlow": {
+                "type": "string",
+                "description": "Payment flow of of payment (for card and card based instruments payments)",
+                "enum": [
+                  "APPLE_PAY",
+                  "CARD",
+                  "CARD_INSTALLMENTS",
+                  "CLICK_TO_PAY",
+                  "FIRST_ONE_CLICK_CARD",
+                  "GOOGLE_PAY",
+                  "GOOGLE_PAY_TOKENIZED",
+                  "VISA_MOBILE",
+                  "ONE_CLICK_CARD",
+                  "ONE_CLICK_CARD_RECURRING",
+                  "ONE_CLICK_MAIL_ORDER",
+                  "ONE_CLICK_MAIL_RECURRING",
+                  "ONE_CLICK_PHONE_ORDER",
+                  "ONE_CLICK_PHONE_RECURRING"
+                ],
+                "example": "CARD"
+              },
+              "validUntil": {
+                "type": "string",
+                "description": "Transaction capture expiration date.",
+                "example": "2024-06-20T09:05:44.238+02:00"
+              },
+              "card": {
+                "type": "object",
+                "description": "Chosen payment method",
+                "properties": {
+                  "cardData": {
+                    "type": "object",
+                    "properties": {
+                      "cardNumberMasked": {
+                        "type": "string",
+                        "description": "Masked card number (real number or token - in case of Apple Pay and Google Pay Tokenized).",
+                        "example": "543402******4014"
+                      },
+                      "cardScheme": {
+                        "type": "string",
+                        "description": "Payment organization: MC (MasterCard/Maestro), VS (Visa)",
+                        "example": "MC"
+                      },
+                      "cardProfile": {
+                        "type": "string",
+                        "description": "Card profile (CONSUMER or BUSINESS)",
+                        "example": "CONSUMER"
+                      },
+                      "cardClassification": {
+                        "type": "string",
+                        "description": "Card classification (CREDIT/DEBIT)",
+                        "example": "DEBIT"
+                      },
+                      "cardResponseCode": {
+                        "type": "string",
+                        "description": "Response code",
+                        "example": "000"
+                      },
+                      "cardResponseCodeDesc": {
+                        "type": "string",
+                        "description": "Response code with description",
+                        "example": "000 - OK"
+                      },
+                      "cardEciCode": {
+                        "type": "string",
+                        "description": "Electronic Commerce Indicator",
+                        "example": "2"
+                      },
+                      "card3DsStatus": {
+                        "type": "string",
+                        "description": "3DS verification status",
+                        "example": "Y"
+                      },
+                      "card3DsFrictionlessIndicator": {
+                        "type": "string",
+                        "description": "Indicates whether the authentication was frictionless or with challenge",
+                        "example": "YES"
+                      },
+                      "card3DsStatusDescription": {
+                        "type": "string",
+                        "description": "Description of 3DS status",
+                        "example": "MessageVersion=2.1.0,browser flow,3DS method not available,dynamic authentication,no cancel indicator,no status reason"
+                      },
+                      "cardBinCountry": {
+                        "type": "string",
+                        "description": "Country in which card was issued. Two-letter country code compliant with ISO-3166",
+                        "example": "PL"
+                      },
+                      "firstTransactionId": {
+                        "type": "string",
+                        "description": "Identifier of the first of recurring payments or Card-on-File, granted by the payment organisation",
+                        "example": "MCC0111LL1121"
+                      }
+                    }
+                  }
+                }
+              },
+              "resultCode": {
+                "type": "string",
+                "enum": [
+                  "AUT_ERROR_NO_AUTHORIZATION",
+                  "AUT_ERROR_ANTIFRAUD_DECLINED",
+                  "REG_ERROR_ANTIFRAUD_DECLINED"
+                ],
+                "description": "Optional informaction about transaction result code: <ul> <li><b>AUT_ERROR_NO_AUTHORIZATION</b> - authorization was not received, transaction cancelled.</li> <li><b>AUT_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at the authoriztion stage by the antifraud system.</li> <li><b>REG_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at registration stage by antifraud system.</li> <li><b>REG_ERROR_AUTHENTICATION_REJECTED</b> - Authentication was rejected by a third-party service. <ul><li>For Visa Mobile payment method: Authentication failed in either the Visa Mobile or Issuer application.</li></ul></li> </ul>",
+                "example": "AUT_ERROR_NO_AUTHORIZATION"
+              }
+            }
+          }
+        }
+      }
+    },
+    "pbl": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "description": "Array of order objects.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "payMethod": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Payment method code",
+                    "example": "m"
+                  }
+                }
+              },
+              "paymentFlow": {
+                "type": "string",
+                "description": "Defines how payments are handled.",
+                "enum": [
+                  "PBL",
+                  "PEX_BANK"
+                ]
+              },
+              "bankAccount": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "string",
+                    "description": "Bank account number from which payment was made.",
+                    "example": "80607787095718703296721164"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the account holder from which payment was made (or full data \u2013 name, surname and address).",
+                    "example": "JAN KOWALSKI"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "City included in account holder address.",
+                    "example": "WARSZAWA"
+                  },
+                  "postalCode": {
+                    "type": "string",
+                    "description": "Postal code included in account holder address.",
+                    "example": "02-638"
+                  },
+                  "street": {
+                    "type": "string",
+                    "description": "Street name and house number included in account holder address.",
+                    "example": "UL.NOWOWIEJSKIEGO 8"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Account holder address.",
+                    "example": "Warszawa Nowowiejskiego 8"
+                  }
+                }
+              },
+              "resultCode": {
+                "type": "string",
+                "enum": [
+                  "AUT_ERROR_NO_AUTHORIZATION",
+                  "AUT_ERROR_ANTIFRAUD_DECLINED",
+                  "REG_ERROR_ANTIFRAUD_DECLINED"
+                ],
+                "description": "Optional informaction about transaction result code: <ul> <li><b>AUT_ERROR_NO_AUTHORIZATION</b> - authorization was not received, transaction cancelled.</li> <li><b>AUT_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at the authoriztion stage by the antifraud system.</li> <li><b>REG_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at registration stage by antifraud system.</li> <li><b>REG_ERROR_AUTHENTICATION_REJECTED</b> - Authentication was rejected by a third-party service. <ul><li>For Visa Mobile payment method: Authentication failed in either the Visa Mobile or Issuer application.</li></ul></li> </ul>",
+                "example": "AUT_ERROR_NO_AUTHORIZATION"
+              }
+            }
+          }
+        }
+      }
+    },
+    "blik": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "description": "Array of order objects.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "payMethod": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Payment method code.",
+                    "example": "blik"
+                  }
+                }
+              },
+              "paymentFlow": {
+                "type": "string",
+                "description": "Defines how payments are handled.",
+                "enum": [
+                  "BLIK_PBL",
+                  "BLIK_AUTHORIZATION_CODE",
+                  "BLIK_AUTHORIZATION_CODE_WITH_UID_TOKEN_REGISTERING",
+                  "BLIK_UID_TOKEN",
+                  "BLIK_AUTHORIZATION_CODE_WITH_PAYID_TOKEN_TYPE_O_REGISTERING",
+                  "BLIK_PAYID_TOKEN_TYPE_O"
+                ]
+              },
+              "resultCode": {
+                "type": "string",
+                "description": "Transaction handling result code."
+              },
+              "blik": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "txRef": {
+                    "type": "string",
+                    "description": "The transaction identifier assigned by the BLIK system."
+                  },
+                  "extTxRef": {
+                    "type": "string",
+                    "description": "Transaction identifier assigned by PayU."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "wire": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "description": "Array of order objects.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "payMethod": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Payment method code",
+                    "example": "bt"
+                  }
+                }
+              },
+              "validUntil": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The expiration date and time for the transaction",
+                "example": "2026-02-20T12:08:07.009+01:00"
+              },
+              "wireTransfer": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the transfer",
+                    "example": "Payment Title"
+                  },
+                  "sortCode": {
+                    "type": "string",
+                    "description": "Bank sort code",
+                    "example": "5500"
+                  },
+                  "bankAccountNumber": {
+                    "type": "string",
+                    "description": "Bank account number",
+                    "example": "2545661682"
+                  },
+                  "ownerName": {
+                    "type": "string",
+                    "description": "Name of the account owner",
+                    "example": "Owner account name"
+                  },
+                  "ownerAddress": {
+                    "type": "string",
+                    "description": "Address of the account owner",
+                    "example": "string"
+                  },
+                  "bankName": {
+                    "type": "string",
+                    "description": "Name of the bank",
+                    "example": "UniCredit Bank"
+                  },
+                  "swiftCode": {
+                    "type": "string",
+                    "description": "SWIFT code of the bank",
+                    "example": "BACXROBUXXX"
+                  },
+                  "specificSymbol": {
+                    "type": "string",
+                    "description": "Specific symbol for the transfer",
+                    "example": "29"
+                  },
+                  "variableSymbol": {
+                    "type": "string",
+                    "description": "Variable symbol for the transfer",
+                    "example": "5011964003"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "balance": {
+      "type": "object",
+      "description": "Section containing Shop balance information.",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "ISO 4217 currency code of currency in which Shop balance is kept.",
+          "example": "PLN"
+        },
+        "total": {
+          "type": "number",
+          "description": "total balance of funds on Shop",
+          "example": 1234567890
+        },
+        "available": {
+          "type": "number",
+          "description": "value of available funds that are under Merchant disposition, excluding funds locked by PayU system",
+          "example": 987654321
+        }
+      }
+    },
+    "refundRetrievePending": {
+      "type": "object",
+      "properties": {
+        "refundId": {
+          "type": "string",
+          "description": "ID of the refund",
+          "example": "5000000142"
+        },
+        "extRefundId": {
+          "type": "string",
+          "description": "External refund ID.",
+          "example": "hdjJduUEEH2"
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount of the refund. If this is left blank, all funds will be returned to the buyer.",
+          "example": 10000
+        },
+        "description": {
+          "type": "string",
+          "description": "Refund description",
+          "example": "Refund for order <orderId>"
+        },
+        "creationDateTime": {
+          "type": "string",
+          "description": "Date of refund creation.",
+          "example": "2020-07-02T09:19:03.896+02:00"
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code compliant with ISO 4217."
+        },
+        "statusDatetime": {
+          "type": "string",
+          "description": "Timestamp of the status.",
+          "example": "2020-07-02T09:19:04.016+02:00"
+        },
+        "status": {
+          "type": "string",
+          "description": "Refund status code.",
+          "example": "PENDING"
+        }
+      }
+    },
+    "refundRetrieveCanceled": {
+      "type": "object",
+      "properties": {
+        "refundId": {
+          "type": "string",
+          "description": "ID of the refund",
+          "example": "5000000142"
+        },
+        "extRefundId": {
+          "type": "string",
+          "description": "External refund ID.",
+          "example": "hdjJduUEEH2"
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount of the refund. If this is left blank, all funds will be returned to the buyer.",
+          "example": 10000
+        },
+        "description": {
+          "type": "string",
+          "description": "Refund description",
+          "example": "Refund for order <orderId>"
+        },
+        "creationDateTime": {
+          "type": "string",
+          "description": "Date of refund creation.",
+          "example": "2020-07-02T09:19:03.896+02:00"
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code compliant with ISO 4217."
+        },
+        "statusDatetime": {
+          "type": "string",
+          "description": "Timestamp of the status.",
+          "example": "2020-07-02T09:19:04.016+02:00"
+        },
+        "status": {
+          "type": "string",
+          "description": "Refund status code."
+        },
+        "statusError": {
+          "type": "object",
+          "description": "Information about error.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error type."
+            },
+            "description": {
+              "type": "string",
+              "description": "Error information."
+            }
+          }
+        }
+      }
+    },
+    "refundRetrieveFinalized": {
+      "type": "object",
+      "properties": {
+        "refundId": {
+          "type": "string",
+          "description": "ID of the refund",
+          "example": "5000000142"
+        },
+        "extRefundId": {
+          "type": "string",
+          "description": "External refund ID.",
+          "example": "hdjJduUEEH2"
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount of the refund. If this is left blank, all funds will be returned to the buyer.",
+          "example": 10000
+        },
+        "description": {
+          "type": "string",
+          "description": "Refund description",
+          "example": "Refund for order <orderId>"
+        },
+        "creationDateTime": {
+          "type": "string",
+          "description": "Date of refund creation.",
+          "example": "2020-07-02T09:19:03.896+02:00"
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code compliant with ISO 4217."
+        },
+        "statusDatetime": {
+          "type": "string",
+          "description": "Timestamp of the status.",
+          "example": "2020-07-02T09:19:04.016+02:00"
+        },
+        "status": {
+          "type": "string",
+          "description": "Refund status code.",
+          "example": "FINALIZED"
+        }
+      }
+    },
+    "StandardPayout": {
+      "type": "object",
+      "title": "Standard Payout",
+      "required": [
+        "shopId"
+      ],
+      "properties": {
+        "shopId": {
+          "type": "string",
+          "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+          "example": "1a2B3Cx"
+        },
+        "payout": {
+          "type": "object",
+          "required": [
+            "amount",
+            "extPayoutId"
+          ],
+          "description": "Payout information.",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Payout description."
+            },
+            "extPayoutId": {
+              "type": "string",
+              "description": "External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "amount": {
+              "type": "number",
+              "description": "amount for which Payout should be created",
+              "example": 987654321
+            },
+            "additionalVariables": {
+              "type": "string",
+              "format": "VS=888111",
+              "description": "Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market.</b>",
+              "example": "VS=888111"
+            }
+          }
+        }
+      }
+    },
+    "payout": {
+      "type": "object",
+      "description": "Payout information.",
+      "required": [
+        "amount",
+        "extPayoutId"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Payout description."
+        },
+        "extPayoutId": {
+          "type": "string",
+          "description": "External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "amount": {
+          "type": "long",
+          "description": "Amount for which Payout should be created.",
+          "example": 10000
+        },
+        "additionalVariables": {
+          "type": "string",
+          "format": "VS=888111",
+          "description": "Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market</b>.",
+          "example": "VS=888111"
+        },
+        "foreign": {
+          "type": "string",
+          "description": "Flag indicating whether payout was made to a foreign account."
+        }
+      }
+    },
+    "account": {
+      "type": "object",
+      "required": [
+        "accountNumber"
+      ],
+      "description": "Information about account to which payout should be sent.",
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "description": "Bank account number. Required account formats for foreign transfers: Polish account: NRB, IBAN. Czech account: IBAN, internal in ([0-9]{1,6}[ -])?[0-9]{2,10}[ /][0-9]{4}) format. As for now, there is no format restrictions for national bank transfers."
+        },
+        "bankName": {
+          "type": "string",
+          "description": "Name of the bank. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "swiftCode": {
+          "type": "string",
+          "description": "Bank's SWIFT code. <b>Required for <code>foreign</code> flag set to true</b>."
+        }
+      }
+    },
+    "customerAddress": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Payout recipient's name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Payout recipient's name."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Payout recipient's address details. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "city": {
+          "type": "string",
+          "description": "Payout recipient's address details - city. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Payout recipient's address details - postal code."
+        },
+        "street": {
+          "type": "string",
+          "description": "Payout recipient's address details - street. <b>Required for <code>foreign</code> flag set to true</b>."
+        }
+      }
+    },
+    "bankAddress": {
+      "type": "object",
+      "description": "Bank address information.",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Bank address information - street. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Bank address information - postal code. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "city": {
+          "type": "string",
+          "description": "Bank address information - city. <b>Required for <code>foreign</code> flag set to true</b>."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Bank address information. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>."
+        }
+      }
+    },
+    "BankAccountPayout": {
+      "type": "object",
+      "title": "Bank Account Payout",
+      "required": [
+        "shopId",
+        "payout",
+        "account",
+        "customerAddress"
+      ],
+      "properties": {
+        "shopId": {
+          "type": "string",
+          "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+          "example": "1a2B3Cx"
+        },
+        "payout": {
+          "$ref": "#/components/schemas/payout"
+        },
+        "account": {
+          "$ref": "#/components/schemas/account"
+        },
+        "customerAddress": {
+          "$ref": "#/components/schemas/customerAddress"
+        },
+        "bankAddress": {
+          "$ref": "#/components/schemas/bankAddress"
+        }
+      }
+    },
+    "payee": {
+      "type": "object",
+      "description": "Required section designed to limit the risk of fraud or money laundering.",
+      "required": [
+        "extCustomerId",
+        "accountCreationDate",
+        "email"
+      ],
+      "properties": {
+        "extCustomerId": {
+          "type": "string",
+          "description": "Customer (payee) id assigned in the merchant system.",
+          "minLength": 1,
+          "maxLength": 64,
+          "example": "customer-id-1"
+        },
+        "accountCreationDate": {
+          "type": "string",
+          "format": "2025-03-27T00:00:00.000Z",
+          "description": "Date when the user was created in the merchant system.",
+          "example": "2025-03-27T00:00:00.000Z"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Customer (payee) phone number.",
+          "minLength": 1,
+          "maxLength": 64,
+          "example": "48 225108001"
+        },
+        "email": {
+          "type": "string",
+          "description": "Customer (payee) email address.",
+          "minLength": 1,
+          "maxLength": 256,
+          "example": "email@email.com"
+        }
+      }
+    },
+    "cardForPayout": {
+      "type": "object",
+      "description": "Data of the card that the payout will be made to. <b>Required in case of a payout to the card number</b>.",
+      "required": [
+        "number",
+        "expirationMonth",
+        "expirationYear"
+      ],
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Card number.",
+          "example": "4444333322221111"
+        },
+        "expirationMonth": {
+          "type": "string",
+          "description": "Card's expiration date - month.",
+          "example": "11"
+        },
+        "expirationYear": {
+          "type": "string",
+          "description": "Card's expiration date - year.",
+          "example": "2029"
+        }
+      }
+    },
+    "CardPayout": {
+      "type": "object",
+      "title": "Card Payout",
+      "required": [
+        "shopId",
+        "payout",
+        "payee",
+        "customerAddress"
+      ],
+      "properties": {
+        "shopId": {
+          "type": "string",
+          "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+          "example": "1a2B3Cx"
+        },
+        "payout": {
+          "$ref": "#/components/schemas/payout"
+        },
+        "payee": {
+          "$ref": "#/components/schemas/payee"
+        },
+        "customerAddress": {
+          "$ref": "#/components/schemas/customerAddress"
+        },
+        "cardToken": {
+          "type": "string",
+          "description": "Card token representing card to which payout will be made. <b>Required in case of a payout to the card token</b>.",
+          "example": "TOKC_2IHRST6HKSST3H62K2GS8pElI862"
+        },
+        "card": {
+          "$ref": "#/components/schemas/cardForPayout"
+        }
+      }
+    },
+    "MarketplacePayout": {
+      "type": "object",
+      "title": "Payout for Marketplace",
+      "required": [
+        "shopId",
+        "payout",
+        "account"
+      ],
+      "properties": {
+        "shopId": {
+          "type": "string",
+          "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+          "example": "1a2B3Cx"
+        },
+        "account": {
+          "type": "object",
+          "required": [
+            "extCustomerId"
+          ],
+          "description": "Information about submerchant account to which payout should be sent.",
+          "properties": {
+            "extCustomerId": {
+              "type": "string",
+              "description": "Unique submerchant identifier assigned by the Marketplace.",
+              "example": "submerchant1"
+            }
+          }
+        },
+        "payout": {
+          "type": "object",
+          "required": [
+            "currencyCode",
+            "amount",
+            "extPayoutId"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Payout description."
+            },
+            "extPayoutId": {
+              "type": "string",
+              "description": "External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "amount": {
+              "type": "long",
+              "description": "Amount for which Payout should be created.",
+              "example": 49
+            },
+            "currencyCode": {
+              "type": "string",
+              "format": "ISO4217",
+              "minLength": 3,
+              "maxLength": 3,
+              "description": "Shop currency from which the conversion will be made.",
+              "example": "PLN"
+            }
+          }
+        }
+      }
+    },
+    "fxData": {
+      "type": "object",
+      "description": "Section containing details of the payout conversion.",
+      "required": [
+        "partnerId",
+        "currencyCode",
+        "amount",
+        "rate",
+        "tableId"
+      ],
+      "properties": {
+        "partnerId": {
+          "type": "string",
+          "description": "Partner id for currency exchange at PayU.",
+          "example": "9999e44b-f68f-42e1-ad6c-3735ba1e2954"
+        },
+        "currencyCode": {
+          "type": "string",
+          "format": "ISO4217",
+          "minLength": 3,
+          "maxLength": 3,
+          "enum": [
+            "PLN",
+            "EUR",
+            "CZK"
+          ],
+          "description": "Currency code after conversion. Currently supported currency codes are **PLN**, **EUR**, **CZK**.",
+          "example": "EUR"
+        },
+        "amount": {
+          "type": "long",
+          "description": "The amount of payout after conversion that the marketplace seller will receive.",
+          "example": 11
+        },
+        "rate": {
+          "type": "double",
+          "description": "The rate at which the payout currency is converted.",
+          "example": 0.22458
+        },
+        "tableId": {
+          "type": "string",
+          "description": "The ID of the exchange rate table retrieved by the merchant from PayU, determining the basis for currency conversion during payment.",
+          "example": "2055"
+        }
+      }
+    },
+    "FxPayout": {
+      "type": "object",
+      "title": "FxPayout",
+      "required": [
+        "shopId",
+        "payout",
+        "account",
+        "fxData"
+      ],
+      "properties": {
+        "shopId": {
+          "type": "string",
+          "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+          "example": "1a2B3Cx"
+        },
+        "account": {
+          "type": "object",
+          "required": [
+            "extCustomerId"
+          ],
+          "description": "Information about submerchant account to which payout should be sent.",
+          "properties": {
+            "extCustomerId": {
+              "type": "string",
+              "description": "Unique submerchant identifier assigned by the Marketplace.",
+              "example": "submerchant1"
+            }
+          }
+        },
+        "payout": {
+          "type": "object",
+          "required": [
+            "currencyCode",
+            "amount",
+            "extPayoutId"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Payout description."
+            },
+            "extPayoutId": {
+              "type": "string",
+              "description": "External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "amount": {
+              "type": "long",
+              "description": "Amount for which Payout should be created.",
+              "example": 49
+            },
+            "currencyCode": {
+              "type": "string",
+              "format": "ISO4217",
+              "minLength": 3,
+              "maxLength": 3,
+              "description": "Shop currency from which the conversion will be made.",
+              "example": "PLN"
+            }
+          }
+        },
+        "fxData": {
+          "$ref": "#/components/schemas/fxData"
+        }
+      }
+    },
+    "PAYMENT_RECEIVED": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "PAYMENT_RECEIVED",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "description": "Order identifier."
+                  },
+                  "extOrderId": {
+                    "type": "string",
+                    "description": "External order identifier."
+                  },
+                  "feeAmount": {
+                    "type": "string",
+                    "description": "Marketplace fee amount."
+                  },
+                  "counterparties": {
+                    "type": "object",
+                    "description": "Order elements.",
+                    "properties": {
+                      "extCustomerId": {
+                        "type": "string",
+                        "description": "Buyer identifier."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Buyer name."
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "Buyer email."
+                      },
+                      "products": {
+                        "type": "array",
+                        "description": "List of products in order.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Product name."
+                            },
+                            "unitPrice": {
+                              "type": "string",
+                              "description": "Unit price of product"
+                            },
+                            "quantity": {
+                              "type": "string",
+                              "description": "Quantity"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "funds": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "REFUND_SENT": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "REFUND_SENT",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "description": "Order identifier."
+                  },
+                  "extOrderId": {
+                    "type": "string",
+                    "description": "External order identifier."
+                  },
+                  "refundId": {
+                    "type": "string",
+                    "description": "Refund identifier."
+                  },
+                  "extRefundId": {
+                    "type": "string",
+                    "description": "External refund identifier."
+                  },
+                  "counterparties": {
+                    "type": "object",
+                    "description": "Order elements.",
+                    "properties": {
+                      "extCustomerId": {
+                        "type": "string",
+                        "description": "Buyer identifier."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Buyer name."
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "Buyer email."
+                      }
+                    }
+                  },
+                  "funds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "PAYOUT": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "PAYOUT",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "payoutId": {
+                    "type": "string",
+                    "description": "Payout identifier"
+                  },
+                  "extPayoutId": {
+                    "type": "string",
+                    "description": "External payout identifier."
+                  },
+                  "accountNumber": {
+                    "type": "string",
+                    "description": "The account to which the payout was made."
+                  },
+                  "funds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "RETURN": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "RETURN",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "payoutId": {
+                    "type": "string",
+                    "description": "Payout identifier"
+                  },
+                  "extPayoutId": {
+                    "type": "string",
+                    "description": "External payout identifier."
+                  },
+                  "funds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "CHARGEBACK": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "CHARGEBACK",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "correctionId": {
+                    "type": "string",
+                    "description": "Correction identifier"
+                  },
+                  "funds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "ADMIN_CORRECTION": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Operation type.",
+                "example": "ADMIN_CORRECTION",
+                "enum": [
+                  "PAYMENT_SENT",
+                  "PAYMENT_RECEIVED",
+                  "PAYOUT",
+                  "REFUND_SENT",
+                  "REFUND_RECEIVED",
+                  "RETURN",
+                  "ADMIN_TRANSFER_SENT",
+                  "ADMIN_TRANSFER_RECEIVED",
+                  "FEE_TRANSFER_SENT",
+                  "FEE_TRANSFER_RECEIVED",
+                  "CHARGEBACK",
+                  "ADMIN_CORRECTION"
+                ]
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount (of order, refund, payout)."
+              },
+              "currencyCode": {
+                "type": "string",
+                "description": "Currency code according to ISO-4217.",
+                "example": "PLN"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description."
+              },
+              "status": {
+                "type": "string",
+                "description": "Operation status.",
+                "example": "COMPLETED"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Operation request moment.",
+                "format": "2019-11-30T20:33:44+02:00"
+              },
+              "eventDate": {
+                "type": "string",
+                "description": "Operation ending moment.",
+                "format": "2019-11-30T22:33:44+02:00"
+              },
+              "details": {
+                "type": "object",
+                "properties": {
+                  "correctionId": {
+                    "type": "string",
+                    "description": "Correction identifier"
+                  },
+                  "funds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pageResponse": {
+          "type": "object",
+          "properties": {
+            "records": {
+              "type": "string",
+              "description": "Total number of records found."
+            },
+            "size": {
+              "type": "string",
+              "description": "Number of returned operations."
+            },
+            "pageCount": {
+              "type": "string",
+              "description": "Page count."
+            }
+          }
+        }
+      }
+    },
+    "CompanyData": {
+      "type": "object",
+      "description": "Submerchant's data (if submerchant is a company).",
+      "required": [
+        "verificationId",
+        "sellerId",
+        "companyName",
+        "taxId",
+        "legalForm",
+        "address",
+        "email"
+      ],
+      "properties": {
+        "verificationId": {
+          "type": "string",
+          "description": "Unique id of the verification provided by PayU.",
+          "maxLength": 18,
+          "example": "aZx65uY"
+        },
+        "sellerId": {
+          "type": "string",
+          "description": "Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).",
+          "maxLength": 50,
+          "example": "seller_1\""
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email.",
+          "minLength": 5,
+          "maxLength": 80,
+          "example": "company@test.com"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone.",
+          "maxLength": 40,
+          "example": "111222333"
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax id.",
+          "format": "no spaces, eg. 1122334455",
+          "maxLength": 60,
+          "example": "1122334455"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Name of the company.",
+          "maxLength": 80,
+          "example": "Company 1"
+        },
+        "legalForm": {
+          "type": "string",
+          "description": "<b>FOREIGN_COMPANY</b> type has been deprecated.",
+          "enum": [
+            "AGENCY_OF_FOREIGN_COMPANY",
+            "ASSOCIATION",
+            "CHURCH_LEGAL_PERSON",
+            "CIVIL_LAW_PARTNERSHIP",
+            "COOPERATIVE",
+            "EDUCATIONAL_INSTITUTION",
+            "FOUNDATION",
+            "GENERAL_PARTNERSHIP",
+            "JOINT_STOCK_COMPANY",
+            "LIMITED_JOINT_STOCK_PARTNERSHIP",
+            "LIMITED_LIABILITY_COMPANY",
+            "LIMITED_LIABILITY_PARTNERSHIP",
+            "LIMITED_PARTNERSHIP",
+            "LOCAL_GOVERNMENT_UNIT",
+            "PRIVATE_PERSON",
+            "PROFESSIONAL_PARTNERSHIP",
+            "LOCAL_GOVERNMENT_CULTURE_INSTITUTION",
+            "RESEARCH_INSTITUTE",
+            "SOLE_TRADER",
+            "OTHER"
+          ],
+          "example": "CIVIL_LAW_PARTNERSHIP"
+        },
+        "gusCode": {
+          "type": "string",
+          "description": "Code relating to the legal form. For more information see the site of the <b><a href='https://stat.gov.pl/metainformacje/slownik-pojec/pojecia-stosowane-w-statystyce-publicznej/97,pojecie.html' target='_blank'>G\u0142\u00f3wny Urz\u0105d Statystyczny</a></b>.",
+          "maxLength": 50
+        },
+        "registryNumber": {
+          "type": "string",
+          "description": "Company registry number (eg REGON in Poland).",
+          "maxLength": 40
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "YYYY-MM-DD",
+          "description": "Company registration date in the registries.",
+          "example": "2019-07-07"
+        },
+        "address": {
+          "type": "object",
+          "description": "Address of the company.",
+          "required": [
+            "country"
+          ],
+          "properties": {
+            "street": {
+              "type": "string",
+              "description": "Street with building and apartment number. <b>Required for full verification</b>.",
+              "maxLength": 255,
+              "example": "Grunwaldzka 186"
+            },
+            "zipcode": {
+              "type": "string",
+              "description": "Company's address zipcode. <b>Required for full verification</b>.",
+              "maxLength": 20,
+              "example": "60-166"
+            },
+            "city": {
+              "type": "string",
+              "description": "<b>Required for full verification</b>.",
+              "maxLength": 40,
+              "example": "Poznan"
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter ISO country code.",
+              "maxLength": 80,
+              "example": "PL"
+            }
+          }
+        }
+      }
+    },
+    "PrivatePerson": {
+      "type": "object",
+      "description": "Submerchant's data (if submerchant is a private person).",
+      "required": [
+        "verificationId",
+        "sellerId",
+        "name",
+        "surname",
+        "legalForm",
+        "address",
+        "email",
+        "dateOfBirth"
+      ],
+      "properties": {
+        "verificationId": {
+          "type": "string",
+          "description": "Unique id of the verification provided by PayU.",
+          "maxLength": 18,
+          "example": "BZx65uYW"
+        },
+        "sellerId": {
+          "type": "string",
+          "description": "Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).",
+          "maxLength": 50,
+          "example": "seller_2\""
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email.",
+          "minLength": 5,
+          "maxLength": 80,
+          "example": "test@test.com"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone.",
+          "maxLength": 40,
+          "example": "111222333"
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax id. <b>Should be empty for private person</b>.",
+          "format": "should be empty for private person",
+          "maxLength": 60,
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "description": "First name of the seller.",
+          "maxLength": 40,
+          "example": "Jan"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Last name of the seller.",
+          "maxLength": 40,
+          "example": "Kowalski"
+        },
+        "legalForm": {
+          "type": "string",
+          "description": "<b>FOREIGN_COMPANY</b> type has been deprecated.",
+          "enum": [
+            "AGENCY_OF_FOREIGN_COMPANY",
+            "ASSOCIATION",
+            "CHURCH_LEGAL_PERSON",
+            "CIVIL_LAW_PARTNERSHIP",
+            "COOPERATIVE",
+            "EDUCATIONAL_INSTITUTION",
+            "FOUNDATION",
+            "GENERAL_PARTNERSHIP",
+            "JOINT_STOCK_COMPANY",
+            "LIMITED_JOINT_STOCK_PARTNERSHIP",
+            "LIMITED_LIABILITY_COMPANY",
+            "LIMITED_LIABILITY_PARTNERSHIP",
+            "LIMITED_PARTNERSHIP",
+            "LOCAL_GOVERNMENT_UNIT",
+            "PRIVATE_PERSON",
+            "PROFESSIONAL_PARTNERSHIP",
+            "LOCAL_GOVERNMENT_CULTURE_INSTITUTION",
+            "RESEARCH_INSTITUTE",
+            "SOLE_TRADER",
+            "OTHER"
+          ],
+          "example": "PRIVATE_PERSON"
+        },
+        "personalIdentificationNumber": {
+          "type": "string",
+          "description": "National, personal identification number e.g. PESEL in Poland. <b>Required for private persons for full verification Not required for basic data</b>.",
+          "maxLength": 150,
+          "example": "90112322330"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "description": "",
+          "format": "YYYY-MM-DD",
+          "example": "1988-10-12"
+        },
+        "registryNumber": {
+          "type": "string",
+          "description": "Company registry number (eg REGON in Poland). <b>Should be empty for private person</b>.",
+          "maxLength": 40,
+          "example": ""
+        },
+        "address": {
+          "type": "object",
+          "description": "Address of the private person.",
+          "required": [
+            "country"
+          ],
+          "properties": {
+            "street": {
+              "type": "string",
+              "description": "Street with building and apartment number. <b>Required for full verification</b>.",
+              "maxLength": 255,
+              "example": "Grunwaldzka 186"
+            },
+            "zipcode": {
+              "type": "string",
+              "description": "Private person's address zipcode. <b>Required for full verification</b>.",
+              "maxLength": 20,
+              "example": "60-166"
+            },
+            "city": {
+              "type": "string",
+              "description": "<b>Required for full verification</b>.",
+              "maxLength": 40,
+              "example": "Poznan"
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter ISO country code.",
+              "maxLength": 80,
+              "example": "PL"
+            }
+          }
+        }
+      }
+    },
+    "PayoutWithVerificationTransfer": {
+      "type": "object",
+      "required": [
+        "bankDataId",
+        "verificationId",
+        "accountNumberRequested",
+        "swiftCode",
+        "payoutDataVerificationType",
+        "foreign",
+        "verified",
+        "verificationTransferId"
+      ],
+      "properties": {
+        "bankDataId": {
+          "type": "string",
+          "description": "Id of the bank account details assigned by marketplace.",
+          "maxLength": 100,
+          "example": "01102020"
+        },
+        "verificationId": {
+          "type": "string",
+          "description": "Id of verification in context of which data are provided.",
+          "maxLength": 18,
+          "example": "verification-123"
+        },
+        "accountNumberRequested": {
+          "type": "string",
+          "description": "Bank account number declared for withdrawals by submerchant.",
+          "format": "IBAN",
+          "maxLength": 255,
+          "example": "PL1122334455667788991010111223345"
+        },
+        "hasDocument": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is \"BANK_STATEMENT\"**.\n",
+          "example": "true"
+        },
+        "payoutDataVerificationType": {
+          "type": "string",
+          "enum": [
+            "LIAN_LIAN",
+            "PINGPONG",
+            "OFX",
+            "BANK_STATEMENT",
+            "BANK_TRANSFER",
+            "NO_VERIFICATION_NEEDED"
+          ],
+          "description": "Type of verification used for the provided payout details verification. Different for each verification type:\n* **LIAN_LIAN** - special type for Chinese submerchants,\n* **PINGPONG** - special type for Chinese submerchants,\n* **OFX** - special type for Chinese submerchants,\n* **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),\n* **BANK_TRANSFER**,\n* **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn't have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.\n",
+          "example": "BANK_STATEMENT"
+        },
+        "foreign": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.\n\n**For domestic transfers set this parameter to `false`, specifically**:\n\n- Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.\n- Payouts in PLN (Polish Z\u0142oty) to an account held in Poland.\n",
+          "example": "false"
+        },
+        "verificationTransferId": {
+          "type": "string",
+          "description": "Have to be indicated in request with declared payouts data. Payouts data need to be declared in 72 hours from above request/response.",
+          "maxLength": 255,
+          "example": "5f7007da-8e05-4f0f-9503-05c053034bde"
+        },
+        "verified": {
+          "type": "string",
+          "description": "parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than \"NO_VERIFICATION_NEEDED\" PayU must verify the bank account details.",
+          "example": "false"
+        }
+      }
+    },
+    "PayoutWithoutVerificationTransfer": {
+      "type": "object",
+      "required": [
+        "bankDataId",
+        "verificationId",
+        "accountNumberRequested",
+        "payoutDataVerificationType",
+        "foreign",
+        "verified"
+      ],
+      "properties": {
+        "bankDataId": {
+          "type": "string",
+          "description": "Id of the bank account details assigned by marketplace.",
+          "maxLength": 100,
+          "example": "01102020"
+        },
+        "verificationId": {
+          "type": "string",
+          "description": "Id of verification in context of which data are provided.",
+          "maxLength": 18,
+          "example": "verification-123"
+        },
+        "accountNumberRequested": {
+          "type": "string",
+          "description": "Bank account number declared for withdrawals by submerchant.",
+          "format": "IBAN",
+          "maxLength": 255,
+          "example": "PL1122334455667788991010111223345"
+        },
+        "hasDocument": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is \"BANK_STATEMENT**\".\n",
+          "example": "true"
+        },
+        "swiftCode": {
+          "type": "string",
+          "description": "Standard format of Bank Identifier Code.",
+          "maxLength": 11,
+          "example": "BREXPLPW"
+        },
+        "bankAddress": {
+          "type": "string",
+          "description": "Bank address.",
+          "example": "Schule Str. 23 60-000 Berlin"
+        },
+        "bankCountry": {
+          "type": "string",
+          "description": "Bank country. **Required for foreign bank account**.",
+          "maxLength": 10,
+          "example": "DE"
+        },
+        "payoutDataVerificationType": {
+          "type": "string",
+          "enum": [
+            "LIAN_LIAN",
+            "PINGPONG",
+            "OFX",
+            "BANK_STATEMENT",
+            "BANK_TRANSFER",
+            "NO_VERIFICATION_NEEDED"
+          ],
+          "description": "Type of verification used for the provided payout details verification. Different for each verification type:\n* **LIAN_LIAN** - special type for Chinese submerchants,\n* **PINGPONG** - special type for Chinese submerchants,\n* **OFX** - special type for Chinese submerchants,\n* **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),\n* **BANK_TRANSFER**,\n* **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn't have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.\n",
+          "example": "BANK_STATEMENT"
+        },
+        "statementData": {
+          "type": "object",
+          "description": "Details from bank statement.",
+          "required": [
+            "ownerName",
+            "address"
+          ],
+          "properties": {
+            "accountNumberFromBank": {
+              "type": "string",
+              "description": "",
+              "maxLength": 50,
+              "example": "DE84074749817492314"
+            },
+            "ownerName": {
+              "type": "string",
+              "description": "Name of the account owner from bank transfer.",
+              "maxLength": 255,
+              "example": "Marian Brotchen"
+            },
+            "address": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "street": {
+                  "type": "string",
+                  "description": "Street name.",
+                  "maxLength": 255,
+                  "example": "Schule Str. 23"
+                },
+                "zipcode": {
+                  "type": "string",
+                  "description": "Zipcode",
+                  "maxLength": 255,
+                  "example": "60-000"
+                },
+                "city": {
+                  "type": "string",
+                  "description": "City name.",
+                  "maxLength": 255,
+                  "example": "Berlin"
+                },
+                "country": {
+                  "type": "string",
+                  "description": "Country code.",
+                  "format": "ISO Country Code",
+                  "maxLength": 2,
+                  "example": "DE"
+                }
+              }
+            }
+          }
+        },
+        "foreign": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.\n\n**For domestic transfers set this parameter to `false`, specifically**:\n\n- Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.\n- Payouts in PLN (Polish Z\u0142oty) to an account held in Poland.\n",
+          "example": "false"
+        },
+        "verified": {
+          "type": "string",
+          "description": "parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than \"NO_VERIFICATION_NEEDED\" PayU must verify the bank account details.",
+          "example": "false"
+        }
+      }
+    },
+    "PayoutBankStatement": {
+      "type": "object",
+      "required": [
+        "bankDataId",
+        "verificationId",
+        "accountNumberRequested",
+        "hasDocument",
+        "payoutDataVerificationType",
+        "foreign",
+        "verified"
+      ],
+      "properties": {
+        "bankDataId": {
+          "type": "string",
+          "description": "Id of the bank account details assigned by marketplace.",
+          "maxLength": 100,
+          "example": "01102020"
+        },
+        "verificationId": {
+          "type": "string",
+          "description": "Id of verification in context of which data are provided.",
+          "maxLength": 18,
+          "example": "verification-123"
+        },
+        "accountNumberRequested": {
+          "type": "string",
+          "description": "Bank account number declared for withdrawals by submerchant.",
+          "format": "IBAN",
+          "maxLength": 255,
+          "example": "PL1122334455667788991010111223345"
+        },
+        "hasDocument": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is \"BANK_STATEMENT**\".\n",
+          "example": "true"
+        },
+        "payoutDataVerificationType": {
+          "type": "string",
+          "enum": [
+            "LIAN_LIAN",
+            "PINGPONG",
+            "OFX",
+            "BANK_STATEMENT",
+            "BANK_TRANSFER",
+            "NO_VERIFICATION_NEEDED"
+          ],
+          "description": "Type of verification used for the provided payout details verification. Different for each verification type:\n* **LIAN_LIAN** - special type for Chinese submerchants,\n* **PINGPONG** - special type for Chinese submerchants,\n* **OFX** - special type for Chinese submerchants,\n* **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),\n* **BANK_TRANSFER**,\n* **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn't have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.\n",
+          "example": "BANK_STATEMENT"
+        },
+        "foreign": {
+          "type": "string",
+          "enum": [
+            true,
+            false
+          ],
+          "description": "Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.\n\n**For domestic transfers set this parameter to `false`, specifically**:\n\n- Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.\n- Payouts in PLN (Polish Z\u0142oty) to an account held in Poland.\n",
+          "example": "false"
+        },
+        "verified": {
+          "type": "string",
+          "description": "parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than \"NO_VERIFICATION_NEEDED\" PayU must verify the bank account details.",
+          "example": "false"
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "required": [
+        "notifyUrl",
+        "externalId",
+        "legalName",
+        "dbaName",
+        "address",
+        "phone",
+        "websiteUrl",
+        "mcc",
+        "riskClass",
+        "taxId",
+        "representatives",
+        "legalForm",
+        "agreementDate"
+      ],
+      "properties": {
+        "payTypeCategories": {
+          "type": "array",
+          "description": "Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Card"
+          ]
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Id assigned by the Payment Facilitator."
+        },
+        "notifyUrl": {
+          "type": "string",
+          "description": "Notifications regarding submerchant status change will be sent to address provided in this field."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Full legal (registration) name."
+        },
+        "dbaName": {
+          "type": "string",
+          "description": "\"Doing business as\" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement)."
+        },
+        "address": {
+          "type": "object",
+          "required": [
+            "street",
+            "postalCode",
+            "city",
+            "countryCode"
+          ],
+          "description": "Legal address object.",
+          "properties": {
+            "street": {
+              "type": "string",
+              "description": "Legal address street including house/apartment number (if applicable)."
+            },
+            "city": {
+              "type": "string",
+              "description": "Legal address city."
+            },
+            "postalCode": {
+              "type": "string",
+              "description": "Legal address postal code."
+            },
+            "countryCode": {
+              "type": "string",
+              "description": "Legal address country code. Must be a valid ISO 3166-1 two-letter code."
+            }
+          }
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "websiteUrl": {
+          "type": "string",
+          "description": "A valid URL address of merchant's website."
+        },
+        "mcc": {
+          "type": "number",
+          "description": "Accurate Merchant Category Code established during KYC process by the PF."
+        },
+        "riskClass": {
+          "type": "string",
+          "description": "Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).",
+          "enum": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ]
+        },
+        "representatives": {
+          "type": "array",
+          "description": "Array of either principals or enterprise owners (depends on legal form). Minimum one is required.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Representative's name."
+              },
+              "phone": {
+                "type": "string",
+                "description": "Representative's phone number."
+              }
+            }
+          }
+        },
+        "legalForm": {
+          "type": "string",
+          "enum": [
+            "FU",
+            "FZ",
+            "IB",
+            "JST",
+            "KOP",
+            "PO",
+            "PP",
+            "PPZ",
+            "PRPA",
+            "SA",
+            "SC",
+            "SD",
+            "SIK",
+            "SJ",
+            "SK",
+            "SO",
+            "SP",
+            "SPOL",
+            "ST"
+          ],
+          "description": "Dictionary value - legal entity type. Check dictionaries for <a href=\"/europe/docs/collaboration/referral-program/#firm-types\">specific origin</a>."
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax identification (e.g. NIP in Poland) or business identification (e.g. I\u010c in Czechia)."
+        },
+        "agreementDate": {
+          "type": "string",
+          "description": "Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).",
+          "format": "yyyy-mm-dd"
+        }
+      }
+    },
+    "CardPbl": {
+      "type": "object",
+      "title": "Card, PBL",
+      "required": [
+        "notifyUrl",
+        "externalId",
+        "legalName",
+        "dbaName",
+        "address",
+        "phone",
+        "websiteUrl",
+        "mcc",
+        "riskClass",
+        "taxId",
+        "representatives",
+        "legalForm",
+        "agreementDate"
+      ],
+      "properties": {
+        "payTypeCategories": {
+          "type": "array",
+          "description": "Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Card",
+            "PBL"
+          ]
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Id assigned by the Payment Facilitator."
+        },
+        "notifyUrl": {
+          "type": "string",
+          "description": "Notifications regarding submerchant status change will be sent to address provided in this field."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Full legal (registration) name."
+        },
+        "dbaName": {
+          "type": "string",
+          "description": "\"Doing business as\" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement)."
+        },
+        "address": {
+          "type": "object",
+          "required": [
+            "street",
+            "postalCode",
+            "city",
+            "countryCode"
+          ],
+          "description": "Legal address object.",
+          "properties": {
+            "street": {
+              "type": "string",
+              "description": "Legal address street including house/apartment number (if applicable)."
+            },
+            "city": {
+              "type": "string",
+              "description": "Legal address city."
+            },
+            "postalCode": {
+              "type": "string",
+              "description": "Legal address postal code."
+            },
+            "countryCode": {
+              "type": "string",
+              "description": "Legal address country code. Must be a valid ISO 3166-1 two-letter code."
+            }
+          }
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "websiteUrl": {
+          "type": "string",
+          "description": "A valid URL address of merchant's website."
+        },
+        "mcc": {
+          "type": "number",
+          "description": "Accurate Merchant Category Code established during KYC process by the PF."
+        },
+        "riskClass": {
+          "type": "string",
+          "description": "Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).",
+          "enum": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ]
+        },
+        "representatives": {
+          "type": "array",
+          "description": "Array of either principals or enterprise owners (depends on legal form). Minimum one is required.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Representative's name."
+              },
+              "phone": {
+                "type": "string",
+                "description": "Representative's phone number."
+              }
+            }
+          }
+        },
+        "legalForm": {
+          "type": "string",
+          "enum": [
+            "FU",
+            "FZ",
+            "IB",
+            "JST",
+            "KOP",
+            "PO",
+            "PP",
+            "PPZ",
+            "PRPA",
+            "SA",
+            "SC",
+            "SD",
+            "SIK",
+            "SJ",
+            "SK",
+            "SO",
+            "SP",
+            "SPOL",
+            "ST"
+          ],
+          "description": "Dictionary value - legal entity type. Check dictionaries for <a href=\"/europe/docs/collaboration/referral-program/#firm-types\">specific origin</a>."
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax identification (e.g. NIP in Poland) or business identification (e.g. I\u010c in Czechia)."
+        },
+        "agreementDate": {
+          "type": "string",
+          "description": "Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).",
+          "format": "yyyy-mm-dd"
+        }
+      }
+    },
+    "Pbl": {
+      "type": "object",
+      "title": "PBL",
+      "required": [
+        "notifyUrl",
+        "externalId",
+        "legalName",
+        "dbaName",
+        "address",
+        "websiteUrl",
+        "mcc",
+        "taxId"
+      ],
+      "properties": {
+        "payTypeCategories": {
+          "type": "array",
+          "description": "Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "PBL"
+          ]
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Id assigned by the Payment Facilitator."
+        },
+        "notifyUrl": {
+          "type": "string",
+          "description": "Notifications regarding submerchant status change will be sent to address provided in this field."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Full legal (registration) name."
+        },
+        "dbaName": {
+          "type": "string",
+          "description": "\"Doing business as\" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement)."
+        },
+        "address": {
+          "type": "object",
+          "required": [
+            "street",
+            "postalCode",
+            "city",
+            "countryCode"
+          ],
+          "description": "Legal address object.",
+          "properties": {
+            "street": {
+              "type": "string",
+              "description": "Legal address street including house/apartment number (if applicable)."
+            },
+            "city": {
+              "type": "string",
+              "description": "Legal address city."
+            },
+            "postalCode": {
+              "type": "string",
+              "description": "Legal address postal code."
+            },
+            "countryCode": {
+              "type": "string",
+              "description": "Legal address country code. Must be a valid ISO 3166-1 two-letter code."
+            }
+          }
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "websiteUrl": {
+          "type": "string",
+          "description": "A valid URL address of merchant's website."
+        },
+        "mcc": {
+          "type": "number",
+          "description": "Accurate Merchant Category Code established during KYC process by the PF."
+        },
+        "riskClass": {
+          "type": "string",
+          "description": "Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).",
+          "enum": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ]
+        },
+        "representatives": {
+          "type": "array",
+          "description": "Array of either principals or enterprise owners (depends on legal form). Minimum one is required.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Representative's name."
+              },
+              "phone": {
+                "type": "string",
+                "description": "Representative's phone number."
+              }
+            }
+          }
+        },
+        "legalForm": {
+          "type": "string",
+          "enum": [
+            "FU",
+            "FZ",
+            "IB",
+            "JST",
+            "KOP",
+            "PO",
+            "PP",
+            "PPZ",
+            "PRPA",
+            "SA",
+            "SC",
+            "SD",
+            "SIK",
+            "SJ",
+            "SK",
+            "SO",
+            "SP",
+            "SPOL",
+            "ST"
+          ],
+          "description": "Dictionary value - legal entity type. Check dictionaries for <a href=\"/europe/docs/collaboration/referral-program/#firm-types\">specific origin</a>."
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax identification (e.g. NIP in Poland) or business identification (e.g. I\u010c in Czechia)."
+        },
+        "agreementDate": {
+          "type": "string",
+          "description": "Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).",
+          "format": "yyyy-mm-dd"
+        }
+      }
+    }
+  }
+}

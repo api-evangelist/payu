@@ -46,7 +46,15 @@ apis:
       - type: Documentation
         url: https://developers.payu.com/europe/docs/get-started/apis/
       - type: OpenAPI
-        url: https://developers.payu.com/europe/api/
+        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/openapi/payu-europe-rest-api.yaml
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+      - type: Examples
+        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+      - type: Vocabulary
+        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+      - type: JSONLD
+        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
     contact:
       - FN: PayU Europe Developer Support
         url: https://developers.payu.com/europe/

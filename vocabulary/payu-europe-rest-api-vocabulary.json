@@ -1,0 +1,1714 @@
+{
+  "title": "PayU GPO Europe REST API Vocabulary",
+  "description": "Terms and concepts extracted from the PayU GPO Europe REST API specification",
+  "source": "https://developers.payu.com/europe/api/",
+  "terms": [
+    {
+      "term": "grant_type",
+      "type": "string",
+      "description": "Authorization mode",
+      "usedIn": [
+        "ClientCredentials",
+        "TrustedMerchant",
+        "Partner"
+      ]
+    },
+    {
+      "term": "client_id",
+      "type": "string",
+      "description": "Merchant's POS identifier in PayU's system. Can be found in PayU's merchant panel",
+      "usedIn": [
+        "ClientCredentials",
+        "TrustedMerchant",
+        "Partner"
+      ]
+    },
+    {
+      "term": "client_secret",
+      "type": "string",
+      "description": "Merchant's secret key. Can be found in PayU's merchant panel",
+      "usedIn": [
+        "ClientCredentials",
+        "TrustedMerchant",
+        "Partner"
+      ]
+    },
+    {
+      "term": "email",
+      "type": "string",
+      "description": "Customer's email address in merchant's system",
+      "usedIn": [
+        "TrustedMerchant",
+        "buyer",
+        "payee",
+        "CompanyData",
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "ext_customer_id",
+      "type": "string",
+      "description": "Customer's identifier in the merchant's system",
+      "usedIn": [
+        "TrustedMerchant"
+      ]
+    },
+    {
+      "term": "firm_id",
+      "type": "string",
+      "description": "publicFirmId created by Partner that will be managed",
+      "usedIn": [
+        "Partner"
+      ]
+    },
+    {
+      "term": "status",
+      "type": "string",
+      "description": "Status of the Click to Pay feature for Mastercard.",
+      "usedIn": [
+        "mastercardFeature",
+        "visaFeature",
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized"
+      ]
+    },
+    {
+      "term": "dpaId",
+      "type": "string",
+      "description": "Merchant ID in Mastercard Click to Pay.",
+      "usedIn": [
+        "mastercardFeature",
+        "visaFeature"
+      ]
+    },
+    {
+      "term": "acquirerBIN",
+      "type": "string",
+      "description": "Acquirer Bank Identification Number for Click to Pay transactions.",
+      "usedIn": [
+        "visaFeature"
+      ]
+    },
+    {
+      "term": "acquirerMerchantId",
+      "type": "string",
+      "description": "Acquirer Merchant ID for Click to Pay transactions.",
+      "usedIn": [
+        "visaFeature"
+      ]
+    },
+    {
+      "term": "brandImageUrl",
+      "type": "string",
+      "description": "URL of the Click to Pay brand image.",
+      "usedIn": [
+        "clickToPayFeature"
+      ]
+    },
+    {
+      "term": "mastercard",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "clickToPayFeature"
+      ]
+    },
+    {
+      "term": "visa",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "clickToPayFeature"
+      ]
+    },
+    {
+      "term": "amount",
+      "type": "integer",
+      "description": "Donation amount in pennies.",
+      "usedIn": [
+        "donation",
+        "payMethod",
+        "merchantFunds",
+        "Partial",
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized",
+        "payout",
+        "fxData"
+      ]
+    },
+    {
+      "term": "organizationId",
+      "type": "string",
+      "description": "Charity identifier provided by PayU.",
+      "usedIn": [
+        "donation"
+      ]
+    },
+    {
+      "term": "street",
+      "type": "string",
+      "description": "Full street address, incl. apartment number. <b>Section recommended for the 3DS 2 authentication</b>.",
+      "usedIn": [
+        "delivery",
+        "billingAddress",
+        "address",
+        "customerAddress",
+        "bankAddress"
+      ]
+    },
+    {
+      "term": "postalBox",
+      "type": "string",
+      "description": "Postal box",
+      "usedIn": [
+        "delivery"
+      ]
+    },
+    {
+      "term": "postalCode",
+      "type": "string",
+      "description": "Postal code. <b>Section recommended for the 3DS 2 authentication</b>.",
+      "usedIn": [
+        "delivery",
+        "billingAddress",
+        "address",
+        "customerAddress",
+        "bankAddress"
+      ]
+    },
+    {
+      "term": "city",
+      "type": "string",
+      "description": "City, <b>section recommended for the 3DS 2 authentication</b>.",
+      "usedIn": [
+        "delivery",
+        "billingAddress",
+        "address",
+        "customerAddress",
+        "bankAddress"
+      ]
+    },
+    {
+      "term": "state",
+      "type": "string",
+      "description": "Country principal subdivision like \"state\" or \"province\". If provided, must be a valid ISO 3166-2 code (e.g. \"UT\" for Utah in the USA or \"30\" for \"Wielkopolskie\" in Poland). <b>Section recommended for the 3DS 2 authentication</b>.",
+      "usedIn": [
+        "delivery",
+        "billingAddress"
+      ]
+    },
+    {
+      "term": "countryCode",
+      "type": "string",
+      "description": "Two-letter country code compliant with <b><a href=\"https://www.iso.org/iso-3166-country-codes.html\">ISO-3166</a></b>. <b>Section recommended for the 3DS 2 authentication</b>.",
+      "usedIn": [
+        "delivery",
+        "blikData",
+        "billingAddress",
+        "address",
+        "customerAddress",
+        "bankAddress"
+      ]
+    },
+    {
+      "term": "name",
+      "type": "string",
+      "description": "Address description",
+      "usedIn": [
+        "delivery",
+        "cardholder",
+        "customerAddress",
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "recipientName",
+      "type": "string",
+      "description": "Recipient name",
+      "usedIn": [
+        "delivery"
+      ]
+    },
+    {
+      "term": "recipientEmail",
+      "type": "string",
+      "description": "Ecipient email",
+      "usedIn": [
+        "delivery"
+      ]
+    },
+    {
+      "term": "recipientPhone",
+      "type": "string",
+      "description": "Recipient phone number",
+      "usedIn": [
+        "delivery"
+      ]
+    },
+    {
+      "term": "extCustomerId",
+      "type": "string",
+      "description": "ID of the customer used in merchant system",
+      "usedIn": [
+        "buyer",
+        "payee"
+      ]
+    },
+    {
+      "term": "phone",
+      "type": "string",
+      "description": "Buyer's telephone number. Please use +[country code] [number] format. **Required for Pay Later with Twisto (CZ), 3DS 2 authentication.**",
+      "usedIn": [
+        "buyer",
+        "CompanyData",
+        "PrivatePerson",
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "firstName",
+      "type": "string",
+      "description": "Buyer's first name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)** </br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.",
+      "usedIn": [
+        "buyer"
+      ]
+    },
+    {
+      "term": "lastName",
+      "type": "string",
+      "description": "Buyer's last name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)**</br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.",
+      "usedIn": [
+        "buyer"
+      ]
+    },
+    {
+      "term": "nin",
+      "type": "string",
+      "description": "National Identification Number",
+      "usedIn": [
+        "buyer"
+      ]
+    },
+    {
+      "term": "language",
+      "type": "string",
+      "description": "Language code, ISO-639-1 compliant. Denotes the language version of PayU hosted payment page and of e-mail messages sent from PayU to the payer.",
+      "usedIn": [
+        "buyer",
+        "browser"
+      ]
+    },
+    {
+      "term": "birthDate",
+      "type": "string",
+      "description": "Buyer's date of birth. **Required for AFT card authorization (Account Funding Transaction)**.",
+      "usedIn": [
+        "buyer"
+      ]
+    },
+    {
+      "term": "delivery",
+      "type": "string",
+      "description": "**Section recommended for the 3DS 2 authentication.**",
+      "usedIn": [
+        "buyer"
+      ]
+    },
+    {
+      "term": "srcCorrelationId",
+      "type": "string",
+      "description": "A transaction identifier.",
+      "usedIn": [
+        "clickToPayVisa",
+        "clickToPayMastercard"
+      ]
+    },
+    {
+      "term": "srcDigitalCardId",
+      "type": "string",
+      "description": "A srcDigitalCardId is a unique identifier that represents the token associated with a card enrolled in Mastercard Checkout Solutions (MCS)",
+      "usedIn": [
+        "clickToPayMastercard"
+      ]
+    },
+    {
+      "term": "number",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardPlainData",
+        "cardForPayout"
+      ]
+    },
+    {
+      "term": "expirationMonth",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardPlainData",
+        "cardForPayout"
+      ]
+    },
+    {
+      "term": "expirationYear",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardPlainData",
+        "cardForPayout"
+      ]
+    },
+    {
+      "term": "cvv",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardPlainData"
+      ]
+    },
+    {
+      "term": "firstTransactionId",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardPlainData"
+      ]
+    },
+    {
+      "term": "aliasLabelProposal",
+      "type": "string",
+      "description": "Label proposal associated with given mobile application. This field can be used only during token registration.</br><b>Required for the BLIK Recurring</b>.",
+      "usedIn": [
+        "blikData"
+      ]
+    },
+    {
+      "term": "registerTokenValue",
+      "type": "string",
+      "description": "UID/PAYID token value assigned by the merchant. This field can be used only during token registration.",
+      "usedIn": [
+        "blikData"
+      ]
+    },
+    {
+      "term": "register",
+      "type": "boolean",
+      "description": "Set to `true` specifies that an alias registration request will be sent. Set to false will result in payment with a T6 authorization code without token registration.",
+      "usedIn": [
+        "blikData"
+      ]
+    },
+    {
+      "term": "appKey",
+      "type": "string",
+      "description": "The identifier of the customer's chosen bank mobile application within which the transaction authorization will take place.",
+      "usedIn": [
+        "blikData"
+      ]
+    },
+    {
+      "term": "recommendedAuthLevel",
+      "type": "string",
+      "description": "The proposed level of transaction authorisation. A value of `NO_CONFIRMATION` means no need for transaction confirmation. In case of recurring payments, the value of `NO_CONFIRMATION` means that the merchant is aware of potential fraud risk, accepts it and takes full responsibility for potential fraudulent transactions.",
+      "usedIn": [
+        "blikData"
+      ]
+    },
+    {
+      "term": "recurring",
+      "type": "object",
+      "description": "Contains information about the recurring payment.",
+      "usedIn": [
+        "blikData",
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "status3Ds",
+      "type": "enum",
+      "description": "3DS status. Following values are allowed to be used:<ul><li><b>Y</b> - successful 3DS2 authentication,</li><li><b>A</b> - 3DS2 authentication attempt.</li></ul>",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "status3DsDescription",
+      "type": "string",
+      "description": "Description related to 3DS result. Passing this parameter as a additional description with the MPI will allow better potential customer support from BOK.",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "xid",
+      "type": "string",
+      "description": "Unique identifier of 3DS transaction given by the shop. Field required within 3DS version 1 section. This field <b>should not</b> be sent when attempting 3DS2.x authentication. <ul><li><b>[1 .. 20] characters</b> - for value in plain text,</li><li><b>{28} characters</b> - for Base64encoded value,</li><li><b>{40} characters</b> - for HEXencoded value.</li></ul>",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "dsTransactionId",
+      "type": "string",
+      "description": "Field required within 3DS2.x section. This field should not be sent when attempting 3DS version 1 authentication.",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "eciCode",
+      "type": "enum",
+      "description": "E-commerce Indicator / UCAF. Values can be passed with \"0\", e.g. \"04\", \"05\", etc. It should be passed always if the MPI provided this information.",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "cavv",
+      "type": "string",
+      "description": "3DS cryptogram. It should be passed always if the MPI provided this information.",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "tavv",
+      "type": "string",
+      "description": "Token Authentication Verification Value (TAVV) from external provider.",
+      "usedIn": [
+        "threeDsData"
+      ]
+    },
+    {
+      "term": "type",
+      "type": "string",
+      "description": "Payment method type.",
+      "usedIn": [
+        "payMethod",
+        "shippingMethod"
+      ]
+    },
+    {
+      "term": "value",
+      "type": "string",
+      "description": "Payment type for PBL, CARD_TOKEN.",
+      "usedIn": [
+        "payMethod",
+        "exemption"
+      ]
+    },
+    {
+      "term": "clickToPay",
+      "type": "string",
+      "description": "ClickToPay details. When this node is used, set `type` to `PBL` and `value` to `c`. Provide exactly one option: `visa` or `mastercard` (not both).",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "authorizationCode",
+      "type": "string",
+      "description": "Optional, usage differs depending on payment method. For BLIK integrated transparently: enables to collect 6-digit BLIK code on your website instead of redirecting to BLIK.",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "authorizationType",
+      "type": "string",
+      "description": "Applicable only to card-based payments, incl. Apple Pay, Google Pay.",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "card",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "payMethod",
+        "CardPayout"
+      ]
+    },
+    {
+      "term": "specificData",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "blikData",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "threeDsData",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "sourcePaymentFlow",
+      "type": "enum",
+      "description": "Indicates digital wallet.",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "cardInstallments",
+      "type": "object",
+      "description": "For merchants operating on the Romanian market (Requires contact with a Payu representative first).",
+      "usedIn": [
+        "payMethod"
+      ]
+    },
+    {
+      "term": "payMethod",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "payMethods"
+      ]
+    },
+    {
+      "term": "mcpCurrency",
+      "type": "string",
+      "description": "termCurrency from the rate table.",
+      "usedIn": [
+        "mcpData"
+      ]
+    },
+    {
+      "term": "mcpAmount",
+      "type": "string",
+      "description": "baseCurrency amount converted to termCurrency.",
+      "usedIn": [
+        "mcpData"
+      ]
+    },
+    {
+      "term": "mcpRate",
+      "type": "string",
+      "description": "Applied conversion rate.",
+      "usedIn": [
+        "mcpData"
+      ]
+    },
+    {
+      "term": "mcpFxTableId",
+      "type": "string",
+      "description": "Applied FX rate table id.",
+      "usedIn": [
+        "mcpData"
+      ]
+    },
+    {
+      "term": "mcpPartnerId",
+      "type": "string",
+      "description": "Id provided by PayU.",
+      "usedIn": [
+        "mcpData"
+      ]
+    },
+    {
+      "term": "rejectionHandling",
+      "type": "string",
+      "description": "Either PERFORM_AUTHENTICATION (PayU will return response with WARNING_CONTINUE_3DS and redirection URL code if exemption cannot be applied) or DECLINE (PayU will decline the payment if exemption cannot be applied - error message will be returned synchronously in OrderCreateResponse)",
+      "usedIn": [
+        "exemption"
+      ]
+    },
+    {
+      "term": "riskScore",
+      "type": "string",
+      "description": "Risk score assigned by merchant's antifraud tool. For informative purposes only.",
+      "usedIn": [
+        "exemption"
+      ]
+    },
+    {
+      "term": "acceptHeaders",
+      "type": "string",
+      "description": "Exact content of the HTTP accept headers as sent from the payer's browser.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "requestIP",
+      "type": "string",
+      "description": "IP address of the browser as returned by the HTTP headers.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "screenWidth",
+      "type": "string",
+      "description": "Total width of the payer's screen in pixels. Obtained from the screen.width HTML DOM property.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "javaEnabled",
+      "type": "boolean",
+      "description": "Obtained from the navigator HTML DOM object.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "timezoneOffset",
+      "type": "string",
+      "description": "Obtained from the getTimezoneOffset() method applied to Date object.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "screenHeight",
+      "type": "string",
+      "description": "Obtained from the navigator HTML DOM object.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "userAgent",
+      "type": "string",
+      "description": "Exact content of the HTTP user-agent header.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "colorDepth",
+      "type": "string",
+      "description": "Obtained from payer's browser using the screen.colorDepth HTML DOM property.",
+      "usedIn": [
+        "browser"
+      ]
+    },
+    {
+      "term": "y",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdkEphemPubKey"
+      ]
+    },
+    {
+      "term": "x",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdkEphemPubKey"
+      ]
+    },
+    {
+      "term": "kty",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdkEphemPubKey"
+      ]
+    },
+    {
+      "term": "crv",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdkEphemPubKey"
+      ]
+    },
+    {
+      "term": "sdkReferenceNumber",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "sdkMaxTimeout",
+      "type": "string",
+      "description": "Indicates the maximum amount of time (in minutes) for all exchanges. The field shall have value greater or equal to 05.",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "sdkAppID",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "sdkEncData",
+      "type": "string",
+      "description": "Data encrypted by the 3DS SDK.",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "sdkTransID",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "sdkEphemPubKey",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "sdk"
+      ]
+    },
+    {
+      "term": "currencyCode",
+      "type": "string",
+      "description": "Currency code compliant with ISO 4217.",
+      "usedIn": [
+        "merchantFunds",
+        "Partial",
+        "balance",
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized",
+        "fxData"
+      ]
+    },
+    {
+      "term": "orderType",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "shipIndicator",
+      "type": "string",
+      "description": "Indicates shipping method chosen for the order.",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "preOrdered",
+      "type": "boolean",
+      "description": "Indicates order for merchandise with a future availability or release date.",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "preOrderedDate",
+      "type": "string",
+      "description": "ISO format applies.",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "deliveryTimeFrame",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "reordered",
+      "type": "boolean",
+      "description": "Indicates if the same purchase has been ordered again.",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "merchantFunds",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "merchantRiskIndicator"
+      ]
+    },
+    {
+      "term": "frequency",
+      "type": "string",
+      "description": "The minimum number of days between recurring payments (e.g. setting it to <b>7</b> for a weekly cycle). However, according to the recommendations of card schemes, when dealing with recurring payments that have a variable frequency, it's advised to use a value of <b>1</b> for this parameter.",
+      "usedIn": [
+        "recurring"
+      ]
+    },
+    {
+      "term": "expiry",
+      "type": "string",
+      "description": "Date after no further recurring payments will be performed. According to recommendation by the card schemes, in cases where there is no established expiry or end date of recurring (e.g. subscriptions), the value of \"9999-12-31T00:00:00Z\" should be used.",
+      "usedIn": [
+        "recurring"
+      ]
+    },
+    {
+      "term": "createDate",
+      "type": "string",
+      "description": "Date when the account has been created for the cardholder.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "suspiciousActivity",
+      "type": "boolean",
+      "description": "Indicates whether merchant has experienced suspicious/fraudulent activity for this account.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "deliveryAddressFirstUsedDate",
+      "type": "string",
+      "description": "Date when the shipping address used for this order was first used.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "deliveryAdressUsageIndicator",
+      "type": "string",
+      "description": "Indicates when this shipping address was first used.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "pastOrdersYear",
+      "type": "integer",
+      "description": "Orders created in merchant's system for this account in the past 12 months.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "pastOrdersDay",
+      "type": "integer",
+      "description": "Orders created in merchant's system for this account in the last 24 hours.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "purchasesLastSixMonths",
+      "type": "integer",
+      "description": "Fulfilled (successful) orders created in merchant's system for this account in the past 6 months.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "changeDate",
+      "type": "string",
+      "description": "Date when account details were last changed.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "changeIndicator",
+      "type": "string",
+      "description": "Indicates time when account information was last changed.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "passwordChanged",
+      "type": "string",
+      "description": "Date when account password was last changed.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "passwordChangeIndicator",
+      "type": "string",
+      "description": "Indicates whether and when the password was last changed.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "nameToRecipientMatch",
+      "type": "boolean",
+      "description": "Indicates whether cardholder's name matches recipient's name.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "addCardAttemptsDay",
+      "type": "string",
+      "description": "Indicates attempts to add a card to cardholder's account in merchant's system within last 24 hours.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "authMethod",
+      "type": "string",
+      "description": "Authentication method used to recognize cardholder.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "authDateTime",
+      "type": "string",
+      "description": "Date and time when authentication was performed.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "cardAddedDate",
+      "type": "string",
+      "description": "Date when card account has been stored with merchant.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "cardAddedIndicator",
+      "type": "string",
+      "description": "Indicates if and when the card was stored with merchant.",
+      "usedIn": [
+        "accountInformation"
+      ]
+    },
+    {
+      "term": "accountInformation",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardholder"
+      ]
+    },
+    {
+      "term": "billingAddress",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "cardholder"
+      ]
+    },
+    {
+      "term": "challengeRequested",
+      "type": "string",
+      "description": "Merchant's preference regarding 3DS 2 challenge. Exclusive with exemption. Maybe overridden by PayU.",
+      "usedIn": [
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "exemption",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "browser",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "threeDsAuthentication",
+        "riskData"
+      ]
+    },
+    {
+      "term": "sdk",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "merchantRiskIndicator",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "cardholder",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "threeDsAuthentication"
+      ]
+    },
+    {
+      "term": "pointId",
+      "type": "string",
+      "description": "The full name of the pickup point, including its unique identifier.",
+      "usedIn": [
+        "address"
+      ]
+    },
+    {
+      "term": "streetNo",
+      "type": "string",
+      "description": "Street number",
+      "usedIn": [
+        "address"
+      ]
+    },
+    {
+      "term": "flatNo",
+      "type": "string",
+      "description": "Flat number",
+      "usedIn": [
+        "address"
+      ]
+    },
+    {
+      "term": "price",
+      "type": "string",
+      "description": "Shipping cost",
+      "usedIn": [
+        "shippingMethod"
+      ]
+    },
+    {
+      "term": "address",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "shippingMethod",
+        "CompanyData",
+        "PrivatePerson",
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "shoppingCarts",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "credit"
+      ]
+    },
+    {
+      "term": "applicant",
+      "type": "object",
+      "description": "Section containing data of person applying for a credit.",
+      "usedIn": [
+        "credit"
+      ]
+    },
+    {
+      "term": "klarnaAttachment",
+      "type": "object",
+      "description": "Extra merchant data mandatory for merchants operating in certain segments. You will find more information about this object and its parameters on **[Klarna Documentation Page](https://docs.klarna.com/klarna-payments/additional-resources/use-cases/extra-merchant-data/)**.",
+      "usedIn": [
+        "credit"
+      ]
+    },
+    {
+      "term": "id",
+      "type": "string",
+      "description": "submerchant ID when payment is created by Payment Facilitator for Submerchant",
+      "usedIn": [
+        "submerchant"
+      ]
+    },
+    {
+      "term": "cardInstallmentsOptions",
+      "type": "object",
+      "description": "List of allowed installment numbers for any number of specific providers, eg. \"OPTIMO\": [1, 2, 3]. For merchants operating on the Romanian market (requires contact with a Payu representative first). Available providers: <ul><li>CARD_AVANTAJ</li><li>STAR_BT</li><li>UNICREDIT</li><li>BRD_INSTALLMENTS</li><li>RAIFFEISEN</li><li>GARANTI_RO</li><li>BCR_INSTALLMENTS</li><li>ALPHABANK_INSTALLMENTS</li><li>OPTIMO</li><li>CARD_EMAG</li></ul>",
+      "usedIn": [
+        "settings"
+      ]
+    },
+    {
+      "term": "transactions",
+      "type": "array",
+      "description": "Array of order objects.",
+      "usedIn": [
+        "card",
+        "pbl",
+        "blik",
+        "wire"
+      ]
+    },
+    {
+      "term": "total",
+      "type": "number",
+      "description": "total balance of funds on Shop",
+      "usedIn": [
+        "balance"
+      ]
+    },
+    {
+      "term": "available",
+      "type": "number",
+      "description": "value of available funds that are under Merchant disposition, excluding funds locked by PayU system",
+      "usedIn": [
+        "balance"
+      ]
+    },
+    {
+      "term": "refundId",
+      "type": "string",
+      "description": "ID of the refund",
+      "usedIn": [
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized"
+      ]
+    },
+    {
+      "term": "extRefundId",
+      "type": "string",
+      "description": "External refund ID.",
+      "usedIn": [
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized"
+      ]
+    },
+    {
+      "term": "description",
+      "type": "string",
+      "description": "Refund description",
+      "usedIn": [
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized",
+        "payout"
+      ]
+    },
+    {
+      "term": "creationDateTime",
+      "type": "string",
+      "description": "Date of refund creation.",
+      "usedIn": [
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized"
+      ]
+    },
+    {
+      "term": "statusDatetime",
+      "type": "string",
+      "description": "Timestamp of the status.",
+      "usedIn": [
+        "refundRetrievePending",
+        "refundRetrieveCanceled",
+        "refundRetrieveFinalized"
+      ]
+    },
+    {
+      "term": "statusError",
+      "type": "object",
+      "description": "Information about error.",
+      "usedIn": [
+        "refundRetrieveCanceled"
+      ]
+    },
+    {
+      "term": "shopId",
+      "type": "string",
+      "description": "Public identifier for the shop within PayU, under which payout will be executed.",
+      "usedIn": [
+        "StandardPayout",
+        "BankAccountPayout",
+        "CardPayout",
+        "MarketplacePayout",
+        "FxPayout"
+      ]
+    },
+    {
+      "term": "payout",
+      "type": "object",
+      "description": "Payout information.",
+      "usedIn": [
+        "StandardPayout",
+        "BankAccountPayout",
+        "CardPayout",
+        "MarketplacePayout",
+        "FxPayout"
+      ]
+    },
+    {
+      "term": "extPayoutId",
+      "type": "string",
+      "description": "External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.",
+      "usedIn": [
+        "payout"
+      ]
+    },
+    {
+      "term": "additionalVariables",
+      "type": "string",
+      "description": "Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market</b>.",
+      "usedIn": [
+        "payout"
+      ]
+    },
+    {
+      "term": "foreign",
+      "type": "string",
+      "description": "Flag indicating whether payout was made to a foreign account.",
+      "usedIn": [
+        "payout",
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "accountNumber",
+      "type": "string",
+      "description": "Bank account number. Required account formats for foreign transfers: Polish account: NRB, IBAN. Czech account: IBAN, internal in ([0-9]{1,6}[ -])?[0-9]{2,10}[ /][0-9]{4}) format. As for now, there is no format restrictions for national bank transfers.",
+      "usedIn": [
+        "account"
+      ]
+    },
+    {
+      "term": "bankName",
+      "type": "string",
+      "description": "Name of the bank. <b>Required for <code>foreign</code> flag set to true</b>.",
+      "usedIn": [
+        "account"
+      ]
+    },
+    {
+      "term": "swiftCode",
+      "type": "string",
+      "description": "Bank's SWIFT code. <b>Required for <code>foreign</code> flag set to true</b>.",
+      "usedIn": [
+        "account",
+        "PayoutWithoutVerificationTransfer"
+      ]
+    },
+    {
+      "term": "account",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "BankAccountPayout",
+        "MarketplacePayout",
+        "FxPayout"
+      ]
+    },
+    {
+      "term": "customerAddress",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "BankAccountPayout",
+        "CardPayout"
+      ]
+    },
+    {
+      "term": "bankAddress",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "BankAccountPayout",
+        "PayoutWithoutVerificationTransfer"
+      ]
+    },
+    {
+      "term": "accountCreationDate",
+      "type": "string",
+      "description": "Date when the user was created in the merchant system.",
+      "usedIn": [
+        "payee"
+      ]
+    },
+    {
+      "term": "phoneNumber",
+      "type": "string",
+      "description": "Customer (payee) phone number.",
+      "usedIn": [
+        "payee"
+      ]
+    },
+    {
+      "term": "payee",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "CardPayout"
+      ]
+    },
+    {
+      "term": "cardToken",
+      "type": "string",
+      "description": "Card token representing card to which payout will be made. <b>Required in case of a payout to the card token</b>.",
+      "usedIn": [
+        "CardPayout"
+      ]
+    },
+    {
+      "term": "partnerId",
+      "type": "string",
+      "description": "Partner id for currency exchange at PayU.",
+      "usedIn": [
+        "fxData"
+      ]
+    },
+    {
+      "term": "rate",
+      "type": "double",
+      "description": "The rate at which the payout currency is converted.",
+      "usedIn": [
+        "fxData"
+      ]
+    },
+    {
+      "term": "tableId",
+      "type": "string",
+      "description": "The ID of the exchange rate table retrieved by the merchant from PayU, determining the basis for currency conversion during payment.",
+      "usedIn": [
+        "fxData"
+      ]
+    },
+    {
+      "term": "fxData",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "FxPayout"
+      ]
+    },
+    {
+      "term": "operations",
+      "type": "array",
+      "description": "List of operations.",
+      "usedIn": [
+        "PAYMENT_RECEIVED",
+        "REFUND_SENT",
+        "PAYOUT",
+        "RETURN",
+        "CHARGEBACK",
+        "ADMIN_CORRECTION"
+      ]
+    },
+    {
+      "term": "pageResponse",
+      "type": "object",
+      "description": "",
+      "usedIn": [
+        "PAYMENT_RECEIVED",
+        "REFUND_SENT",
+        "PAYOUT",
+        "RETURN",
+        "CHARGEBACK",
+        "ADMIN_CORRECTION"
+      ]
+    },
+    {
+      "term": "verificationId",
+      "type": "string",
+      "description": "Unique id of the verification provided by PayU.",
+      "usedIn": [
+        "CompanyData",
+        "PrivatePerson",
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "sellerId",
+      "type": "string",
+      "description": "Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).",
+      "usedIn": [
+        "CompanyData",
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "taxId",
+      "type": "string",
+      "description": "Tax id.",
+      "usedIn": [
+        "CompanyData",
+        "PrivatePerson",
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "companyName",
+      "type": "string",
+      "description": "Name of the company.",
+      "usedIn": [
+        "CompanyData"
+      ]
+    },
+    {
+      "term": "legalForm",
+      "type": "string",
+      "description": "<b>FOREIGN_COMPANY</b> type has been deprecated.",
+      "usedIn": [
+        "CompanyData",
+        "PrivatePerson",
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "gusCode",
+      "type": "string",
+      "description": "Code relating to the legal form. For more information see the site of the <b><a href='https://stat.gov.pl/metainformacje/slownik-pojec/pojecia-stosowane-w-statystyce-publicznej/97,pojecie.html' target='_blank'>G\u0142\u00f3wny Urz\u0105d Statystyczny</a></b>.",
+      "usedIn": [
+        "CompanyData"
+      ]
+    },
+    {
+      "term": "registryNumber",
+      "type": "string",
+      "description": "Company registry number (eg REGON in Poland).",
+      "usedIn": [
+        "CompanyData",
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "registrationDate",
+      "type": "string",
+      "description": "Company registration date in the registries.",
+      "usedIn": [
+        "CompanyData"
+      ]
+    },
+    {
+      "term": "surname",
+      "type": "string",
+      "description": "Last name of the seller.",
+      "usedIn": [
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "personalIdentificationNumber",
+      "type": "string",
+      "description": "National, personal identification number e.g. PESEL in Poland. <b>Required for private persons for full verification Not required for basic data</b>.",
+      "usedIn": [
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "dateOfBirth",
+      "type": "string",
+      "description": "",
+      "usedIn": [
+        "PrivatePerson"
+      ]
+    },
+    {
+      "term": "bankDataId",
+      "type": "string",
+      "description": "Id of the bank account details assigned by marketplace.",
+      "usedIn": [
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "accountNumberRequested",
+      "type": "string",
+      "description": "Bank account number declared for withdrawals by submerchant.",
+      "usedIn": [
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "hasDocument",
+      "type": "string",
+      "description": "Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is \"BANK_STATEMENT\"**.\n",
+      "usedIn": [
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "payoutDataVerificationType",
+      "type": "string",
+      "description": "Type of verification used for the provided payout details verification. Different for each verification type:\n* **LIAN_LIAN** - special type for Chinese submerchants,\n* **PINGPONG** - special type for Chinese submerchants,\n* **OFX** - special type for Chinese submerchants,\n* **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),\n* **BANK_TRANSFER**,\n* **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn't have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.\n",
+      "usedIn": [
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "verificationTransferId",
+      "type": "string",
+      "description": "Have to be indicated in request with declared payouts data. Payouts data need to be declared in 72 hours from above request/response.",
+      "usedIn": [
+        "PayoutWithVerificationTransfer"
+      ]
+    },
+    {
+      "term": "verified",
+      "type": "string",
+      "description": "parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than \"NO_VERIFICATION_NEEDED\" PayU must verify the bank account details.",
+      "usedIn": [
+        "PayoutWithVerificationTransfer",
+        "PayoutWithoutVerificationTransfer",
+        "PayoutBankStatement"
+      ]
+    },
+    {
+      "term": "bankCountry",
+      "type": "string",
+      "description": "Bank country. **Required for foreign bank account**.",
+      "usedIn": [
+        "PayoutWithoutVerificationTransfer"
+      ]
+    },
+    {
+      "term": "statementData",
+      "type": "object",
+      "description": "Details from bank statement.",
+      "usedIn": [
+        "PayoutWithoutVerificationTransfer"
+      ]
+    },
+    {
+      "term": "payTypeCategories",
+      "type": "array",
+      "description": "Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "externalId",
+      "type": "string",
+      "description": "Id assigned by the Payment Facilitator.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "notifyUrl",
+      "type": "string",
+      "description": "Notifications regarding submerchant status change will be sent to address provided in this field.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "legalName",
+      "type": "string",
+      "description": "Full legal (registration) name.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "dbaName",
+      "type": "string",
+      "description": "\"Doing business as\" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "websiteUrl",
+      "type": "string",
+      "description": "A valid URL address of merchant's website.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "mcc",
+      "type": "number",
+      "description": "Accurate Merchant Category Code established during KYC process by the PF.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "riskClass",
+      "type": "string",
+      "description": "Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "representatives",
+      "type": "array",
+      "description": "Array of either principals or enterprise owners (depends on legal form). Minimum one is required.",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    },
+    {
+      "term": "agreementDate",
+      "type": "string",
+      "description": "Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).",
+      "usedIn": [
+        "Card",
+        "CardPbl",
+        "Pbl"
+      ]
+    }
+  ]
+}

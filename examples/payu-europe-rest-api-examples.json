@@ -1,0 +1,354 @@
+[
+  {
+    "operationId": "create-an-order",
+    "summary": "Create an Order",
+    "path": "/api/v2_1/orders",
+    "method": "POST",
+    "request": {
+      "example": {
+        "continueUrl": "www.example.com/path",
+        "notifyUrl": "https://your.eshop.com/notify",
+        "customerIp": "string",
+        "merchantPosId": "string",
+        "description": "string",
+        "additionalDescription": "string",
+        "visibleDescription": "string",
+        "statementDescription": "string",
+        "extOrderId": "string",
+        "currencyCode": "string",
+        "totalAmount": "1000",
+        "validityTime": "100000",
+        "cardOnFile": "FIRST",
+        "recurring": "FIRST",
+        "donation": {
+          "amount": 500,
+          "organizationId": "string"
+        },
+        "buyer": {
+          "extCustomerId": "string",
+          "email": "email@email.com",
+          "phone": "+48 225108001",
+          "firstName": "John",
+          "lastName": "Doe",
+          "nin": 123456789,
+          "language": "pl",
+          "birthDate": "2006-12-03T00:00:00.000+01:00",
+          "delivery": {
+            "street": "string",
+            "postalBox": "string",
+            "postalCode": "string",
+            "city": "string",
+            "state": "30",
+            "countryCode": "string",
+            "name": "string",
+            "recipientName": "string",
+            "recipientEmail": "string",
+            "recipientPhone": "string"
+          }
+        },
+        "shoppingCarts": [
+          {
+            "extCustomerId": "ext-customer-1",
+            "amount": 24950,
+            "fee": 250,
+            "shippingMethods": [
+              {}
+            ],
+            "products": [
+              {}
+            ]
+          }
+        ],
+        "products": [
+          {
+            "name": "My product",
+            "unitPrice": 999,
+            "quantity": 4,
+            "virtual": true
+          }
+        ],
+        "payMethods": {
+          "payMethod": {
+            "type": "PBL",
+            "value": "c",
+            "clickToPay": {},
+            "authorizationCode": "777123",
+            "authorizationType": "PRE_AUTHORIZATION",
+            "card": {
+              "number": {},
+              "expirationMonth": {},
+              "expirationYear": {},
+              "cvv": {},
+              "firstTransactionId": {}
+            },
+            "specificData": [
+              {}
+            ],
+            "amount": "string",
+            "blikData": {
+              "aliasLabelProposal": {},
+              "registerTokenValue": {},
+              "register": {},
+              "appKey": {},
+              "recommendedAuthLevel": {},
+              "countryCode": {},
+              "recurring": {}
+            },
+            "threeDsData": {
+              "status3Ds": {},
+              "status3DsDescription": {},
+              "xid": {},
+              "dsTransactionId": {},
+              "eciCode": {},
+              "cavv": {},
+              "tavv": {}
+            },
+            "sourcePaymentFlow": null,
+            "cardInstallments": {
+              "provider": {},
+              "number": {}
+            }
+          }
+        },
+        "mcpData": {
+          "mcpCurrency": "EUR",
+          "mcpAmount": 10000,
+          "mcpRate": 4.2556,
+          "mcpFxTableId": 132331,
+          "mcpPartnerId": "6283a549-8b1a-430d-8a62-eea64327440e"
+        },
+        "threeDsAuthentication": {
+          "challengeRequested": "YES",
+          "exemption": {
+            "value": "LOW_RISK",
+            "rejectionHandling": "PERFORM_AUTHENTICATION",
+            "riskScore": "120 - low risk score calculated in Merchants antifraud tool"
+          },
+          "browser": {
+            "acceptHeaders": "string",
+            "requestIP": "127.0.0.1",
+            "screenWidth": 1920,
+            "javaEnabled": false,
+            "timezoneOffset": 1,
+            "screenHeight": 1280,
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+            "colorDepth": 32,
+            "language": "pl_PL"
+          },
+          "sdk": {
+            "sdkReferenceNumber": "DS_LOA_SDK_ADBV_739485_94783",
+            "sdkMaxTimeout": 30,
+            "sdkAppID": "9063b12c-fcde-43c7-b28e-8d0af5520e8a",
+            "sdkEncData": "9063b12c-fcde-43c7-b28e-8d0af5520e8a",
+            "sdkTransID": "b60c9879-ac77-4918-a317-7b01c4317053/8Q==.",
+            "sdkEphemPubKey": {
+              "y": {},
+              "x": {},
+              "kty": {},
+              "crv": {}
+            }
+          },
+          "merchantRiskIndicator": {
+            "orderType": "LOAN",
+            "shipIndicator": "TICKETS",
+            "preOrdered": false,
+            "preOrderedDate": "2019-03-27T10:57:59.000+01:00",
+            "deliveryTimeFrame": "OVERNIGHT",
+            "reordered": false,
+            "merchantFunds": {
+              "amount": {},
+              "currencyCode": {}
+            }
+          },
+          "recurring": {
+            "frequency": "7",
+            "expiry": "2025-03-27T00:00:00.000Z"
+          },
+          "cardholder": {
+            "name": "John Doe",
+            "accountInformation": {
+              "createDate": {},
+              "suspiciousActivity": {},
+              "deliveryAddressFirstUsedDate": {},
+              "deliveryAdressUsageIndicator": {},
+              "pastOrdersYear": {},
+              "pastOrdersDay": {},
+              "purchasesLastSixMonths": {},
+              "changeDate": {},
+              "changeIndicator": {},
+              "passwordChanged": {},
+              "passwordChangeIndicator": {},
+              "nameToRecipientMatch": {},
+              "addCardAttemptsDay": {},
+              "authMethod": {},
+              "authDateTime": {},
+              "cardAddedDate": {},
+              "cardAddedIndicator": {}
+            },
+            "billingAddress": {
+              "street": {},
+              "postalCode": {},
+              "city": {},
+              "state": {},
+              "countryCode": {}
+            }
+          }
+        },
+        "riskData": {
+          "browser": {
+            "acceptHeaders": "string",
+            "requestIP": "127.0.0.1",
+            "screenWidth": 1920,
+            "javaEnabled": false,
+            "timezoneOffset": 1,
+            "screenHeight": 1280,
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+            "colorDepth": 32,
+            "language": "pl_PL"
+          }
+        },
+        "credit": {
+          "shoppingCarts": [
+            {
+              "shippingMethod": {},
+              "products": {},
+              "extCustomerId": {}
+            }
+          ],
+          "applicant": {
+            "email": "test@test.com",
+            "phone": 123456789,
+            "firstName": "Joe",
+            "lastName": "Doe",
+            "language": "pl",
+            "nin": 123456789,
+            "address": {
+              "street": {},
+              "streetNo": {},
+              "flatNo": {},
+              "postalCode": {},
+              "city": {},
+              "countryCode": {}
+            },
+            "additionalInfo": {
+              "hasSuccessfullyFinishedOrderInShop": {}
+            }
+          },
+          "klarnaAttachment": {
+            "content_type": "string",
+            "body": "string"
+          }
+        },
+        "submerchant": {
+          "id": "string"
+        },
+        "settings": {
+          "cardInstallmentsOptions": {}
+        },
+        "deviceFingerprint": "3e9fae0b3e6003a4093358167bc1079e"
+      }
+    },
+    "response": {
+      "example": {
+        "status": {
+          "statusCode": "string"
+        },
+        "redirectUri": "string",
+        "qrCode": "string",
+        "orderId": "WZHF5FFDRJ140731GUEST000P01",
+        "iframeAllowed": true,
+        "threeDsProtocolVersion": "3DS2",
+        "extOrderId": "string",
+        "challengeParameters": {
+          "threeDsServerTransactionId": "0016f22b-f988-4358-b2c6-8917bba22037",
+          "acsTransID": "d7c1ee99-9478-44a6-b1f2-391e29c6b340",
+          "acsReferenceNumber": "3DS_LOA_ACS_201_13579",
+          "acsSignedContent": "c29tZUJhc2U2NGVuY29kZWRTdHJpbmc="
+        }
+      }
+    }
+  },
+  {
+    "operationId": "create-a-refund",
+    "summary": "Create a Refund",
+    "path": "/api/v2_1/orders/{orderId}/refunds",
+    "method": "POST",
+    "request": {
+      "example": {
+        "refund": {
+          "description": "Test refund",
+          "amount": "10000",
+          "extRefundId": "3e5cac39-7e38-4139-8fd6-30adc06a61bd",
+          "currencyCode": "PLN",
+          "bankDescription": "Bank transfer refund",
+          "type": "REFUND_PAYMENT_STANDARD"
+        }
+      }
+    },
+    "response": {
+      "example": {
+        "orderId": "WZGF5FFDRJ140731GUEST000P01",
+        "refund": {
+          "refundId": "5000000142",
+          "description": "Test refund",
+          "amount": "10000",
+          "extRefundId": "3e5cac39-7e38-4139-8fd6-30adc06a61bd",
+          "currencyCode": "PLN",
+          "bankDescription": "Bank transfer refund",
+          "creationDateTime": "2020-07-02T09:19:03.896+02:00",
+          "status": "PENDING",
+          "statusDatetime": "2020-07-02T09:19:04.013+02:00"
+        },
+        "status": {
+          "statusCode": "SUCCESS",
+          "statusDesc": "Refund queued for processing"
+        }
+      }
+    }
+  },
+  {
+    "operationId": "create-a-payout",
+    "summary": "Create a Payout",
+    "path": "/api/v2_1/payouts",
+    "method": "POST",
+    "request": null,
+    "response": {
+      "example": {
+        "payout": {
+          "payoutId": "string",
+          "extPayoutId": "string",
+          "extCustomerId": "string",
+          "amount": null,
+          "currencyCode": "PLN",
+          "status": "PENDING",
+          "fxData": {
+            "currencyCode": "EUR",
+            "amount": null,
+            "rate": null,
+            "partnerId": "string",
+            "tableId": "string"
+          }
+        },
+        "status": {
+          "statusCode": "string"
+        }
+      }
+    }
+  },
+  {
+    "operationId": "oauth",
+    "summary": "Create OAuth Token",
+    "path": "/pl/standard/user/oauth/authorize",
+    "method": "POST",
+    "request": null,
+    "response": {
+      "example": {
+        "access_token": "string",
+        "token_type": "bearer",
+        "refresh_token": "string",
+        "expires_in": 0,
+        "grant_type": "client_credentials"
+      }
+    }
+  }
+]

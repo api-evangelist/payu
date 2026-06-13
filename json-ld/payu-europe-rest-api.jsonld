@@ -1,0 +1,459 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "payu": "https://developers.payu.com/europe/api/#",
+    "openapi": "https://spec.openapis.org/oas/v3.1.0#",
+    "apiEndpoint": "https://schema.org/WebAPI"
+  },
+  "@type": "WebAPI",
+  "@id": "https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/openapi/payu-europe-rest-api.yaml",
+  "name": "PayU GPO Europe REST API",
+  "description": "REST API for payment processing in Central & Eastern Europe supporting order creation, refunds, payouts, tokenization, marketplace operations, and BLIK payments.",
+  "version": "2.1.0",
+  "url": "https://developers.payu.com/europe/api/",
+  "provider": {
+    "@type": "Organization",
+    "name": "PayU",
+    "url": "https://corporate.payu.com/"
+  },
+  "license": "http://www.apache.org/licenses/LICENSE-2.0.html",
+  "termsOfService": "https://developers.payu.com/europe/",
+  "documentation": "https://developers.payu.com/europe/docs/get-started/apis/",
+  "availableChannel": [
+    {
+      "@type": "ServiceChannel",
+      "name": "Production",
+      "serviceUrl": "https://secure.payu.com"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Sandbox",
+      "serviceUrl": "https://secure.snd.payu.com"
+    }
+  ],
+  "endpointDescription": [
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/pl/standard/user/oauth/authorize",
+      "name": "Create OAuth Token",
+      "description": "Each payment should be authorized in one of three available modes: \n- <code>client_credentials</code> - used for standard integration,\n- <code>trusted_merchant</code> - used for authentication of requ",
+      "identifier": "oauth",
+      "encodingType": "application/x-www-form-urlencoded"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/paymethods",
+      "name": "Retrieve All Available Payment Methods.",
+      "description": "",
+      "identifier": "retrieve-payment-methods",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders",
+      "name": "Create an Order",
+      "description": "Create a new order request.",
+      "identifier": "create-an-order",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}",
+      "name": "Retrieve an Order",
+      "description": "Retrieve the status and details of an order.",
+      "identifier": "retrieve-an-order",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "DELETE",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}",
+      "name": "Cancel an Order",
+      "description": "Cancel (reject) orders processed by the PayU system.",
+      "identifier": "cancel-an-order",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/captures",
+      "name": "Capture Authorized Order",
+      "description": "Capture whole order and update its status to COMPLETED (ended).",
+      "identifier": "capture-authorized-order",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "PUT",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/status",
+      "name": "(deprecated) Capture Authorized Order",
+      "description": "Capture an order and update its status to COMPLETED (ended).",
+      "identifier": "capture-authorized-order-deprecated",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/transactions",
+      "name": "Retrieve a Transaction",
+      "description": "Retrieve the details of transactions created for an order with specified `orderId`.",
+      "identifier": "retrieve-a-transaction",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/shops/{shopId}",
+      "name": "Retrieve Shop Data",
+      "description": "Retrieve your PayU shop balance, id, etc.",
+      "identifier": "retrieve-shop-data",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/refunds",
+      "name": "Retrieve ALL Refunds Data for the Specified Order",
+      "description": "",
+      "identifier": "retrieve-all-refunds-for-the-specified-order",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/refunds",
+      "name": "Create a Refund",
+      "description": "Create new refund - this request is idempotent, so if exactly same data will be provided, response will return data of already previously created refund instead of creating new refund.",
+      "identifier": "create-a-refund",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/orders/{orderId}/refunds/{refundId}",
+      "name": "Retrieve Specific Refund Data",
+      "description": "",
+      "identifier": "retrieve-specific-refund",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/payouts",
+      "name": "Create a Payout",
+      "description": "Create a payout with the selected destination of funds.",
+      "identifier": "create-a-payout",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/payouts/{payoutId}",
+      "name": "Retrieve a Payout",
+      "description": "Retrieve data of a specified payout.",
+      "identifier": "retrieve-a-payout",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "DELETE",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/tokens/{token}",
+      "name": "Delete a Token",
+      "description": "In case the customer terminates the user account in your shop or chooses to remove the stored card from the user account, you need to delete the token.",
+      "identifier": "delete-a-token",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/mcp-partners/{mcpPartnerId}/fx-table",
+      "name": "Retrieve Rate Table",
+      "description": "Retrieve current table with the conversion rates for the currencies.",
+      "identifier": "retrieve-rate-table",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/fx-providers/ecb/fx-rates",
+      "name": "Retrieve Reference Rates",
+      "description": "You can retrieve a reference rate table that is updated daily. This table encompasses rates released by the European Central Bank (ECB) against EUR, as well as additional rates that are triangulated u",
+      "identifier": "retrieve-reference-rates",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/customers/ext/{extCustomerId}/status",
+      "name": "Retrieve Seller Status",
+      "description": "You can check the verification status of your submerchants.",
+      "identifier": "retrieve-seller-status",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/customers/ext/{extCustomerId}/balances",
+      "name": "Retrieve Seller Balance",
+      "description": "",
+      "identifier": "retrieve-seller-balance",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/customers/ext/{extCustomerId}/operations",
+      "name": "Retrieve Seller Operation History",
+      "description": "",
+      "identifier": "retrieve-seller-operation-history",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/customers/ext/{extCustomerId}/feeDebitTransfer",
+      "name": "Transfer Funds from Seller to Marketplace Balance",
+      "description": "",
+      "identifier": "transfer-funds-from-seller-to-marketplace-balance",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/customers/ext/{extCustomerId}/feeCreditTransfer",
+      "name": "Transfer Funds from Marketplace to Seller Balance",
+      "description": "",
+      "identifier": "transfer-funds-from-marketplace-to-seller-balance",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification-advice",
+      "name": "Retrieve Verification Advice",
+      "description": "Verify, on the basis of a Personal Identification Number or NIP number, whether a given individual/company has already been registered in the PayU system.",
+      "identifier": "retrieve-marketplace-verification-advice",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification",
+      "name": "Retrieve Marketplace Verification Status",
+      "description": "Retrieve the status of the verification with the specific `Id`.",
+      "identifier": "retrieve-marketplace-verification-status",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification",
+      "name": "Create Marketplace Verification",
+      "description": "Initialize the verification process of the seller.",
+      "identifier": "create-marketplace-verification",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/seller",
+      "name": "Add Seller's Data",
+      "description": "This method allows to send data of the seller (submerchant).",
+      "identifier": "add-sellers-data",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/associates",
+      "name": "Add Associates Data",
+      "description": "Send the data of the associates (representatives and beneficiaries according to the relevant instructions from PayU).",
+      "identifier": "add-associates-data",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/files",
+      "name": "Add Files",
+      "description": "Upload documents to the server.",
+      "identifier": "add-files",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/seller/documents",
+      "name": "Add Seller's Documents",
+      "description": "This method allows to load company related documents.",
+      "identifier": "add-sellers-documents",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/associates/documents",
+      "name": "Add Associates Documents",
+      "description": "Upload required documents for associates (representatives or beneficiaries).",
+      "identifier": "add-associates-documents",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification-transfers/manual",
+      "name": "Create Order for Verification Transfer",
+      "description": "Create an order for the verification transfer service. In response you will be provided with the bank account details to make the transfer.",
+      "identifier": "create-order-for-verification-transfer",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/bankAccountData",
+      "name": "Add Bank Account for Payouts",
+      "description": "Send bank account data for the payouts.",
+      "identifier": "add-bank-account-for-payouts",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/payoneer",
+      "name": "Add Payoneer Account for Payouts",
+      "description": "Send bank account data for the payouts. Method is reserved for the users who have verified Payoneer account.",
+      "identifier": "add-payoneer-account-for-payouts",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/worldfirst",
+      "name": "Add Worldfirst Account for Payouts",
+      "description": "Send bank account data for the payouts. Method is reserved for the users who have verified Worldfirst account.",
+      "identifier": "add-worldfirst-account-for-payouts",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification/complete",
+      "name": "Complete Marketplace Verification",
+      "description": "Inform PayU about completing verification process.",
+      "identifier": "complete-marketplace-verification",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/aml-verification/v1/verification/cancel",
+      "name": "Cancel Verification",
+      "description": "Cancel verification on every step of verification providing the reason.",
+      "identifier": "cancel-marketplace-verification",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/front/card-installments-options",
+      "name": "Retrieve Available Installments Options",
+      "description": "Retrieve available card installments options for specific card. For merchants operating on the Romanian market (Requires contact with a Payu representative first).",
+      "identifier": "retrieve-card-installments",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/reports/{reportId}",
+      "name": "Retrieve Statement",
+      "description": "In response to retrieving a statement via the API, PayU returns a statement file (as indicated by the `Content-Type=application/octet-stream`) in the `Content-Disposition` header. You should take this",
+      "identifier": "retrieve-statement",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms",
+      "name": "Create a Firm",
+      "description": "Create a Firm entity for your partner.",
+      "identifier": "create-a-firm",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms/{firmId}/urls",
+      "name": "Create a URL for the Partner's Firm",
+      "description": "Create a URL for the specified `firmId`.",
+      "identifier": "create-a-url-for-the-partners-firm",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms{firmId}/shops",
+      "name": "Create a Shop for the Partner",
+      "description": "Create a Shop for the specified `firmId`.",
+      "identifier": "create-a-shop-for-the-partner",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/shops/{shopId}/poses",
+      "name": "Create POS for Partner",
+      "description": "Create a POS, for your partner, for the specified `shopId`.",
+      "identifier": "create-pos-for-partner",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/poses/{posId}",
+      "name": "Retrieve Partner's POS Data",
+      "description": "Retrieve data of the POS with specified `posId`.",
+      "identifier": "retrieve-partners-pos-data",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms/{posId}/users",
+      "name": "Create a User",
+      "description": "Create an additional User for your partner.",
+      "identifier": "create-a-user",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "POST",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms/{firmPublicId}/submerchants",
+      "name": "Create a Submerchant",
+      "description": "",
+      "identifier": "create-a-submerchant",
+      "encodingType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "GET",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms/{firmPublicId}/submerchants/{submerchantId}",
+      "name": "Retrieve Submerchant Data",
+      "description": "",
+      "identifier": "retrieve-submerchant-data",
+      "encodingType": null
+    },
+    {
+      "@type": "EntryPoint",
+      "httpMethod": "PUT",
+      "urlTemplate": "https://secure.payu.com/api/v2_1/firms/{firmPublicId}/submerchants/{submerchantId}",
+      "name": "Update Submerchant Data",
+      "description": "",
+      "identifier": "update-submerchants-data",
+      "encodingType": "application/json"
+    }
+  ]
+}
