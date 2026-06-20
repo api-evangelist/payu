@@ -7,7 +7,7 @@ description: >-
   subscriptions, fraud detection, checkout optimization, marketplace operations,
   tokenization, and financial services. PayU processes 4 million transactions
   daily for 450,000+ merchants through 450+ local payment methods.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -31,7 +31,7 @@ apis:
       order creation and management, payment method retrieval, refunds, payouts,
       card tokenization, marketplace operations, multi-currency pricing, BLIK
       payments, and 3DS 2.0 authentication.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.payu.com/europe/api/
     baseURL: https://secure.payu.com
     tags:
@@ -66,7 +66,7 @@ apis:
       payment links, recurring payments, subscription management, save cards /
       vault, split settlements, wallet operations, cross-border payments,
       pre-authorization, payouts, and settlement reporting.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.payu.in/reference/introduction-api-reference
     baseURL: https://info.payu.in
     tags:
@@ -90,7 +90,7 @@ apis:
       Brazil, Chile, Colombia, Mexico, and Peru. Supports payments, refunds,
       recurring charges, installment financing, and the Pricing API for
       querying available financing options and costs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
     baseURL: https://api.payulatam.com
     tags:
@@ -114,7 +114,7 @@ apis:
       connections with dynamic routing. Supports charge, authorize/capture,
       void, refund, and credit operations, as well as risk management,
       network tokens, webhooks, and settlement reporting.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.paymentsos.com/docs.html
     baseURL: https://api.paymentsos.com
     tags:
