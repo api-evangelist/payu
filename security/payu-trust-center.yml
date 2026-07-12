@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://corporate.payu.com/resource-hub/payment-methods-encyclopedia/trustly/
+url: https://corporate.payu.com/resource-hub/payment-methods-encyclopedia/trustly/
+certifications:
+- PCI DSS
+evidence:
+- source: https://corporate.payu.com/resource-hub/payment-methods-encyclopedia/trustly/
+  keywords:
+  - pci dss
+  - pci-dss

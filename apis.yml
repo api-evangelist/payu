@@ -132,6 +132,14 @@ apis:
         url: https://developers.paymentsos.com/
 
 common:
+  - type: TrustCenter
+    url: security/payu-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/payu-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/payu-domain-security.yml
+  - type: Authentication
+    url: authentication/payu-authentication.yml
   - type: Website
     url: https://corporate.payu.com/
   - type: Documentation

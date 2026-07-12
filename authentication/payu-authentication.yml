@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/payu-europe-rest-api.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: Bearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/payu-europe-rest-api.yaml
+- name: Basic
+  type: http
+  scheme: basic
+  sources:
+  - openapi/payu-europe-rest-api.yaml
