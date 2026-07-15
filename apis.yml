@@ -132,6 +132,8 @@ apis:
         url: https://developers.paymentsos.com/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/payu-agentic-access.yml
   - type: TrustCenter
     url: security/payu-trust-center.yml
   - type: VulnerabilityDisclosure
