@@ -1,0 +1,2024 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize Marketplace-Verification API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: Marketplace-Verification
+  x-displayName: Marketplace Verification
+  description: PayU is required by the Anti-Money Laundering Act to verify customers in this context. For this purpose, we provide a collection of endpoints to make it easier for you to verify sellers.
+paths:
+  /api/aml-verification/v1/verification-advice:
+    get:
+      tags:
+      - Marketplace-Verification
+      summary: Retrieve Verification Advice
+      description: Verify, on the basis of a Personal Identification Number or NIP number, whether a given individual/company has already been registered in the PayU system.
+      operationId: retrieve-marketplace-verification-advice
+      parameters:
+      - name: companyTaxId
+        in: query
+        required: true
+        description: Company tax id of a entity. <b>Required if you want to check a status of a company.</b>
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: pesonalIdentificationNumber
+        in: query
+        required: true
+        description: Personal identification number of individual. <b>Required if you want to check a status of a private person.</b>
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: Advised verify action.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  advice:
+                    type: string
+                    enum:
+                    - FULL_ONBOARDING_REQUIRED
+                    - BANK_ACCOUNT_VERIFICATION_REQUIRED
+                    description: '* **FULL_ONBOARDING_REQUIRED** - full boarding process required,
+
+                      * **BANK_ACCOUNT_VERIFICATION_REQUIRED** -  only a verification transfer is required for verification purposes.
+
+                      '
+        '400':
+          x-summary: Bad request
+          description: Invalid input query values.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Marketplace not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/aml-verification/v1/verification:
+    get:
+      tags:
+      - Marketplace-Verification
+      summary: Retrieve Marketplace Verification Status
+      description: Retrieve the status of the verification with the specific `Id`.
+      operationId: retrieve-marketplace-verification-status
+      parameters:
+      - name: id
+        in: query
+        description: Value of the query `id` parameter is the same as the `verificationId`.
+        example: aZl6Ja
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: Verification found. Http 200 will return body which will contain one of below statuses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Create Marketplace Verification
+      description: Initialize the verification process of the seller.
+      operationId: create-marketplace-verification
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sellerId
+              - type
+              properties:
+                sellerId:
+                  type: string
+                  description: Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same seller (submerchant).
+                  maxLength: 50
+                type:
+                  type: string
+                  description: 'Verification type. Possible values descriptions: <ul> <li><b>PAYOUT_ACCOUNT_DATA</b>- initialized by marketplace side. The verification with this type should contain the data of payout account and seller (submerchant). If this verification initializes seller in PayU then seller data are required. If it is just account update, then only account data are required.</li> <li><b>FULL</b> - verification which requires providing by seller all data for AML4 and payouts, typically initialized by marketplace side.</li> <li><b>UPDATE</b> - verification which requires providing by seller all data for AML4 and payouts, typically initialized by marketplace side.</li> <li><b>REVERIFICATION</b> - verification which requires providing by seller all data for AML4 and payouts, typically initialized by marketplace side.</li> <li><b>PERSONAL_ID_TAX_ID_CHANGE</b>- initialized by marketplace side. This allows to change PERSONAL_ID for private person or TAX_IDs for legal entity. Once the KYC verification process begins, the current account and payouts are blocked until verification is completed. If the process is interrupted (e.g. the company is unable to verify itself), PayU restores the old merchant account, thus unlocking the payouts on it.</li> <li><b>CONVERSION</b>- initialized by marketplace side. This allows to change PERSONAL_ID for private person or TAX_IDs for legal entity. Once the KYC verification process begins, the current account and payouts are blocked until verification is completed. If the process is interrupted (e.g. the company is unable to verify itself), PayU restores the old merchant account, thus unlocking the payouts on it.</li> </ul> '
+                  enum:
+                  - PAYOUT_ACCOUNT_DATA
+                  - FULL
+                  - UPDATE
+                  - REVERIFICATION
+                  - PERSONAL_ID_TAX_ID_CHANGE
+                  - CONVERSION
+                overridePayouts:
+                  type: boolean
+                  description: ''
+      responses:
+        '200':
+          x-summary: OK
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verificationId:
+                    type: string
+                    description: Unique id of the verification provided by PayU.
+                    example: aZl6Ja
+                  status:
+                    type: string
+                    description: "Current status of the verification: \n* **WAITING_FOR_DATA** - status after initialization of the verification, when PayU is waiting for data or after exceeding transaction limits for the occasional transaction flow.\n* **WAITING_FOR_VERIFICATION** - set when all the data were send to PayU (after complete).\n* **REJECTED** - set when there are some errors in the provided data. These status is send with error codes.\n* **POSITIVE** - final status for approved verification.\n* **NEGATIVE** - final rejection status.\n"
+                    example: WAITING_FOR_DATA
+                  sellerId:
+                    type: string
+                    example: seller_27
+        '400':
+          x-summary: Bad request
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '409':
+          x-summary: Conflict
+          description: Verification may be already in progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/seller:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Seller's Data
+      description: This method allows to send data of the seller (submerchant).
+      operationId: add-sellers-data
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/CompanyData'
+              - $ref: '#/components/schemas/PrivatePerson'
+      responses:
+        '204':
+          x-summary: No Content
+          description: Data accepted for further verification.
+        '400':
+          x-summary: Bad Request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/associates:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Associates Data
+      description: Send the data of the associates (representatives and beneficiaries according to the relevant instructions from PayU).
+      operationId: add-associates-data
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              - associateId
+              - associateType
+              - associateName
+              - associateSurname
+              - associateCitizenship
+              - associateCountryOfBirth
+              properties:
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: aZx65uY
+                associateId:
+                  type: string
+                  description: Associate id. Unique on seller level.
+                  maxLength: 100
+                  example: dsada65
+                associateType:
+                  type: string
+                  description: Type of the associate.
+                  enum:
+                  - BENEFICIARY
+                  - REPRESENTATIVE
+                associateName:
+                  type: string
+                  description: Associate first name.
+                  maxLength: 200
+                  example: Jan
+                associateSurname:
+                  type: string
+                  description: Associate last name.
+                  maxLength: 200
+                  example: Kowalski
+                associateBirthDate:
+                  type: string
+                  description: Associate date of birth. <b>Required for non-polish associates</b>.
+                  format: YYYY-MM-DD
+                  example: '1980-01-27'
+                associateIdentityNumber:
+                  type: string
+                  description: Unique associate identification number. PESEL in Poland. <b>Required for polish associates</b>.
+                  maxLength: 150
+                  example: '90120789112'
+                associateCitizenship:
+                  type: string
+                  description: Two letter ISO country code.
+                  format: ISO Country Code
+                  maxLength: 255
+                  example: PL
+                associateCountryOfBirth:
+                  type: string
+                  description: Two letter ISO country code.
+                  maxLength: 255
+                  example: PL
+                pepStatement:
+                  type: string
+                  enum:
+                  - 'true'
+                  - 'false'
+                  description: ''
+                  example: 'true'
+                verified:
+                  type: string
+                  enum:
+                  - 'true'
+                  - 'false'
+                  description: ''
+                  example: 'true'
+                externalVerificationData:
+                  type: object
+                  description: Object containing Authologic data.
+                  required:
+                  - externalVerificationType
+                  - documentNumber
+                  - documentType
+                  - documentExpiryDate
+                  - identityNumber
+                  - nationality
+                  - dateOfBirth
+                  - secondDocumentNumber
+                  - secondDocumentType
+                  - secondDocumentExpiryDate
+                  - identityNumberSecondDocument
+                  - nationalitySecondDocument
+                  - dateOfBirthSecondDocument
+                  - authologicConversationID
+                  properties:
+                    externalVerificationType:
+                      type: string
+                      description: The type of verification that was used in Authologic.
+                      enum:
+                      - MOJEID_PL
+                      - MOJEID_CZ
+                      - BANKID_CZ
+                      - EDO
+                      - MYOBYWATEL
+                      - BIOMETRIC_VERIFICATION_OCR
+                    documentNumber:
+                      type: string
+                      description: The identification number of the document.
+                      example: ABC123456
+                    documentType:
+                      type: string
+                      description: The type of the document.
+                      example: ID_CARD
+                    documentExpiryDate:
+                      type: string
+                      description: The expiry date of the document
+                      format: YYYY-MM-DD
+                      example: '2030-09-23'
+                    identityNumber:
+                      type: string
+                      description: The identification number of the associate as stated in the document.
+                      example: '94091100007'
+                    nationality:
+                      type: string
+                      description: The nationality of the associate as stated in the document.
+                      example: PL
+                    dateOfBirth:
+                      type: string
+                      description: The date of birth of the associate as stated in the document.
+                      format: YYYY-MM-DD
+                      example: '2000-09-11'
+                    secondDocumentNumber:
+                      type: string
+                      description: The identification number of the second document.
+                      example: DFE123456
+                    secondDocumentType:
+                      type: string
+                      description: The type of the second document.
+                      example: PASSPORT
+                    secondDocumentExpiryDate:
+                      type: string
+                      description: The expiry date of the second document.
+                      format: YYYY-MM-DD
+                      example: '2030-09-23'
+                    identityNumberSecondDocument:
+                      type: string
+                      description: The identification number of the associate as stated in the second document.
+                      example: '94091100007'
+                    nationalitySecondDocument:
+                      type: string
+                      description: The nationality of the associate as stated in the second document.
+                      example: PL
+                    dateOfBirthSecondDocument:
+                      type: string
+                      description: The date of birth of the associate as stated in the document.
+                      format: YYYY-MM-DD
+                      example: '2030-09-23'
+                    authologicConversationID:
+                      type: string
+                      description: External identifier of the Authologic verification process.
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/files:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Files
+      description: Upload documents to the server.
+      operationId: add-files
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              - filename
+              - content
+              properties:
+                verificationId:
+                  type: string
+                  maxLength: 18
+                  description: Unique id of the verification provided by PayU.
+                filename:
+                  type: string
+                  description: ''
+                content:
+                  type: string
+                  description: ''
+      responses:
+        '200':
+          x-summary: OK
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verifictionId:
+                    type: string
+                    description: Unique id of the verification provided by PayU.
+                    example: aZx65uY
+                  fileId:
+                    type: string
+                    description: Identificator of uploaded file given by PayU. Please save it for whole process of verification – this will be used in dataloading/../documents request.
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/seller/documents:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Seller's Documents
+      description: This method allows to load company related documents.
+      operationId: add-sellers-documents
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              - documentId
+              - type
+              - files
+              properties:
+                verificationId:
+                  type: string
+                  description: Id of verification in context of which data are provided.
+                  maxLength: 18
+                documentId:
+                  type: string
+                  maxLength: 100
+                  description: ''
+                type:
+                  type: string
+                  description: Document types.
+                  enum:
+                  - REGISTRY_DOCUMENT
+                  - BANK_ACCOUNT_AGREEMENT
+                  - INVOICE
+                  - UBO_STATEMENT
+                  - CIVIL_LAW_AGREEMENT
+                  - PROXY_DOCUMENT
+                  - OTHER_DOCUMENT
+                files:
+                  type: array
+                  description: List of file ids given in a response to the dataloading/files request. There can be many IDs in this field when one document contains many files.
+                  format: String[]
+                  items:
+                    type: string
+                note:
+                  type: string
+                  description: ''
+                  maxLength: 255
+                translationFiles:
+                  type: array
+                  description: <code>fileId</code> of translation of documents (Polish or English documents do not need to be translated).
+                  format: String[]
+                  items:
+                    type: string
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/associates/documents:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Associates Documents
+      description: Upload required documents for associates (representatives or beneficiaries).
+      operationId: add-associates-documents
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              - associateId
+              - type
+              - files
+              - documentId
+              properties:
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                associateId:
+                  type: string
+                  description: Unique id of an associate assigned by the Marketplace.
+                  maxLength: 100
+                type:
+                  type: string
+                  description: Document type.
+                  enum:
+                  - ID_CARD
+                  - PASSPORT
+                  - DRIVING_LICENCE
+                  - RESIDENCE_PERMIT
+                  - OTHER_DOCUMENT
+                  - PEP_STATEMENT
+                files:
+                  type: array
+                  description: List of file ids given in a response to the dataloading/files request. Can be many IDs in this field when one document contains many files.
+                  format: String[]
+                  items:
+                    type: string
+                documentId:
+                  type: string
+                  description: Unique document ID assigned by the Marketplace.
+                  maxLength: 100
+                documentNumber:
+                  type: string
+                  description: Serial number of the provided document.
+                  maxLength: 100
+                issueDate:
+                  type: string
+                  description: Issue date of the document.
+                  format: YYYY-MM-DD
+                expireDate:
+                  type: string
+                  description: Expiry date of the document.
+                  format: YYYY-MM-DD
+                note:
+                  type: string
+                  description: ''
+                  maxLength: 255
+                translationFiles:
+                  type: array
+                  description: '`fileId` of translation of documents (Polish or English documents do not need to be translated)'
+                  format: String[]
+                  items:
+                    type: string
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/verification-transfers/manual:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Create Order for Verification Transfer
+      description: Create an order for the verification transfer service. In response you will be provided with the bank account details to make the transfer.
+      operationId: create-order-for-verification-transfer
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              properties:
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: verification-123
+                transferCurrency:
+                  type: string
+                  description: ''
+                  example: PLN
+                email:
+                  type: string
+                  description: ''
+                  example: user@example.com
+                language:
+                  type: string
+                  description: Changes the language of the sent email message. Possible values you can find in <b><a href="/europe/docs/get-started/introduction/#languages" target="_blank">languages</a></b> table.
+      responses:
+        '201':
+          x-summary: Created
+          description: Details for bank transfer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verificationTransferId:
+                    type: string
+                    description: ''
+                    example: 5f7007da-8e05-4f0f-9503-05c053034bde
+                  expirationTime:
+                    type: string
+                    description: ''
+                    example: '2020-08-20T14:03:44.473Z'
+                  transferData:
+                    type: object
+                    description: ''
+                    properties:
+                      bankName:
+                        type: string
+                        description: ''
+                        example: mBank S.A.
+                      accountNumber:
+                        type: string
+                        description: ''
+                        example: PL12114011243630011718031748
+                      swiftCode:
+                        type: string
+                        description: ''
+                        example: BREXPLPW
+                      recipientName:
+                        type: string
+                        description: ''
+                        example: PayU S.A.
+                      recipientAddress:
+                        type: string
+                        description: ''
+                        example: ul. Grunwaldzka 186, 60-166 Poznań
+                      transferTitle:
+                        type: string
+                        description: ''
+                        example: Verification transfer XX1718031748XX
+                      transferAmount:
+                        type: integer
+                        description: ''
+                        example: 101
+                      transferCurrency:
+                        type: string
+                        description: ''
+                        example: PLN
+        '400':
+          x-summary: Bad request
+          description: Error encountered during posting the data for verification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '403':
+          x-summary: Forbidden
+          description: Error encountered during posting the data for verification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '404':
+          x-summary: Not found
+          description: Error encountered during posting the data for verification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+  /api/aml-verification/v1/dataloading/payouts/bankAccountData:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Bank Account for Payouts
+      description: Send bank account data for the payouts.
+      operationId: add-bank-account-for-payouts
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/PayoutWithVerificationTransfer'
+              - $ref: '#/components/schemas/PayoutWithoutVerificationTransfer'
+              - $ref: '#/components/schemas/PayoutBankStatement'
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Error encountered during posting the data for verification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '403':
+          x-summary: Forbidden
+          description: Error encountered during posting the data for verification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '404':
+          x-summary: Not found
+          description: Error encountered during posting the data for verification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/payouts/payoneer:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Payoneer Account for Payouts
+      description: Send bank account data for the payouts. Method is reserved for the users who have verified Payoneer account.
+      operationId: add-payoneer-account-for-payouts
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bankDataId
+              - verificationId
+              - payoneerId
+              properties:
+                bankDataId:
+                  type: string
+                  description: Id of the bank account details assigned by marketplace.
+                  maxLength: 100
+                  example: acc1sd
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: hfs6sfa
+                payoneerId:
+                  type: string
+                  maxLength: 50
+                  description: Id of the account of the submerchant in the Payoneer.
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Forbidden
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/dataloading/payouts/worldfirst:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Add Worldfirst Account for Payouts
+      description: Send bank account data for the payouts. Method is reserved for the users who have verified Worldfirst account.
+      operationId: add-worldfirst-account-for-payouts
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bankDataId
+              - verificationId
+              - referenceCustomerId
+              properties:
+                bankDataId:
+                  type: string
+                  description: Id of the bank account details assigned by marketplace.
+                  maxLength: 100
+                  example: acc1sd
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: hfs6sfa
+                referenceCustomerId:
+                  type: string
+                  description: Id of the account binding between the marketplace and the WorldFirst.
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Forbidden
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/verification/complete:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Complete Marketplace Verification
+      description: Inform PayU about completing verification process.
+      operationId: complete-marketplace-verification
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              properties:
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: hfs6sfa
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '400':
+          x-summary: Bad request
+          description: Invalid input. Reason specified in content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+  /api/aml-verification/v1/verification/cancel:
+    post:
+      tags:
+      - Marketplace-Verification
+      summary: Cancel Verification
+      description: Cancel verification on every step of verification providing the reason.
+      operationId: cancel-marketplace-verification
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - verificationId
+              properties:
+                verificationId:
+                  type: string
+                  description: Unique id of the verification provided by PayU.
+                  maxLength: 18
+                  example: hfs6sfa
+                rejectionReasonComment:
+                  type: string
+                  description: Reason for cancelling verification.
+      responses:
+        '204':
+          x-summary: No Content
+          description: SUCCESS
+        '404':
+          x-summary: Not found
+          description: Verification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '409':
+          x-summary: Conflict
+          description: Verification state does not allow cancel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409'
+components:
+  schemas:
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    CompanyData:
+      type: object
+      description: Submerchant's data (if submerchant is a company).
+      required:
+      - verificationId
+      - sellerId
+      - companyName
+      - taxId
+      - legalForm
+      - address
+      - email
+      properties:
+        verificationId:
+          type: string
+          description: Unique id of the verification provided by PayU.
+          maxLength: 18
+          example: aZx65uY
+        sellerId:
+          type: string
+          description: Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).
+          maxLength: 50
+          example: seller_1"
+        email:
+          type: string
+          description: Contact email.
+          minLength: 5
+          maxLength: 80
+          example: company@test.com
+        phone:
+          type: string
+          description: Contact phone.
+          maxLength: 40
+          example: '111222333'
+        taxId:
+          type: string
+          description: Tax id.
+          format: no spaces, eg. 1122334455
+          maxLength: 60
+          example: '1122334455'
+        companyName:
+          type: string
+          description: Name of the company.
+          maxLength: 80
+          example: Company 1
+        legalForm:
+          type: string
+          description: <b>FOREIGN_COMPANY</b> type has been deprecated.
+          enum:
+          - AGENCY_OF_FOREIGN_COMPANY
+          - ASSOCIATION
+          - CHURCH_LEGAL_PERSON
+          - CIVIL_LAW_PARTNERSHIP
+          - COOPERATIVE
+          - EDUCATIONAL_INSTITUTION
+          - FOUNDATION
+          - GENERAL_PARTNERSHIP
+          - JOINT_STOCK_COMPANY
+          - LIMITED_JOINT_STOCK_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LOCAL_GOVERNMENT_UNIT
+          - PRIVATE_PERSON
+          - PROFESSIONAL_PARTNERSHIP
+          - LOCAL_GOVERNMENT_CULTURE_INSTITUTION
+          - RESEARCH_INSTITUTE
+          - SOLE_TRADER
+          - OTHER
+          example: CIVIL_LAW_PARTNERSHIP
+        gusCode:
+          type: string
+          description: Code relating to the legal form. For more information see the site of the <b><a href='https://stat.gov.pl/metainformacje/slownik-pojec/pojecia-stosowane-w-statystyce-publicznej/97,pojecie.html' target='_blank'>Główny Urząd Statystyczny</a></b>.
+          maxLength: 50
+        registryNumber:
+          type: string
+          description: Company registry number (eg REGON in Poland).
+          maxLength: 40
+        registrationDate:
+          type: string
+          format: YYYY-MM-DD
+          description: Company registration date in the registries.
+          example: '2019-07-07'
+        address:
+          type: object
+          description: Address of the company.
+          required:
+          - country
+          properties:
+            street:
+              type: string
+              description: Street with building and apartment number. <b>Required for full verification</b>.
+              maxLength: 255
+              example: Grunwaldzka 186
+            zipcode:
+              type: string
+              description: Company's address zipcode. <b>Required for full verification</b>.
+              maxLength: 20
+              example: 60-166
+            city:
+              type: string
+              description: <b>Required for full verification</b>.
+              maxLength: 40
+              example: Poznan
+            country:
+              type: string
+              description: Two letter ISO country code.
+              maxLength: 80
+              example: PL
+    '200':
+      type: object
+      description: ''
+      properties:
+        verificationId:
+          type: string
+          description: ''
+          example: 5002500000BVmycAAD
+        verificationType:
+          type: string
+          description: ''
+          example: FULL
+        verificationTransferStatus:
+          type: string
+          description: 'Indicates status of the verification transfer.
+
+            * **Success** - transfer was received by PayU.
+
+            * **Failure** - PayU did not received funds
+
+            * **Matched** - transfer has been matched properly.
+
+            * **null** - did not have enough information about the transfer.
+
+            '
+          enum:
+          - Success
+          - Failure
+          - Matched
+          - 'null'
+          example: 'null'
+        processType:
+          type: string
+          description: Type of the process.
+          enum:
+          - OCCASIONAL
+          - REGULAR
+          example: OCCASIONAL
+        status:
+          type: string
+          description: 'Possible statuses: <ul> <li><b>POSITIVE</b> - indicates that the seller is accepted and can process transactions with PayU.</li> <li><b>NEGATIVE</b> - indicates that the seller is rejected and can''t process transactions with PayU. There is an error code always send for negative scenario.</li> <li><b>REJECTED</b> -  indicates that provided data must be corrected.</li> <li><b>WAITING_FOR_DATA</b> - waiting for data is sent in the notification when the verification was initialized but the request to start verification was not yet received. Provide the necessary data and documents according to the type of submerchant and send POST request on <code complete</code> endpoint.</li> <li><b>WAITING_FOR_VERIFICATION</b> - waiting for verification indicates that data and documents submitted to PayU will be verified by PayU or  currently being verified. Wait for notification about status change.</li> <li><b>CANCELED</b> - canceled. Initiate new verification when it is necessary. Marketplace can not cancel verification intialized by PayU or after sending complete information.</li> </ul>'
+          example: REJECTED
+        sellerId:
+          type: string
+          description: ''
+          example: 123456test12
+        note:
+          type: string
+          description: ''
+          example: null
+        errors:
+          type: array
+          description: ''
+          items:
+            type: object
+            properties:
+              content:
+                type: object
+                description: Group of fields that indicate which data/document the error code applies to.
+                properties:
+                  itemType:
+                    type: string
+                    description: ''
+                    enum:
+                    - SELLER
+                    - SELLER_DOCUMENT
+                    - ASSOCIATE
+                    - ASSOCIATE_DOCUMENT
+                    - PAYOUT_ACCOUNT
+                    example: SELLER_DOCUMENT
+                  itemProperties:
+                    type: object
+                    description: ''
+                    properties:
+                      documentType:
+                        type: string
+                        description: ''
+                        enum:
+                        - ID_CARD
+                        - PASSPORT
+                        - DRIVING_LICENCE
+                        - RESIDENCE_PERMIT
+                        - OTHER
+                        example: PEP_STATEMENT
+                      documentId:
+                        type: string
+                        description: ''
+                        example: '2'
+                      associateId:
+                        type: string
+                        description: ''
+                        example: null
+              code:
+                type: string
+                description: Error Code.
+                example: '006'
+        updateDate:
+          type: string
+          description: ''
+          example: '2020-04-03T09:14:06.000Z'
+        createDate:
+          type: string
+          description: ''
+          example: '2020-04-03T06:36:15.000Z'
+    '400':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    PayoutWithVerificationTransfer:
+      type: object
+      required:
+      - bankDataId
+      - verificationId
+      - accountNumberRequested
+      - swiftCode
+      - payoutDataVerificationType
+      - foreign
+      - verified
+      - verificationTransferId
+      properties:
+        bankDataId:
+          type: string
+          description: Id of the bank account details assigned by marketplace.
+          maxLength: 100
+          example: '01102020'
+        verificationId:
+          type: string
+          description: Id of verification in context of which data are provided.
+          maxLength: 18
+          example: verification-123
+        accountNumberRequested:
+          type: string
+          description: Bank account number declared for withdrawals by submerchant.
+          format: IBAN
+          maxLength: 255
+          example: PL1122334455667788991010111223345
+        hasDocument:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is "BANK_STATEMENT"**.
+
+            '
+          example: 'true'
+        payoutDataVerificationType:
+          type: string
+          enum:
+          - LIAN_LIAN
+          - PINGPONG
+          - OFX
+          - BANK_STATEMENT
+          - BANK_TRANSFER
+          - NO_VERIFICATION_NEEDED
+          description: 'Type of verification used for the provided payout details verification. Different for each verification type:
+
+            * **LIAN_LIAN** - special type for Chinese submerchants,
+
+            * **PINGPONG** - special type for Chinese submerchants,
+
+            * **OFX** - special type for Chinese submerchants,
+
+            * **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),
+
+            * **BANK_TRANSFER**,
+
+            * **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn''t have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.
+
+            '
+          example: BANK_STATEMENT
+        foreign:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.
+
+
+            **For domestic transfers set this parameter to `false`, specifically**:
+
+
+            - Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.
+
+            - Payouts in PLN (Polish Złoty) to an account held in Poland.
+
+            '
+          example: 'false'
+        verificationTransferId:
+          type: string
+          description: Have to be indicated in request with declared payouts data. Payouts data need to be declared in 72 hours from above request/response.
+          maxLength: 255
+          example: 5f7007da-8e05-4f0f-9503-05c053034bde
+        verified:
+          type: string
+          description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
+          example: 'false'
+    '404':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            statusDesc:
+              type: string
+              description: Error description.
+    '409':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error type.
+              example: '409'
+            message:
+              type: string
+              description: Error message.
+    PayoutWithoutVerificationTransfer:
+      type: object
+      required:
+      - bankDataId
+      - verificationId
+      - accountNumberRequested
+      - payoutDataVerificationType
+      - foreign
+      - verified
+      properties:
+        bankDataId:
+          type: string
+          description: Id of the bank account details assigned by marketplace.
+          maxLength: 100
+          example: '01102020'
+        verificationId:
+          type: string
+          description: Id of verification in context of which data are provided.
+          maxLength: 18
+          example: verification-123
+        accountNumberRequested:
+          type: string
+          description: Bank account number declared for withdrawals by submerchant.
+          format: IBAN
+          maxLength: 255
+          example: PL1122334455667788991010111223345
+        hasDocument:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is "BANK_STATEMENT**".
+
+            '
+          example: 'true'
+        swiftCode:
+          type: string
+          description: Standard format of Bank Identifier Code.
+          maxLength: 11
+          example: BREXPLPW
+        bankAddress:
+          type: string
+          description: Bank address.
+          example: Schule Str. 23 60-000 Berlin
+        bankCountry:
+          type: string
+          description: Bank country. **Required for foreign bank account**.
+          maxLength: 10
+          example: DE
+        payoutDataVerificationType:
+          type: string
+          enum:
+          - LIAN_LIAN
+          - PINGPONG
+          - OFX
+          - BANK_STATEMENT
+          - BANK_TRANSFER
+          - NO_VERIFICATION_NEEDED
+          description: 'Type of verification used for the provided payout details verification. Different for each verification type:
+
+            * **LIAN_LIAN** - special type for Chinese submerchants,
+
+            * **PINGPONG** - special type for Chinese submerchants,
+
+            * **OFX** - special type for Chinese submerchants,
+
+            * **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),
+
+            * **BANK_TRANSFER**,
+
+            * **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn''t have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.
+
+            '
+          example: BANK_STATEMENT
+        statementData:
+          type: object
+          description: Details from bank statement.
+          required:
+          - ownerName
+          - address
+          properties:
+            accountNumberFromBank:
+              type: string
+              description: ''
+              maxLength: 50
+              example: DE84074749817492314
+            ownerName:
+              type: string
+              description: Name of the account owner from bank transfer.
+              maxLength: 255
+              example: Marian Brotchen
+            address:
+              type: object
+              description: ''
+              properties:
+                street:
+                  type: string
+                  description: Street name.
+                  maxLength: 255
+                  example: Schule Str. 23
+                zipcode:
+                  type: string
+                  description: Zipcode
+                  maxLength: 255
+                  example: 60-000
+                city:
+                  type: string
+                  description: City name.
+                  maxLength: 255
+                  example: Berlin
+                country:
+                  type: string
+                  description: Country code.
+                  format: ISO Country Code
+                  maxLength: 2
+                  example: DE
+        foreign:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.
+
+
+            **For domestic transfers set this parameter to `false`, specifically**:
+
+
+            - Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.
+
+            - Payouts in PLN (Polish Złoty) to an account held in Poland.
+
+            '
+          example: 'false'
+        verified:
+          type: string
+          description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
+          example: 'false'
+    PrivatePerson:
+      type: object
+      description: Submerchant's data (if submerchant is a private person).
+      required:
+      - verificationId
+      - sellerId
+      - name
+      - surname
+      - legalForm
+      - address
+      - email
+      - dateOfBirth
+      properties:
+        verificationId:
+          type: string
+          description: Unique id of the verification provided by PayU.
+          maxLength: 18
+          example: BZx65uYW
+        sellerId:
+          type: string
+          description: Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).
+          maxLength: 50
+          example: seller_2"
+        email:
+          type: string
+          description: Contact email.
+          minLength: 5
+          maxLength: 80
+          example: test@test.com
+        phone:
+          type: string
+          description: Contact phone.
+          maxLength: 40
+          example: '111222333'
+        taxId:
+          type: string
+          description: Tax id. <b>Should be empty for private person</b>.
+          format: should be empty for private person
+          maxLength: 60
+          example: ''
+        name:
+          type: string
+          description: First name of the seller.
+          maxLength: 40
+          example: Jan
+        surname:
+          type: string
+          description: Last name of the seller.
+          maxLength: 40
+          example: Kowalski
+        legalForm:
+          type: string
+          description: <b>FOREIGN_COMPANY</b> type has been deprecated.
+          enum:
+          - AGENCY_OF_FOREIGN_COMPANY
+          - ASSOCIATION
+          - CHURCH_LEGAL_PERSON
+          - CIVIL_LAW_PARTNERSHIP
+          - COOPERATIVE
+          - EDUCATIONAL_INSTITUTION
+          - FOUNDATION
+          - GENERAL_PARTNERSHIP
+          - JOINT_STOCK_COMPANY
+          - LIMITED_JOINT_STOCK_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LOCAL_GOVERNMENT_UNIT
+          - PRIVATE_PERSON
+          - PROFESSIONAL_PARTNERSHIP
+          - LOCAL_GOVERNMENT_CULTURE_INSTITUTION
+          - RESEARCH_INSTITUTE
+          - SOLE_TRADER
+          - OTHER
+          example: PRIVATE_PERSON
+        personalIdentificationNumber:
+          type: string
+          description: National, personal identification number e.g. PESEL in Poland. <b>Required for private persons for full verification Not required for basic data</b>.
+          maxLength: 150
+          example: '90112322330'
+        dateOfBirth:
+          type: string
+          description: ''
+          format: YYYY-MM-DD
+          example: '1988-10-12'
+        registryNumber:
+          type: string
+          description: Company registry number (eg REGON in Poland). <b>Should be empty for private person</b>.
+          maxLength: 40
+          example: ''
+        address:
+          type: object
+          description: Address of the private person.
+          required:
+          - country
+          properties:
+            street:
+              type: string
+              description: Street with building and apartment number. <b>Required for full verification</b>.
+              maxLength: 255
+              example: Grunwaldzka 186
+            zipcode:
+              type: string
+              description: Private person's address zipcode. <b>Required for full verification</b>.
+              maxLength: 20
+              example: 60-166
+            city:
+              type: string
+              description: <b>Required for full verification</b>.
+              maxLength: 40
+              example: Poznan
+            country:
+              type: string
+              description: Two letter ISO country code.
+              maxLength: 80
+              example: PL
+    PayoutBankStatement:
+      type: object
+      required:
+      - bankDataId
+      - verificationId
+      - accountNumberRequested
+      - hasDocument
+      - payoutDataVerificationType
+      - foreign
+      - verified
+      properties:
+        bankDataId:
+          type: string
+          description: Id of the bank account details assigned by marketplace.
+          maxLength: 100
+          example: '01102020'
+        verificationId:
+          type: string
+          description: Id of verification in context of which data are provided.
+          maxLength: 18
+          example: verification-123
+        accountNumberRequested:
+          type: string
+          description: Bank account number declared for withdrawals by submerchant.
+          format: IBAN
+          maxLength: 255
+          example: PL1122334455667788991010111223345
+        hasDocument:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is "BANK_STATEMENT**".
+
+            '
+          example: 'true'
+        payoutDataVerificationType:
+          type: string
+          enum:
+          - LIAN_LIAN
+          - PINGPONG
+          - OFX
+          - BANK_STATEMENT
+          - BANK_TRANSFER
+          - NO_VERIFICATION_NEEDED
+          description: 'Type of verification used for the provided payout details verification. Different for each verification type:
+
+            * **LIAN_LIAN** - special type for Chinese submerchants,
+
+            * **PINGPONG** - special type for Chinese submerchants,
+
+            * **OFX** - special type for Chinese submerchants,
+
+            * **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),
+
+            * **BANK_TRANSFER**,
+
+            * **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn''t have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.
+
+            '
+          example: BANK_STATEMENT
+        foreign:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.
+
+
+            **For domestic transfers set this parameter to `false`, specifically**:
+
+
+            - Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.
+
+            - Payouts in PLN (Polish Złoty) to an account held in Poland.
+
+            '
+          example: 'false'
+        verified:
+          type: string
+          description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
+          example: 'false'
+    '403':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Error type.
+              enum:
+              - access_denied
+            error_description:
+              type: string
+              description: Description of error.
+              enum:
+              - Access is denied
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic

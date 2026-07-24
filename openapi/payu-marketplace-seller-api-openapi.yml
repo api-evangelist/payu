@@ -1,0 +1,1034 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize Marketplace-Seller API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: Marketplace-Seller
+  x-displayName: Marketplace Seller
+  description: In PayU, as a marketplace, you have the capability to manage various aspects of your submerchants.
+paths:
+  /api/v2_1/customers/ext/{extCustomerId}/status:
+    get:
+      tags:
+      - Marketplace-Seller
+      summary: Retrieve Seller Status
+      description: You can check the verification status of your submerchants.
+      operationId: retrieve-seller-status
+      parameters:
+      - name: extCustomerId
+        in: path
+        description: Submerchant identifier.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: currencyCode
+        in: query
+        example: PLN
+        description: Currency code according to ISO-4217.
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customVerificationStatus:
+                    type: string
+                    enum:
+                    - Verified
+                    - NotVerified
+                    description: Submerchant status.
+                  name:
+                    type: string
+                    description: Name of the company.
+                  taxId:
+                    type: string
+                    description: Company NIP. For companies registered abroad the field contains Tax ID or VAT UE.
+                  regon:
+                    type: string
+                    description: Regon number of the company
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/customers/ext/{extCustomerId}/balances:
+    get:
+      tags:
+      - Marketplace-Seller
+      summary: Retrieve Seller Balance
+      operationId: retrieve-seller-balance
+      parameters:
+      - name: extCustomerId
+        description: Submerchant identifier.
+        in: path
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: currencyCode
+        in: query
+        example: PLN
+        required: true
+        description: Currency code according to ISO-4217.
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: object
+                    properties:
+                      availableAmount:
+                        type: string
+                        description: Available funds.
+                      totalAmount:
+                        type: string
+                        description: Total submerchant funds (including blocked funds)
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Response Status
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/customers/ext/{extCustomerId}/operations:
+    get:
+      tags:
+      - Marketplace-Seller
+      summary: Retrieve Seller Operation History
+      operationId: retrieve-seller-operation-history
+      parameters:
+      - name: extCustomerId
+        in: path
+        description: Submerchant identifier.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: currencyCode
+        in: query
+        description: Currency code according to ISO-4217. <b>You can enter multiple values. Subsequent entries should be separated by a comma</b>.
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Operation type. <b>You can enter multiple values. Subsequent entries should be separated by a comma.</b>
+        required: false
+        schema:
+          type: string
+          enum:
+          - PAYMENT_SENT
+          - PAYMENT_RECEIVED
+          - PAYOUT
+          - REFUND_SENT
+          - REFUND_RECEIVED
+          - RETURN
+          - ADMIN_TRANSFER_SENT
+          - ADMIN_TRANSFER_RECEIVED
+          - FEE_TRANSFER_SENT
+          - FEE_TRANSFER_RECEIVED
+      - name: eventDateFrom
+        in: query
+        description: Start of the search range for "eventDate". <b>Date must be url encoded.</b>
+        required: true
+        schema:
+          type: string
+          format: 2019-01-30T20%3A59%3A00%2B02%3A00
+      - name: eventDateTo
+        in: query
+        description: End of the search range for "eventDate". <b>Date must be url encoded.</b>
+        required: true
+        schema:
+          type: string
+          format: 2019-04-30T20%3A59%3A00%2B02%3A00
+      - name: creationDateFrom
+        in: query
+        description: Start of the search range for "creationDate". <b>Date must be url encoded.</b>
+        required: false
+        schema:
+          type: string
+          format: 2019-04-30T20%3A59%3A00%2B02%3A00
+      - name: creationDateTo
+        in: query
+        description: End of the search range for "creationDate". <b>Date must be url encoded.</b>
+        required: false
+        schema:
+          type: string
+          format: 2019-04-30T20%3A59%3A00%2B02%3A00
+      - name: limit
+        in: query
+        description: Number of records per page.
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Page number (indexing from 0).
+        required: false
+        schema:
+          type: string
+      - name: sortBy
+        in: query
+        description: Sorting field. Additional sign "<b>+</b>" or "<b>-</b>" before field name defines sorting order. <b>Default is ascending</b>.
+        required: false
+        schema:
+          type: string
+          enum:
+          - eventDate
+          - creationDate
+          - type
+          - currencyCode
+        examples:
+          ascending:
+            value: +eventDate
+            summary: sorting ascending by eventDate.
+          descending:
+            value: -eventDate
+            summary: sorting descending by eventDate.
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/PAYMENT_RECEIVED'
+                - $ref: '#/components/schemas/REFUND_SENT'
+                - $ref: '#/components/schemas/PAYOUT'
+                - $ref: '#/components/schemas/RETURN'
+                - $ref: '#/components/schemas/CHARGEBACK'
+                - $ref: '#/components/schemas/ADMIN_CORRECTION'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/customers/ext/{extCustomerId}/feeDebitTransfer:
+    post:
+      tags:
+      - Marketplace-Seller
+      summary: Transfer Funds from Seller to Marketplace Balance
+      operationId: transfer-funds-from-seller-to-marketplace-balance
+      parameters:
+      - name: extCustomerId
+        in: path
+        description: Submerchant identifier.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: Transfer amount.
+                currencyCode:
+                  type: string
+                  description: Currency code according to ISO-4217.
+                  example: PLN
+                description:
+                  type: string
+                  description: Description of the operation.
+                extTransferId:
+                  type: string
+                  description: Unique transfer identifier for given marketplace.
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  extCustomerId:
+                    type: string
+                    description: Unique submerchant identifier.
+                  extTransferId:
+                    type: string
+                    description: Unique transfer identifier for given marketpalce.
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Response status.
+                        example: SUCCESS
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/customers/ext/{extCustomerId}/feeCreditTransfer:
+    post:
+      tags:
+      - Marketplace-Seller
+      summary: Transfer Funds from Marketplace to Seller Balance
+      description: ''
+      operationId: transfer-funds-from-marketplace-to-seller-balance
+      parameters:
+      - name: extCustomerId
+        in: path
+        description: Unique submerchant identifier.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: Transfer amount.
+                currencyCode:
+                  type: string
+                  description: Currency code according to ISO-4217.
+                  example: PLN
+                description:
+                  type: string
+                  description: Description of the operation.
+                extTransferId:
+                  type: string
+                  description: Unique transfer identifier for given marketplace.
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  extCustomerId:
+                    type: string
+                    description: Unique submerchant identifier.
+                  extTransferId:
+                    type: string
+                    description: Unique transfer identifier for given marketpalce.
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Response status.
+                        example: SUCCESS
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+components:
+  schemas:
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    ADMIN_CORRECTION:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: ADMIN_CORRECTION
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  correctionId:
+                    type: string
+                    description: Correction identifier
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    PAYMENT_RECEIVED:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: PAYMENT_RECEIVED
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    description: Order identifier.
+                  extOrderId:
+                    type: string
+                    description: External order identifier.
+                  feeAmount:
+                    type: string
+                    description: Marketplace fee amount.
+                  counterparties:
+                    type: object
+                    description: Order elements.
+                    properties:
+                      extCustomerId:
+                        type: string
+                        description: Buyer identifier.
+                      name:
+                        type: string
+                        description: Buyer name.
+                      email:
+                        type: string
+                        description: Buyer email.
+                      products:
+                        type: array
+                        description: List of products in order.
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Product name.
+                            unitPrice:
+                              type: string
+                              description: Unit price of product
+                            quantity:
+                              type: string
+                              description: Quantity
+              funds:
+                type: array
+                items:
+                  type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    REFUND_SENT:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: REFUND_SENT
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    description: Order identifier.
+                  extOrderId:
+                    type: string
+                    description: External order identifier.
+                  refundId:
+                    type: string
+                    description: Refund identifier.
+                  extRefundId:
+                    type: string
+                    description: External refund identifier.
+                  counterparties:
+                    type: object
+                    description: Order elements.
+                    properties:
+                      extCustomerId:
+                        type: string
+                        description: Buyer identifier.
+                      name:
+                        type: string
+                        description: Buyer name.
+                      email:
+                        type: string
+                        description: Buyer email.
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    CHARGEBACK:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: CHARGEBACK
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  correctionId:
+                    type: string
+                    description: Correction identifier
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    RETURN:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: RETURN
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  payoutId:
+                    type: string
+                    description: Payout identifier
+                  extPayoutId:
+                    type: string
+                    description: External payout identifier.
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    PAYOUT:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: PAYOUT
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  payoutId:
+                    type: string
+                    description: Payout identifier
+                  extPayoutId:
+                    type: string
+                    description: External payout identifier.
+                  accountNumber:
+                    type: string
+                    description: The account to which the payout was made.
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic

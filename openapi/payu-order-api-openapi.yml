@@ -1,0 +1,2286 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize Order API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: Order
+  x-displayName: Order
+  description: 'Order is the basic payment request for the standard integration with PayU.
+
+    > If the response to the payment creation request is returned with an **HTTP 200** status and in HTML format, make sure that the tool used to communicate with PayU has automatic redirect handling disabled. Only in this case is it possible to receive the correct JSON response with an **HTTP 302** status code.'
+paths:
+  /api/v2_1/orders:
+    post:
+      tags:
+      - Order
+      summary: Create an Order
+      security:
+      - Bearer:
+        - client_credentials
+        - trusted_merchant
+      description: Create a new order request.
+      operationId: create-an-order
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Parameters for OrderCreateRequest
+              required:
+              - customerIp
+              - merchantPosId
+              - description
+              - currencyCode
+              - totalAmount
+              - products
+              properties:
+                continueUrl:
+                  type: string
+                  description: Address for redirecting the customer after payment is commenced.
+                  example: www.example.com/path
+                  maxLength: 1024
+                  format: RFC 3986
+                notifyUrl:
+                  type: string
+                  description: The address for sending notifications
+                  example: https://your.eshop.com/notify
+                  maxLength: 1024
+                  format: RFC 3986
+                customerIp:
+                  type: string
+                  description: 'Payer''s IP address. Value is accepted in following formats:<ul> <li> **IPv4** - address represented in the dotted decimal format of 4 sets of decimal numbers separated by dots. The decimal number in each and every set is in the range 0 - 255. Example: 1.12.123.255.</li> <li> **IPv6** - address represented as eight groups of four hexadecimal digits, each group representing 16 bits (two octets). The groups are separated by colons (:). Example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334.</li></ul>'
+                  examples:
+                  - 127.0.0.1
+                  - 127.0.0.2
+                  - 8d33:56b2:24aa:b822:9b2f:1db7:c21d:04e1
+                merchantPosId:
+                  type: string
+                  description: Point of sale ID.
+                  examples:
+                  - '140332'
+                  - '145227'
+                description:
+                  type: string
+                  description: Description of the order.
+                  maxLength: 4000
+                additionalDescription:
+                  type: string
+                  description: Additional description of the order.
+                  maxLength: 1024
+                visibleDescription:
+                  type: string
+                  maxLength: 80
+                  description: Order/Payment description visible for Buyer on the PayU payment page.
+                statementDescription:
+                  type: string
+                  maxLength: 22
+                  description: Payment recipient name followed by payment description (order ID, ticket number etc) visible on card statement. The name should be easy to recognize by the cardholder. If field is not provided, static name configured by PayU will be used.
+                extOrderId:
+                  type: string
+                  description: ID of an order used in merchant system. Order identifier assigned by the merchant. It enables merchants to find a specific order in their system. This value must be unique within a single POS.
+                  maxLength: 1024
+                currencyCode:
+                  type: string
+                  description: Currency code compliant with ISO 4217 (e.g EUR).
+                  examples:
+                  - EUR
+                  - PLN
+                  - USD
+                totalAmount:
+                  type: string
+                  description: Total price of the order in pennies (e.g. 1000 is 10.00 EUR). Applies also to currencies without subunits (e.g. 1000 is 10 HUF).
+                  example: '1000'
+                validityTime:
+                  type: string
+                  description: Duration for the validity of an order (in seconds), during which time payment must be made. Default value 86400.
+                  example: '100000'
+                cardOnFile:
+                  type: string
+                  description: Information about party initializing order or a transaction with Buyer consent to save card token. "cardOnFile" parameter cannot be used with "recurring" parameter.
+                  enum:
+                  - FIRST
+                  - STANDARD_CARDHOLDER
+                  - STANDARD_MERCHANT
+                  example: FIRST
+                recurring:
+                  type: string
+                  description: 'Marks the order as recurring payment: <ul> <li><b>FIRST</b> - payment initialized by the card owner who agreed to save card for future use in recurring plan. You can expect full authentication (3D Secure and/or CVV). If you want to use multi-use token (TOKC_) later, you have to be confident, that first recurring payment was successful.</li> <li><b>STANDARD</b> - subsequent recurring payment (user is not present). This transaction has multi use token (TOKC_). You cannot use it if FIRST recurring payment failed.</li> </ul> <b><code>recurring</code> parameter cannot be used with <code>cardOnFile</code> parameter</b> .'
+                  enum:
+                  - FIRST
+                  - STANDARD
+                  example: FIRST
+                donation:
+                  $ref: '#/components/schemas/donation'
+                buyer:
+                  $ref: '#/components/schemas/buyer'
+                shoppingCarts:
+                  $ref: '#/components/schemas/shoppingCarts'
+                products:
+                  $ref: '#/components/schemas/products'
+                payMethods:
+                  $ref: '#/components/schemas/payMethods'
+                mcpData:
+                  $ref: '#/components/schemas/mcpData'
+                threeDsAuthentication:
+                  $ref: '#/components/schemas/threeDsAuthentication'
+                riskData:
+                  $ref: '#/components/schemas/riskData'
+                credit:
+                  $ref: '#/components/schemas/credit'
+                submerchant:
+                  $ref: '#/components/schemas/submerchant'
+                settings:
+                  $ref: '#/components/schemas/settings'
+                deviceFingerprint:
+                  type: string
+                  description: Hashed identifier of the user or its device.
+                  example: 3e9fae0b3e6003a4093358167bc1079e
+                  maxLength: 255
+      responses:
+        '201':
+          x-summary: Created
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                  redirectUri:
+                    type: string
+                  qrCode:
+                    type: string
+                    description: Based64 encoded QR code image. **It is returned only for transparent QR code payment type**.
+                  orderId:
+                    type: string
+                    example: WZHF5FFDRJ140731GUEST000P01
+                  iframeAllowed:
+                    type: boolean
+                    example: true
+                  threeDsProtocolVersion:
+                    type: string
+                    enum:
+                    - 3DS2
+                    example: 3DS2
+                  extOrderId:
+                    type: string
+                  challengeParameters:
+                    type: object
+                    properties:
+                      threeDsServerTransactionId:
+                        type: string
+                        example: 0016f22b-f988-4358-b2c6-8917bba22037
+                      acsTransID:
+                        type: string
+                        example: d7c1ee99-9478-44a6-b1f2-391e29c6b340
+                      acsReferenceNumber:
+                        type: string
+                        example: 3DS_LOA_ACS_201_13579
+                      acsSignedContent:
+                        type: string
+                        example: c29tZUJhc2U2NGVuY29kZWRTdHJpbmc=
+        '302':
+          x-summary: Found
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Response code
+                        example: SUCCESS
+                      severity:
+                        type: string
+                  redirectUri:
+                    type: string
+                    description: Url redirection address with payment summary.
+                    example: https://merch-prod.snd.payu.com/pay/?orderId=WZHF5FFDRJ140731GUEST000P01&token=eyJhbGciOiJIUzI1NiJ9.eyJvcmRlcklkIjoiV1pIRjVGRkRSSjE0MDczMUdVRVNUMDAwUDAxIiwicG9zSWQiOiJhYmMxMjM0IiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9DTElFTlQiXSwicGF5ZXJFbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHAiOjE2NzI3NjE4NjEsImlzcyI6IlBBWVUiLCJhdWQiOiJhcGktZ2F0ZXdheSIsInN1YiI6IlBheVUgc3ViamVjdCIsImp0aSI6IjYzMTA3M2Y0LThmMzgtNDNlZS1iOTc1LWVlNWIwZGI0ZWFiZSJ9.tBThoQDVgo9mpmh2AUDC5hkfecwtqO0L9LSCdXRYruk
+                  iframeAllowed:
+                    type: boolean
+                    example: true
+                  threeDsProtocolVersion:
+                    type: string
+                    enum:
+                    - 3DS2
+                  orderId:
+                    type: string
+                    description: Order identifier given by PayU.
+                    example: WZHF5FFDRJ140731GUEST000P01
+                  extOrderId:
+                    type: string
+                    description: Order identifier given by merchant.
+                    example: my_ext_order_id
+                  payMethods:
+                    type: object
+                    properties:
+                      payMethod:
+                        type: object
+                        properties:
+                          card:
+                            type: object
+                            properties:
+                              number:
+                                type: string
+                                description: Card number.
+                                example: 4444333322221111
+                              expirationMonth:
+                                type: integer
+                                description: Card expiration month.
+                                example: 9
+                              expirationYear:
+                                type: integer
+                                description: Card expiration year.
+                                example: 2026
+                          type:
+                            type: string
+                            enum:
+                            - CARD_TOKEN
+                          value:
+                            type: string
+                            example: TOKC_XATB7DF8ACXYTVQIPLWTVPFRKQE
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: Incorrect authentication. Check signature parameters and implementation of the signature algorithm.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          x-summary: Forbidden
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '500':
+          x-summary: Internal server error
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+  /api/v2_1/orders/{orderId}:
+    get:
+      tags:
+      - Order
+      summary: Retrieve an Order
+      description: Retrieve the status and details of an order.
+      operationId: retrieve-an-order
+      parameters:
+      - name: orderId
+        in: path
+        example: WZHF5FFDRJ140731GUEST000P01
+        description: Order ID generated by the PayU system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    description: Array of order objects.
+                    items:
+                      type: object
+                      properties:
+                        shippingMethod:
+                          type: object
+                          properties:
+                            country:
+                              type: string
+                              description: Two-letter country code compliant with ISO-3166
+                              example: PL
+                            price:
+                              type: string
+                              description: Shipping cost
+                              example: 2000
+                            name:
+                              type: string
+                              description: Shipping method name
+                              example: parcell
+                        orderId:
+                          type: string
+                          description: Order ID generated by the PayU system.
+                          example: VVLR1HXK2S160929GUEST000P01
+                        extOrderId:
+                          type: string
+                          description: External order ID (assigned by the shop).
+                          example: '343242'
+                        orderCreateDate:
+                          type: string
+                          description: Order creation timestamp.
+                          example: '2023-01-03T14:58:17.443+01:00'
+                        notifyUrl:
+                          type: string
+                          description: Address for sending notifications.
+                          example: http://localhost/OrderNotify/
+                        customerIp:
+                          type: string
+                          description: 'Customer''s IP address. Note: 0.0.0.0 is not accepted.'
+                          example: 127.0.0.1
+                        merchantPosId:
+                          type: string
+                          description: Point of sale ID.
+                          example: '145227'
+                        description:
+                          type: string
+                          description: Description for order.
+                          example: New Order
+                        additionalDescription:
+                          type: string
+                          description: Additional description for order.
+                          example: New Order
+                        validityTime:
+                          type: string
+                          description: Duration for the validity of an order (in seconds), during which time payment must be made.
+                          default: '86400'
+                        currencyCode:
+                          type: string
+                          description: Currency code compliant with ISO 4217.
+                          example: PLN
+                        totalAmount:
+                          type: string
+                          description: Total price of the order.
+                          example: '3200'
+                        buyer:
+                          $ref: '#/components/schemas/buyer'
+                        payMethod:
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              example: 20000
+                            type:
+                              type: string
+                              enum:
+                              - PBL
+                              - CARD_TOKEN
+                              - PAYMENT_WALL
+                              - BLIK_AUTHORIZATION_CODE
+                              - BLIK_TOKEN
+                        products:
+                          $ref: '#/components/schemas/products'
+                        shoppingCarts:
+                          $ref: '#/components/schemas/shoppingCarts'
+                        status:
+                          type: string
+                          description: Order status.
+                          enum:
+                          - NEW
+                          - PENDING
+                          - WAITING_FOR_CONFIRMATION
+                          - COMPLETED
+                          - CANCELED
+                          example: COMPLETED
+                  properties:
+                    $ref: '#/components/schemas/properties'
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '404':
+          x-summary: Not found
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+    delete:
+      tags:
+      - Order
+      summary: Cancel an Order
+      description: Cancel (reject) orders processed by the PayU system.
+      operationId: cancel-an-order
+      parameters:
+      - name: orderId
+        in: path
+        example: WZHF5FFDRJ140731GUEST000P01
+        description: Order ID generated by the PayU system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    description: Order identifier in PayU's system.
+                    example: WZHF5FFDRJ140731GUEST000P01
+                  extOrderId:
+                    type: string
+                    description: Order identifier in merchant's system.
+                    example: 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Status after update.
+                        example: SUCCESS
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          x-summary: Forbidden
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '404':
+          x-summary: Not Found
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+        '500':
+          x-summary: Internal server error
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+  /api/v2_1/orders/{orderId}/captures:
+    post:
+      tags:
+      - Order
+      summary: Capture Authorized Order
+      description: Capture whole order and update its status to COMPLETED (ended).
+      operationId: capture-authorized-order
+      parameters:
+      - name: orderId
+        in: path
+        example: WZHF5FFDRJ140731GUEST000P01
+        description: Order ID generated by the PayU system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/Full'
+              - $ref: '#/components/schemas/Partial'
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Status after update.
+                        example: SUCCESS
+                      statusDesc:
+                        type: string
+                        description: Status message.
+                        example: Status was updated
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '500':
+          x-summary: Internal server error
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+  /api/v2_1/orders/{orderId}/status:
+    put:
+      tags:
+      - Order
+      summary: (deprecated) Capture Authorized Order
+      description: Capture an order and update its status to COMPLETED (ended).
+      operationId: capture-authorized-order-deprecated
+      parameters:
+      - name: orderId
+        in: path
+        example: WZHF5FFDRJ140731GUEST000P01
+        description: Order ID generated by the PayU system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - orderId
+              - orderStatus
+              properties:
+                orderId:
+                  type: string
+                  description: Identifier of the order you want to update.
+                  example: VVLR1HXK2S160929GUEST000P01
+                orderStatus:
+                  type: string
+                  description: Status of the order after update.
+                  example: COMPLETED
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: string
+                        description: Status after update.
+                        example: SUCCESS
+                      statusDesc:
+                        type: string
+                        description: Status message.
+                        example: Status was updated
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '500':
+          x-summary: Internal server error
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+  /api/v2_1/orders/{orderId}/transactions:
+    get:
+      tags:
+      - Order
+      summary: Retrieve a Transaction
+      description: Retrieve the details of transactions created for an order with specified `orderId`.
+      operationId: retrieve-a-transaction
+      security:
+      - Bearer:
+        - oAuth token
+      parameters:
+      - name: orderId
+        in: path
+        example: WZHF5FFDRJ140731GUEST000P01
+        description: Order ID generated by the PayU system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/card'
+                - $ref: '#/components/schemas/pbl'
+                - $ref: '#/components/schemas/blik'
+                - $ref: '#/components/schemas/wire'
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '404':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404'
+components:
+  schemas:
+    pbl:
+      type: object
+      properties:
+        transactions:
+          type: array
+          description: Array of order objects.
+          items:
+            type: object
+            properties:
+              payMethod:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    description: Payment method code
+                    example: m
+              paymentFlow:
+                type: string
+                description: Defines how payments are handled.
+                enum:
+                - PBL
+                - PEX_BANK
+              bankAccount:
+                type: object
+                properties:
+                  number:
+                    type: string
+                    description: Bank account number from which payment was made.
+                    example: '80607787095718703296721164'
+                  name:
+                    type: string
+                    description: Name of the account holder from which payment was made (or full data – name, surname and address).
+                    example: JAN KOWALSKI
+                  city:
+                    type: string
+                    description: City included in account holder address.
+                    example: WARSZAWA
+                  postalCode:
+                    type: string
+                    description: Postal code included in account holder address.
+                    example: 02-638
+                  street:
+                    type: string
+                    description: Street name and house number included in account holder address.
+                    example: UL.NOWOWIEJSKIEGO 8
+                  address:
+                    type: string
+                    description: Account holder address.
+                    example: Warszawa Nowowiejskiego 8
+              resultCode:
+                type: string
+                enum:
+                - AUT_ERROR_NO_AUTHORIZATION
+                - AUT_ERROR_ANTIFRAUD_DECLINED
+                - REG_ERROR_ANTIFRAUD_DECLINED
+                description: 'Optional informaction about transaction result code: <ul> <li><b>AUT_ERROR_NO_AUTHORIZATION</b> - authorization was not received, transaction cancelled.</li> <li><b>AUT_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at the authoriztion stage by the antifraud system.</li> <li><b>REG_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at registration stage by antifraud system.</li> <li><b>REG_ERROR_AUTHENTICATION_REJECTED</b> - Authentication was rejected by a third-party service. <ul><li>For Visa Mobile payment method: Authentication failed in either the Visa Mobile or Issuer application.</li></ul></li> </ul>'
+                example: AUT_ERROR_NO_AUTHORIZATION
+    '404':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            statusDesc:
+              type: string
+              description: Error description.
+    threeDsAuthentication:
+      type: object
+      description: Contains optional fields required by 3DS 2 authentication protocol.
+      properties:
+        challengeRequested:
+          type: string
+          description: Merchant's preference regarding 3DS 2 challenge. Exclusive with exemption. Maybe overridden by PayU.
+          enum:
+          - 'YES'
+          - 'NO'
+          - MANDATE
+        exemption:
+          $ref: '#/components/schemas/exemption'
+        browser:
+          $ref: '#/components/schemas/browser'
+        sdk:
+          $ref: '#/components/schemas/sdk'
+        merchantRiskIndicator:
+          $ref: '#/components/schemas/merchantRiskIndicator'
+        recurring:
+          $ref: '#/components/schemas/recurring'
+        cardholder:
+          $ref: '#/components/schemas/cardholder'
+    browser:
+      type: object
+      description: Browser data required for 3DS 2 browser flow. If not provided, these data will be collected by PayU. It is strongly recommended to include it when charging a stored card (multi-use token), because in some cases it will spare you redirection to PayU's authentication page.
+      required:
+      - acceptHeaders
+      - requestIP
+      - screenWidth
+      - javaEnabled
+      - timezoneOffset
+      - screenHeight
+      - userAgent
+      - colorDepth
+      - language
+      properties:
+        acceptHeaders:
+          type: string
+          description: Exact content of the HTTP accept headers as sent from the payer's browser.
+        requestIP:
+          type: string
+          description: IP address of the browser as returned by the HTTP headers.
+          example: 127.0.0.1
+        screenWidth:
+          type: string
+          description: Total width of the payer's screen in pixels. Obtained from the screen.width HTML DOM property.
+          example: 1920
+        javaEnabled:
+          type: boolean
+          description: Obtained from the navigator HTML DOM object.
+          example: false
+        timezoneOffset:
+          type: string
+          description: Obtained from the getTimezoneOffset() method applied to Date object.
+          example: 1
+        screenHeight:
+          type: string
+          description: Obtained from the navigator HTML DOM object.
+          example: 1280
+        userAgent:
+          type: string
+          description: Exact content of the HTTP user-agent header.
+          example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36
+        colorDepth:
+          type: string
+          description: Obtained from payer's browser using the screen.colorDepth HTML DOM property.
+          example: 32
+        language:
+          type: string
+          description: Obtained from payer's browser using the navigator.language HTML DOM property. Max. 8 chars.
+          example: pl_PL
+    properties:
+      type: array
+      description: Array of objects related to transaction identification.
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Static value. The payment identifier, displayed on transaction statements as "Trans ID" and within the transaction search option in the Management Panel.
+            example: PAYMENT_ID
+          value:
+            type: string
+            description: Transaction ID in PayU system.
+            example: '1234567890'
+    '403':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Error type.
+              enum:
+              - access_denied
+            error_description:
+              type: string
+              description: Description of error.
+              enum:
+              - Access is denied
+    address:
+      type: object
+      description: Section containing data about shipping address. Section <shippingMethod.address> is a single object of type address
+      properties:
+        pointId:
+          type: string
+          description: The full name of the pickup point, including its unique identifier.
+          example: Parcel locker POZ29A
+        street:
+          type: string
+          description: Street name, possibly including house and flat number.
+        streetNo:
+          type: string
+          description: Street number
+        flatNo:
+          type: string
+          description: Flat number
+        postalCode:
+          type: string
+          description: Postal Code
+        city:
+          type: string
+          description: City
+        countryCode:
+          type: string
+          description: Two-letter country code compliant with ISO-3166.
+    blikData:
+      type: object
+      description: Additional data for BLIK payment with T6 or token.
+      properties:
+        aliasLabelProposal:
+          type: string
+          description: Label proposal associated with given mobile application. This field can be used only during token registration.</br><b>Required for the BLIK Recurring</b>.
+        registerTokenValue:
+          type: string
+          description: UID/PAYID token value assigned by the merchant. This field can be used only during token registration.
+        register:
+          type: boolean
+          description: Set to `true` specifies that an alias registration request will be sent. Set to false will result in payment with a T6 authorization code without token registration.
+        appKey:
+          type: string
+          description: The identifier of the customer's chosen bank mobile application within which the transaction authorization will take place.
+        recommendedAuthLevel:
+          type: string
+          description: The proposed level of transaction authorisation. A value of `NO_CONFIRMATION` means no need for transaction confirmation. In case of recurring payments, the value of `NO_CONFIRMATION` means that the merchant is aware of potential fraud risk, accepts it and takes full responsibility for potential fraudulent transactions.
+          enum:
+          - NO_CONFIRMATION
+          - REQUIRED_CONFIRMATION
+        countryCode:
+          type: string
+          enum:
+          - PL
+          - SK
+          example: PL
+          description: Indicates the market where the BLIK payment will be initiated. If the field is not provided, the default value will be **PL**.
+        recurring:
+          type: object
+          description: Contains information about the recurring payment.
+          required:
+          - type
+          properties:
+            type:
+              type: enum
+              description: Type of the recurring payment. <b>Required for the recurring payment.</b>
+              enum:
+              - O
+            initializationDate:
+              type: string
+              description: Date of the first transaction in the recurring payment cycle without the customer confirmation.
+              example: '2026-10-01T00:00:00+02:00'
+              format: yyyy-MM-dd'T'HH:mm:ssXXX
+            expirationDate:
+              type: string
+              description: Expiration date of the PAYID token. Maximum date is 10 years from the creation date of the token. If the value is not provided, token will be valid indifinitely.
+              example: '2026-10-01T00:00:00+02:00'
+              format: yyyy-MM-dd'T'HH:mm:ssXXX
+            authorizeDespiteRecurringNotSupported:
+              type: boolean
+              default: false
+              description: Indicates if BLIK transaction should be processed even if Buyers bank do not support recurring feature in BLIK payment. <b>In such case, only a single transaction will be processed</b>.
+    shippingMethod:
+      type: object
+      description: Section containing data of shipping method. Section <shippingMethod> is a single object of type shippingMethod.
+      properties:
+        type:
+          type: string
+          description: Type of shipment
+          enum:
+          - COURIER
+          - COLLECTION_POINT_PICKUP
+          - PARCEL_LOCKER
+          - STORE_PICKUP
+        price:
+          type: string
+          description: Shipping cost
+        address:
+          $ref: '#/components/schemas/address'
+    products:
+      type: array
+      description: Section containing data of the ordered products. Section <code>products</code> is an array of objects of type product.
+      items:
+        type: object
+        required:
+        - name
+        - unitPrice
+        - quantity
+        properties:
+          name:
+            type: string
+            description: Name of the product.
+            example: My product
+            maxLength: 255
+          unitPrice:
+            type: string
+            description: Unit price.
+            example: 999
+          quantity:
+            type: string
+            description: Quantity of given product
+            example: 4
+          virtual:
+            type: boolean
+            description: Product type, which can be virtual or material. **Even if sent, the virtual parameter is not returned in PAYU notifications.**
+            example: true
+    payMethod:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: Payment method type.
+          enum:
+          - PBL
+          - CARD_TOKEN
+          - PAYMENT_WALL
+          - BLIK_AUTHORIZATION_CODE
+          - BLIK_TOKEN
+          - TRANSPARENT
+        value:
+          type: string
+          description: Payment type for PBL, CARD_TOKEN.
+          example: c
+        clickToPay:
+          description: 'ClickToPay details. When this node is used, set `type` to `PBL` and `value` to `c`. Provide exactly one option: `visa` or `mastercard` (not both).'
+          allOf:
+          - $ref: '#/components/schemas/clickToPay'
+        authorizationCode:
+          type: string
+          description: 'Optional, usage differs depending on payment method. For BLIK integrated transparently: enables to collect 6-digit BLIK code on your website instead of redirecting to BLIK.'
+          example: '777123'
+        authorizationType:
+          type: string
+          description: Applicable only to card-based payments, incl. Apple Pay, Google Pay.
+          default: AUTHORIZATION
+          enum:
+          - PRE_AUTHORIZATION
+          - AUTHORIZATION
+        card:
+          $ref: '#/components/schemas/cardPlainData'
+        specificData:
+          $ref: '#/components/schemas/specificData'
+        amount:
+          type: string
+          description: Additional information required for Marketplace integration - must be equal to `totalAmount` as sum of amount parameters objects in `shoppingCards` array
+        blikData:
+          $ref: '#/components/schemas/blikData'
+        threeDsData:
+          $ref: '#/components/schemas/threeDsData'
+        sourcePaymentFlow:
+          type: enum
+          description: Indicates digital wallet.
+          example: VISA_MOBILE
+          enum:
+          - APPLE_PAY
+          - CARDS
+          - MDES
+          - GOOGLE_PAY
+          - VISA_MOBILE
+          - VTS
+        cardInstallments:
+          type: object
+          description: For merchants operating on the Romanian market (Requires contact with a Payu representative first).
+          properties:
+            provider:
+              type: string
+              description: Card installments program obtained by retrieving [Installments Options](#tag/Card-Installments/operation/retrieve-card-installments).
+              example: BRD_INSTALLMENTS
+            number:
+              type: integer
+              description: Selected amount of card installments, obtained by [retrieving Installments Options](#tag/Card-Installments/operation/retrieve-card-installments).
+              example: 6
+    '400':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    clickToPayVisa:
+      type: object
+      title: visa
+      description: Click to Pay data for Visa.
+      required:
+      - srcCorrelationId
+      properties:
+        srcCorrelationId:
+          type: string
+          description: A transaction identifier.
+          example: 123e4567-e89b-12d3-a456-426614174000
+    delivery:
+      type: object
+      description: Section containing delivery address. For a list of parameters, see section delivery
+      properties:
+        street:
+          type: string
+          description: Full street address, incl. apartment number. <b>Section recommended for the 3DS 2 authentication</b>.
+          maxLength: 255
+        postalBox:
+          type: string
+          description: Postal box
+          maxLength: 255
+        postalCode:
+          type: string
+          description: Postal code. <b>Section recommended for the 3DS 2 authentication</b>.
+          maxLength: 255
+        city:
+          type: string
+          description: City, <b>section recommended for the 3DS 2 authentication</b>.
+          maxLength: 255
+        state:
+          type: string
+          description: Country principal subdivision like "state" or "province". If provided, must be a valid ISO 3166-2 code (e.g. "UT" for Utah in the USA or "30" for "Wielkopolskie" in Poland). <b>Section recommended for the 3DS 2 authentication</b>.
+          example: '30'
+          maxLength: 255
+        countryCode:
+          type: string
+          description: Two-letter country code compliant with <b><a href="https://www.iso.org/iso-3166-country-codes.html">ISO-3166</a></b>. <b>Section recommended for the 3DS 2 authentication</b>.
+        name:
+          type: string
+          description: Address description
+          maxLength: 255
+        recipientName:
+          type: string
+          description: Recipient name
+          maxLength: 255
+        recipientEmail:
+          type: string
+          description: Ecipient email
+        recipientPhone:
+          type: string
+          description: Recipient phone number
+    wire:
+      type: object
+      properties:
+        transactions:
+          type: array
+          description: Array of order objects.
+          items:
+            type: object
+            properties:
+              payMethod:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    description: Payment method code
+                    example: bt
+              validUntil:
+                type: string
+                format: date-time
+                description: The expiration date and time for the transaction
+                example: '2026-02-20T12:08:07.009+01:00'
+              wireTransfer:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: Title of the transfer
+                    example: Payment Title
+                  sortCode:
+                    type: string
+                    description: Bank sort code
+                    example: '5500'
+                  bankAccountNumber:
+                    type: string
+                    description: Bank account number
+                    example: '2545661682'
+                  ownerName:
+                    type: string
+                    description: Name of the account owner
+                    example: Owner account name
+                  ownerAddress:
+                    type: string
+                    description: Address of the account owner
+                    example: string
+                  bankName:
+                    type: string
+                    description: Name of the bank
+                    example: UniCredit Bank
+                  swiftCode:
+                    type: string
+                    description: SWIFT code of the bank
+                    example: BACXROBUXXX
+                  specificSymbol:
+                    type: string
+                    description: Specific symbol for the transfer
+                    example: '29'
+                  variableSymbol:
+                    type: string
+                    description: Variable symbol for the transfer
+                    example: '5011964003'
+    '500':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    shoppingCarts:
+      type: array
+      description: Array of objects related to transaction identification.
+      items:
+        type: object
+        required:
+        - extCustomerId
+        - amount
+        - products
+        properties:
+          extCustomerId:
+            type: string
+            description: Submerchant identifier
+            example: ext-customer-1
+            maxLength: 1024
+          amount:
+            type: number
+            description: Total amount for given submerchant
+            example: 24950
+          fee:
+            type: string
+            description: Marketplace fee. Value should be in range <0, amount>
+            example: 250
+          shippingMethods:
+            $ref: '#/components/schemas/shippingMethods'
+          products:
+            $ref: '#/components/schemas/products'
+    recurring:
+      type: object
+      description: Additional information in case of a recurring payment.
+      properties:
+        frequency:
+          type: string
+          description: The minimum number of days between recurring payments (e.g. setting it to <b>7</b> for a weekly cycle). However, according to the recommendations of card schemes, when dealing with recurring payments that have a variable frequency, it's advised to use a value of <b>1</b> for this parameter.
+          example: '7'
+        expiry:
+          type: string
+          format: '2025-03-27T00:00:00.000Z'
+          description: Date after no further recurring payments will be performed. According to recommendation by the card schemes, in cases where there is no established expiry or end date of recurring (e.g. subscriptions), the value of "9999-12-31T00:00:00Z" should be used.
+          example: '2025-03-27T00:00:00.000Z'
+    cardPlainData:
+      type: object
+      description: ''
+      required: []
+      properties:
+        number:
+          type: string
+          description: ''
+          example: '5100052384536818'
+        expirationMonth:
+          type: string
+          description: ''
+          example: '02'
+        expirationYear:
+          type: string
+          description: ''
+          example: '29'
+        cvv:
+          type: string
+          description: ''
+          example: '123'
+        firstTransactionId:
+          type: string
+          description: ''
+          example: MCC0111LL1121
+    sdkEphemPubKey:
+      type: object
+      description: Public key component of the ephemeral key pair generated by the 3DS SDK and used to establish session keys between the 3DS SDK and the issuer.
+      properties:
+        y:
+          type: string
+          example: MRy7wofaw77myc7hZef23hmmEOE
+        x:
+          type: string
+          example: MRy7wofaw77myc7hZef23hmmEOE
+        kty:
+          type: string
+          example: EC
+        crv:
+          type: string
+          example: P-256
+    donation:
+      type: object
+      description: Section containing data of donation added to the order.
+      properties:
+        amount:
+          type: integer
+          description: Donation amount in pennies.
+          example: 500
+        organizationId:
+          type: string
+          description: Charity identifier provided by PayU.
+    card:
+      type: object
+      properties:
+        transactions:
+          type: array
+          description: Array of order objects.
+          items:
+            type: object
+            properties:
+              payMethod:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    description: Payment method code
+                    example: c
+              paymentFlow:
+                type: string
+                description: Payment flow of of payment (for card and card based instruments payments)
+                enum:
+                - APPLE_PAY
+                - CARD
+                - CARD_INSTALLMENTS
+                - CLICK_TO_PAY
+                - FIRST_ONE_CLICK_CARD
+                - GOOGLE_PAY
+                - GOOGLE_PAY_TOKENIZED
+                - VISA_MOBILE
+                - ONE_CLICK_CARD
+                - ONE_CLICK_CARD_RECURRING
+                - ONE_CLICK_MAIL_ORDER
+                - ONE_CLICK_MAIL_RECURRING
+                - ONE_CLICK_PHONE_ORDER
+                - ONE_CLICK_PHONE_RECURRING
+                example: CARD
+              validUntil:
+                type: string
+                description: Transaction capture expiration date.
+                example: '2024-06-20T09:05:44.238+02:00'
+              card:
+                type: object
+                description: Chosen payment method
+                properties:
+                  cardData:
+                    type: object
+                    properties:
+                      cardNumberMasked:
+                        type: string
+                        description: Masked card number (real number or token - in case of Apple Pay and Google Pay Tokenized).
+                        example: 543402******4014
+                      cardScheme:
+                        type: string
+                        description: 'Payment organization: MC (MasterCard/Maestro), VS (Visa)'
+                        example: MC
+                      cardProfile:
+                        type: string
+                        description: Card profile (CONSUMER or BUSINESS)
+                        example: CONSUMER
+                      cardClassification:
+                        type: string
+                        description: Card classification (CREDIT/DEBIT)
+                        example: DEBIT
+                      cardResponseCode:
+                        type: string
+                        description: Response code
+                        example: '000'
+                      cardResponseCodeDesc:
+                        type: string
+                        description: Response code with description
+                        example: 000 - OK
+                      cardEciCode:
+                        type: string
+                        description: Electronic Commerce Indicator
+                        example: '2'
+                      card3DsStatus:
+                        type: string
+                        description: 3DS verification status
+                        example: Y
+                      card3DsFrictionlessIndicator:
+                        type: string
+                        description: Indicates whether the authentication was frictionless or with challenge
+                        example: 'YES'
+                      card3DsStatusDescription:
+                        type: string
+                        description: Description of 3DS status
+                        example: MessageVersion=2.1.0,browser flow,3DS method not available,dynamic authentication,no cancel indicator,no status reason
+                      cardBinCountry:
+                        type: string
+                        description: Country in which card was issued. Two-letter country code compliant with ISO-3166
+                        example: PL
+                      firstTransactionId:
+                        type: string
+                        description: Identifier of the first of recurring payments or Card-on-File, granted by the payment organisation
+                        example: MCC0111LL1121
+              resultCode:
+                type: string
+                enum:
+                - AUT_ERROR_NO_AUTHORIZATION
+                - AUT_ERROR_ANTIFRAUD_DECLINED
+                - REG_ERROR_ANTIFRAUD_DECLINED
+                description: 'Optional informaction about transaction result code: <ul> <li><b>AUT_ERROR_NO_AUTHORIZATION</b> - authorization was not received, transaction cancelled.</li> <li><b>AUT_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at the authoriztion stage by the antifraud system.</li> <li><b>REG_ERROR_ANTIFRAUD_DECLINED</b> - transaction rejected at registration stage by antifraud system.</li> <li><b>REG_ERROR_AUTHENTICATION_REJECTED</b> - Authentication was rejected by a third-party service. <ul><li>For Visa Mobile payment method: Authentication failed in either the Visa Mobile or Issuer application.</li></ul></li> </ul>'
+                example: AUT_ERROR_NO_AUTHORIZATION
+    billingAddress:
+      type: object
+      properties:
+        street:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: Full street address, incl. apartment number.
+          example: Test Street
+        postalCode:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: Postal/ZIP code.
+          example: 01-000
+        city:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: City name.
+          example: Test City
+        state:
+          type: string
+          minLength: 1
+          maxLength: 3
+          description: Country principal subdivision like "state" or "province". If provided, must be a two-letter country code compliant with ISO-3166.
+          example: 30
+        countryCode:
+          type: string
+          minLength: 1
+          maxLength: 2
+          description: Two-letter country code compliant with ISO-3166.
+          example: PL
+    submerchant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: submerchant ID when payment is created by Payment Facilitator for Submerchant
+    blik:
+      type: object
+      properties:
+        transactions:
+          type: array
+          description: Array of order objects.
+          items:
+            type: object
+            properties:
+              payMethod:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    description: Payment method code.
+                    example: blik
+              paymentFlow:
+                type: string
+                description: Defines how payments are handled.
+                enum:
+                - BLIK_PBL
+                - BLIK_AUTHORIZATION_CODE
+                - BLIK_AUTHORIZATION_CODE_WITH_UID_TOKEN_REGISTERING
+                - BLIK_UID_TOKEN
+                - BLIK_AUTHORIZATION_CODE_WITH_PAYID_TOKEN_TYPE_O_REGISTERING
+                - BLIK_PAYID_TOKEN_TYPE_O
+              resultCode:
+                type: string
+                description: Transaction handling result code.
+              blik:
+                type: object
+                description: ''
+                properties:
+                  txRef:
+                    type: string
+                    description: The transaction identifier assigned by the BLIK system.
+                  extTxRef:
+                    type: string
+                    description: Transaction identifier assigned by PayU.
+    accountInformation:
+      type: object
+      description: Informations about cardholders account.
+      properties:
+        createDate:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date when the account has been created for the cardholder.
+          example: '2019-03-27T10:57:59.000+01:00'
+        suspiciousActivity:
+          type: boolean
+          description: Indicates whether merchant has experienced suspicious/fraudulent activity for this account.
+          example: false
+        deliveryAddressFirstUsedDate:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date when the shipping address used for this order was first used.
+          example: '2019-03-27T10:57:59.000+01:00'
+        deliveryAdressUsageIndicator:
+          type: string
+          enum:
+          - THIS_TRANSACTION
+          - LESS_THAN_30_DAYS
+          - 30_TO_60_DAYS
+          - MORE_THAN_60_DAYS
+          description: Indicates when this shipping address was first used.
+          example: THIS_TRANSACTION
+        pastOrdersYear:
+          type: integer
+          description: Orders created in merchant's system for this account in the past 12 months.
+          minimum: 1
+          maximum: 9999
+          example: 46
+        pastOrdersDay:
+          type: integer
+          description: Orders created in merchant's system for this account in the last 24 hours.
+          minimum: 1
+          maximum: 9999
+          example: 125
+        purchasesLastSixMonths:
+          type: integer
+          description: Fulfilled (successful) orders created in merchant's system for this account in the past 6 months.
+          minimum: 1
+          maximum: 9999
+          example: 12
+        changeDate:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date when account details were last changed.
+          example: '2019-03-27T10:57:59.000+01:00'
+        changeIndicator:
+          type: string
+          enum:
+          - THIS_TRANSACTION
+          - LESS_THAN_30_DAYS
+          - 30_TO_60_DAYS
+          - MORE_THAN_60_DAYS
+          description: Indicates time when account information was last changed.
+          example: THIS_TRANSACTION
+        passwordChanged:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date when account password was last changed.
+          example: '2019-03-27T10:57:59.000+01:00'
+        passwordChangeIndicator:
+          type: string
+          enum:
+          - NO_CHANGE
+          - THIS_TRANSACTION
+          - LESS_THAN_30_DAYS
+          - 30_TO_60_DAYS
+          - MORE_THAN_60_DAYS
+          description: Indicates whether and when the password was last changed.
+          example: NO_CHANGE
+        nameToRecipientMatch:
+          type: boolean
+          description: Indicates whether cardholder's name matches recipient's name.
+          example: true
+        addCardAttemptsDay:
+          type: string
+          description: Indicates attempts to add a card to cardholder's account in merchant's system within last 24 hours.
+          example: 3
+        authMethod:
+          type: string
+          enum:
+          - GUEST
+          - LOGIN
+          - FEDERATED_ID
+          - THIRD_PARTY
+          - ISSUER
+          - FIDO
+          description: Authentication method used to recognize cardholder.
+          example: GUEST
+        authDateTime:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date and time when authentication was performed.
+          example: '2019-03-27T10:57:59.000+01:00'
+        cardAddedDate:
+          type: string
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: Date when card account has been stored with merchant.
+          example: '2019-03-27T10:57:59.000+01:00'
+        cardAddedIndicator:
+          type: string
+          enum:
+          - GUEST
+          - THIS_TRANSACTION
+          - LESS_THAN_30_DAYS
+          - 30_TO_60_DAYS
+          - MORE_THAN_60_DAYS
+          description: Indicates if and when the card was stored with merchant.
+          example: THIS_TRANSACTION
+    credit:
+      type: object
+      description: Section containing credit data. This information is not required, but it is strongly recommended to include it. Otherwise the buyer will be prompted to provide missing data on provider page when payment by Installments or Pay later.
+      properties:
+        shoppingCarts:
+          $ref: '#/components/schemas/shoppingCart'
+        applicant:
+          type: object
+          description: Section containing data of person applying for a credit.
+          properties:
+            email:
+              type: string
+              description: Applicant's email address
+              example: test@test.com
+            phone:
+              type: string
+              description: Applicant's phone number
+              example: 123456789
+            firstName:
+              type: string
+              description: Applicant's first name
+              example: Joe
+            lastName:
+              type: string
+              description: Applicant's last name
+              example: Doe
+            language:
+              type: string
+              description: Language code, ISO-639-1 compliant. Denotes the language version of PayU hosted payment page and of e-mail messages sent from PayU to the payer.
+              example: pl
+            nin:
+              type: string
+              description: National Identification Number
+              example: 123456789
+            address:
+              type: object
+              description: Section containing data about applican's address.
+              properties:
+                street:
+                  type: string
+                  description: Street name, possibly including house and flat number.
+                  example: Test Street
+                streetNo:
+                  type: string
+                  description: Street number
+                  example: 123
+                flatNo:
+                  type: string
+                  description: Flat number
+                  example: 987
+                postalCode:
+                  type: string
+                  description: Postal Code
+                  example: 01-000
+                city:
+                  type: string
+                  description: City
+                  example: Test City
+                countryCode:
+                  type: string
+                  description: Two-letter country code compliant with ISO-3166.
+                  example: PL
+            additionalInfo:
+              type: object
+              description: Additional information about person applying for credit.
+              properties:
+                hasSuccessfullyFinishedOrderInShop:
+                  type: string
+                  description: Information whether there were previous, successfully completed orders for applicant.
+                  example: 'YES'
+        klarnaAttachment:
+          type: object
+          description: Extra merchant data mandatory for merchants operating in certain segments. You will find more information about this object and its parameters on **[Klarna Documentation Page](https://docs.klarna.com/klarna-payments/additional-resources/use-cases/extra-merchant-data/)**.
+          properties:
+            content_type:
+              type: string
+            body:
+              type: string
+    Partial:
+      type: object
+      description: ''
+      required:
+      - amount
+      - currencyCode
+      properties:
+        amount:
+          type: string
+          description: Amount you want to capture. Must be less than captured order amount. **Can be used only during partial capture**.
+          example: 900
+        currencyCode:
+          type: string
+          description: Currency of the order. **Can be used only during partial capture**
+          example: EUR
+    riskData:
+      type: object
+      description: Contains optional fields required for risk analysis purposes. **Required for BLIK with authorization code or token.**
+      required:
+      - browser
+      properties:
+        browser:
+          $ref: '#/components/schemas/browser'
+    sdk:
+      type: object
+      description: Required if 3DS 2 is to be natively supported in your mobile app. Content needs to be generated by a certified 3DS 2 SDK. This information is not required, but it is strongly recommended to include it when charging a stored card (multi-use token).
+      required:
+      - sdkReferenceNumber
+      - sdkMaxTimeout
+      - sdkAppID
+      - sdkEncData
+      - sdkTransID
+      - sdkEphemPubKey
+      properties:
+        sdkReferenceNumber:
+          type: string
+          example: DS_LOA_SDK_ADBV_739485_94783
+        sdkMaxTimeout:
+          type: string
+          description: Indicates the maximum amount of time (in minutes) for all exchanges. The field shall have value greater or equal to 05.
+          example: 30
+        sdkAppID:
+          type: string
+          example: 9063b12c-fcde-43c7-b28e-8d0af5520e8a
+        sdkEncData:
+          type: string
+          description: Data encrypted by the 3DS SDK.
+          example: 9063b12c-fcde-43c7-b28e-8d0af5520e8a
+        sdkTransID:
+          type: string
+          example: b60c9879-ac77-4918-a317-7b01c4317053/8Q==.
+        sdkEphemPubKey:
+          $ref: '#/components/schemas/sdkEphemPubKey'
+    clickToPay:
+      type: object
+      description: 'ClickToPay details. When this node is used, set `type` to `PBL` and `value` to `c`. Provide exactly one option: `visa` or `mastercard` (not both).'
+      oneOf:
+      - title: Visa
+        type: object
+        required:
+        - visa
+        properties:
+          visa:
+            $ref: '#/components/schemas/clickToPayVisa'
+      - title: Mastercard
+        type: object
+        required:
+        - mastercard
+        properties:
+          mastercard:
+            $ref: '#/components/schemas/clickToPayMastercard'
+    shoppingCart:
+      type: array
+      description: Section containing data of the ordered products. Section <credit.shoppingCarts> is an array of objects of type shoppingCart.
+      items:
+        type: object
+        properties:
+          shippingMethod:
+            $ref: '#/components/schemas/shippingMethod'
+          products:
+            type: array
+            description: Section containing data of the ordered products. Section <code>products</code> is an array of objects of type product.
+            required:
+            - name
+            - unitPrice
+            - quantity
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the product
+                unitPrice:
+                  type: string
+                  description: Unit price
+                quantity:
+                  type: string
+                  description: Quantity of
+                virtual:
+                  type: boolean
+                  description: Product type, which can be virtual or material.
+                listingDate:
+                  type: string
+                  format: '2019-03-27T10:57:59.000+01:00'
+                  description: Marketplace date from which the product (or offer) is available, ISO format applies.
+          extCustomerId:
+            type: string
+            description: Submerchant identifier. This field should be consistent with field extCustomerId in shoppingCarts section when order is placed in marketplace.
+    merchantRiskIndicator:
+      type: object
+      description: Set of fields helping to assess risk connected with the order itself (type of goods purchased, shipping method etc.).
+      properties:
+        orderType:
+          type: string
+          enum:
+          - PURCHASE
+          - ACC_FUNDING
+          - LOAN
+          example: LOAN
+        shipIndicator:
+          type: string
+          enum:
+          - BILLING_ADDRESS
+          - VERIFIED_ADDRESS
+          - OTHER_ADDRESS
+          - SHIP_TO_STORE
+          - DIGITAL_GOODS
+          - TICKETS
+          - NOT_SHIPPED
+          description: Indicates shipping method chosen for the order.
+          example: TICKETS
+        preOrdered:
+          type: boolean
+          description: Indicates order for merchandise with a future availability or release date.
+          example: false
+        preOrderedDate:
+          type: string
+          example: '2019-03-27T10:57:59.000+01:00'
+          format: '2019-03-27T10:57:59.000+01:00'
+          description: ISO format applies.
+        deliveryTimeFrame:
+          type: string
+          enum:
+          - ELECTRONIC
+          - SAME_DAY
+          - OVERNIGHT
+          - TWO_OR_MORE_DAYS
+          example: OVERNIGHT
+        reordered:
+          type: boolean
+          description: Indicates if the same purchase has been ordered again.
+          example: false
+        merchantFunds:
+          $ref: '#/components/schemas/merchantFunds'
+    settings:
+      type: object
+      properties:
+        cardInstallmentsOptions:
+          type: object
+          description: 'List of allowed installment numbers for any number of specific providers, eg. "OPTIMO": [1, 2, 3]. For merchants operating on the Romanian market (requires contact with a Payu representative first). Available providers: <ul><li>CARD_AVANTAJ</li><li>STAR_BT</li><li>UNICREDIT</li><li>BRD_INSTALLMENTS</li><li>RAIFFEISEN</li><li>GARANTI_RO</li><li>BCR_INSTALLMENTS</li><li>ALPHABANK_INSTALLMENTS</li><li>OPTIMO</li><li>CARD_EMAG</li></ul>'
+          additionalProperties:
+            type: array
+            example:
+            - 1
+            - 3
+            - 5
+            - 7
+            - 9
+            - 11
+            - 13
+    specificData:
+      type: array
+      description: Additional data for some Visa Checkout integrations.
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          value:
+            type: string
+    threeDsData:
+      type: object
+      description: Object containing result data from 3DS process.
+      required:
+      - status3Ds
+      - dsTransactionId
+      properties:
+        status3Ds:
+          type: enum
+          description: 3DS status. Following values are allowed to be used:<ul><li><b>Y</b> - successful 3DS2 authentication,</li><li><b>A</b> - 3DS2 authentication attempt.</li></ul>
+          enum:
+          - Y
+          - A
+          example: Y
+        status3DsDescription:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: Description related to 3DS result. Passing this parameter as a additional description with the MPI will allow better potential customer support from BOK.
+          example: Authentication successful
+        xid:
+          type: string
+          description: Unique identifier of 3DS transaction given by the shop. Field required within 3DS version 1 section. This field <b>should not</b> be sent when attempting 3DS2.x authentication. <ul><li><b>[1 .. 20] characters</b> - for value in plain text,</li><li><b>{28} characters</b> - for Base64encoded value,</li><li><b>{40} characters</b> - for HEXencoded value.</li></ul>
+        dsTransactionId:
+          type: string
+          description: Field required within 3DS2.x section. This field should not be sent when attempting 3DS version 1 authentication.
+          minLength: 1
+          maxLength: 36
+          example: 3b31b19d-1c06-4ea4-a85a-00af10c66588
+        eciCode:
+          type: enum
+          description: E-commerce Indicator / UCAF. Values can be passed with "0", e.g. "04", "05", etc. It should be passed always if the MPI provided this information.
+          enum:
+          - 5
+          - 6
+          - 7
+          - 2
+          - 1
+          - 0
+          example: 5
+        cavv:
+          type: string
+          description: 3DS cryptogram. It should be passed always if the MPI provided this information.
+          minLength: 1
+          maxLength: 200
+          example: AAABBBEAUAAAABgICABQAAAAAAA=
+        tavv:
+          type: string
+          description: Token Authentication Verification Value (TAVV) from external provider.
+          example: AgAAABBEAUAAAABg8CABQAAQEAAA=
+    exemption:
+      type: object
+      required:
+      - value
+      - rejectionHandling
+      description: Merchant's preference regarding SCA exemption to be used to exempt card payment from 3DS authentication. Exclusive with challengeRequested. Requires additional configuration to be enabled.
+      properties:
+        value:
+          type: string
+          description: Either LOW_RISK (also known as TRA - transaction risk analysis compliant with SCA requirements has been performed by the merchant) or LOW_VALUE (low value payment, up to 30 EUR or equivalent in other currency)
+          enum:
+          - LOW_RISK
+          - LOW_VALUE
+          example: LOW_RISK
+        rejectionHandling:
+          type: string
+          description: Either PERFORM_AUTHENTICATION (PayU will return response with WARNING_CONTINUE_3DS and redirection URL code if exemption cannot be applied) or DECLINE (PayU will decline the payment if exemption cannot be applied - error message will be returned synchronously in OrderCreateResponse)
+          enum:
+          - PERFORM_AUTHENTICATION
+          - DECLINE
+          example: PERFORM_AUTHENTICATION
+        riskScore:
+          type: string
+          maxLength: 128
+          description: Risk score assigned by merchant's antifraud tool. For informative purposes only.
+          example: 120 - low risk score calculated in Merchants antifraud tool
+    cardholder:
+      type: object
+      description: Describes cardholder's account data in merchant's possession, including details of account run for the cardholder in merchant's system **You have to use ISO/IEC 8859-1 encoding**.</br></br>You can use this field for providing cardholder name for AFT card authorization (Account Funding Transaction) instead of using buyer's first and last name.
+      properties:
+        name:
+          type: string
+          description: Cardholder name and surname.
+          example: John Doe
+        accountInformation:
+          $ref: '#/components/schemas/accountInformation'
+        billingAddress:
+          $ref: '#/components/schemas/billingAddress'
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    merchantFunds:
+      type: object
+      description: Indicates whether merchant's own funding (e.g. a gift card) has been used to partially pay for the order. Sum of amounts provided here and of <totalAmount> field denote the real value of order in merchant's system.
+      required:
+      - amount
+      - currencyCode
+      properties:
+        amount:
+          type: string
+          description: In pennies.
+          example: 100
+        currencyCode:
+          type: string
+          description: Currency code compliant with ISO 4217.
+          example: PLN
+    mcpData:
+      type: object
+      description: Section allows to pass currency conversion details if you chose to use Multi-Currency Pricing.
+      required:
+      - mcpCurrency
+      - mcpAmount
+      - mcpRate
+      - mcpFxTableId
+      - mcpPartnerId
+      properties:
+        mcpCurrency:
+          type: string
+          description: termCurrency from the rate table.
+          example: EUR
+        mcpAmount:
+          type: string
+          description: baseCurrency amount converted to termCurrency.
+          example: 10000
+        mcpRate:
+          type: string
+          description: Applied conversion rate.
+          example: 4.2556
+        mcpFxTableId:
+          type: string
+          description: Applied FX rate table id.
+          example: 132331
+        mcpPartnerId:
+          type: string
+          description: Id provided by PayU.
+          example: 6283a549-8b1a-430d-8a62-eea64327440e
+    shippingMethods:
+      type: array
+      description: Array of objects related to shipping method.
+      items:
+        type: object
+        required:
+        - country
+        - price
+        - name
+        properties:
+          country:
+            type: string
+            description: Two-letter shipping country code compliant with <b><a href="https://www.iso.org/iso-3166-country-codes.html">ISO-3166</a></b>.
+            example: PL
+          price:
+            type: number
+            description: Shipping price.
+            example: 250
+          name:
+            type: string
+            description: Shipping method name
+            example: Postal package
+    clickToPayMastercard:
+      type: object
+      title: mastercard
+      description: Click to Pay data for Mastercard.
+      required:
+      - srcCorrelationId
+      - srcDigitalCardId
+      properties:
+        srcCorrelationId:
+          type: string
+          description: A transaction identifier.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        srcDigitalCardId:
+          type: string
+          description: A srcDigitalCardId is a unique identifier that represents the token associated with a card enrolled in Mastercard Checkout Solutions (MCS)
+          example: DCID-111
+    buyer:
+      type: object
+      description: Section containing buyer data.
+      properties:
+        extCustomerId:
+          type: string
+          description: ID of the customer used in merchant system
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          description: Buyer's email address. **Required for Installments (PL), Pay Later (PL), Pay Later with Twisto (CZ), 3DS 2 authentication.**
+          example: email@email.com
+          minLength: 1
+          maxLength: 255
+        phone:
+          type: string
+          description: Buyer's telephone number. Please use +[country code] [number] format. **Required for Pay Later with Twisto (CZ), 3DS 2 authentication.**
+          example: +48 225108001
+          minLength: 1
+          maxLength: 255
+        firstName:
+          type: string
+          description: Buyer's first name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)** </br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.
+          example: John
+          minLength: 1
+          maxLength: 100
+        lastName:
+          type: string
+          description: Buyer's last name. </br>**Required for Pay Later with Twisto (CZ) and AFT card authorization (Account Funding Transaction)**</br></br>**In case of AFT card authorization you have to use ISO/IEC 8859-1 encoding**.
+          example: Doe
+          minLength: 1
+          maxLength: 100
+        nin:
+          type: string
+          description: National Identification Number
+          example: 123456789
+        language:
+          type: string
+          description: Language code, ISO-639-1 compliant. Denotes the language version of PayU hosted payment page and of e-mail messages sent from PayU to the payer.
+          example: pl
+        birthDate:
+          type: string
+          description: Buyer's date of birth. **Required for AFT card authorization (Account Funding Transaction)**.
+          format: ISO 8601
+          example: '2006-12-03T00:00:00.000+01:00'
+        delivery:
+          description: '**Section recommended for the 3DS 2 authentication.**'
+          $ref: '#/components/schemas/delivery'
+    payMethods:
+      type: object
+      description: Section allows to directly invoke payment method. Section <code>payMethods</code> is one object of <code>payMethod</code> type.
+      properties:
+        payMethod:
+          $ref: '#/components/schemas/payMethod'
+    Full:
+      type: 'null'
+      description: ''
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic

@@ -1,0 +1,904 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize PF-Submerchant-Registration API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: PF-Submerchant-Registration
+  x-displayName: Payment Facilitator Submerchant Registration
+  description: Payment Facilitator (PF) is an advanced form of partnership where PayU cedes much of its own responsibilities, like e.g. Know Your Customer (KYC) and verification, customer support and settlement (payouts) to the PF. Below are the endpoints for registering and handling PF submerchants.
+paths:
+  /api/v2_1/firms/{firmPublicId}/submerchants:
+    post:
+      tags:
+      - PF-Submerchant-Registration
+      summary: Create a Submerchant
+      operationId: create-a-submerchant
+      parameters:
+      - name: firmPublicId
+        in: path
+        description: Firm id in alphanumeric format, visible in the merchant panel.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              discriminator:
+                propertyName: payTypeCategories
+                mapping:
+                  Card: '#/components/schemas/Card'
+                  Card, PBL: '#/components/schemas/CardPbl'
+                  PBL: '#/components/schemas/Pbl'
+              anyOf:
+              - $ref: '#/components/schemas/Card'
+              - $ref: '#/components/schemas/CardPbl'
+              - $ref: '#/components/schemas/Pbl'
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Id assigned by PayU and required in OrderCreateRequest.
+                  externalId:
+                    type: string
+                    description: Id assigned by the Payment Facilitator.
+                  status:
+                    type: string
+                    enum:
+                    - NOT_ACTIVE
+                    - ACTIVE
+                    - BLOCKED
+                    description: Submerchant status.
+                  lastUpdated:
+                    type: string
+                    description: Datetime of resource creation or last update (if applicable) in ISO 8601 format.
+                    format: YYYY-MM-DDThh:mm:ss±hh:mm
+                  notifyUrl:
+                    type: string
+                    description: Notifications regarding submerchant status change will be sent to address provided in this field.
+                  legalName:
+                    type: string
+                    description: Full legal (registration) name.
+                  dbaName:
+                    type: string
+                    description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+                  address:
+                    type: object
+                    description: Legal address object.
+                    properties:
+                      street:
+                        type: string
+                        description: Legal address street including house/apartment number (if applicable).
+                      city:
+                        type: string
+                        description: Legal address city.
+                      postalCode:
+                        type: string
+                        description: Legal address postal code.
+                      countryCode:
+                        type: string
+                        description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+                  phone:
+                    type: string
+                    description: Contact phone number.
+                  websiteUrl:
+                    type: string
+                    description: A valid URL address of merchant's website.
+                  mcc:
+                    type: number
+                    description: Accurate Merchant Category Code established during KYC process by the PF.
+                  riskClass:
+                    type: string
+                    description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+                    enum:
+                    - LOW
+                    - NORMAL
+                    - HIGH
+                  taxId:
+                    type: string
+                    description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+                  representatives:
+                    type: array
+                    description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Representative's name.
+                        phone:
+                          type: string
+                          description: Representative's phone number.
+                  legalForm:
+                    type: string
+                    description: Dictionary value - legal entity type. Dictionaries for specific origin are available here.
+                  agreementDate:
+                    type: string
+                    description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+                    format: yyyy-mm-dd
+                  payTypeCategories:
+                    type: string
+                    description: 'Array of enumerated values: CARD, PBL. Minimum one is required.'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/firms/{firmPublicId}/submerchants/{submerchantId}:
+    put:
+      tags:
+      - PF-Submerchant-Registration
+      summary: Update Submerchant Data
+      operationId: update-submerchants-data
+      parameters:
+      - name: firmPublicId
+        in: path
+        description: Firm id in alphanumeric format, visible in the merchant panel.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: submerchantId
+        in: path
+        description: Id returned by PayU upon submerchant registration.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              discriminator:
+                propertyName: payTypeCategories
+                mapping:
+                  Card: '#/components/schemas/Card'
+                  Card, PBL: '#/components/schemas/CardPbl'
+                  PBL: '#/components/schemas/Pbl'
+              anyOf:
+              - $ref: '#/components/schemas/Card'
+              - $ref: '#/components/schemas/CardPbl'
+              - $ref: '#/components/schemas/Pbl'
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Id assigned by PayU and required in OrderCreateRequest.
+                  externalId:
+                    type: string
+                    description: Id assigned by the Payment Facilitator.
+                  status:
+                    type: string
+                    enum:
+                    - NOT_ACTIVE
+                    - ACTIVE
+                    - BLOCKED
+                    description: Submerchant status.
+                  lastUpdated:
+                    type: string
+                    description: Datetime of resource creation or last update (if applicable) in ISO 8601 format.
+                    format: YYYY-MM-DDThh:mm:ss±hh:mm
+                  notifyUrl:
+                    type: string
+                    description: Notifications regarding submerchant status change will be sent to address provided in this field.
+                  legalName:
+                    type: string
+                    description: Full legal (registration) name.
+                  dbaName:
+                    type: string
+                    description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+                  address:
+                    type: object
+                    description: Legal address object.
+                    properties:
+                      street:
+                        type: string
+                        description: Legal address street including house/apartment number (if applicable).
+                      city:
+                        type: string
+                        description: Legal address city.
+                      postalCode:
+                        type: string
+                        description: Legal address postal code.
+                      countryCode:
+                        type: string
+                        description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+                  phone:
+                    type: string
+                    description: Contact phone number.
+                  websiteUrl:
+                    type: string
+                    description: A valid URL address of merchant's website.
+                  mcc:
+                    type: number
+                    description: Accurate Merchant Category Code established during KYC process by the PF.
+                  riskClass:
+                    type: string
+                    description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+                    enum:
+                    - LOW
+                    - NORMAL
+                    - HIGH
+                  taxId:
+                    type: string
+                    description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+                  representatives:
+                    type: array
+                    description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Representative's name.
+                        phone:
+                          type: string
+                          description: Representative's phone number.
+                  legalForm:
+                    type: string
+                    description: Dictionary value - legal entity type. Dictionaries for specific origin are available here.
+                  agreementDate:
+                    type: string
+                    description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+                    format: yyyy-mm-dd
+                  payTypeCategories:
+                    type: string
+                    description: 'Array of enumerated values: CARD, PBL. Minimum one is required.'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+    get:
+      tags:
+      - PF-Submerchant-Registration
+      summary: Retrieve Submerchant Data
+      description: ''
+      operationId: retrieve-submerchant-data
+      parameters:
+      - name: firmPublicId
+        in: path
+        description: Firm id in alphanumeric format, visible in the merchant panel.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: submerchantId
+        in: path
+        description: Id returned by PayU upon submerchant registration.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Id assigned by PayU and required in OrderCreateRequest.
+                  externalId:
+                    type: string
+                    description: Id assigned by the Payment Facilitator.
+                  status:
+                    type: string
+                    enum:
+                    - NOT_ACTIVE
+                    - ACTIVE
+                    - BLOCKED
+                    description: Submerchant status.
+                  lastUpdated:
+                    type: string
+                    description: Datetime of resource creation or last update (if applicable) in ISO 8601 format.
+                    format: YYYY-MM-DDThh:mm:ss±hh:mm
+                  notifyUrl:
+                    type: string
+                    description: Notifications regarding submerchant status change will be sent to address provided in this field.
+                  legalName:
+                    type: string
+                    description: Full legal (registration) name.
+                  dbaName:
+                    type: string
+                    description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+                  address:
+                    type: object
+                    description: Legal address object.
+                    properties:
+                      street:
+                        type: string
+                        description: Legal address street including house/apartment number (if applicable).
+                      city:
+                        type: string
+                        description: Legal address city.
+                      postalCode:
+                        type: string
+                        description: Legal address postal code.
+                      countryCode:
+                        type: string
+                        description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+                  phone:
+                    type: string
+                    description: Contact phone number.
+                  websiteUrl:
+                    type: string
+                    description: A valid URL address of merchant's website.
+                  mcc:
+                    type: number
+                    description: Accurate Merchant Category Code established during KYC process by the PF.
+                  riskClass:
+                    type: string
+                    description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+                    enum:
+                    - LOW
+                    - NORMAL
+                    - HIGH
+                  taxId:
+                    type: string
+                    description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+                  representatives:
+                    type: array
+                    description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Representative's name.
+                        phone:
+                          type: string
+                          description: Representative's phone number.
+                  legalForm:
+                    type: string
+                    description: Dictionary value - legal entity type. Dictionaries for specific origin are available here.
+                  agreementDate:
+                    type: string
+                    description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+                    format: yyyy-mm-dd
+                  payTypeCategories:
+                    type: string
+                    description: 'Array of enumerated values: CARD, PBL. Minimum one is required.'
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+components:
+  schemas:
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    CardPbl:
+      type: object
+      title: Card, PBL
+      required:
+      - notifyUrl
+      - externalId
+      - legalName
+      - dbaName
+      - address
+      - phone
+      - websiteUrl
+      - mcc
+      - riskClass
+      - taxId
+      - representatives
+      - legalForm
+      - agreementDate
+      properties:
+        payTypeCategories:
+          type: array
+          description: 'Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.'
+          items:
+            type: string
+          example:
+          - Card
+          - PBL
+        externalId:
+          type: string
+          description: Id assigned by the Payment Facilitator.
+        notifyUrl:
+          type: string
+          description: Notifications regarding submerchant status change will be sent to address provided in this field.
+        legalName:
+          type: string
+          description: Full legal (registration) name.
+        dbaName:
+          type: string
+          description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+        address:
+          type: object
+          required:
+          - street
+          - postalCode
+          - city
+          - countryCode
+          description: Legal address object.
+          properties:
+            street:
+              type: string
+              description: Legal address street including house/apartment number (if applicable).
+            city:
+              type: string
+              description: Legal address city.
+            postalCode:
+              type: string
+              description: Legal address postal code.
+            countryCode:
+              type: string
+              description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+        phone:
+          type: string
+          description: Contact phone number.
+        websiteUrl:
+          type: string
+          description: A valid URL address of merchant's website.
+        mcc:
+          type: number
+          description: Accurate Merchant Category Code established during KYC process by the PF.
+        riskClass:
+          type: string
+          description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+          enum:
+          - LOW
+          - NORMAL
+          - HIGH
+        representatives:
+          type: array
+          description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+          items:
+            type: object
+            required:
+            - name
+            - phone
+            properties:
+              name:
+                type: string
+                description: Representative's name.
+              phone:
+                type: string
+                description: Representative's phone number.
+        legalForm:
+          type: string
+          enum:
+          - FU
+          - FZ
+          - IB
+          - JST
+          - KOP
+          - PO
+          - PP
+          - PPZ
+          - PRPA
+          - SA
+          - SC
+          - SD
+          - SIK
+          - SJ
+          - SK
+          - SO
+          - SP
+          - SPOL
+          - ST
+          description: Dictionary value - legal entity type. Check dictionaries for <a href="/europe/docs/collaboration/referral-program/#firm-types">specific origin</a>.
+        taxId:
+          type: string
+          description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+        agreementDate:
+          type: string
+          description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+          format: yyyy-mm-dd
+    Card:
+      type: object
+      required:
+      - notifyUrl
+      - externalId
+      - legalName
+      - dbaName
+      - address
+      - phone
+      - websiteUrl
+      - mcc
+      - riskClass
+      - taxId
+      - representatives
+      - legalForm
+      - agreementDate
+      properties:
+        payTypeCategories:
+          type: array
+          description: 'Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.'
+          items:
+            type: string
+          example:
+          - Card
+        externalId:
+          type: string
+          description: Id assigned by the Payment Facilitator.
+        notifyUrl:
+          type: string
+          description: Notifications regarding submerchant status change will be sent to address provided in this field.
+        legalName:
+          type: string
+          description: Full legal (registration) name.
+        dbaName:
+          type: string
+          description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+        address:
+          type: object
+          required:
+          - street
+          - postalCode
+          - city
+          - countryCode
+          description: Legal address object.
+          properties:
+            street:
+              type: string
+              description: Legal address street including house/apartment number (if applicable).
+            city:
+              type: string
+              description: Legal address city.
+            postalCode:
+              type: string
+              description: Legal address postal code.
+            countryCode:
+              type: string
+              description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+        phone:
+          type: string
+          description: Contact phone number.
+        websiteUrl:
+          type: string
+          description: A valid URL address of merchant's website.
+        mcc:
+          type: number
+          description: Accurate Merchant Category Code established during KYC process by the PF.
+        riskClass:
+          type: string
+          description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+          enum:
+          - LOW
+          - NORMAL
+          - HIGH
+        representatives:
+          type: array
+          description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+          items:
+            type: object
+            required:
+            - name
+            - phone
+            properties:
+              name:
+                type: string
+                description: Representative's name.
+              phone:
+                type: string
+                description: Representative's phone number.
+        legalForm:
+          type: string
+          enum:
+          - FU
+          - FZ
+          - IB
+          - JST
+          - KOP
+          - PO
+          - PP
+          - PPZ
+          - PRPA
+          - SA
+          - SC
+          - SD
+          - SIK
+          - SJ
+          - SK
+          - SO
+          - SP
+          - SPOL
+          - ST
+          description: Dictionary value - legal entity type. Check dictionaries for <a href="/europe/docs/collaboration/referral-program/#firm-types">specific origin</a>.
+        taxId:
+          type: string
+          description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+        agreementDate:
+          type: string
+          description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+          format: yyyy-mm-dd
+    Pbl:
+      type: object
+      title: PBL
+      required:
+      - notifyUrl
+      - externalId
+      - legalName
+      - dbaName
+      - address
+      - websiteUrl
+      - mcc
+      - taxId
+      properties:
+        payTypeCategories:
+          type: array
+          description: 'Array of enumerated values: `Card`, `PBL`. Both can be used at the same time - minimum one is required.'
+          items:
+            type: string
+          example:
+          - PBL
+        externalId:
+          type: string
+          description: Id assigned by the Payment Facilitator.
+        notifyUrl:
+          type: string
+          description: Notifications regarding submerchant status change will be sent to address provided in this field.
+        legalName:
+          type: string
+          description: Full legal (registration) name.
+        dbaName:
+          type: string
+          description: '"Doing business as" name, usually simplified website address which can be recognized by customer (e.g. when displayed on card statement).'
+        address:
+          type: object
+          required:
+          - street
+          - postalCode
+          - city
+          - countryCode
+          description: Legal address object.
+          properties:
+            street:
+              type: string
+              description: Legal address street including house/apartment number (if applicable).
+            city:
+              type: string
+              description: Legal address city.
+            postalCode:
+              type: string
+              description: Legal address postal code.
+            countryCode:
+              type: string
+              description: Legal address country code. Must be a valid ISO 3166-1 two-letter code.
+        phone:
+          type: string
+          description: Contact phone number.
+        websiteUrl:
+          type: string
+          description: A valid URL address of merchant's website.
+        mcc:
+          type: number
+          description: Accurate Merchant Category Code established during KYC process by the PF.
+        riskClass:
+          type: string
+          description: Risk class assigned by Payment Facilitator (basing on requirements provided by PayU).
+          enum:
+          - LOW
+          - NORMAL
+          - HIGH
+        representatives:
+          type: array
+          description: Array of either principals or enterprise owners (depends on legal form). Minimum one is required.
+          items:
+            type: object
+            required:
+            - name
+            - phone
+            properties:
+              name:
+                type: string
+                description: Representative's name.
+              phone:
+                type: string
+                description: Representative's phone number.
+        legalForm:
+          type: string
+          enum:
+          - FU
+          - FZ
+          - IB
+          - JST
+          - KOP
+          - PO
+          - PP
+          - PPZ
+          - PRPA
+          - SA
+          - SC
+          - SD
+          - SIK
+          - SJ
+          - SK
+          - SO
+          - SP
+          - SPOL
+          - ST
+          description: Dictionary value - legal entity type. Check dictionaries for <a href="/europe/docs/collaboration/referral-program/#firm-types">specific origin</a>.
+        taxId:
+          type: string
+          description: Tax identification (e.g. NIP in Poland) or business identification (e.g. IČ in Czechia).
+        agreementDate:
+          type: string
+          description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
+          format: yyyy-mm-dd
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic

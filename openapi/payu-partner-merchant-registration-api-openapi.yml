@@ -1,0 +1,833 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize Partner-Merchant-Registration API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: Partner-Merchant-Registration
+  x-displayName: Partner Merchant Registration
+  description: Below are the endpoints that enable you to create the necessary entities (Firm, Url, Shop, POS) for your partner.
+paths:
+  /api/v2_1/firms:
+    post:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Create a Firm
+      description: Create a Firm entity for your partner.
+      operationId: create-a-firm
+      security:
+      - Bearer:
+        - client_credentials
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=client_credentials</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - type
+              - taxId
+              - taxIdType
+              - cin
+              - bankAccount
+              - partnerId
+              - businessArea
+              - users
+              - representatives
+              - contactData
+              - address
+              properties:
+                name:
+                  type: string
+                  description: Full legal name.
+                  example: Test sp. z o.o.
+                type:
+                  type: string
+                  description: Dictionary value - legal entity type. Dictionaries for specific origin are available here. For a firm which <code>address.country</code> code is not equal to <code>businessArea.origin</code> please use <b>FZ</b> type. <b>Providing accurate type speeds up merchant verification.</b>
+                  example: SO
+                taxId:
+                  type: string
+                  description: Tax identification.
+                  example: '3771910486'
+                taxIdType:
+                  type: string
+                  description: Type of tax identification.
+                  enum:
+                  - NIP
+                  - VAT_EU
+                  - TAX_ID
+                  example: NIP
+                cin:
+                  type: string
+                  description: Business identification. IČ (CZ) or REGON (PL).
+                  example: '138237420'
+                bankAccount:
+                  type: string
+                  description: Primary bank account to receive payouts for payments. Will be inherited by all <b>shops</b> created for this firm. Must be a valid IBAN number in case of firms with <b>PL</b> origin. <b>Different bank account maybe defined at shop level manually, via PayU merchant panel.</b>
+                  format: IBAN
+                  example: PL92906300080597567560803897
+                partnerId:
+                  type: string
+                  description: Your partner id.
+                  example: egmcvdo5
+                contactLanguage:
+                  type: string
+                  description: Preferred language for communication.
+                  enum:
+                  - EN
+                  - PL
+                  - CS
+                  - RO
+                  example: PL
+                businessArea:
+                  type: object
+                  required:
+                  - origin
+                  description: Business area of the registered firm.
+                  properties:
+                    origin:
+                      type: string
+                      description: 'Denotes firm origin and applies validation and requirements for this origin. Currently only two values are available: <b>CZ</b> and <b>PL</b>. <b>It is still possible to register a firm which is incorporated outside of Czechia or Poland</b>.'
+                      example: PL
+                users:
+                  type: array
+                  description: Array of PayU panel users. At least 1 must be provided.
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - surname
+                    - email
+                    - role
+                    properties:
+                      name:
+                        type: string
+                        description: User's first name.
+                        example: Jan
+                      surname:
+                        type: string
+                        description: User's last name.
+                        example: Nowak
+                      email:
+                        type: string
+                        description: User's email.
+                        example: jan.nowak@testowa.pl
+                      phone:
+                        type: string
+                        description: User's phone number.
+                        example: 123123123
+                      role:
+                        type: string
+                        description: User's role.
+                        enum:
+                        - MANAGER
+                        - USER
+                        example: MANAGER
+                representatives:
+                  type: array
+                  description: Array of firm legal representatives. At least 1 must be provided.
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - surname
+                    - countryCode
+                    - birthCountryCode
+                    properties:
+                      name:
+                        type: string
+                        description: Representative's first name.
+                        example: Jan
+                      surname:
+                        type: string
+                        description: Representative's last name.
+                        example: Nowak
+                      nin:
+                        type: string
+                        description: Representative's national identity number (PESEL). <b>Required only for Polish citizens</b>
+                        example: 80010104578
+                      countryCode:
+                        type: string
+                        description: Representative's citizenship. Must be a valid ISO 3166-1 two-letter code.
+                        example: PL
+                      birthDate:
+                        type: string
+                        format: RRRR-MM-DD
+                        description: Representative's date of birth. <b>Required only for non-Polish citizens</b>
+                        example: '2000-01-01'
+                      birthCountryCode:
+                        type: string
+                        description: Country code of representative's birth country. Must be a valid ISO 3166-1 two-letter code.
+                        example: pl
+                contactData:
+                  type: object
+                  description: Object containing firm's contact details.
+                  required:
+                  - phone
+                  - email
+                  properties:
+                    phone:
+                      type: string
+                      description: Firm's contact phone number.
+                      example: 123123123
+                    email:
+                      type: string
+                      description: Firm's contact email address.
+                      example: biuro@testowa.pl
+                technicalContactData:
+                  type: object
+                  description: Object containing firm's technical contact details (e.g. to the developer responsible for integration with PayU).
+                  required: []
+                address:
+                  type: object
+                  description: Firm's registration address.
+                  required:
+                  - street
+                  - houseNo
+                  - apartmentNo
+                  - postalCode
+                  - city
+                  - countryCode
+                  properties:
+                    street:
+                      type: string
+                      description: Firm's registration address street.
+                      example: Grunwaldzka
+                    houseNo:
+                      type: string
+                      description: Firm's registration address house number.
+                      example: 186
+                    apartmentNo:
+                      type: string
+                      description: Firm's registration address apartment number.
+                      example: 1
+                    postalCode:
+                      type: string
+                      description: Firm's registration address postal code.
+                      example: 61-166
+                    city:
+                      type: string
+                      description: Firm's registration address city.
+                      example: Poznań
+                    countryCode:
+                      type: string
+                      description: Firm's registration address country code. Must be a valid ISO 3166-1 two-letter code.
+                      example: PL
+                correspondenceAddress:
+                  type: object
+                  description: Firm's correspondence address (<b>if other than registration address</b>). This object the same fields as address.
+                  required:
+                  - street
+                  - houseNo
+                  - apartmentNo
+                  - postalCode
+                  - city
+                  - countryCode
+                  properties:
+                    street:
+                      type: string
+                      description: Firm's registration address street.
+                      example: Grunwaldzka
+                    houseNo:
+                      type: string
+                      description: Firm's registration address house number.
+                      example: 186
+                    apartmentNo:
+                      type: string
+                      description: Firm's registration address apartment number.
+                      example: 1
+                    postalCode:
+                      type: string
+                      description: Firm's registration address postal code.
+                      example: 61-166
+                    city:
+                      type: string
+                      description: Firm's registration address city.
+                      example: Poznań
+                    countryCode:
+                      type: string
+                      description: Firm's registration address country code. Must be a valid ISO 3166-1 two-letter code.
+                      example: PL
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  firmId:
+                    type: string
+                    description: Identifier that needs to be stored in your system and is used to create further entities for that firm.
+                    example: KzXy4ZzD
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/firms/{firmId}/urls:
+    post:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Create a URL for the Partner's Firm
+      description: Create a URL for the specified `firmId`.
+      operationId: create-a-url-for-the-partners-firm
+      security:
+      - Bearer:
+        - partner
+      parameters:
+      - name: firmId
+        in: path
+        example: KzXy4ZzD
+        description: Firm identifier retrieved after firm creation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=partner</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - value
+              - services
+              properties:
+                value:
+                  type: string
+                  description: URL address.
+                  example: http://www.test-url.com
+                mcc:
+                  type: string
+                  description: Merchant Category Code (value is validated). Data type
+                  example: '0742'
+                services:
+                  type: array
+                  description: Array of service types.
+                  items:
+                    type: object
+                    required:
+                    - type
+                    properties:
+                      type:
+                        type: string
+                        description: 'Dictionary value:<ul> <li><b>TRANSFERS</b> - online transfers ("pay-by-links" and standard bank transfers, incl. Blik),</li> <li><b>CARD</b> - cards (Visa, Mastercard) and digital wallets (Apple Pay, Google Pay),</li> <li><b>INSTALLMENTS</b> - online installments,</li> <li><b>DELAYED_PAYMENTS</b> - "pay later" methods.</li></ul>
+
+                          '
+                        enum:
+                        - TRANSFERS
+                        - CARD
+                        - INSTALLMENTS
+                        - DELAYED_PAYMENTS
+                        example: TRANSFERS
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  urlId:
+                    type: string
+                    description: urlId that needs to be stored in your system can be used to create shop.
+                    example: PItR5x0v
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/firms{firmId}/shops:
+    post:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Create a Shop for the Partner
+      description: Create a Shop for the specified `firmId`.
+      operationId: create-a-shop-for-the-partner
+      security:
+      - Bearer:
+        - partner
+      parameters:
+      - name: firmId
+        in: path
+        example: KzXy4ZzD
+        description: Firm identifier retrieved after firm creation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=partner</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - currencyCode
+              - urlId
+              properties:
+                name:
+                  type: string
+                  description: Shop name - will be visible in the merchant panel.
+                  example: Shop name
+                description:
+                  type: string
+                  description: Shop description - more detailed info, visible in the merchant panel.
+                  example: Shop description
+                currencyCode:
+                  type: string
+                  description: Must be a three-letter ISO 4217 currency code. Please contact your key account manager to get more information about available currencies.
+                  example: EUR
+                urlId:
+                  type: string
+                  description: Reference to previously created <b>URL</b>.
+                  example: PItR5x0v
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shopId:
+                    type: string
+                    description: Identifier that needs to be stored in merchant's system and is used to create POS.
+                    example: ycmGyfCv
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/shops/{shopId}/poses:
+    post:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Create POS for Partner
+      description: Create a POS, for your partner, for the specified `shopId`.
+      operationId: create-pos-for-partner
+      security:
+      - Bearer:
+        - partner
+      parameters:
+      - name: shopId
+        in: path
+        example: Shop identifier retrieved after shop creation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=partner</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - type
+              properties:
+                name:
+                  type: string
+                  description: Name of the created POS.
+                  example: Test POS
+                type:
+                  type: string
+                  description: Type of the created POS.
+                  example: REST
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posId:
+                    type: string
+                    description: Identifier of the created POS.
+                    example: JyoMIVTY
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/poses/{posId}:
+    get:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Retrieve Partner's POS Data
+      description: Retrieve data of the POS with specified `posId`.
+      operationId: retrieve-partners-pos-data
+      security:
+      - Bearer:
+        - partner
+      parameters:
+      - name: posId
+        in: path
+        example: POS identifier retrieved after POS creation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=partner</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posId:
+                    type: string
+                    description: Public POS ID.
+                    example: JyoMIVTY
+                  type:
+                    type: string
+                    description: POS type (determines API that can be used).
+                    example: REST
+                  name:
+                    type: string
+                    description: POS name.
+                    example: Test POS
+                  encoding:
+                    type: string
+                    description: Determines encoding used by PayU system to read API requests. Always <b>UTF-8</b> for <b>REST</b> type.
+                    example: UTF-8
+                  authorization:
+                    type: object
+                    description: Object with authorization details.
+                    properties:
+                      standard:
+                        type: object
+                        properties:
+                          merchantPosId:
+                            type: string
+                            description: POS identifier used for API calls. It has the same value as the `client_id` used in the OAuth calls.
+                            example: '385234'
+                          key:
+                            type: string
+                            description: Has the same value as the "`client_secret` used to obtain OAuth access tokens for REST API calls.
+                            example: 9c0041e05fdee99749de4c2d2ce4c66e"
+                          secondKey:
+                            type: string
+                            description: The second API key is utilized for signing notifications sent by PayU, as well as for verifying the notification signature provided by PayU. Additionally, it is used for basic authorization when fetching statement files via the API.
+                            example: f096a39d78fbe03b8d23dde43b728cfd
+                          authKey:
+                            type: string
+                            description: Not required for REST API.
+                            example: uHcZ9Ly
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  /api/v2_1/firms/{posId}/users:
+    post:
+      tags:
+      - Partner-Merchant-Registration
+      summary: Create a User
+      description: Create an additional User for your partner.
+      operationId: create-a-user
+      security:
+      - Bearer:
+        - partner
+      parameters:
+      - name: firmId
+        in: path
+        example: KzXy4ZzD
+        description: Firm identifier retrieved after firm creation.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      - name: Content-Type
+        in: header
+        description: Content type
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: application/json
+      - name: Authorization
+        in: header
+        description: Auth token with <code>grant_type=partner</code>.
+        required: true
+        schema:
+          type: string
+        style: simple
+        example: Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: object
+                  required:
+                  - name
+                  - surname
+                  - email
+                  - role
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      description: First name of the new user.
+                      example: Joe
+                    surname:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      description: Last name of the new user.
+                      example: Doe
+                    email:
+                      type: string
+                      minLength: 1
+                      maxLength: 128
+                      description: Email address of the new user.
+                      example: joe.doe@test.com
+                    phone:
+                      type: string
+                      minLength: 3
+                      maxLength: 25
+                      description: Phone number of the new user.
+                    role:
+                      type: string
+                      enum:
+                      - manager
+                      - user
+                      description: Role specified for the new user.
+                      example: manager
+      responses:
+        '201':
+          x-summary: Created
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    description: New user identifier.
+                    example: 2e629a11-8add-49c5-bf27-a7f684721b86
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+components:
+  schemas:
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic

@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  version: 2.1.0
+  title: PayU GPO Europe REST Authorize API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://poland.payu.com/wp-content/themes/global-website/assets/src/images/payu-logo.svg
+  description: '# Overview
+
+
+    This reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you''re running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.
+
+
+    Our API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.
+
+
+    For more details on the integration, please refer to the official <a href="/europe/docs/">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.
+
+
+    ## Testing
+
+
+    ### Production Environment
+
+
+    For a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.
+
+
+    **Public Test POS (point of sale)**
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           145227 |
+
+    | OAuth protocol - client_id     |                           145227 |
+
+    | Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |
+
+    | OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |
+
+
+    ### Sandbox Environment
+
+
+    Sandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.
+
+
+    **Public Test POS (Point of Sale)**
+
+
+    Although it is best to <a href="https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/" target="_blank">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:
+
+
+    | Key name                       |                            Value |
+
+    | ------------------------------ | -------------------------------: |
+
+    | POS ID (pos_id)                |                           300746 |
+
+    | OAuth protocol - client_id     |                           300746 |
+
+    | Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |
+
+    | OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |
+
+
+    The availability of the sandbox environment can be checked on the <a href="https://status.snd.payu.com/" target="_blank">Status page</a>.
+
+
+    **Testing Card Payments**
+
+
+    In order to test card payments on sandbox, please use credentials displayed on the <a href="/europe/docs/testing/sandbox/" target="_blank">Sandbox</a> documentation page.'
+servers:
+- url: https://secure.payu.com
+  description: Production Server
+- url: https://secure.snd.payu.com
+  description: Sandbox Test Server
+security:
+- Bearer:
+  - client_credentials
+tags:
+- name: Authorize
+  description: Authentication involves generating an OAuth token, which is used for further communication with PayU servers. To create a standard OAuth token, you will need <code>client_id</code> and <code>client_secret</code> keys, which can be found in your merchant panel, in the POS.
+paths:
+  /pl/standard/user/oauth/authorize:
+    post:
+      tags:
+      - Authorize
+      summary: Create OAuth Token
+      security: []
+      description: "Each payment should be authorized in one of three available modes: \n- <code>client_credentials</code> - used for standard integration,\n- <code>trusted_merchant</code> - used for authentication of requests made for logged-in shop/application users with fixed <code>extCustomerId</code>,\n- <code>partner</code> - special type of a token meant for creating entities (e.g. Shop, POS, URL) within partner firm.\n\nGenerated access token is valid for 43199 seconds.\n"
+      operationId: oauth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              discriminator:
+                propertyName: grant_type
+                mapping:
+                  client_credentials: '#/components/schemas/ClientCredentials'
+                  trusted_merchant: '#/components/schemas/TrustedMerchant'
+                  partner: '#/components/schemas/Partner'
+              anyOf:
+              - $ref: '#/components/schemas/ClientCredentials'
+              - $ref: '#/components/schemas/TrustedMerchant'
+              - $ref: '#/components/schemas/Partner'
+      responses:
+        '200':
+          x-summary: OK
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Token used for authentication of API calls.
+                    format: uuid
+                  token_type:
+                    type: string
+                    enum:
+                    - bearer
+                  refresh_token:
+                    type: string
+                    format: uuid
+                  expires_in:
+                    type: integer
+                    description: Token expiration time (in seconds).
+                    enum:
+                    - 43199
+                  grant_type:
+                    type: string
+                    description: Token authentication mode.
+                    enum:
+                    - client_credentials
+                    - trusted_merchant
+        '400':
+          x-summary: Bad Request
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                - error_description
+                properties:
+                  error:
+                    type: string
+                    description: Cause of the error.
+                  error_description:
+                    type: string
+                    description: Error description.
+        '401':
+          x-summary: Unauthorized
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                - error_description
+                properties:
+                  error:
+                    type: string
+                    description: Cause of the error.
+                  error_description:
+                    type: string
+                    description: Error description.
+components:
+  schemas:
+    Partner:
+      type: object
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      - firm_id
+      description: only usable with special Technical Partner priviliges that allow management of Firms, URLs, Shops and POSes created and managed by Partner
+      properties:
+        grant_type:
+          type: string
+          example: partner
+          enum:
+          - partner
+          description: Authorization mode
+        client_id:
+          type: string
+          example: '145227'
+          description: Partners client_id
+        client_secret:
+          type: string
+          example: 12f071174cb7eb79d4aac5bc2f07563f
+          description: Partners client_secret
+        firm_id:
+          type: string
+          example: p3BiPgVO
+          description: publicFirmId created by Partner that will be managed
+    TrustedMerchant:
+      type: object
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      - email
+      - ext_customer_id
+      properties:
+        grant_type:
+          type: string
+          example: trusted_merchant
+          enum:
+          - trusted_merchant
+          description: Authorization mode
+        client_id:
+          type: string
+          example: '145227'
+          description: Merchant's POS identifier in PayU's system. Can be found in PayU's merchant panel
+        client_secret:
+          type: string
+          example: 12f071174cb7eb79d4aac5bc2f07563f
+          description: Merchant's secret key. Can be found in PayU's merchant panel
+        email:
+          type: string
+          description: Customer's email address in merchant's system
+        ext_customer_id:
+          type: string
+          description: Customer's identifier in the merchant's system
+    ClientCredentials:
+      type: object
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      properties:
+        grant_type:
+          type: string
+          example: client_credentials
+          enum:
+          - client_credenitals
+          description: Authorization mode
+        client_id:
+          type: string
+          example: '145227'
+          description: Merchant's POS identifier in PayU's system. Can be found in PayU's merchant panel
+        client_secret:
+          type: string
+          example: 12f071174cb7eb79d4aac5bc2f07563f
+          description: Merchant's secret key. Can be found in PayU's merchant panel
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: http
+      scheme: basic
