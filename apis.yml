@@ -7,7 +7,20 @@ description: >-
   subscriptions, fraud detection, checkout optimization, marketplace operations,
   tokenization, and financial services. PayU processes 4 million transactions
   daily for 450,000+ merchants through 450+ local payment methods.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/payu.png
 url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -24,113 +37,465 @@ tags:
   - Tokenization
   - Emerging Markets
 apis:
-  - aid: payu:payu-europe-rest-api
-    name: PayU Europe REST API
-    description: >-
-      REST API for payment processing in Central & Eastern Europe. Supports
-      order creation and management, payment method retrieval, refunds, payouts,
-      card tokenization, marketplace operations, multi-currency pricing, BLIK
-      payments, and 3DS 2.0 authentication.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.payu.com/europe/api/
-    baseURL: https://secure.payu.com
-    tags:
-      - Payments
-      - Europe
-      - Orders
-      - Refunds
-      - Payouts
-      - Marketplace
-      - Tokenization
-    properties:
-      - type: Documentation
-        url: https://developers.payu.com/europe/docs/get-started/apis/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/openapi/payu-europe-rest-api.yaml
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
-      - type: Examples
-        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
-      - type: JSONLD
-        url: https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
-    contact:
-      - FN: PayU Europe Developer Support
-        url: https://developers.payu.com/europe/
+- aid: payu:payu-india-rest-api
+  name: PayU India REST API
+  description: >-
+    REST API for payment processing in India. Supports hosted checkout, payment links, recurring payments,
+    subscription management, save cards / vault, split settlements, wallet operations, cross-border payments,
+    pre-authorization, payouts, and settlement reporting.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.payu.in/reference/introduction-api-reference
+  baseURL: https://info.payu.in
+  tags:
+  - Payments
+  - India
+  - Checkout
+  - Subscriptions
+  - Payouts
+  - Settlements
+  properties:
+  - type: Documentation
+    url: https://docs.payu.in/
+  contact:
+  - FN: PayU India Developer Support
+    url: https://docs.payu.in/
+- aid: payu:payu-latam-payments-api
+  name: PayU Latam Payments API
+  description: >-
+    REST API for payment processing across Latin America including Argentina, Brazil, Chile, Colombia,
+    Mexico, and Peru. Supports payments, refunds, recurring charges, installment financing, and the Pricing
+    API for querying available financing options and costs.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
+  baseURL: https://api.payulatam.com
+  tags:
+  - Payments
+  - Latin America
+  - Installments
+  - Pricing
+  - Refunds
+  properties:
+  - type: Documentation
+    url: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
+  contact:
+  - FN: PayU Latam Developer Support
+    url: https://developers.payulatam.com/
+- aid: payu:payu-enterprise-api
+  name: PayU Enterprise API (PaymentsOS)
+  description: >-
+    Enterprise-grade payment orchestration API powered by PaymentsOS. Provides a single entry point for
+    processing payments across multiple provider connections with dynamic routing. Supports charge, authorize/capture,
+    void, refund, and credit operations, as well as risk management, network tokens, webhooks, and settlement
+    reporting.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.paymentsos.com/docs.html
+  baseURL: https://api.paymentsos.com
+  tags:
+  - Payments
+  - Orchestration
+  - Enterprise
+  - Routing
+  - Webhooks
+  - Risk Management
+  properties:
+  - type: Documentation
+    url: https://developers.paymentsos.com/docs.html
+  contact:
+  - FN: PayU Enterprise Developer Support
+    url: https://developers.paymentsos.com/
+- aid: payu:payu-authorize-api
+  name: PayU Authorize API
+  description: >-
+    Authentication involves generating an OAuth token, which is used for further communication with PayU
+    servers. To create a standard OAuth token, you will need <code>client_id</code> and <code>client_secret</code>
+    keys, which can be found in your merchant panel, in the POS.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Authorize
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-authorize-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-card-installments-api
+  name: PayU Card Installments API
+  description: >-
+    Retrieve available card installments options for specific card. For merchants operating on the Romanian
+    market (Requires contact with a Payu representative first).
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Card Installments
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-card-installments-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-fx-reference-api
+  name: PayU FX-Reference API
+  description: >-
+    According to regulations in the European Union countries, payment service providers and parties providing
+    currency conversion services at the point of sale are obliged to express the total currency conversion
+    charges as a percentage mark-up over the latest available euro foreign exchange reference rates issued
+    by the European Central Bank (ECB).
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - FX-Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-fx-reference-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-marketplace-seller-api
+  name: PayU Marketplace-Seller API
+  description: >-
+    In PayU, as a marketplace, you have the capability to manage various aspects of your submerchants.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Marketplace-Seller
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-marketplace-seller-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-marketplace-verification-api
+  name: PayU Marketplace-Verification API
+  description: >-
+    PayU is required by the Anti-Money Laundering Act to verify customers in this context. For this purpose,
+    we provide a collection of endpoints to make it easier for you to verify sellers.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Marketplace-Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-marketplace-verification-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-mcp-api
+  name: PayU MCP API
+  description: We can convert your customers' payments to the currency of your shop set up with PayU.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - MCP
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-mcp-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-order-api
+  name: PayU Order API
+  description: >-
+    Order is the basic payment request for the standard integration with PayU.
 
-  - aid: payu:payu-india-rest-api
-    name: PayU India REST API
-    description: >-
-      REST API for payment processing in India. Supports hosted checkout,
-      payment links, recurring payments, subscription management, save cards /
-      vault, split settlements, wallet operations, cross-border payments,
-      pre-authorization, payouts, and settlement reporting.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.payu.in/reference/introduction-api-reference
-    baseURL: https://info.payu.in
-    tags:
-      - Payments
-      - India
-      - Checkout
-      - Subscriptions
-      - Payouts
-      - Settlements
-    properties:
-      - type: Documentation
-        url: https://docs.payu.in/
-    contact:
-      - FN: PayU India Developer Support
-        url: https://docs.payu.in/
-
-  - aid: payu:payu-latam-payments-api
-    name: PayU Latam Payments API
-    description: >-
-      REST API for payment processing across Latin America including Argentina,
-      Brazil, Chile, Colombia, Mexico, and Peru. Supports payments, refunds,
-      recurring charges, installment financing, and the Pricing API for
-      querying available financing options and costs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
-    baseURL: https://api.payulatam.com
-    tags:
-      - Payments
-      - Latin America
-      - Installments
-      - Pricing
-      - Refunds
-    properties:
-      - type: Documentation
-        url: https://developers.payulatam.com/latam/en/docs/integrations/api-integration.html
-    contact:
-      - FN: PayU Latam Developer Support
-        url: https://developers.payulatam.com/
-
-  - aid: payu:payu-enterprise-api
-    name: PayU Enterprise API (PaymentsOS)
-    description: >-
-      Enterprise-grade payment orchestration API powered by PaymentsOS. Provides
-      a single entry point for processing payments across multiple provider
-      connections with dynamic routing. Supports charge, authorize/capture,
-      void, refund, and credit operations, as well as risk management,
-      network tokens, webhooks, and settlement reporting.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.paymentsos.com/docs.html
-    baseURL: https://api.paymentsos.com
-    tags:
-      - Payments
-      - Orchestration
-      - Enterprise
-      - Routing
-      - Webhooks
-      - Risk Management
-    properties:
-      - type: Documentation
-        url: https://developers.paymentsos.com/docs.html
-    contact:
-      - FN: PayU Enterprise Developer Support
-        url: https://developers.paymentsos.com/
-
+    > If the response to the payment creation request is returned with an **HTTP 200** status and in HTML
+    format, make sure that the tool used to communicate with PayU has automatic redirect handling disabled.
+    Only in this case is it possible to receive the correct JSON response with an **HTTP 302** status
+    code.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-order-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-partner-merchant-registration-api
+  name: PayU Partner-Merchant-Registration API
+  description: >-
+    Below are the endpoints that enable you to create the necessary entities (Firm, Url, Shop, POS) for
+    your partner.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Partner-Merchant-Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-partner-merchant-registration-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-payment-methods-api
+  name: PayU Payment-Methods API
+  description: >-
+    Retrieving payment methods allows you to remove the threat of presenting a disabled payment method
+    with white-label integration. It also gives you the ability to retrieve stored tokens and customer
+    card data.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Payment-Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-payout-api
+  name: PayU Payout API
+  description: To widthraw funds from the PayU account you need to create a payout.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Payout
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-payout-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-pf-submerchant-registration-api
+  name: PayU PF-Submerchant-Registration API
+  description: >-
+    Payment Facilitator (PF) is an advanced form of partnership where PayU cedes much of its own responsibilities,
+    like e.g. Know Your Customer (KYC) and verification, customer support and settlement (payouts) to
+    the PF. Below are the endpoints for registering and handling PF submerchants.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - PF-Submerchant-Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-pf-submerchant-registration-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-refund-api
+  name: PayU Refund API
+  description: >-
+    The PayU system fully supports refunds for the processed payments, the balance of which is transferred
+    directly to the buyer's account.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Refund
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-refund-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-shop-api
+  name: PayU Shop API
+  description: >-
+    Shop is the main entity in the management panel. It is the place where you can manage incoming transactions
+    processed by PayU.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Shop
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-shop-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-statements-api
+  name: PayU Statements API
+  description: >-
+    Statements in PayU are comprehensive reports that provide a detailed summary of completed purchase
+    transactions, refunds, and payouts.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-statements-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
+- aid: payu:payu-token-api
+  name: PayU Token API
+  description: >-
+    With tokenization, we are confident that your customers' card data is protected from third parties.
+  humanURL: https://developers.payu.com/europe/api/
+  baseURL: https://secure.payu.com
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/payu-token-api-openapi.yml
+  - type: Documentation
+    url: https://developers.payu.com/europe/docs/get-started/apis/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-schema/payu-europe-rest-api.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/examples/payu-europe-rest-api-examples.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/vocabulary/payu-europe-rest-api-vocabulary.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/payu-agentic-access.yml
