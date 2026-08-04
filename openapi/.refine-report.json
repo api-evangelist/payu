@@ -1,0 +1,42 @@
+{
+  "provider": "payu",
+  "sources": [
+    "payu-authorize-api-openapi.yml",
+    "payu-card-installments-api-openapi.yml",
+    "payu-fx-reference-api-openapi.yml",
+    "payu-marketplace-seller-api-openapi.yml",
+    "payu-marketplace-verification-api-openapi.yml",
+    "payu-mcp-api-openapi.yml",
+    "payu-order-api-openapi.yml",
+    "payu-partner-merchant-registration-api-openapi.yml",
+    "payu-payment-methods-api-openapi.yml",
+    "payu-payout-api-openapi.yml",
+    "payu-pf-submerchant-registration-api-openapi.yml",
+    "payu-refund-api-openapi.yml",
+    "payu-shop-api-openapi.yml",
+    "payu-statements-api-openapi.yml",
+    "payu-token-api-openapi.yml"
+  ],
+  "outputs": [
+    "payu-authorize-api-openapi.yml",
+    "payu-card-installments-api-openapi.yml",
+    "payu-fx-reference-api-openapi.yml",
+    "payu-marketplace-seller-api-openapi.yml",
+    "payu-marketplace-verification-api-openapi.yml",
+    "payu-mcp-api-openapi.yml",
+    "payu-order-api-openapi.yml",
+    "payu-partner-merchant-registration-api-openapi.yml",
+    "payu-payment-methods-api-openapi.yml",
+    "payu-payout-api-openapi.yml",
+    "payu-pf-submerchant-registration-api-openapi.yml",
+    "payu-refund-api-openapi.yml",
+    "payu-shop-api-openapi.yml",
+    "payu-statements-api-openapi.yml",
+    "payu-token-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
