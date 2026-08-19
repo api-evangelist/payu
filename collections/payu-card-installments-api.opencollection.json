@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize Card Installments API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Installments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Available Installments Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/front/card-installments-options",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve available card installments options for specific card. For merchants operating on the Romanian market (Requires contact with a Payu representative first)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

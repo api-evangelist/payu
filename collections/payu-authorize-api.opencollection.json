@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorize",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create OAuth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/pl/standard/user/oauth/authorize",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Each payment should be authorized in one of three available modes: \n- <code>client_credentials</code> - used for standard integration,\n- <code>trusted_merchant</code> - used for authentication of requests made for logged-in shop/application users with fixed <code>extCustomerId</code>,\n- <code>partner</code> - special type of a token meant for creating entities (e.g. Shop, POS, URL) within partner firm.\n\nGenerated access token is valid for 43199 seconds.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

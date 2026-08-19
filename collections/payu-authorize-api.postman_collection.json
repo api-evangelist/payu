@@ -1,0 +1,299 @@
+{
+  "item": [
+    {
+      "id": "e9048aa4-d3bc-4536-acd3-f723d7801804",
+      "name": "Authorize",
+      "description": {
+        "content": "Authentication involves generating an OAuth token, which is used for further communication with PayU servers. To create a standard OAuth token, you will need <code>client_id</code> and <code>client_secret</code> keys, which can be found in your merchant panel, in the POS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6876705e-b386-420e-b8a7-1fc2184d1670",
+          "name": "Create OAuth Token",
+          "request": {
+            "name": "Create OAuth Token",
+            "description": {
+              "content": "Each payment should be authorized in one of three available modes: \n- <code>client_credentials</code> - used for standard integration,\n- <code>trusted_merchant</code> - used for authentication of requests made for logged-in shop/application users with fixed <code>extCustomerId</code>,\n- <code>partner</code> - special type of a token meant for creating entities (e.g. Shop, POS, URL) within partner firm.\n\nGenerated access token is valid for 43199 seconds.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pl",
+                "standard",
+                "user",
+                "oauth",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dc001e0-f34d-4808-b46d-fea12c8c150a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pl",
+                    "standard",
+                    "user",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "grant_type",
+                      "value": "client_credenitals"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_id",
+                      "value": "145227"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_secret",
+                      "value": "12f071174cb7eb79d4aac5bc2f07563f"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"d44f3e09-ad16-c9a5-3125-f0cd8bbdd72d\",\n  \"token_type\": \"bearer\",\n  \"refresh_token\": \"251c2590-0360-a823-72fa-25c5cbbe9a10\",\n  \"expires_in\": 43199,\n  \"grant_type\": \"client_credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fff48a4-4c2c-4092-939c-c84d0bcc01cf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pl",
+                    "standard",
+                    "user",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "grant_type",
+                      "value": "client_credenitals"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_id",
+                      "value": "145227"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_secret",
+                      "value": "12f071174cb7eb79d4aac5bc2f07563f"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f814197-6f0b-4024-9588-b12303a4e8bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pl",
+                    "standard",
+                    "user",
+                    "oauth",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "grant_type",
+                      "value": "client_credenitals"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_id",
+                      "value": "145227"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "client_secret",
+                      "value": "12f071174cb7eb79d4aac5bc2f07563f"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9fc7fbe0-75a3-4713-baf9-f6e12435e7f8",
+    "name": "PayU GPO Europe REST Authorize API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize Marketplace-Seller API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Marketplace-Seller",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Seller Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/customers/ext/:extCustomerId/status",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "extCustomerId",
+                "value": "",
+                "type": "path",
+                "description": "Submerchant identifier."
+              },
+              {
+                "name": "currencyCode",
+                "value": "PLN",
+                "type": "query",
+                "description": "Currency code according to ISO-4217."
+              }
+            ]
+          },
+          "docs": "You can check the verification status of your submerchants."
+        },
+        {
+          "info": {
+            "name": "Retrieve Seller Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/customers/ext/:extCustomerId/balances",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "extCustomerId",
+                "value": "",
+                "type": "path",
+                "description": "Submerchant identifier."
+              },
+              {
+                "name": "currencyCode",
+                "value": "PLN",
+                "type": "query",
+                "description": "Currency code according to ISO-4217."
+              }
+            ]
+          },
+          "docs": "Retrieve Seller Balance"
+        },
+        {
+          "info": {
+            "name": "Retrieve Seller Operation History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/customers/ext/:extCustomerId/operations",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "extCustomerId",
+                "value": "",
+                "type": "path",
+                "description": "Submerchant identifier."
+              },
+              {
+                "name": "currencyCode",
+                "value": "",
+                "type": "query",
+                "description": "Currency code according to ISO-4217. <b>You can enter multiple values. Subsequent entries should be separated by a comma</b>."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Operation type. <b>You can enter multiple values. Subsequent entries should be separated by a comma.</b>"
+              },
+              {
+                "name": "eventDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Start of the search range for \"eventDate\". <b>Date must be url encoded.</b>"
+              },
+              {
+                "name": "eventDateTo",
+                "value": "",
+                "type": "query",
+                "description": "End of the search range for \"eventDate\". <b>Date must be url encoded.</b>"
+              },
+              {
+                "name": "creationDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Start of the search range for \"creationDate\". <b>Date must be url encoded.</b>"
+              },
+              {
+                "name": "creationDateTo",
+                "value": "",
+                "type": "query",
+                "description": "End of the search range for \"creationDate\". <b>Date must be url encoded.</b>"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page number (indexing from 0)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting field. Additional sign \"<b>+</b>\" or \"<b>-</b>\" before field name defines sorting order. <b>Default is ascending</b>."
+              }
+            ]
+          },
+          "docs": "Retrieve Seller Operation History"
+        },
+        {
+          "info": {
+            "name": "Transfer Funds from Seller to Marketplace Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/customers/ext/:extCustomerId/feeDebitTransfer",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "extCustomerId",
+                "value": "",
+                "type": "path",
+                "description": "Submerchant identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer Funds from Seller to Marketplace Balance"
+        },
+        {
+          "info": {
+            "name": "Transfer Funds from Marketplace to Seller Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/customers/ext/:extCustomerId/feeCreditTransfer",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "extCustomerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique submerchant identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer Funds from Marketplace to Seller Balance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

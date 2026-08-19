@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize Partner-Merchant-Registration API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner-Merchant-Registration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/firms",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Firm entity for your partner."
+        },
+        {
+          "info": {
+            "name": "Create a URL for the Partner's Firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/firms/:firmId/urls",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmId",
+                "value": "KzXy4ZzD",
+                "type": "path",
+                "description": "Firm identifier retrieved after firm creation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a URL for the specified `firmId`."
+        },
+        {
+          "info": {
+            "name": "Create a Shop for the Partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/firms:firmId/shops",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmId",
+                "value": "KzXy4ZzD",
+                "type": "path",
+                "description": "Firm identifier retrieved after firm creation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Shop for the specified `firmId`."
+        },
+        {
+          "info": {
+            "name": "Create POS for Partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/shops/:shopId/poses",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "shopId",
+                "value": "Shop identifier retrieved after shop creation.",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a POS, for your partner, for the specified `shopId`."
+        },
+        {
+          "info": {
+            "name": "Retrieve Partner's POS Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/poses/:posId",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "posId",
+                "value": "POS identifier retrieved after POS creation.",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve data of the POS with specified `posId`."
+        },
+        {
+          "info": {
+            "name": "Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/firms/:posId/users",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmId",
+                "value": "KzXy4ZzD",
+                "type": "path",
+                "description": "Firm identifier retrieved after firm creation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an additional User for your partner."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

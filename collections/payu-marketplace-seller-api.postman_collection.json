@@ -1,0 +1,1163 @@
+{
+  "item": [
+    {
+      "id": "eece0d45-33f2-4ef4-87e3-0cea659af745",
+      "name": "Marketplace-Seller",
+      "description": {
+        "content": "In PayU, as a marketplace, you have the capability to manage various aspects of your submerchants.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f17b1663-f940-43b7-ba73-53d2ef728f17",
+          "name": "Retrieve Seller Status",
+          "request": {
+            "name": "Retrieve Seller Status",
+            "description": {
+              "content": "You can check the verification status of your submerchants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "customers",
+                "ext",
+                ":extCustomerId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyCode",
+                  "value": "<string>",
+                  "description": "(Required) Currency code according to ISO-4217."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "extCustomerId",
+                  "description": "(Required) Submerchant identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd182674-172e-4293-a3c3-5f909475689c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "PLN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customVerificationStatus\": \"Verified\",\n  \"name\": \"string\",\n  \"taxId\": \"string\",\n  \"regon\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48897be3-a438-4a7e-86f6-684e021a31d6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "PLN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89b6aee7-e2a6-4507-ae53-86802638b7c8",
+          "name": "Retrieve Seller Balance",
+          "request": {
+            "name": "Retrieve Seller Balance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "customers",
+                "ext",
+                ":extCustomerId",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyCode",
+                  "value": "<string>",
+                  "description": "(Required) Currency code according to ISO-4217."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "extCustomerId",
+                  "description": "(Required) Submerchant identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e638b0e6-4239-489f-883d-d8f0b797a01d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "PLN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": {\n    \"availableAmount\": \"string\",\n    \"totalAmount\": \"string\"\n  },\n  \"status\": {\n    \"statusCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c74cf9-d188-4bed-a6f7-25b7fb838a2c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "PLN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aebd13c7-5611-4fb4-a586-3ced5ab5b951",
+          "name": "Retrieve Seller Operation History",
+          "request": {
+            "name": "Retrieve Seller Operation History",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "customers",
+                "ext",
+                ":extCustomerId",
+                "operations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyCode",
+                  "value": "<string>",
+                  "description": "Currency code according to ISO-4217. <b>You can enter multiple values. Subsequent entries should be separated by a comma</b>."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Operation type. <b>You can enter multiple values. Subsequent entries should be separated by a comma.</b>"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateFrom",
+                  "value": "<2019-01-30T20%3A59%3A00%2B02%3A00>",
+                  "description": "(Required) Start of the search range for \"eventDate\". <b>Date must be url encoded.</b>"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateTo",
+                  "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>",
+                  "description": "(Required) End of the search range for \"eventDate\". <b>Date must be url encoded.</b>"
+                },
+                {
+                  "disabled": false,
+                  "key": "creationDateFrom",
+                  "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>",
+                  "description": "Start of the search range for \"creationDate\". <b>Date must be url encoded.</b>"
+                },
+                {
+                  "disabled": false,
+                  "key": "creationDateTo",
+                  "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>",
+                  "description": "End of the search range for \"creationDate\". <b>Date must be url encoded.</b>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Number of records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>",
+                  "description": "Page number (indexing from 0)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "Sorting field. Additional sign \"<b>+</b>\" or \"<b>-</b>\" before field name defines sorting order. <b>Default is ascending</b>."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "extCustomerId",
+                  "description": "(Required) Submerchant identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "288fa9ee-b501-425a-bcd0-b2862bb047e4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "<2019-01-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "creationDateFrom",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "creationDateTo",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operations\": [\n    {\n      \"type\": \"PAYMENT_RECEIVED\",\n      \"amount\": \"string\",\n      \"currencyCode\": \"PLN\",\n      \"description\": \"string\",\n      \"status\": \"COMPLETED\",\n      \"creationDate\": \"string\",\n      \"eventDate\": \"string\",\n      \"details\": {\n        \"orderId\": \"string\",\n        \"extOrderId\": \"string\",\n        \"feeAmount\": \"string\",\n        \"counterparties\": {\n          \"extCustomerId\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"string\",\n          \"products\": [\n            {\n              \"name\": \"string\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\"\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"type\": \"PAYMENT_RECEIVED\",\n      \"amount\": \"string\",\n      \"currencyCode\": \"PLN\",\n      \"description\": \"string\",\n      \"status\": \"COMPLETED\",\n      \"creationDate\": \"string\",\n      \"eventDate\": \"string\",\n      \"details\": {\n        \"orderId\": \"string\",\n        \"extOrderId\": \"string\",\n        \"feeAmount\": \"string\",\n        \"counterparties\": {\n          \"extCustomerId\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"string\",\n          \"products\": [\n            {\n              \"name\": \"string\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\"\n            }\n          ]\n        }\n      }\n    }\n  ],\n  \"pageResponse\": {\n    \"records\": \"string\",\n    \"size\": \"string\",\n    \"pageCount\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40edaa28-386d-46b5-bf0a-92b8c3d0db6f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "<2019-01-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "creationDateFrom",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "creationDateTo",
+                      "value": "<2019-04-30T20%3A59%3A00%2B02%3A00>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05e4c065-0c9a-4895-94bf-8da6ddcd0ee2",
+          "name": "Transfer Funds from Seller to Marketplace Balance",
+          "request": {
+            "name": "Transfer Funds from Seller to Marketplace Balance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "customers",
+                "ext",
+                ":extCustomerId",
+                "feeDebitTransfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "extCustomerId",
+                  "description": "(Required) Submerchant identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"<string>\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15e49984-6dcb-41c9-b473-55eecf04165f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "feeDebitTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"PLN\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extCustomerId\": \"string\",\n  \"extTransferId\": \"string\",\n  \"status\": {\n    \"statusCode\": \"SUCCESS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b20493a-14ab-42b4-9d82-0904a4484780",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "feeDebitTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"PLN\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "387b427c-2e0c-4351-8bd0-ec258cb2024c",
+          "name": "Transfer Funds from Marketplace to Seller Balance",
+          "request": {
+            "name": "Transfer Funds from Marketplace to Seller Balance",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "customers",
+                "ext",
+                ":extCustomerId",
+                "feeCreditTransfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "extCustomerId",
+                  "description": "(Required) Unique submerchant identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"<string>\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1edb894a-2fb0-46d0-9f95-ef1ac393af86",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "feeCreditTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Unique submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"PLN\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extCustomerId\": \"string\",\n  \"extTransferId\": \"string\",\n  \"status\": {\n    \"statusCode\": \"SUCCESS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80453f87-4296-4c0d-a15c-4fce31801a73",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "customers",
+                    "ext",
+                    ":extCustomerId",
+                    "feeCreditTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "extCustomerId",
+                      "description": "(Required) Unique submerchant identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"PLN\",\n  \"description\": \"<string>\",\n  \"extTransferId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "92d2dcc3-54ef-4b72-9b4a-576a2e07df05",
+    "name": "PayU GPO Europe REST Authorize Marketplace-Seller API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

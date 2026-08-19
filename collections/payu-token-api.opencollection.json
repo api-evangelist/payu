@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize Token API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://secure.payu.com/api/v2_1/tokens/:token",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "TOKC_XATB7DF8ACXYTVQIPLWTVPFRKQE",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "In case the customer terminates the user account in your shop or chooses to remove the stored card from the user account, you need to delete the token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

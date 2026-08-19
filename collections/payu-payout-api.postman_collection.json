@@ -1,0 +1,782 @@
+{
+  "item": [
+    {
+      "id": "e5d27784-8fbc-4e92-824c-042808133ab7",
+      "name": "Payout",
+      "description": {
+        "content": "To widthraw funds from the PayU account you need to create a payout.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3302f8e3-f57e-4d67-bc56-f278bbf3a129",
+          "name": "Create a Payout",
+          "request": {
+            "name": "Create a Payout",
+            "description": {
+              "content": "Create a payout with the selected destination of funds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "payouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shopId\": \"<string>\",\n  \"payout\": {\n    \"amount\": \"<number>\",\n    \"extPayoutId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalVariables\": \"<VS=888111>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4294c9e5-c57b-45e8-b292-b6ea6e0e7c4d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shopId\": \"1a2B3Cx\",\n  \"payout\": {\n    \"amount\": 987654321,\n    \"extPayoutId\": \"string\",\n    \"description\": \"string\",\n    \"additionalVariables\": \"VS=888111\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payout\": {\n    \"payoutId\": \"string\",\n    \"extPayoutId\": \"string\",\n    \"extCustomerId\": \"string\",\n    \"amount\": 10000,\n    \"currencyCode\": \"PLN\",\n    \"status\": \"PENDING\",\n    \"fxData\": {\n      \"currencyCode\": \"EUR\",\n      \"amount\": 2500,\n      \"rate\": 0.25,\n      \"partnerId\": \"string\",\n      \"tableId\": \"string\"\n    }\n  },\n  \"status\": {\n    \"statusCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "547d16c8-493b-4890-a1de-16acfd257c60",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shopId\": \"1a2B3Cx\",\n  \"payout\": {\n    \"amount\": 987654321,\n    \"extPayoutId\": \"string\",\n    \"description\": \"string\",\n    \"additionalVariables\": \"VS=888111\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9840502-34c5-422e-8631-b9399a7944f6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shopId\": \"1a2B3Cx\",\n  \"payout\": {\n    \"amount\": 987654321,\n    \"extPayoutId\": \"string\",\n    \"description\": \"string\",\n    \"additionalVariables\": \"VS=888111\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "620754ae-6799-4589-a1bb-773c2656d13c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shopId\": \"1a2B3Cx\",\n  \"payout\": {\n    \"amount\": 987654321,\n    \"extPayoutId\": \"string\",\n    \"description\": \"string\",\n    \"additionalVariables\": \"VS=888111\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62619c71-01f1-4a83-a664-e2172dcbf8aa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shopId\": \"1a2B3Cx\",\n  \"payout\": {\n    \"amount\": 987654321,\n    \"extPayoutId\": \"string\",\n    \"description\": \"string\",\n    \"additionalVariables\": \"VS=888111\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfc1cee1-6aa7-4a46-aa10-1a8dfef7c291",
+          "name": "Retrieve a Payout",
+          "request": {
+            "name": "Retrieve a Payout",
+            "description": {
+              "content": "Retrieve data of a specified payout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "payouts",
+                ":payoutId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "payoutId",
+                  "description": "(Required) Payout ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1b79df1-6aa5-4ab2-9699-ad9d9a0647de",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts",
+                    ":payoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "payoutId",
+                      "description": "(Required) Payout ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payout\": {\n    \"payoutId\": \"string\",\n    \"extPayoutId\": \"string\",\n    \"amount\": 10000,\n    \"description\": \"string\",\n    \"status\": \"REALIZED\",\n    \"fxData\": {\n      \"currencyCode\": \"string\",\n      \"amount\": 2500,\n      \"rate\": 0.25,\n      \"partnerId\": \"string\",\n      \"tableId\": \"string\"\n    }\n  },\n  \"status\": {\n    \"statusCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca09f60b-b8df-49a2-b21e-732b6bb12498",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts",
+                    ":payoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "payoutId",
+                      "description": "(Required) Payout ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cb381bb-e31d-4ab7-8bd5-11a3a4f792c7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts",
+                    ":payoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "payoutId",
+                      "description": "(Required) Payout ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48658f64-01f9-4866-af95-8c1155ec8b59",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts",
+                    ":payoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "payoutId",
+                      "description": "(Required) Payout ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7c77fce-d820-4c30-9922-8e81947b0abc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "payouts",
+                    ":payoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "payoutId",
+                      "description": "(Required) Payout ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "79270edd-58a6-4e20-a3ce-6375d19ffae5",
+    "name": "PayU GPO Europe REST Authorize Payout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

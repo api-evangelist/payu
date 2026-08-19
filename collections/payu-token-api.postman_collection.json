@@ -1,0 +1,287 @@
+{
+  "item": [
+    {
+      "id": "a91ff34c-94f1-44d8-94b4-45e1346426e7",
+      "name": "Token",
+      "description": {
+        "content": "With tokenization, we are confident that your customers' card data is protected from third parties.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "606b86a3-48cb-4351-bd1b-f1463b89ce10",
+          "name": "Delete a Token",
+          "request": {
+            "name": "Delete a Token",
+            "description": {
+              "content": "In case the customer terminates the user account in your shop or chooses to remove the stored card from the user account, you need to delete the token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "tokens",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "token",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ee8df4b7-b643-4bd3-adc7-4fd46e4a5285",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "tokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "token",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=trusted_merchant</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3d2db7da-e26e-4055-b6ab-acf628dddb40",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "tokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "token",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=trusted_merchant</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c4c85df-e74e-4a50-ae1a-dc8eac188c81",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "tokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "token",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=trusted_merchant</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "047d91d9-4f2f-4a1c-9197-00d368747978",
+    "name": "PayU GPO Europe REST Authorize Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

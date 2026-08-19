@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize FX-Reference API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FX-Reference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Reference Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/fx-providers/ecb/fx-rates",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "termCurrency",
+                "value": "[object Object]",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can retrieve a reference rate table that is updated daily. This table encompasses rates released by the European Central Bank (ECB) against EUR, as well as additional rates that are triangulated using EUR (e.g., PLN/USD, CZK/GBP, etc.)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

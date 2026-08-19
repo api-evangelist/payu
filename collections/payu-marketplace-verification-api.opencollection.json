@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize Marketplace-Verification API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Marketplace-Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Verification Advice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification-advice",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "companyTaxId",
+                "value": "",
+                "type": "query",
+                "description": "Company tax id of a entity. <b>Required if you want to check a status of a company.</b>"
+              },
+              {
+                "name": "pesonalIdentificationNumber",
+                "value": "",
+                "type": "query",
+                "description": "Personal identification number of individual. <b>Required if you want to check a status of a private person.</b>"
+              }
+            ]
+          },
+          "docs": "Verify, on the basis of a Personal Identification Number or NIP number, whether a given individual/company has already been registered in the PayU system."
+        },
+        {
+          "info": {
+            "name": "Retrieve Marketplace Verification Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "aZl6Ja",
+                "type": "query",
+                "description": "Value of the query `id` parameter is the same as the `verificationId`."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of the verification with the specific `Id`."
+        },
+        {
+          "info": {
+            "name": "Create Marketplace Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initialize the verification process of the seller."
+        },
+        {
+          "info": {
+            "name": "Add Seller's Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/seller",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows to send data of the seller (submerchant)."
+        },
+        {
+          "info": {
+            "name": "Add Associates Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/associates",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send the data of the associates (representatives and beneficiaries according to the relevant instructions from PayU)."
+        },
+        {
+          "info": {
+            "name": "Add Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/files",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload documents to the server."
+        },
+        {
+          "info": {
+            "name": "Add Seller's Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/seller/documents",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows to load company related documents."
+        },
+        {
+          "info": {
+            "name": "Add Associates Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/associates/documents",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload required documents for associates (representatives or beneficiaries)."
+        },
+        {
+          "info": {
+            "name": "Create Order for Verification Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification-transfers/manual",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an order for the verification transfer service. In response you will be provided with the bank account details to make the transfer."
+        },
+        {
+          "info": {
+            "name": "Add Bank Account for Payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/bankAccountData",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send bank account data for the payouts."
+        },
+        {
+          "info": {
+            "name": "Add Payoneer Account for Payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/payoneer",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send bank account data for the payouts. Method is reserved for the users who have verified Payoneer account."
+        },
+        {
+          "info": {
+            "name": "Add Worldfirst Account for Payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/dataloading/payouts/worldfirst",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send bank account data for the payouts. Method is reserved for the users who have verified Worldfirst account."
+        },
+        {
+          "info": {
+            "name": "Complete Marketplace Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification/complete",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Inform PayU about completing verification process."
+        },
+        {
+          "info": {
+            "name": "Cancel Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/aml-verification/v1/verification/cancel",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel verification on every step of verification providing the reason."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

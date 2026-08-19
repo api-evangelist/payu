@@ -1,0 +1,1258 @@
+{
+  "item": [
+    {
+      "id": "b16710f4-8a77-4f77-89c3-3975aa18ec75",
+      "name": "Partner-Merchant-Registration",
+      "description": {
+        "content": "Below are the endpoints that enable you to create the necessary entities (Firm, Url, Shop, POS) for your partner.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f390ab3d-45bd-4cbe-8b76-efdef09696c1",
+          "name": "Create a Firm",
+          "request": {
+            "name": "Create a Firm",
+            "description": {
+              "content": "Create a Firm entity for your partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"taxIdType\": \"<string>\",\n  \"cin\": \"<string>\",\n  \"bankAccount\": \"<IBAN>\",\n  \"partnerId\": \"<string>\",\n  \"businessArea\": {\n    \"origin\": \"<string>\"\n  },\n  \"users\": [\n    {\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"<string>\",\n      \"phone\": \"<string>\"\n    }\n  ],\n  \"representatives\": [\n    {\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"birthCountryCode\": \"<string>\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"<RRRR-MM-DD>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"birthCountryCode\": \"<string>\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"<RRRR-MM-DD>\"\n    }\n  ],\n  \"contactData\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"address\": {\n    \"street\": \"<string>\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"city\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"contactLanguage\": \"<string>\",\n  \"technicalContactData\": \"<object>\",\n  \"correspondenceAddress\": {\n    \"street\": \"<string>\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"city\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7617c84-7474-4f60-a341-94e824792315",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=client_credentials</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test sp. z o.o.\",\n  \"type\": \"SO\",\n  \"taxId\": \"3771910486\",\n  \"taxIdType\": \"NIP\",\n  \"cin\": \"138237420\",\n  \"bankAccount\": \"PL92906300080597567560803897\",\n  \"partnerId\": \"egmcvdo5\",\n  \"businessArea\": {\n    \"origin\": \"PL\"\n  },\n  \"users\": [\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"email\": \"jan.nowak@testowa.pl\",\n      \"role\": \"MANAGER\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"email\": \"jan.nowak@testowa.pl\",\n      \"role\": \"MANAGER\",\n      \"phone\": \"<string>\"\n    }\n  ],\n  \"representatives\": [\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"countryCode\": \"PL\",\n      \"birthCountryCode\": \"pl\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"2000-01-01\"\n    },\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"countryCode\": \"PL\",\n      \"birthCountryCode\": \"pl\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"2000-01-01\"\n    }\n  ],\n  \"contactData\": {\n    \"phone\": \"<string>\",\n    \"email\": \"biuro@testowa.pl\"\n  },\n  \"address\": {\n    \"street\": \"Grunwaldzka\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"61-166\",\n    \"city\": \"Poznań\",\n    \"countryCode\": \"PL\"\n  },\n  \"contactLanguage\": \"PL\",\n  \"technicalContactData\": \"<object>\",\n  \"correspondenceAddress\": {\n    \"street\": \"Grunwaldzka\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"61-166\",\n    \"city\": \"Poznań\",\n    \"countryCode\": \"PL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"firmId\": \"KzXy4ZzD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a7562f6-2cf0-4ead-8523-613874c1d5a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=client_credentials</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test sp. z o.o.\",\n  \"type\": \"SO\",\n  \"taxId\": \"3771910486\",\n  \"taxIdType\": \"NIP\",\n  \"cin\": \"138237420\",\n  \"bankAccount\": \"PL92906300080597567560803897\",\n  \"partnerId\": \"egmcvdo5\",\n  \"businessArea\": {\n    \"origin\": \"PL\"\n  },\n  \"users\": [\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"email\": \"jan.nowak@testowa.pl\",\n      \"role\": \"MANAGER\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"email\": \"jan.nowak@testowa.pl\",\n      \"role\": \"MANAGER\",\n      \"phone\": \"<string>\"\n    }\n  ],\n  \"representatives\": [\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"countryCode\": \"PL\",\n      \"birthCountryCode\": \"pl\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"2000-01-01\"\n    },\n    {\n      \"name\": \"Jan\",\n      \"surname\": \"Nowak\",\n      \"countryCode\": \"PL\",\n      \"birthCountryCode\": \"pl\",\n      \"nin\": \"<string>\",\n      \"birthDate\": \"2000-01-01\"\n    }\n  ],\n  \"contactData\": {\n    \"phone\": \"<string>\",\n    \"email\": \"biuro@testowa.pl\"\n  },\n  \"address\": {\n    \"street\": \"Grunwaldzka\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"61-166\",\n    \"city\": \"Poznań\",\n    \"countryCode\": \"PL\"\n  },\n  \"contactLanguage\": \"PL\",\n  \"technicalContactData\": \"<object>\",\n  \"correspondenceAddress\": {\n    \"street\": \"Grunwaldzka\",\n    \"houseNo\": \"<string>\",\n    \"apartmentNo\": \"<string>\",\n    \"postalCode\": \"61-166\",\n    \"city\": \"Poznań\",\n    \"countryCode\": \"PL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d522645-288e-4cd1-853a-31f333dcc526",
+          "name": "Create a URL for the Partner's Firm",
+          "request": {
+            "name": "Create a URL for the Partner's Firm",
+            "description": {
+              "content": "Create a URL for the specified `firmId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms",
+                ":firmId",
+                "urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "firmId",
+                  "description": "(Required) Firm identifier retrieved after firm creation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<string>\",\n  \"services\": [\n    {\n      \"type\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\"\n    }\n  ],\n  \"mcc\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "686b2e68-a48c-4a09-9972-bdbae17e39d8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmId",
+                    "urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmId",
+                      "description": "(Required) Firm identifier retrieved after firm creation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"http://www.test-url.com\",\n  \"services\": [\n    {\n      \"type\": \"TRANSFERS\"\n    },\n    {\n      \"type\": \"TRANSFERS\"\n    }\n  ],\n  \"mcc\": \"0742\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"urlId\": \"PItR5x0v\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "753980da-7b5a-412c-aa8c-f2e718c75c4f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmId",
+                    "urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmId",
+                      "description": "(Required) Firm identifier retrieved after firm creation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"http://www.test-url.com\",\n  \"services\": [\n    {\n      \"type\": \"TRANSFERS\"\n    },\n    {\n      \"type\": \"TRANSFERS\"\n    }\n  ],\n  \"mcc\": \"0742\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b23b1bd1-a5c4-4698-888f-a788a3d70b5d",
+          "name": "Create a Shop for the Partner",
+          "request": {
+            "name": "Create a Shop for the Partner",
+            "description": {
+              "content": "Create a Shop for the specified `firmId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms{{firmId}}",
+                "shops"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"urlId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce6c0ad1-f39a-4690-a812-aa2e81c4bcde",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms{{firmId}}",
+                    "shops"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Shop name\",\n  \"currencyCode\": \"EUR\",\n  \"urlId\": \"PItR5x0v\",\n  \"description\": \"Shop description\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shopId\": \"ycmGyfCv\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "421535f6-3e34-4d0c-b8ef-a6068ba83871",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms{{firmId}}",
+                    "shops"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Shop name\",\n  \"currencyCode\": \"EUR\",\n  \"urlId\": \"PItR5x0v\",\n  \"description\": \"Shop description\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21085698-f706-47fd-8888-bbc26339c046",
+          "name": "Create POS for Partner",
+          "request": {
+            "name": "Create POS for Partner",
+            "description": {
+              "content": "Create a POS, for your partner, for the specified `shopId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "shops",
+                ":shopId",
+                "poses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "shopId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d5909ff-0e6c-4498-bc92-55047e79fc0d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "shops",
+                    ":shopId",
+                    "poses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "shopId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test POS\",\n  \"type\": \"REST\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"posId\": \"JyoMIVTY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e464dbf5-9a61-4cf3-9a71-2a954634db36",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "shops",
+                    ":shopId",
+                    "poses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "shopId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test POS\",\n  \"type\": \"REST\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47e14cff-a628-443e-93cd-10100f7204d7",
+          "name": "Retrieve Partner's POS Data",
+          "request": {
+            "name": "Retrieve Partner's POS Data",
+            "description": {
+              "content": "Retrieve data of the POS with specified `posId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "poses",
+                ":posId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "posId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cb6e5424-967e-4512-9b54-f5029102e8dc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "poses",
+                    ":posId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "posId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"posId\": \"JyoMIVTY\",\n  \"type\": \"REST\",\n  \"name\": \"Test POS\",\n  \"encoding\": \"UTF-8\",\n  \"authorization\": {\n    \"standard\": {\n      \"merchantPosId\": \"385234\",\n      \"key\": \"9c0041e05fdee99749de4c2d2ce4c66e\\\"\",\n      \"secondKey\": \"f096a39d78fbe03b8d23dde43b728cfd\",\n      \"authKey\": \"uHcZ9Ly\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9c5978e-619e-468d-b2e0-8ce2695d4f6e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "poses",
+                    ":posId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "posId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a95db48-3d85-4f0c-ae5f-c18c57d27aca",
+          "name": "Create a User",
+          "request": {
+            "name": "Create a User",
+            "description": {
+              "content": "Create an additional User for your partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms",
+                ":posId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "firmId",
+                  "description": "(Required) Firm identifier retrieved after firm creation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"email\": \"<string>\",\n    \"role\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ca179fb-15e9-4cd9-bc1e-39e58e988034",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":posId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmId",
+                      "description": "(Required) Firm identifier retrieved after firm creation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"name\": \"Joe\",\n    \"surname\": \"Doe\",\n    \"email\": \"joe.doe@test.com\",\n    \"role\": \"manager\",\n    \"phone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userId\": \"2e629a11-8add-49c5-bf27-a7f684721b86\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "112a3512-481f-4de0-9ad2-17acaed6b042",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":posId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmId",
+                      "description": "(Required) Firm identifier retrieved after firm creation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token with <code>grant_type=partner</code>.",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"name\": \"Joe\",\n    \"surname\": \"Doe\",\n    \"email\": \"joe.doe@test.com\",\n    \"role\": \"manager\",\n    \"phone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Firm identifier retrieved after firm creation.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "",
+      "key": "firmId"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0eed41d8-9600-42c2-9d0c-2218ff709192",
+    "name": "PayU GPO Europe REST Authorize Partner-Merchant-Registration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

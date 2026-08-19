@@ -1,0 +1,678 @@
+{
+  "item": [
+    {
+      "id": "492da65d-c2d4-4dca-bbe4-3f290e05cd60",
+      "name": "PF-Submerchant-Registration",
+      "description": {
+        "content": "Payment Facilitator (PF) is an advanced form of partnership where PayU cedes much of its own responsibilities, like e.g. Know Your Customer (KYC) and verification, customer support and settlement (payouts) to the PF. Below are the endpoints for registering and handling PF submerchants.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd4f297c-5847-4ade-924e-5ea06348af04",
+          "name": "Create a Submerchant",
+          "request": {
+            "name": "Create a Submerchant",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms",
+                ":firmPublicId",
+                "submerchants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "firmPublicId",
+                  "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notifyUrl\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"legalName\": \"<string>\",\n  \"dbaName\": \"<string>\",\n  \"address\": {\n    \"street\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"city\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"websiteUrl\": \"<string>\",\n  \"mcc\": \"<number>\",\n  \"riskClass\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"representatives\": [\n    {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    }\n  ],\n  \"legalForm\": \"<string>\",\n  \"agreementDate\": \"<yyyy-mm-dd>\",\n  \"payTypeCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "751d89d4-aae3-4b55-9812-126b84f97f66",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notifyUrl\": \"string\",\n  \"externalId\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 4397.201243556909,\n  \"riskClass\": \"NORMAL\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"SA\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": [\n    \"Card\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalId\": \"string\",\n  \"status\": \"NOT_ACTIVE\",\n  \"lastUpdated\": \"string\",\n  \"notifyUrl\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"postalCode\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 2837.569394782731,\n  \"riskClass\": \"HIGH\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"string\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a4e44fa-41bd-4bfa-9ae7-bd6377077e26",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notifyUrl\": \"string\",\n  \"externalId\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 4397.201243556909,\n  \"riskClass\": \"NORMAL\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"SA\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": [\n    \"Card\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8175a3c2-90f8-40d0-b22f-679cdd274fcb",
+          "name": "Update Submerchant Data",
+          "request": {
+            "name": "Update Submerchant Data",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms",
+                ":firmPublicId",
+                "submerchants",
+                ":submerchantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "firmPublicId",
+                  "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "submerchantId",
+                  "description": "(Required) Id returned by PayU upon submerchant registration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notifyUrl\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"legalName\": \"<string>\",\n  \"dbaName\": \"<string>\",\n  \"address\": {\n    \"street\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"city\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"websiteUrl\": \"<string>\",\n  \"mcc\": \"<number>\",\n  \"riskClass\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"representatives\": [\n    {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    }\n  ],\n  \"legalForm\": \"<string>\",\n  \"agreementDate\": \"<yyyy-mm-dd>\",\n  \"payTypeCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0ac74e8-8592-4181-be6f-fd2425a0975a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants",
+                    ":submerchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "submerchantId",
+                      "description": "(Required) Id returned by PayU upon submerchant registration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notifyUrl\": \"string\",\n  \"externalId\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 4397.201243556909,\n  \"riskClass\": \"NORMAL\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"SA\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": [\n    \"Card\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalId\": \"string\",\n  \"status\": \"NOT_ACTIVE\",\n  \"lastUpdated\": \"string\",\n  \"notifyUrl\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"postalCode\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 2837.569394782731,\n  \"riskClass\": \"HIGH\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"string\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d064c74-b19a-41db-b9f7-ebb74dc3a626",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants",
+                    ":submerchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "submerchantId",
+                      "description": "(Required) Id returned by PayU upon submerchant registration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notifyUrl\": \"string\",\n  \"externalId\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 4397.201243556909,\n  \"riskClass\": \"NORMAL\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"SA\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": [\n    \"Card\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53ea73cd-39c5-497c-9cc2-08d1fbf92619",
+          "name": "Retrieve Submerchant Data",
+          "request": {
+            "name": "Retrieve Submerchant Data",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "firms",
+                ":firmPublicId",
+                "submerchants",
+                ":submerchantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "firmPublicId",
+                  "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "submerchantId",
+                  "description": "(Required) Id returned by PayU upon submerchant registration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de3be7e5-8310-44a9-aac7-c97e7287cf98",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants",
+                    ":submerchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "submerchantId",
+                      "description": "(Required) Id returned by PayU upon submerchant registration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalId\": \"string\",\n  \"status\": \"NOT_ACTIVE\",\n  \"lastUpdated\": \"string\",\n  \"notifyUrl\": \"string\",\n  \"legalName\": \"string\",\n  \"dbaName\": \"string\",\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"postalCode\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"websiteUrl\": \"string\",\n  \"mcc\": 2837.569394782731,\n  \"riskClass\": \"HIGH\",\n  \"taxId\": \"string\",\n  \"representatives\": [\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"phone\": \"string\"\n    }\n  ],\n  \"legalForm\": \"string\",\n  \"agreementDate\": \"string\",\n  \"payTypeCategories\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34fc9aa1-76dd-405b-b4de-0fefc301ef41",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "firms",
+                    ":firmPublicId",
+                    "submerchants",
+                    ":submerchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "firmPublicId",
+                      "description": "(Required) Firm id in alphanumeric format, visible in the merchant panel."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "submerchantId",
+                      "description": "(Required) Id returned by PayU upon submerchant registration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20ee0310-1201-47f8-8a6f-334fd11df921",
+    "name": "PayU GPO Europe REST Authorize PF-Submerchant-Registration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

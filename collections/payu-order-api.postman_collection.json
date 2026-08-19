@@ -1,0 +1,2258 @@
+{
+  "item": [
+    {
+      "id": "2ec184cf-4654-4437-827f-61d652540520",
+      "name": "Order",
+      "description": {
+        "content": "Order is the basic payment request for the standard integration with PayU.\n> If the response to the payment creation request is returned with an **HTTP 200** status and in HTML format, make sure that the tool used to communicate with PayU has automatic redirect handling disabled. Only in this case is it possible to receive the correct JSON response with an **HTTP 302** status code.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "988dc872-239e-454b-b40e-e311514c2b38",
+          "name": "Create an Order",
+          "request": {
+            "name": "Create an Order",
+            "description": {
+              "content": "Create a new order request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerIp\": \"<string>\",\n  \"merchantPosId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"totalAmount\": \"<string>\",\n  \"products\": [\n    {\n      \"name\": \"<string>\",\n      \"unitPrice\": \"<string>\",\n      \"quantity\": \"<string>\",\n      \"virtual\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"unitPrice\": \"<string>\",\n      \"quantity\": \"<string>\",\n      \"virtual\": \"<boolean>\"\n    }\n  ],\n  \"continueUrl\": \"<RFC 3986>\",\n  \"notifyUrl\": \"<RFC 3986>\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"<string>\",\n  \"cardOnFile\": \"<string>\",\n  \"recurring\": \"<string>\",\n  \"donation\": {\n    \"amount\": \"<integer>\",\n    \"organizationId\": \"<string>\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"language\": \"<string>\",\n    \"birthDate\": \"<ISO 8601>\",\n    \"delivery\": {\n      \"street\": \"<string>\",\n      \"postalBox\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"name\": \"<string>\",\n      \"recipientName\": \"<string>\",\n      \"recipientEmail\": \"<string>\",\n      \"recipientPhone\": \"<string>\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"products\": [\n        {\n          \"name\": \"<string>\",\n          \"unitPrice\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"virtual\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"unitPrice\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"virtual\": \"<boolean>\"\n        }\n      ],\n      \"fee\": \"<string>\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"<string>\",\n          \"price\": \"<number>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\",\n          \"price\": \"<number>\",\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"products\": [\n        {\n          \"name\": \"<string>\",\n          \"unitPrice\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"virtual\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"unitPrice\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"virtual\": \"<boolean>\"\n        }\n      ],\n      \"fee\": \"<string>\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"<string>\",\n          \"price\": \"<number>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\",\n          \"price\": \"<number>\",\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"<string>\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"<string>\",\n        \"expirationMonth\": \"<string>\",\n        \"expirationYear\": \"<string>\",\n        \"cvv\": \"<string>\",\n        \"firstTransactionId\": \"<string>\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"amount\": \"<string>\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"<string>\",\n        \"registerTokenValue\": \"<string>\",\n        \"register\": \"<boolean>\",\n        \"appKey\": \"<string>\",\n        \"recommendedAuthLevel\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"recurring\": {\n          \"type\": \"<enum>\",\n          \"initializationDate\": \"<yyyy-MM-dd'T'HH:mm:ssXXX>\",\n          \"expirationDate\": \"<yyyy-MM-dd'T'HH:mm:ssXXX>\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"<enum>\",\n        \"dsTransactionId\": \"<string>\",\n        \"status3DsDescription\": \"<string>\",\n        \"xid\": \"<string>\",\n        \"eciCode\": \"<enum>\",\n        \"cavv\": \"<string>\",\n        \"tavv\": \"<string>\"\n      },\n      \"sourcePaymentFlow\": \"<enum>\",\n      \"cardInstallments\": {\n        \"provider\": \"<string>\",\n        \"number\": \"<integer>\"\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"<string>\",\n    \"mcpAmount\": \"<string>\",\n    \"mcpRate\": \"<string>\",\n    \"mcpFxTableId\": \"<string>\",\n    \"mcpPartnerId\": \"<string>\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"<string>\",\n    \"exemption\": {\n      \"value\": \"<string>\",\n      \"rejectionHandling\": \"<string>\",\n      \"riskScore\": \"<string>\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"<string>\",\n      \"requestIP\": \"<string>\",\n      \"screenWidth\": \"<string>\",\n      \"javaEnabled\": \"<boolean>\",\n      \"timezoneOffset\": \"<string>\",\n      \"screenHeight\": \"<string>\",\n      \"userAgent\": \"<string>\",\n      \"colorDepth\": \"<string>\",\n      \"language\": \"<string>\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"<string>\",\n      \"sdkMaxTimeout\": \"<string>\",\n      \"sdkAppID\": \"<string>\",\n      \"sdkEncData\": \"<string>\",\n      \"sdkTransID\": \"<string>\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"<string>\",\n        \"x\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"crv\": \"<string>\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"<string>\",\n      \"shipIndicator\": \"<string>\",\n      \"preOrdered\": \"<boolean>\",\n      \"preOrderedDate\": \"<2019-03-27T10:57:59.000+01:00>\",\n      \"deliveryTimeFrame\": \"<string>\",\n      \"reordered\": \"<boolean>\",\n      \"merchantFunds\": {\n        \"amount\": \"<string>\",\n        \"currencyCode\": \"<string>\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"<string>\",\n      \"expiry\": \"<2025-03-27T00:00:00.000Z>\"\n    },\n    \"cardholder\": {\n      \"name\": \"<string>\",\n      \"accountInformation\": {\n        \"createDate\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"suspiciousActivity\": \"<boolean>\",\n        \"deliveryAddressFirstUsedDate\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"deliveryAdressUsageIndicator\": \"<string>\",\n        \"pastOrdersYear\": \"<integer>\",\n        \"pastOrdersDay\": \"<integer>\",\n        \"purchasesLastSixMonths\": \"<integer>\",\n        \"changeDate\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"changeIndicator\": \"<string>\",\n        \"passwordChanged\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"passwordChangeIndicator\": \"<string>\",\n        \"nameToRecipientMatch\": \"<boolean>\",\n        \"addCardAttemptsDay\": \"<string>\",\n        \"authMethod\": \"<string>\",\n        \"authDateTime\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"cardAddedDate\": \"<2019-03-27T10:57:59.000+01:00>\",\n        \"cardAddedIndicator\": \"<string>\"\n      },\n      \"billingAddress\": {\n        \"street\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"countryCode\": \"<string>\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"<string>\",\n      \"requestIP\": \"<string>\",\n      \"screenWidth\": \"<string>\",\n      \"javaEnabled\": \"<boolean>\",\n      \"timezoneOffset\": \"<string>\",\n      \"screenHeight\": \"<string>\",\n      \"userAgent\": \"<string>\",\n      \"colorDepth\": \"<string>\",\n      \"language\": \"<string>\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"<string>\",\n          \"price\": \"<string>\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"<string>\",\n            \"unitPrice\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"virtual\": \"<boolean>\",\n            \"listingDate\": \"<2019-03-27T10:57:59.000+01:00>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"unitPrice\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"virtual\": \"<boolean>\",\n            \"listingDate\": \"<2019-03-27T10:57:59.000+01:00>\"\n          }\n        ],\n        \"extCustomerId\": \"<string>\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"<string>\",\n          \"price\": \"<string>\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"<string>\",\n            \"unitPrice\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"virtual\": \"<boolean>\",\n            \"listingDate\": \"<2019-03-27T10:57:59.000+01:00>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"unitPrice\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"virtual\": \"<boolean>\",\n            \"listingDate\": \"<2019-03-27T10:57:59.000+01:00>\"\n          }\n        ],\n        \"extCustomerId\": \"<string>\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"language\": \"<string>\",\n      \"nin\": \"<string>\",\n      \"address\": {\n        \"street\": \"<string>\",\n        \"streetNo\": \"<string>\",\n        \"flatNo\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"city\": \"<string>\",\n        \"countryCode\": \"<string>\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"<string>\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"<string>\",\n      \"body\": \"<string>\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"<string>\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": \"<array>\",\n      \"key_1\": \"<array>\",\n      \"key_2\": \"<array>\"\n    }\n  },\n  \"deviceFingerprint\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab281910-274e-43b0-b74f-a2fa69a4649b",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\"\n  },\n  \"redirectUri\": \"string\",\n  \"qrCode\": \"string\",\n  \"orderId\": \"WZHF5FFDRJ140731GUEST000P01\",\n  \"iframeAllowed\": true,\n  \"threeDsProtocolVersion\": \"3DS2\",\n  \"extOrderId\": \"string\",\n  \"challengeParameters\": {\n    \"threeDsServerTransactionId\": \"0016f22b-f988-4358-b2c6-8917bba22037\",\n    \"acsTransID\": \"d7c1ee99-9478-44a6-b1f2-391e29c6b340\",\n    \"acsReferenceNumber\": \"3DS_LOA_ACS_201_13579\",\n    \"acsSignedContent\": \"c29tZUJhc2U2NGVuY29kZWRTdHJpbmc=\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ae78ae2-d144-4256-acde-7eb94922ae20",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"SUCCESS\",\n    \"severity\": \"string\"\n  },\n  \"redirectUri\": \"https://merch-prod.snd.payu.com/pay/?orderId=WZHF5FFDRJ140731GUEST000P01&token=eyJhbGciOiJIUzI1NiJ9.eyJvcmRlcklkIjoiV1pIRjVGRkRSSjE0MDczMUdVRVNUMDAwUDAxIiwicG9zSWQiOiJhYmMxMjM0IiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9DTElFTlQiXSwicGF5ZXJFbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHAiOjE2NzI3NjE4NjEsImlzcyI6IlBBWVUiLCJhdWQiOiJhcGktZ2F0ZXdheSIsInN1YiI6IlBheVUgc3ViamVjdCIsImp0aSI6IjYzMTA3M2Y0LThmMzgtNDNlZS1iOTc1LWVlNWIwZGI0ZWFiZSJ9.tBThoQDVgo9mpmh2AUDC5hkfecwtqO0L9LSCdXRYruk\",\n  \"iframeAllowed\": true,\n  \"threeDsProtocolVersion\": \"3DS2\",\n  \"orderId\": \"WZHF5FFDRJ140731GUEST000P01\",\n  \"extOrderId\": \"my_ext_order_id\",\n  \"payMethods\": {\n    \"payMethod\": {\n      \"card\": {\n        \"number\": \"string\",\n        \"expirationMonth\": 9,\n        \"expirationYear\": 2026\n      },\n      \"type\": \"CARD_TOKEN\",\n      \"value\": \"TOKC_XATB7DF8ACXYTVQIPLWTVPFRKQE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64ace985-00f5-45cc-8127-347e21352c17",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9a1ce46-d7f2-4202-a261-95e56f334de7",
+              "name": "Incorrect authentication. Check signature parameters and implementation of the signature algorithm.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d70fbd-ac8a-4d80-a13c-c90f76edcc37",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9753fe4-d588-494f-a909-dcf5930aa1d3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerIp\": \"127.0.0.1\",\n  \"merchantPosId\": \"140332\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"EUR\",\n  \"totalAmount\": \"1000\",\n  \"products\": [\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    },\n    {\n      \"name\": \"My product\",\n      \"unitPrice\": \"string\",\n      \"quantity\": \"string\",\n      \"virtual\": true\n    }\n  ],\n  \"continueUrl\": \"www.example.com/path\",\n  \"notifyUrl\": \"https://your.eshop.com/notify\",\n  \"additionalDescription\": \"<string>\",\n  \"visibleDescription\": \"<string>\",\n  \"statementDescription\": \"<string>\",\n  \"extOrderId\": \"<string>\",\n  \"validityTime\": \"100000\",\n  \"cardOnFile\": \"FIRST\",\n  \"recurring\": \"FIRST\",\n  \"donation\": {\n    \"amount\": 500,\n    \"organizationId\": \"string\"\n  },\n  \"buyer\": {\n    \"extCustomerId\": \"string\",\n    \"email\": \"email@email.com\",\n    \"phone\": \"+48 225108001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"nin\": \"string\",\n    \"language\": \"pl\",\n    \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n    \"delivery\": {\n      \"street\": \"string\",\n      \"postalBox\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"30\",\n      \"countryCode\": \"string\",\n      \"name\": \"string\",\n      \"recipientName\": \"string\",\n      \"recipientEmail\": \"string\",\n      \"recipientPhone\": \"string\"\n    }\n  },\n  \"shoppingCarts\": [\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    },\n    {\n      \"extCustomerId\": \"ext-customer-1\",\n      \"amount\": 24950,\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"fee\": \"string\",\n      \"shippingMethods\": [\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        },\n        {\n          \"country\": \"PL\",\n          \"price\": 250,\n          \"name\": \"Postal package\"\n        }\n      ]\n    }\n  ],\n  \"payMethods\": {\n    \"payMethod\": {\n      \"type\": \"BLIK_TOKEN\",\n      \"value\": \"c\",\n      \"clickToPay\": {\n        \"visa\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"authorizationCode\": \"777123\",\n      \"authorizationType\": \"AUTHORIZATION\",\n      \"card\": {\n        \"number\": \"5100052384536818\",\n        \"expirationMonth\": \"02\",\n        \"expirationYear\": \"29\",\n        \"cvv\": \"123\",\n        \"firstTransactionId\": \"MCC0111LL1121\"\n      },\n      \"specificData\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"amount\": \"string\",\n      \"blikData\": {\n        \"aliasLabelProposal\": \"string\",\n        \"registerTokenValue\": \"string\",\n        \"register\": true,\n        \"appKey\": \"string\",\n        \"recommendedAuthLevel\": \"REQUIRED_CONFIRMATION\",\n        \"countryCode\": \"PL\",\n        \"recurring\": {\n          \"type\": \"O\",\n          \"initializationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"expirationDate\": \"2026-10-01T00:00:00+02:00\",\n          \"authorizeDespiteRecurringNotSupported\": false\n        }\n      },\n      \"threeDsData\": {\n        \"status3Ds\": \"Y\",\n        \"dsTransactionId\": \"3b31b19d-1c06-4ea4-a85a-00af10c66588\",\n        \"status3DsDescription\": \"Authentication successful\",\n        \"xid\": \"string\",\n        \"eciCode\": 5,\n        \"cavv\": \"AAABBBEAUAAAABgICABQAAAAAAA=\",\n        \"tavv\": \"AgAAABBEAUAAAABg8CABQAAQEAAA=\"\n      },\n      \"sourcePaymentFlow\": \"VISA_MOBILE\",\n      \"cardInstallments\": {\n        \"provider\": \"BRD_INSTALLMENTS\",\n        \"number\": 6\n      }\n    }\n  },\n  \"mcpData\": {\n    \"mcpCurrency\": \"EUR\",\n    \"mcpAmount\": \"string\",\n    \"mcpRate\": \"string\",\n    \"mcpFxTableId\": \"string\",\n    \"mcpPartnerId\": \"6283a549-8b1a-430d-8a62-eea64327440e\"\n  },\n  \"threeDsAuthentication\": {\n    \"challengeRequested\": \"YES\",\n    \"exemption\": {\n      \"value\": \"LOW_RISK\",\n      \"rejectionHandling\": \"PERFORM_AUTHENTICATION\",\n      \"riskScore\": \"120 - low risk score calculated in Merchants antifraud tool\"\n    },\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    },\n    \"sdk\": {\n      \"sdkReferenceNumber\": \"DS_LOA_SDK_ADBV_739485_94783\",\n      \"sdkMaxTimeout\": \"string\",\n      \"sdkAppID\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkEncData\": \"9063b12c-fcde-43c7-b28e-8d0af5520e8a\",\n      \"sdkTransID\": \"b60c9879-ac77-4918-a317-7b01c4317053/8Q==.\",\n      \"sdkEphemPubKey\": {\n        \"y\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"x\": \"MRy7wofaw77myc7hZef23hmmEOE\",\n        \"kty\": \"EC\",\n        \"crv\": \"P-256\"\n      }\n    },\n    \"merchantRiskIndicator\": {\n      \"orderType\": \"LOAN\",\n      \"shipIndicator\": \"TICKETS\",\n      \"preOrdered\": false,\n      \"preOrderedDate\": \"2019-03-27T10:57:59.000+01:00\",\n      \"deliveryTimeFrame\": \"OVERNIGHT\",\n      \"reordered\": false,\n      \"merchantFunds\": {\n        \"amount\": \"string\",\n        \"currencyCode\": \"PLN\"\n      }\n    },\n    \"recurring\": {\n      \"frequency\": \"7\",\n      \"expiry\": \"2025-03-27T00:00:00.000Z\"\n    },\n    \"cardholder\": {\n      \"name\": \"John Doe\",\n      \"accountInformation\": {\n        \"createDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"suspiciousActivity\": false,\n        \"deliveryAddressFirstUsedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"deliveryAdressUsageIndicator\": \"THIS_TRANSACTION\",\n        \"pastOrdersYear\": 46,\n        \"pastOrdersDay\": 125,\n        \"purchasesLastSixMonths\": 12,\n        \"changeDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"changeIndicator\": \"THIS_TRANSACTION\",\n        \"passwordChanged\": \"2019-03-27T10:57:59.000+01:00\",\n        \"passwordChangeIndicator\": \"NO_CHANGE\",\n        \"nameToRecipientMatch\": true,\n        \"addCardAttemptsDay\": \"string\",\n        \"authMethod\": \"GUEST\",\n        \"authDateTime\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedDate\": \"2019-03-27T10:57:59.000+01:00\",\n        \"cardAddedIndicator\": \"THIS_TRANSACTION\"\n      },\n      \"billingAddress\": {\n        \"street\": \"Test Street\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"state\": \"str\",\n        \"countryCode\": \"PL\"\n      }\n    }\n  },\n  \"riskData\": {\n    \"browser\": {\n      \"acceptHeaders\": \"string\",\n      \"requestIP\": \"127.0.0.1\",\n      \"screenWidth\": \"string\",\n      \"javaEnabled\": false,\n      \"timezoneOffset\": \"string\",\n      \"screenHeight\": \"string\",\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\",\n      \"colorDepth\": \"string\",\n      \"language\": \"pl_PL\"\n    }\n  },\n  \"credit\": {\n    \"shoppingCarts\": [\n      {\n        \"shippingMethod\": {\n          \"type\": \"COLLECTION_POINT_PICKUP\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": false,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      },\n      {\n        \"shippingMethod\": {\n          \"type\": \"COURIER\",\n          \"price\": \"string\",\n          \"address\": {\n            \"pointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flatNo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"products\": [\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"unitPrice\": \"string\",\n            \"quantity\": \"string\",\n            \"virtual\": true,\n            \"listingDate\": \"string\"\n          }\n        ],\n        \"extCustomerId\": \"string\"\n      }\n    ],\n    \"applicant\": {\n      \"email\": \"test@test.com\",\n      \"phone\": \"string\",\n      \"firstName\": \"Joe\",\n      \"lastName\": \"Doe\",\n      \"language\": \"pl\",\n      \"nin\": \"string\",\n      \"address\": {\n        \"street\": \"Test Street\",\n        \"streetNo\": \"string\",\n        \"flatNo\": \"string\",\n        \"postalCode\": \"01-000\",\n        \"city\": \"Test City\",\n        \"countryCode\": \"PL\"\n      },\n      \"additionalInfo\": {\n        \"hasSuccessfullyFinishedOrderInShop\": \"YES\"\n      }\n    },\n    \"klarnaAttachment\": {\n      \"content_type\": \"string\",\n      \"body\": \"string\"\n    }\n  },\n  \"submerchant\": {\n    \"id\": \"string\"\n  },\n  \"settings\": {\n    \"cardInstallmentsOptions\": {\n      \"key_0\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_1\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ],\n      \"key_2\": [\n        1,\n        3,\n        5,\n        7,\n        9,\n        11,\n        13\n      ]\n    }\n  },\n  \"deviceFingerprint\": \"3e9fae0b3e6003a4093358167bc1079e\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e500805d-6b91-47fd-8334-246b8556066e",
+          "name": "Retrieve an Order",
+          "request": {
+            "name": "Retrieve an Order",
+            "description": {
+              "content": "Retrieve the status and details of an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "orderId",
+                  "description": "(Required) Order ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7abacfbe-dbe6-45c9-ae99-71e0ecb4eb74",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"shippingMethod\": {\n        \"country\": \"PL\",\n        \"price\": \"string\",\n        \"name\": \"parcell\"\n      },\n      \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n      \"extOrderId\": \"343242\",\n      \"orderCreateDate\": \"2023-01-03T14:58:17.443+01:00\",\n      \"notifyUrl\": \"http://localhost/OrderNotify/\",\n      \"customerIp\": \"127.0.0.1\",\n      \"merchantPosId\": \"145227\",\n      \"description\": \"New Order\",\n      \"additionalDescription\": \"New Order\",\n      \"validityTime\": \"86400\",\n      \"currencyCode\": \"PLN\",\n      \"totalAmount\": \"3200\",\n      \"buyer\": {\n        \"extCustomerId\": \"string\",\n        \"email\": \"email@email.com\",\n        \"phone\": \"+48 225108001\",\n        \"firstName\": \"John\",\n        \"lastName\": \"Doe\",\n        \"nin\": \"string\",\n        \"language\": \"pl\",\n        \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n        \"delivery\": {\n          \"street\": \"string\",\n          \"postalBox\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"30\",\n          \"countryCode\": \"string\",\n          \"name\": \"string\",\n          \"recipientName\": \"string\",\n          \"recipientEmail\": \"string\",\n          \"recipientPhone\": \"string\"\n        }\n      },\n      \"payMethod\": {\n        \"amount\": \"string\",\n        \"type\": \"PAYMENT_WALL\"\n      },\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"shoppingCarts\": [\n        {\n          \"extCustomerId\": \"ext-customer-1\",\n          \"amount\": 24950,\n          \"products\": [\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            },\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            }\n          ],\n          \"fee\": \"string\",\n          \"shippingMethods\": [\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            },\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            }\n          ]\n        },\n        {\n          \"extCustomerId\": \"ext-customer-1\",\n          \"amount\": 24950,\n          \"products\": [\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            },\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            }\n          ],\n          \"fee\": \"string\",\n          \"shippingMethods\": [\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            },\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            }\n          ]\n        }\n      ],\n      \"status\": \"COMPLETED\"\n    },\n    {\n      \"shippingMethod\": {\n        \"country\": \"PL\",\n        \"price\": \"string\",\n        \"name\": \"parcell\"\n      },\n      \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n      \"extOrderId\": \"343242\",\n      \"orderCreateDate\": \"2023-01-03T14:58:17.443+01:00\",\n      \"notifyUrl\": \"http://localhost/OrderNotify/\",\n      \"customerIp\": \"127.0.0.1\",\n      \"merchantPosId\": \"145227\",\n      \"description\": \"New Order\",\n      \"additionalDescription\": \"New Order\",\n      \"validityTime\": \"86400\",\n      \"currencyCode\": \"PLN\",\n      \"totalAmount\": \"3200\",\n      \"buyer\": {\n        \"extCustomerId\": \"string\",\n        \"email\": \"email@email.com\",\n        \"phone\": \"+48 225108001\",\n        \"firstName\": \"John\",\n        \"lastName\": \"Doe\",\n        \"nin\": \"string\",\n        \"language\": \"pl\",\n        \"birthDate\": \"2006-12-03T00:00:00.000+01:00\",\n        \"delivery\": {\n          \"street\": \"string\",\n          \"postalBox\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"30\",\n          \"countryCode\": \"string\",\n          \"name\": \"string\",\n          \"recipientName\": \"string\",\n          \"recipientEmail\": \"string\",\n          \"recipientPhone\": \"string\"\n        }\n      },\n      \"payMethod\": {\n        \"amount\": \"string\",\n        \"type\": \"CARD_TOKEN\"\n      },\n      \"products\": [\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        },\n        {\n          \"name\": \"My product\",\n          \"unitPrice\": \"string\",\n          \"quantity\": \"string\",\n          \"virtual\": true\n        }\n      ],\n      \"shoppingCarts\": [\n        {\n          \"extCustomerId\": \"ext-customer-1\",\n          \"amount\": 24950,\n          \"products\": [\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            },\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            }\n          ],\n          \"fee\": \"string\",\n          \"shippingMethods\": [\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            },\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            }\n          ]\n        },\n        {\n          \"extCustomerId\": \"ext-customer-1\",\n          \"amount\": 24950,\n          \"products\": [\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            },\n            {\n              \"name\": \"My product\",\n              \"unitPrice\": \"string\",\n              \"quantity\": \"string\",\n              \"virtual\": true\n            }\n          ],\n          \"fee\": \"string\",\n          \"shippingMethods\": [\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            },\n            {\n              \"country\": \"PL\",\n              \"price\": 250,\n              \"name\": \"Postal package\"\n            }\n          ]\n        }\n      ],\n      \"status\": \"COMPLETED\"\n    }\n  ],\n  \"properties\": [\n    {\n      \"name\": \"PAYMENT_ID\",\n      \"value\": \"1234567890\"\n    },\n    {\n      \"name\": \"PAYMENT_ID\",\n      \"value\": \"1234567890\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "762b112f-d21a-491a-bc66-309bfe258cf0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "478d8913-3e87-4a7b-b167-c9ee29608886",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fba7c668-6a8f-4c52-9e69-6ad3070b903b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52ab005e-2486-4ae1-8d81-cfe25493eae1",
+          "name": "Cancel an Order",
+          "request": {
+            "name": "Cancel an Order",
+            "description": {
+              "content": "Cancel (reject) orders processed by the PayU system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "orderId",
+                  "description": "(Required) Order ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af07d71d-343a-40d7-bc8e-816a1393ab6c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"WZHF5FFDRJ140731GUEST000P01\",\n  \"extOrderId\": \"3e5cac39-7e38-4139-8fd6-30adc06a61bd\",\n  \"status\": {\n    \"statusCode\": \"SUCCESS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dea9be04-a0d6-4cf5-a671-24b14090b676",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff647fbf-d6bf-4b2f-95ce-e80a7de290f1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d47d122b-9dc7-4ed6-bf4b-511f33bb1da5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "063d6cc2-3ee0-4605-9865-c80d41a2cb0a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7758dadd-a969-4a1e-bba1-07221957fe2c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c03cafdd-8c80-4883-8f8c-92c714041126",
+          "name": "Capture Authorized Order",
+          "request": {
+            "name": "Capture Authorized Order",
+            "description": {
+              "content": "Capture whole order and update its status to COMPLETED (ended).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders",
+                ":orderId",
+                "captures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "orderId",
+                  "description": "(Required) Order ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<null>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65049b75-b595-4233-a186-e4a22d75a95a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"SUCCESS\",\n    \"statusDesc\": \"Status was updated\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4ca65fe-1e9f-4efb-8224-1d6d820ffb5a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dfddb66-7eb3-4760-bba7-f7622788c68a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a9e7db5-5d6c-440c-aca8-8c68761bf930",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b47bd1bd-0963-4062-a625-6acc91a5c536",
+          "name": "(deprecated) Capture Authorized Order",
+          "request": {
+            "name": "(deprecated) Capture Authorized Order",
+            "description": {
+              "content": "Capture an order and update its status to COMPLETED (ended).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders",
+                ":orderId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "orderId",
+                  "description": "(Required) Order ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"<string>\",\n  \"orderStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3cf57ac1-a26f-443d-8982-e36ecb98cce5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n  \"orderStatus\": \"COMPLETED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"SUCCESS\",\n    \"statusDesc\": \"Status was updated\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01e91c3b-ba6c-4cdd-9be9-c40d91dfa362",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n  \"orderStatus\": \"COMPLETED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0869536-6127-413f-b6a7-bf1cf0dede18",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n  \"orderStatus\": \"COMPLETED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85c37f93-8f5a-43ac-af1b-105f6f8ef53c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"VVLR1HXK2S160929GUEST000P01\",\n  \"orderStatus\": \"COMPLETED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db811163-08f2-41b5-a94c-cab158331d51",
+          "name": "Retrieve a Transaction",
+          "request": {
+            "name": "Retrieve a Transaction",
+            "description": {
+              "content": "Retrieve the details of transactions created for an order with specified `orderId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2_1",
+                "orders",
+                ":orderId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "orderId",
+                  "description": "(Required) Order ID generated by the PayU system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c7e2bc3e-4f1c-4f3f-a119-e27abe4045cf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"payMethod\": {\n        \"value\": \"c\"\n      },\n      \"paymentFlow\": \"CARD\",\n      \"validUntil\": \"2024-06-20T09:05:44.238+02:00\",\n      \"card\": {\n        \"cardData\": {\n          \"cardNumberMasked\": \"543402******4014\",\n          \"cardScheme\": \"MC\",\n          \"cardProfile\": \"CONSUMER\",\n          \"cardClassification\": \"DEBIT\",\n          \"cardResponseCode\": \"000\",\n          \"cardResponseCodeDesc\": \"000 - OK\",\n          \"cardEciCode\": \"2\",\n          \"card3DsStatus\": \"Y\",\n          \"card3DsFrictionlessIndicator\": \"YES\",\n          \"card3DsStatusDescription\": \"MessageVersion=2.1.0,browser flow,3DS method not available,dynamic authentication,no cancel indicator,no status reason\",\n          \"cardBinCountry\": \"PL\",\n          \"firstTransactionId\": \"MCC0111LL1121\"\n        }\n      },\n      \"resultCode\": \"AUT_ERROR_NO_AUTHORIZATION\"\n    },\n    {\n      \"payMethod\": {\n        \"value\": \"c\"\n      },\n      \"paymentFlow\": \"CARD\",\n      \"validUntil\": \"2024-06-20T09:05:44.238+02:00\",\n      \"card\": {\n        \"cardData\": {\n          \"cardNumberMasked\": \"543402******4014\",\n          \"cardScheme\": \"MC\",\n          \"cardProfile\": \"CONSUMER\",\n          \"cardClassification\": \"DEBIT\",\n          \"cardResponseCode\": \"000\",\n          \"cardResponseCodeDesc\": \"000 - OK\",\n          \"cardEciCode\": \"2\",\n          \"card3DsStatus\": \"Y\",\n          \"card3DsFrictionlessIndicator\": \"YES\",\n          \"card3DsStatusDescription\": \"MessageVersion=2.1.0,browser flow,3DS method not available,dynamic authentication,no cancel indicator,no status reason\",\n          \"cardBinCountry\": \"PL\",\n          \"firstTransactionId\": \"MCC0111LL1121\"\n        }\n      },\n      \"resultCode\": \"AUT_ERROR_NO_AUTHORIZATION\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57fc0af5-6699-4b22-bee5-deb38241c45b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "908016da-a293-45aa-9bdf-0b6b526ef649",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae5af278-b0ce-4853-a5b8-53aeb2be9b5e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2_1",
+                    "orders",
+                    ":orderId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "orderId",
+                      "description": "(Required) Order ID generated by the PayU system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "716d50e9-5a32-4cde-8bdf-56ccb13ae989",
+    "name": "PayU GPO Europe REST Authorize Order API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

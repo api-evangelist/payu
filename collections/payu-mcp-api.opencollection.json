@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize MCP API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MCP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Rate Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/mcp-partners/:mcpPartnerId/fx-table",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpPartnerId",
+                "value": "6283a549-8b1a-430d-8a62-eea64327440e",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve current table with the conversion rates for the currencies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

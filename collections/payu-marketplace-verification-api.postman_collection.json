@@ -1,0 +1,4229 @@
+{
+  "item": [
+    {
+      "id": "5c67dc37-fb38-46cd-9392-5267dcca6dc9",
+      "name": "Marketplace-Verification",
+      "description": {
+        "content": "PayU is required by the Anti-Money Laundering Act to verify customers in this context. For this purpose, we provide a collection of endpoints to make it easier for you to verify sellers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38b4be04-4a9e-4067-a77c-72882e145d63",
+          "name": "Retrieve Verification Advice",
+          "request": {
+            "name": "Retrieve Verification Advice",
+            "description": {
+              "content": "Verify, on the basis of a Personal Identification Number or NIP number, whether a given individual/company has already been registered in the PayU system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification-advice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Company tax id of a entity. <b>Required if you want to check a status of a company.</b>",
+                    "type": "text/plain"
+                  },
+                  "key": "companyTaxId",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Personal identification number of individual. <b>Required if you want to check a status of a private person.</b>",
+                    "type": "text/plain"
+                  },
+                  "key": "pesonalIdentificationNumber",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a50b50b9-499f-493c-a89e-7051bfc7634d",
+              "name": "Advised verify action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-advice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "companyTaxId",
+                      "value": ""
+                    },
+                    {
+                      "key": "pesonalIdentificationNumber",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"advice\": \"BANK_ACCOUNT_VERIFICATION_REQUIRED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54536e21-d721-4778-88e2-8be7911b4dd0",
+              "name": "Invalid input query values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-advice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "companyTaxId",
+                      "value": ""
+                    },
+                    {
+                      "key": "pesonalIdentificationNumber",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e102310e-4ba9-45f6-9744-612b45130519",
+              "name": "Marketplace not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-advice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "companyTaxId",
+                      "value": ""
+                    },
+                    {
+                      "key": "pesonalIdentificationNumber",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1be036de-a9d5-4f25-bd28-015cb19a4f04",
+          "name": "Retrieve Marketplace Verification Status",
+          "request": {
+            "name": "Retrieve Marketplace Verification Status",
+            "description": {
+              "content": "Retrieve the status of the verification with the specific `Id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Value of the query `id` parameter is the same as the `verificationId`.",
+                    "type": "text/plain"
+                  },
+                  "key": "id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d438e4c-627e-4b6d-9800-bb552115de86",
+              "name": "Verification found. Http 200 will return body which will contain one of below statuses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"verificationId\": \"5002500000BVmycAAD\",\n  \"verificationType\": \"FULL\",\n  \"verificationTransferStatus\": \"null\",\n  \"processType\": \"OCCASIONAL\",\n  \"status\": \"REJECTED\",\n  \"sellerId\": \"123456test12\",\n  \"note\": \"string\",\n  \"errors\": [\n    {\n      \"content\": {\n        \"itemType\": \"SELLER_DOCUMENT\",\n        \"itemProperties\": {\n          \"documentType\": \"OTHER\",\n          \"documentId\": \"2\",\n          \"associateId\": \"string\"\n        }\n      },\n      \"code\": \"006\"\n    },\n    {\n      \"content\": {\n        \"itemType\": \"SELLER_DOCUMENT\",\n        \"itemProperties\": {\n          \"documentType\": \"RESIDENCE_PERMIT\",\n          \"documentId\": \"2\",\n          \"associateId\": \"string\"\n        }\n      },\n      \"code\": \"006\"\n    }\n  ],\n  \"updateDate\": \"2020-04-03T09:14:06.000Z\",\n  \"createDate\": \"2020-04-03T06:36:15.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bca7ae5-2fd6-4914-b481-21d1b26be7de",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5986e411-0332-4420-af33-e16e75d198f5",
+          "name": "Create Marketplace Verification",
+          "request": {
+            "name": "Create Marketplace Verification",
+            "description": {
+              "content": "Initialize the verification process of the seller.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sellerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"overridePayouts\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75567e69-d645-44ba-97a6-f9f61c60e81a",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"overridePayouts\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"verificationId\": \"aZl6Ja\",\n  \"status\": \"WAITING_FOR_DATA\",\n  \"sellerId\": \"seller_27\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68f4df6f-be21-44aa-9be0-c2109fb33615",
+              "name": "Invalid input data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"overridePayouts\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "901d075a-08c6-46fc-a436-9f19565e89c4",
+              "name": "Verification may be already in progress.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"overridePayouts\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2b83fed-51c5-48c8-85c7-05737e860b72",
+          "name": "Add Seller's Data",
+          "request": {
+            "name": "Add Seller's Data",
+            "description": {
+              "content": "This method allows to send data of the seller (submerchant).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "seller"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"sellerId\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"taxId\": \"<no spaces, eg. 1122334455>\",\n  \"legalForm\": \"<string>\",\n  \"address\": {\n    \"country\": \"<string>\",\n    \"street\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"city\": \"<string>\"\n  },\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"gusCode\": \"<string>\",\n  \"registryNumber\": \"<string>\",\n  \"registrationDate\": \"<YYYY-MM-DD>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f9f2c13-b3b2-4e63-9f48-d78f8aedef8f",
+              "name": "Data accepted for further verification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"sellerId\": \"seller_1\\\"\",\n  \"companyName\": \"Company 1\",\n  \"taxId\": \"1122334455\",\n  \"legalForm\": \"CIVIL_LAW_PARTNERSHIP\",\n  \"address\": {\n    \"country\": \"PL\",\n    \"street\": \"Grunwaldzka 186\",\n    \"zipcode\": \"60-166\",\n    \"city\": \"Poznan\"\n  },\n  \"email\": \"company@test.com\",\n  \"phone\": \"111222333\",\n  \"gusCode\": \"string\",\n  \"registryNumber\": \"string\",\n  \"registrationDate\": \"2019-07-07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c81a19e-1d5e-4be8-9a6c-4188c367fc89",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"sellerId\": \"seller_1\\\"\",\n  \"companyName\": \"Company 1\",\n  \"taxId\": \"1122334455\",\n  \"legalForm\": \"CIVIL_LAW_PARTNERSHIP\",\n  \"address\": {\n    \"country\": \"PL\",\n    \"street\": \"Grunwaldzka 186\",\n    \"zipcode\": \"60-166\",\n    \"city\": \"Poznan\"\n  },\n  \"email\": \"company@test.com\",\n  \"phone\": \"111222333\",\n  \"gusCode\": \"string\",\n  \"registryNumber\": \"string\",\n  \"registrationDate\": \"2019-07-07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed51210c-605b-483f-865a-3ded85a128f1",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"sellerId\": \"seller_1\\\"\",\n  \"companyName\": \"Company 1\",\n  \"taxId\": \"1122334455\",\n  \"legalForm\": \"CIVIL_LAW_PARTNERSHIP\",\n  \"address\": {\n    \"country\": \"PL\",\n    \"street\": \"Grunwaldzka 186\",\n    \"zipcode\": \"60-166\",\n    \"city\": \"Poznan\"\n  },\n  \"email\": \"company@test.com\",\n  \"phone\": \"111222333\",\n  \"gusCode\": \"string\",\n  \"registryNumber\": \"string\",\n  \"registrationDate\": \"2019-07-07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f99d15d-18ec-46e5-8206-de7348235208",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"sellerId\": \"seller_1\\\"\",\n  \"companyName\": \"Company 1\",\n  \"taxId\": \"1122334455\",\n  \"legalForm\": \"CIVIL_LAW_PARTNERSHIP\",\n  \"address\": {\n    \"country\": \"PL\",\n    \"street\": \"Grunwaldzka 186\",\n    \"zipcode\": \"60-166\",\n    \"city\": \"Poznan\"\n  },\n  \"email\": \"company@test.com\",\n  \"phone\": \"111222333\",\n  \"gusCode\": \"string\",\n  \"registryNumber\": \"string\",\n  \"registrationDate\": \"2019-07-07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c03a0810-6775-44dc-b153-859ec4775d22",
+          "name": "Add Associates Data",
+          "request": {
+            "name": "Add Associates Data",
+            "description": {
+              "content": "Send the data of the associates (representatives and beneficiaries according to the relevant instructions from PayU).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "associates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"associateType\": \"<string>\",\n  \"associateName\": \"<string>\",\n  \"associateSurname\": \"<string>\",\n  \"associateCitizenship\": \"<ISO Country Code>\",\n  \"associateCountryOfBirth\": \"<string>\",\n  \"associateBirthDate\": \"<YYYY-MM-DD>\",\n  \"associateIdentityNumber\": \"<string>\",\n  \"pepStatement\": \"<string>\",\n  \"verified\": \"<string>\",\n  \"externalVerificationData\": {\n    \"externalVerificationType\": \"<string>\",\n    \"documentNumber\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentExpiryDate\": \"<YYYY-MM-DD>\",\n    \"identityNumber\": \"<string>\",\n    \"nationality\": \"<string>\",\n    \"dateOfBirth\": \"<YYYY-MM-DD>\",\n    \"secondDocumentNumber\": \"<string>\",\n    \"secondDocumentType\": \"<string>\",\n    \"secondDocumentExpiryDate\": \"<YYYY-MM-DD>\",\n    \"identityNumberSecondDocument\": \"<string>\",\n    \"nationalitySecondDocument\": \"<string>\",\n    \"dateOfBirthSecondDocument\": \"<YYYY-MM-DD>\",\n    \"authologicConversationID\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "686b4db1-71a0-413b-89fd-f5bd4178421e",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"associateId\": \"dsada65\",\n  \"associateType\": \"<string>\",\n  \"associateName\": \"Jan\",\n  \"associateSurname\": \"Kowalski\",\n  \"associateCitizenship\": \"PL\",\n  \"associateCountryOfBirth\": \"PL\",\n  \"associateBirthDate\": \"1980-01-27\",\n  \"associateIdentityNumber\": \"90120789112\",\n  \"pepStatement\": \"true\",\n  \"verified\": \"true\",\n  \"externalVerificationData\": {\n    \"externalVerificationType\": \"<string>\",\n    \"documentNumber\": \"ABC123456\",\n    \"documentType\": \"ID_CARD\",\n    \"documentExpiryDate\": \"2030-09-23\",\n    \"identityNumber\": \"94091100007\",\n    \"nationality\": \"PL\",\n    \"dateOfBirth\": \"2000-09-11\",\n    \"secondDocumentNumber\": \"DFE123456\",\n    \"secondDocumentType\": \"PASSPORT\",\n    \"secondDocumentExpiryDate\": \"2030-09-23\",\n    \"identityNumberSecondDocument\": \"94091100007\",\n    \"nationalitySecondDocument\": \"PL\",\n    \"dateOfBirthSecondDocument\": \"2030-09-23\",\n    \"authologicConversationID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc5c6ac-4dd6-4162-9aa8-28995d603868",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"associateId\": \"dsada65\",\n  \"associateType\": \"<string>\",\n  \"associateName\": \"Jan\",\n  \"associateSurname\": \"Kowalski\",\n  \"associateCitizenship\": \"PL\",\n  \"associateCountryOfBirth\": \"PL\",\n  \"associateBirthDate\": \"1980-01-27\",\n  \"associateIdentityNumber\": \"90120789112\",\n  \"pepStatement\": \"true\",\n  \"verified\": \"true\",\n  \"externalVerificationData\": {\n    \"externalVerificationType\": \"<string>\",\n    \"documentNumber\": \"ABC123456\",\n    \"documentType\": \"ID_CARD\",\n    \"documentExpiryDate\": \"2030-09-23\",\n    \"identityNumber\": \"94091100007\",\n    \"nationality\": \"PL\",\n    \"dateOfBirth\": \"2000-09-11\",\n    \"secondDocumentNumber\": \"DFE123456\",\n    \"secondDocumentType\": \"PASSPORT\",\n    \"secondDocumentExpiryDate\": \"2030-09-23\",\n    \"identityNumberSecondDocument\": \"94091100007\",\n    \"nationalitySecondDocument\": \"PL\",\n    \"dateOfBirthSecondDocument\": \"2030-09-23\",\n    \"authologicConversationID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "473d5ac7-775a-45dd-bd60-2b634fb05019",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"associateId\": \"dsada65\",\n  \"associateType\": \"<string>\",\n  \"associateName\": \"Jan\",\n  \"associateSurname\": \"Kowalski\",\n  \"associateCitizenship\": \"PL\",\n  \"associateCountryOfBirth\": \"PL\",\n  \"associateBirthDate\": \"1980-01-27\",\n  \"associateIdentityNumber\": \"90120789112\",\n  \"pepStatement\": \"true\",\n  \"verified\": \"true\",\n  \"externalVerificationData\": {\n    \"externalVerificationType\": \"<string>\",\n    \"documentNumber\": \"ABC123456\",\n    \"documentType\": \"ID_CARD\",\n    \"documentExpiryDate\": \"2030-09-23\",\n    \"identityNumber\": \"94091100007\",\n    \"nationality\": \"PL\",\n    \"dateOfBirth\": \"2000-09-11\",\n    \"secondDocumentNumber\": \"DFE123456\",\n    \"secondDocumentType\": \"PASSPORT\",\n    \"secondDocumentExpiryDate\": \"2030-09-23\",\n    \"identityNumberSecondDocument\": \"94091100007\",\n    \"nationalitySecondDocument\": \"PL\",\n    \"dateOfBirthSecondDocument\": \"2030-09-23\",\n    \"authologicConversationID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fa9d7b2-d6aa-4259-99be-7997574a6afd",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"aZx65uY\",\n  \"associateId\": \"dsada65\",\n  \"associateType\": \"<string>\",\n  \"associateName\": \"Jan\",\n  \"associateSurname\": \"Kowalski\",\n  \"associateCitizenship\": \"PL\",\n  \"associateCountryOfBirth\": \"PL\",\n  \"associateBirthDate\": \"1980-01-27\",\n  \"associateIdentityNumber\": \"90120789112\",\n  \"pepStatement\": \"true\",\n  \"verified\": \"true\",\n  \"externalVerificationData\": {\n    \"externalVerificationType\": \"<string>\",\n    \"documentNumber\": \"ABC123456\",\n    \"documentType\": \"ID_CARD\",\n    \"documentExpiryDate\": \"2030-09-23\",\n    \"identityNumber\": \"94091100007\",\n    \"nationality\": \"PL\",\n    \"dateOfBirth\": \"2000-09-11\",\n    \"secondDocumentNumber\": \"DFE123456\",\n    \"secondDocumentType\": \"PASSPORT\",\n    \"secondDocumentExpiryDate\": \"2030-09-23\",\n    \"identityNumberSecondDocument\": \"94091100007\",\n    \"nationalitySecondDocument\": \"PL\",\n    \"dateOfBirthSecondDocument\": \"2030-09-23\",\n    \"authologicConversationID\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83e001d4-ceda-4222-8e6d-f58f3fca0118",
+          "name": "Add Files",
+          "request": {
+            "name": "Add Files",
+            "description": {
+              "content": "Upload documents to the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "494a9fc3-f526-45b8-bdca-f85ee1bc8f08",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"verifictionId\": \"aZx65uY\",\n  \"fileId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9823a22-2eb5-41fe-a703-4aeba89847a4",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9afc97b6-3342-4cc5-869b-554b1d84f225",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60f05ccc-bfc8-45d1-94c8-e46d41c71656",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1dbda1f-61e6-4f9a-abaa-b72add806a08",
+          "name": "Add Seller's Documents",
+          "request": {
+            "name": "Add Seller's Documents",
+            "description": {
+              "content": "This method allows to load company related documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "seller",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"documentId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c07cc2be-e697-47bb-9da2-b0137e8031bc",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"documentId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9d6fe70-34f6-4094-a330-2310771b0e66",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"documentId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0602a68a-11d0-425a-a0a8-3489e38f748a",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"documentId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c51c408-468c-4d79-b4ad-fc135b236519",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "seller",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"documentId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c45ac2b1-8ee5-4dbf-9f68-0385475e61db",
+          "name": "Add Associates Documents",
+          "request": {
+            "name": "Add Associates Documents",
+            "description": {
+              "content": "Upload required documents for associates (representatives or beneficiaries).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "associates",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentId\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"issueDate\": \"<YYYY-MM-DD>\",\n  \"expireDate\": \"<YYYY-MM-DD>\",\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e21d307-6718-4adf-a548-9fa84e03691e",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentId\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"issueDate\": \"<YYYY-MM-DD>\",\n  \"expireDate\": \"<YYYY-MM-DD>\",\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b23ad21-2152-413c-862c-52935bf8d5e1",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentId\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"issueDate\": \"<YYYY-MM-DD>\",\n  \"expireDate\": \"<YYYY-MM-DD>\",\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30feac62-dd25-4545-ad73-c67efd8d34cc",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentId\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"issueDate\": \"<YYYY-MM-DD>\",\n  \"expireDate\": \"<YYYY-MM-DD>\",\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb6f8e41-fda5-4d53-ace6-23123086bf64",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "associates",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"<string>\",\n  \"associateId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentId\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"issueDate\": \"<YYYY-MM-DD>\",\n  \"expireDate\": \"<YYYY-MM-DD>\",\n  \"note\": \"<string>\",\n  \"translationFiles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "313a0c0a-dbe1-42db-a585-3badebc7cb6e",
+          "name": "Create Order for Verification Transfer",
+          "request": {
+            "name": "Create Order for Verification Transfer",
+            "description": {
+              "content": "Create an order for the verification transfer service. In response you will be provided with the bank account details to make the transfer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification-transfers",
+                "manual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"transferCurrency\": \"<string>\",\n  \"email\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31be0386-8a8a-461f-8eaa-eab6bf0e13e2",
+              "name": "Details for bank transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-transfers",
+                    "manual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"verification-123\",\n  \"transferCurrency\": \"PLN\",\n  \"email\": \"user@example.com\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"expirationTime\": \"2020-08-20T14:03:44.473Z\",\n  \"transferData\": {\n    \"bankName\": \"mBank S.A.\",\n    \"accountNumber\": \"PL12114011243630011718031748\",\n    \"swiftCode\": \"BREXPLPW\",\n    \"recipientName\": \"PayU S.A.\",\n    \"recipientAddress\": \"ul. Grunwaldzka 186, 60-166 Poznań\",\n    \"transferTitle\": \"Verification transfer XX1718031748XX\",\n    \"transferAmount\": 101,\n    \"transferCurrency\": \"PLN\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5032cf5b-5995-46d4-b0fc-b5c55139195a",
+              "name": "Error encountered during posting the data for verification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-transfers",
+                    "manual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"verification-123\",\n  \"transferCurrency\": \"PLN\",\n  \"email\": \"user@example.com\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3808935-e6a1-4dd0-b7f7-cb4414f42d40",
+              "name": "Error encountered during posting the data for verification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-transfers",
+                    "manual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"verification-123\",\n  \"transferCurrency\": \"PLN\",\n  \"email\": \"user@example.com\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f310c544-2161-4b03-b0d8-90585be57f1d",
+              "name": "Error encountered during posting the data for verification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification-transfers",
+                    "manual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"verification-123\",\n  \"transferCurrency\": \"PLN\",\n  \"email\": \"user@example.com\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef7515cf-3abb-4779-bc3b-1c71b305fb9c",
+          "name": "Add Bank Account for Payouts",
+          "request": {
+            "name": "Add Bank Account for Payouts",
+            "description": {
+              "content": "Send bank account data for the payouts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "payouts",
+                "bankAccountData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bankDataId\": \"<string>\",\n  \"verificationId\": \"<string>\",\n  \"accountNumberRequested\": \"<IBAN>\",\n  \"payoutDataVerificationType\": \"<string>\",\n  \"foreign\": \"<string>\",\n  \"verified\": \"<string>\",\n  \"verificationTransferId\": \"<string>\",\n  \"hasDocument\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19c76aa6-02d8-41f5-86e5-e7d353417e45",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "bankAccountData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"01102020\",\n  \"verificationId\": \"verification-123\",\n  \"accountNumberRequested\": \"PL1122334455667788991010111223345\",\n  \"payoutDataVerificationType\": \"BANK_STATEMENT\",\n  \"foreign\": \"true\",\n  \"verified\": \"false\",\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"hasDocument\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbfb5e30-65a8-486d-b8dd-5230576c054e",
+              "name": "Error encountered during posting the data for verification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "bankAccountData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"01102020\",\n  \"verificationId\": \"verification-123\",\n  \"accountNumberRequested\": \"PL1122334455667788991010111223345\",\n  \"payoutDataVerificationType\": \"BANK_STATEMENT\",\n  \"foreign\": \"true\",\n  \"verified\": \"false\",\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"hasDocument\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01717989-c549-4592-a0d0-343e80c2bb96",
+              "name": "Error encountered during posting the data for verification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "bankAccountData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"01102020\",\n  \"verificationId\": \"verification-123\",\n  \"accountNumberRequested\": \"PL1122334455667788991010111223345\",\n  \"payoutDataVerificationType\": \"BANK_STATEMENT\",\n  \"foreign\": \"true\",\n  \"verified\": \"false\",\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"hasDocument\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"error\": \"access_denied\",\n    \"error_description\": \"Access is denied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56a28e69-c00d-4d9b-9195-2555ccc1a1a2",
+              "name": "Error encountered during posting the data for verification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "bankAccountData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"01102020\",\n  \"verificationId\": \"verification-123\",\n  \"accountNumberRequested\": \"PL1122334455667788991010111223345\",\n  \"payoutDataVerificationType\": \"BANK_STATEMENT\",\n  \"foreign\": \"true\",\n  \"verified\": \"false\",\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"hasDocument\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "097a55e9-60ea-4861-bc16-aa980eef7774",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "bankAccountData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"01102020\",\n  \"verificationId\": \"verification-123\",\n  \"accountNumberRequested\": \"PL1122334455667788991010111223345\",\n  \"payoutDataVerificationType\": \"BANK_STATEMENT\",\n  \"foreign\": \"true\",\n  \"verified\": \"false\",\n  \"verificationTransferId\": \"5f7007da-8e05-4f0f-9503-05c053034bde\",\n  \"hasDocument\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c010612b-b2d3-464c-bc89-c475d7da958c",
+          "name": "Add Payoneer Account for Payouts",
+          "request": {
+            "name": "Add Payoneer Account for Payouts",
+            "description": {
+              "content": "Send bank account data for the payouts. Method is reserved for the users who have verified Payoneer account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "payouts",
+                "payoneer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bankDataId\": \"<string>\",\n  \"verificationId\": \"<string>\",\n  \"payoneerId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fa0beae-f7ca-41a4-9c0d-6391d0dd27d4",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "payoneer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"payoneerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "373ec5ea-ab03-41a9-b85b-0f923a9cded9",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "payoneer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"payoneerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fc3c8e2-44ad-4020-bc87-6eb53cd83866",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "payoneer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"payoneerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59e02413-1f8e-46cc-90eb-53c35a25ba3e",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "payoneer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"payoneerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40b4c0a2-711f-47f6-bc4b-c89e64d26ae7",
+          "name": "Add Worldfirst Account for Payouts",
+          "request": {
+            "name": "Add Worldfirst Account for Payouts",
+            "description": {
+              "content": "Send bank account data for the payouts. Method is reserved for the users who have verified Worldfirst account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "dataloading",
+                "payouts",
+                "worldfirst"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bankDataId\": \"<string>\",\n  \"verificationId\": \"<string>\",\n  \"referenceCustomerId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aafc51e9-6f21-490b-a5de-fa03deff7593",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "worldfirst"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"referenceCustomerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2957a57b-cac0-443e-a9c4-fa9e36ec4502",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "worldfirst"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"referenceCustomerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb08ac39-9214-4843-a818-cd3ca1c77152",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "worldfirst"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"referenceCustomerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99c57aad-8d4e-46a7-9c91-6b7a769b2957",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "dataloading",
+                    "payouts",
+                    "worldfirst"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankDataId\": \"acc1sd\",\n  \"verificationId\": \"hfs6sfa\",\n  \"referenceCustomerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7341ac27-e9dd-432b-9677-730526d95a05",
+          "name": "Complete Marketplace Verification",
+          "request": {
+            "name": "Complete Marketplace Verification",
+            "description": {
+              "content": "Inform PayU about completing verification process.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79b40284-2192-4088-8fc9-313cbef0d29d",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1be92498-0198-4a0b-b012-37f2ead397eb",
+              "name": "Invalid input. Reason specified in content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"code\": \"string\",\n    \"codeLiteral\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec1bdc6d-dbad-4d80-87c9-f8bbb82114b9",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaff1237-5d89-468e-9383-81a2bca49b64",
+              "name": "Verification state does not allow operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "839e44b8-7252-4e46-abf5-d00fd4c232d7",
+          "name": "Cancel Verification",
+          "request": {
+            "name": "Cancel Verification",
+            "description": {
+              "content": "Cancel verification on every step of verification providing the reason.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "aml-verification",
+                "v1",
+                "verification",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationId\": \"<string>\",\n  \"rejectionReasonComment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28d70531-accb-4668-bec7-9f36924d73ed",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\",\n  \"rejectionReasonComment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2b14ac6-f1f6-4455-beda-5c169a7b67fe",
+              "name": "Verification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\",\n  \"rejectionReasonComment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"statusCode\": \"string\",\n    \"severity\": \"string\",\n    \"statusDesc\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2e35b1b-b8d1-475d-9b72-96463007e8b4",
+              "name": "Verification state does not allow cancel.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "aml-verification",
+                    "v1",
+                    "verification",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Content type",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Auth token",
+                    "key": "Authorization",
+                    "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verificationId\": \"hfs6sfa\",\n  \"rejectionReasonComment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": \"409\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.payu.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c187e9cf-a15e-465c-b0ca-9f8a0704904b",
+    "name": "PayU GPO Europe REST Authorize Marketplace-Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThis reference is designed to assist you in effectively utilizing the PayU REST API to enhance your online payment capabilities. Whether you're running an e-commerce store or developing applications that require secure and seamless payment processing, our API offers a range of features to meet your needs.\n\nOur API offers a comprehensive set of endpoints to empower you with full control over your payment processes. With these endpoints, you can seamlessly create, capture, cancel, and retrieve orders, conduct payouts, and access essential reports.\n\nFor more details on the integration, please refer to the official <a href=\"/europe/docs/\">PayU documentation</a>. It provides comprehensive explanations, code samples, and best practices for seamless integration of the PayU API into your applications.\n\n## Testing\n\n### Production Environment\n\nFor a basic integration, including only a redirection to PayU hosted payment page, it is perfectly enough to use the public test point of sale. However, if you would like to test a full set of endpoints, including e.g. refunds, consider registering for a sandbox account.\n\n**Public Test POS (point of sale)**\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           145227 |\n| OAuth protocol - client_id     |                           145227 |\n| Second key (MD5)               | 13a980d4f851f3d9a1cfc792fb1f5e50 |\n| OAuth protocol - client_secret | 12f071174cb7eb79d4aac5bc2f07563f |\n\n### Sandbox Environment\n\nSandbox is an almost identical copy of PayU production system. It can be used for integration and testing purposes.\n\n**Public Test POS (Point of Sale)**\n\nAlthough it is best to <a href=\"https://registration-merch-prod.snd.payu.com/boarding/#/registerSandbox/\" target=\"_blank\">create your own account</a> to later be able to configure it as needed, you may also use a public sandbox test POS without registering:\n\n| Key name                       |                            Value |\n| ------------------------------ | -------------------------------: |\n| POS ID (pos_id)                |                           300746 |\n| OAuth protocol - client_id     |                           300746 |\n| Second key (MD5)               | b6ca15b0d1020e8094d9b5f8d163db54 |\n| OAuth protocol - client_secret | 2ee86a66e5d97e3fadc400c9f19b065d |\n\nThe availability of the sandbox environment can be checked on the <a href=\"https://status.snd.payu.com/\" target=\"_blank\">Status page</a>.\n\n**Testing Card Payments**\n\nIn order to test card payments on sandbox, please use credentials displayed on the <a href=\"/europe/docs/testing/sandbox/\" target=\"_blank\">Sandbox</a> documentation page.",
+      "type": "text/plain"
+    }
+  }
+}

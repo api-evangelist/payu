@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "payu",
+    "captured_at": "2026-08-17T124503",
+    "source_url": "https://corporate.payu.com/",
+    "source_type": "Website",
+    "file": "payu-2026-08-17T124503.png",
+    "bytes": 614035,
+    "capture": "playwright-local"
+  }
+]

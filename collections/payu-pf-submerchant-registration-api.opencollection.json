@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayU GPO Europe REST Authorize PF-Submerchant-Registration API",
+    "version": "2.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PF-Submerchant-Registration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Submerchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.payu.com/api/v2_1/firms/:firmPublicId/submerchants",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmPublicId",
+                "value": "",
+                "type": "path",
+                "description": "Firm id in alphanumeric format, visible in the merchant panel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Submerchant"
+        },
+        {
+          "info": {
+            "name": "Retrieve Submerchant Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.payu.com/api/v2_1/firms/:firmPublicId/submerchants/:submerchantId",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmPublicId",
+                "value": "",
+                "type": "path",
+                "description": "Firm id in alphanumeric format, visible in the merchant panel."
+              },
+              {
+                "name": "submerchantId",
+                "value": "",
+                "type": "path",
+                "description": "Id returned by PayU upon submerchant registration."
+              }
+            ]
+          },
+          "docs": "Retrieve Submerchant Data"
+        },
+        {
+          "info": {
+            "name": "Update Submerchant Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://secure.payu.com/api/v2_1/firms/:firmPublicId/submerchants/:submerchantId",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 3e5cac39-7e38-4139-8fd6-30adc06a61bd"
+              }
+            ],
+            "params": [
+              {
+                "name": "firmPublicId",
+                "value": "",
+                "type": "path",
+                "description": "Firm id in alphanumeric format, visible in the merchant panel."
+              },
+              {
+                "name": "submerchantId",
+                "value": "",
+                "type": "path",
+                "description": "Id returned by PayU upon submerchant registration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Submerchant Data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
