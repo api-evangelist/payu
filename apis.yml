@@ -29,6 +29,17 @@ tags:
   - Payments
   - Payment Processing
   - Fintech
+  - Financial-Services
+  - Subscription
+  - Fraud Detection
+  - Checkout
+  - Marketplace
+  - Tokenization
+  - Emerging Markets
+tags_raw:
+  - Payments
+  - Payment Processing
+  - Fintech
   - Financial Services
   - Subscriptions
   - Fraud Detection
@@ -47,6 +58,13 @@ apis:
   humanURL: https://docs.payu.in/reference/introduction-api-reference
   baseURL: https://info.payu.in
   tags:
+  - Payments
+  - India
+  - Checkout
+  - Subscription
+  - Payouts
+  - Settlement
+  tags_raw:
   - Payments
   - India
   - Checkout
@@ -91,6 +109,13 @@ apis:
   humanURL: https://developers.paymentsos.com/docs.html
   baseURL: https://api.paymentsos.com
   tags:
+  - Payments
+  - Orchestration
+  - Enterprise
+  - Routing
+  - Webhook
+  - Risk Management
+  tags_raw:
   - Payments
   - Orchestration
   - Enterprise
@@ -324,6 +349,8 @@ apis:
   humanURL: https://developers.payu.com/europe/api/
   baseURL: https://secure.payu.com
   tags:
+  - Payment Methods
+  tags_raw:
   - Payment-Methods
   properties:
   - type: OpenAPI
