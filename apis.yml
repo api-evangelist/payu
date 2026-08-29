@@ -7,6 +7,18 @@ description: >-
   subscriptions, fraud detection, checkout optimization, marketplace operations,
   tokenization, and financial services. PayU processes 4 million transactions
   daily for 450,000+ merchants through 450+ local payment methods.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
