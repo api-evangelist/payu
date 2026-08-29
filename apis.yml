@@ -536,6 +536,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/payu/refs/heads/main/json-ld/payu-europe-rest-api.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/payu-capability-edges.yml
+    name: PayU Business Capability Map
   - type: AgenticAccess
     url: agentic-access/payu-agentic-access.yml
   - type: TrustCenter
