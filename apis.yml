@@ -361,7 +361,7 @@ apis:
   humanURL: https://developers.payu.com/europe/api/
   baseURL: https://secure.payu.com
   tags:
-  - Payment Methods
+  - Payment-Methods
   tags_raw:
   - Payment-Methods
   properties:
