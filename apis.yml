@@ -517,6 +517,8 @@ apis:
   humanURL: https://developers.payu.com/europe/api/
   baseURL: https://secure.payu.com
   tags:
+  - Tokens
+  tags_raw:
   - Token
   properties:
   - type: OpenAPI
