@@ -1,34 +1,20 @@
 {
   "provider": "payu",
   "sources": [
-    "payu-authorize-api-openapi.yml",
-    "payu-card-installments-api-openapi.yml",
-    "payu-fx-reference-api-openapi.yml",
-    "payu-marketplace-seller-api-openapi.yml",
-    "payu-marketplace-verification-api-openapi.yml",
-    "payu-mcp-api-openapi.yml",
-    "payu-order-api-openapi.yml",
-    "payu-partner-merchant-registration-api-openapi.yml",
-    "payu-payment-methods-api-openapi.yml",
-    "payu-payout-api-openapi.yml",
-    "payu-pf-submerchant-registration-api-openapi.yml",
-    "payu-refund-api-openapi.yml",
-    "payu-shop-api-openapi.yml",
-    "payu-statements-api-openapi.yml",
-    "payu-token-api-openapi.yml"
+    "_original/payu-europe-rest-api.yaml"
   ],
   "outputs": [
     "payu-authorize-api-openapi.yml",
     "payu-card-installments-api-openapi.yml",
     "payu-fx-reference-api-openapi.yml",
+    "payu-mcp-api-openapi.yml",
     "payu-marketplace-seller-api-openapi.yml",
     "payu-marketplace-verification-api-openapi.yml",
-    "payu-mcp-api-openapi.yml",
     "payu-order-api-openapi.yml",
+    "payu-pf-submerchant-registration-api-openapi.yml",
     "payu-partner-merchant-registration-api-openapi.yml",
     "payu-payment-methods-api-openapi.yml",
     "payu-payout-api-openapi.yml",
-    "payu-pf-submerchant-registration-api-openapi.yml",
     "payu-refund-api-openapi.yml",
     "payu-shop-api-openapi.yml",
     "payu-statements-api-openapi.yml",
@@ -37,6 +23,26 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "payu-europe-rest-api.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "payu-authorize-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-card-installments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-fx-reference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-marketplace-seller-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-marketplace-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-mcp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-order-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-partner-merchant-registration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-payout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-pf-submerchant-registration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-refund-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-shop-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "payu-token-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
