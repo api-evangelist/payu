@@ -254,54 +254,69 @@ paths:
                 $ref: '#/components/schemas/404'
 components:
   schemas:
-    MarketplacePayout:
+    account:
       type: object
-      title: Payout for Marketplace
       required:
-      - shopId
-      - payout
-      - account
+      - accountNumber
+      description: Information about account to which payout should be sent.
       properties:
-        shopId:
+        accountNumber:
           type: string
-          description: Public identifier for the shop within PayU, under which payout will be executed.
-          example: 1a2B3Cx
-        account:
-          type: object
-          required:
-          - extCustomerId
-          description: Information about submerchant account to which payout should be sent.
-          properties:
-            extCustomerId:
-              type: string
-              description: Unique submerchant identifier assigned by the Marketplace.
-              example: submerchant1
-        payout:
-          type: object
-          required:
-          - currencyCode
-          - amount
-          - extPayoutId
-          properties:
-            description:
-              type: string
-              description: Payout description.
-            extPayoutId:
-              type: string
-              description: External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.
-              minLength: 1
-              maxLength: 64
-            amount:
-              type: long
-              description: Amount for which Payout should be created.
-              example: 49
-            currencyCode:
-              type: string
-              format: ISO4217
-              minLength: 3
-              maxLength: 3
-              description: Shop currency from which the conversion will be made.
-              example: PLN
+          description: 'Bank account number. Required account formats for foreign transfers: Polish account: NRB, IBAN. Czech account: IBAN, internal in ([0-9]{1,6}[ -])?[0-9]{2,10}[ /][0-9]{4}) format. As for now, there is no format restrictions for national bank transfers.'
+        bankName:
+          type: string
+          description: Name of the bank. <b>Required for <code>foreign</code> flag set to true</b>.
+        swiftCode:
+          type: string
+          description: Bank's SWIFT code. <b>Required for <code>foreign</code> flag set to true</b>.
+    customerAddress:
+      type: object
+      required:
+      - name
+      description: Payout recipient's name.
+      properties:
+        name:
+          type: string
+          description: Payout recipient's name.
+        countryCode:
+          type: string
+          description: Payout recipient's address details. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>.
+        city:
+          type: string
+          description: Payout recipient's address details - city. <b>Required for <code>foreign</code> flag set to true</b>.
+        postalCode:
+          type: string
+          description: Payout recipient's address details - postal code.
+        street:
+          type: string
+          description: Payout recipient's address details - street. <b>Required for <code>foreign</code> flag set to true</b>.
+    payout:
+      type: object
+      description: Payout information.
+      required:
+      - amount
+      - extPayoutId
+      properties:
+        description:
+          type: string
+          description: Payout description.
+        extPayoutId:
+          type: string
+          description: External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.
+          minLength: 1
+          maxLength: 64
+        amount:
+          type: long
+          description: Amount for which Payout should be created.
+          example: 10000
+        additionalVariables:
+          type: string
+          format: VS=888111
+          description: Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market</b>.
+          example: VS=888111
+        foreign:
+          type: string
+          description: Flag indicating whether payout was made to a foreign account.
     payee:
       type: object
       description: Required section designed to limit the risk of fraud or money laundering.
@@ -367,175 +382,6 @@ components:
               format: VS=888111
               description: Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market.</b>
               example: VS=888111
-    '403':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            error:
-              type: string
-              description: Error type.
-              enum:
-              - access_denied
-            error_description:
-              type: string
-              description: Description of error.
-              enum:
-              - Access is denied
-    '400':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            severity:
-              type: string
-              description: error severity type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
-    BankAccountPayout:
-      type: object
-      title: Bank Account Payout
-      required:
-      - shopId
-      - payout
-      - account
-      - customerAddress
-      properties:
-        shopId:
-          type: string
-          description: Public identifier for the shop within PayU, under which payout will be executed.
-          example: 1a2B3Cx
-        payout:
-          $ref: '#/components/schemas/payout'
-        account:
-          $ref: '#/components/schemas/account'
-        customerAddress:
-          $ref: '#/components/schemas/customerAddress'
-        bankAddress:
-          $ref: '#/components/schemas/bankAddress'
-    account:
-      type: object
-      required:
-      - accountNumber
-      description: Information about account to which payout should be sent.
-      properties:
-        accountNumber:
-          type: string
-          description: 'Bank account number. Required account formats for foreign transfers: Polish account: NRB, IBAN. Czech account: IBAN, internal in ([0-9]{1,6}[ -])?[0-9]{2,10}[ /][0-9]{4}) format. As for now, there is no format restrictions for national bank transfers.'
-        bankName:
-          type: string
-          description: Name of the bank. <b>Required for <code>foreign</code> flag set to true</b>.
-        swiftCode:
-          type: string
-          description: Bank's SWIFT code. <b>Required for <code>foreign</code> flag set to true</b>.
-    bankAddress:
-      type: object
-      description: Bank address information.
-      properties:
-        street:
-          type: string
-          description: Bank address information - street. <b>Required for <code>foreign</code> flag set to true</b>.
-        postalCode:
-          type: string
-          description: Bank address information - postal code. <b>Required for <code>foreign</code> flag set to true</b>.
-        city:
-          type: string
-          description: Bank address information - city. <b>Required for <code>foreign</code> flag set to true</b>.
-        countryCode:
-          type: string
-          description: Bank address information. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>.
-    CardPayout:
-      type: object
-      title: Card Payout
-      required:
-      - shopId
-      - payout
-      - payee
-      - customerAddress
-      properties:
-        shopId:
-          type: string
-          description: Public identifier for the shop within PayU, under which payout will be executed.
-          example: 1a2B3Cx
-        payout:
-          $ref: '#/components/schemas/payout'
-        payee:
-          $ref: '#/components/schemas/payee'
-        customerAddress:
-          $ref: '#/components/schemas/customerAddress'
-        cardToken:
-          type: string
-          description: Card token representing card to which payout will be made. <b>Required in case of a payout to the card token</b>.
-          example: TOKC_2IHRST6HKSST3H62K2GS8pElI862
-        card:
-          $ref: '#/components/schemas/cardForPayout'
-    '401':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
-    fxData:
-      type: object
-      description: Section containing details of the payout conversion.
-      required:
-      - partnerId
-      - currencyCode
-      - amount
-      - rate
-      - tableId
-      properties:
-        partnerId:
-          type: string
-          description: Partner id for currency exchange at PayU.
-          example: 9999e44b-f68f-42e1-ad6c-3735ba1e2954
-        currencyCode:
-          type: string
-          format: ISO4217
-          minLength: 3
-          maxLength: 3
-          enum:
-          - PLN
-          - EUR
-          - CZK
-          description: Currency code after conversion. Currently supported currency codes are **PLN**, **EUR**, **CZK**.
-          example: EUR
-        amount:
-          type: long
-          description: The amount of payout after conversion that the marketplace seller will receive.
-          example: 11
-        rate:
-          type: double
-          description: The rate at which the payout currency is converted.
-          example: 0.22458
-        tableId:
-          type: string
-          description: The ID of the exchange rate table retrieved by the merchant from PayU, determining the basis for currency conversion during payment.
-          example: '2055'
     FxPayout:
       type: object
       title: FxPayout
@@ -587,33 +433,205 @@ components:
               example: PLN
         fxData:
           $ref: '#/components/schemas/fxData'
-    payout:
+    bankAddress:
       type: object
-      description: Payout information.
-      required:
-      - amount
-      - extPayoutId
+      description: Bank address information.
       properties:
-        description:
+        street:
           type: string
-          description: Payout description.
-        extPayoutId:
+          description: Bank address information - street. <b>Required for <code>foreign</code> flag set to true</b>.
+        postalCode:
           type: string
-          description: External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.
-          minLength: 1
-          maxLength: 64
+          description: Bank address information - postal code. <b>Required for <code>foreign</code> flag set to true</b>.
+        city:
+          type: string
+          description: Bank address information - city. <b>Required for <code>foreign</code> flag set to true</b>.
+        countryCode:
+          type: string
+          description: Bank address information. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>.
+    '404':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            statusDesc:
+              type: string
+              description: Error description.
+    MarketplacePayout:
+      type: object
+      title: Payout for Marketplace
+      required:
+      - shopId
+      - payout
+      - account
+      properties:
+        shopId:
+          type: string
+          description: Public identifier for the shop within PayU, under which payout will be executed.
+          example: 1a2B3Cx
+        account:
+          type: object
+          required:
+          - extCustomerId
+          description: Information about submerchant account to which payout should be sent.
+          properties:
+            extCustomerId:
+              type: string
+              description: Unique submerchant identifier assigned by the Marketplace.
+              example: submerchant1
+        payout:
+          type: object
+          required:
+          - currencyCode
+          - amount
+          - extPayoutId
+          properties:
+            description:
+              type: string
+              description: Payout description.
+            extPayoutId:
+              type: string
+              description: External identificator of Payout assigned by Merchant. Parameter must be unique within the scope of a given shop, upon encountering an error, you should use a different value.
+              minLength: 1
+              maxLength: 64
+            amount:
+              type: long
+              description: Amount for which Payout should be created.
+              example: 49
+            currencyCode:
+              type: string
+              format: ISO4217
+              minLength: 3
+              maxLength: 3
+              description: Shop currency from which the conversion will be made.
+              example: PLN
+    '403':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Error type.
+              enum:
+              - access_denied
+            error_description:
+              type: string
+              description: Description of error.
+              enum:
+              - Access is denied
+    CardPayout:
+      type: object
+      title: Card Payout
+      required:
+      - shopId
+      - payout
+      - payee
+      - customerAddress
+      properties:
+        shopId:
+          type: string
+          description: Public identifier for the shop within PayU, under which payout will be executed.
+          example: 1a2B3Cx
+        payout:
+          $ref: '#/components/schemas/payout'
+        payee:
+          $ref: '#/components/schemas/payee'
+        customerAddress:
+          $ref: '#/components/schemas/customerAddress'
+        cardToken:
+          type: string
+          description: Card token representing card to which payout will be made. <b>Required in case of a payout to the card token</b>.
+          example: TOKC_2IHRST6HKSST3H62K2GS8pElI862
+        card:
+          $ref: '#/components/schemas/cardForPayout'
+    fxData:
+      type: object
+      description: Section containing details of the payout conversion.
+      required:
+      - partnerId
+      - currencyCode
+      - amount
+      - rate
+      - tableId
+      properties:
+        partnerId:
+          type: string
+          description: Partner id for currency exchange at PayU.
+          example: 9999e44b-f68f-42e1-ad6c-3735ba1e2954
+        currencyCode:
+          type: string
+          format: ISO4217
+          minLength: 3
+          maxLength: 3
+          enum:
+          - PLN
+          - EUR
+          - CZK
+          description: Currency code after conversion. Currently supported currency codes are **PLN**, **EUR**, **CZK**.
+          example: EUR
         amount:
           type: long
-          description: Amount for which Payout should be created.
-          example: 10000
-        additionalVariables:
+          description: The amount of payout after conversion that the marketplace seller will receive.
+          example: 11
+        rate:
+          type: double
+          description: The rate at which the payout currency is converted.
+          example: 0.22458
+        tableId:
           type: string
-          format: VS=888111
-          description: Allows sending additional information to the system (Variable Symbol). Data from this field is send only to the supporting banks. <b>This solution is dedicated only for Czech market</b>.
-          example: VS=888111
-        foreign:
+          description: The ID of the exchange rate table retrieved by the merchant from PayU, determining the basis for currency conversion during payment.
+          example: '2055'
+    BankAccountPayout:
+      type: object
+      title: Bank Account Payout
+      required:
+      - shopId
+      - payout
+      - account
+      - customerAddress
+      properties:
+        shopId:
           type: string
-          description: Flag indicating whether payout was made to a foreign account.
+          description: Public identifier for the shop within PayU, under which payout will be executed.
+          example: 1a2B3Cx
+        payout:
+          $ref: '#/components/schemas/payout'
+        account:
+          $ref: '#/components/schemas/account'
+        customerAddress:
+          $ref: '#/components/schemas/customerAddress'
+        bankAddress:
+          $ref: '#/components/schemas/bankAddress'
+    '400':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
     cardForPayout:
       type: object
       description: Data of the card that the payout will be made to. <b>Required in case of a payout to the card number</b>.
@@ -634,28 +652,7 @@ components:
           type: string
           description: Card's expiration date - year.
           example: '2029'
-    customerAddress:
-      type: object
-      required:
-      - name
-      description: Payout recipient's name.
-      properties:
-        name:
-          type: string
-          description: Payout recipient's name.
-        countryCode:
-          type: string
-          description: Payout recipient's address details. Two-letter country code compliant with ISO-3166. <b>Required for <code>foreign</code> flag set to true</b>.
-        city:
-          type: string
-          description: Payout recipient's address details - city. <b>Required for <code>foreign</code> flag set to true</b>.
-        postalCode:
-          type: string
-          description: Payout recipient's address details - postal code.
-        street:
-          type: string
-          description: Payout recipient's address details - street. <b>Required for <code>foreign</code> flag set to true</b>.
-    '404':
+    '401':
       type: object
       properties:
         status:
@@ -664,9 +661,12 @@ components:
             statusCode:
               type: string
               description: Error type.
-            severity:
+            code:
               type: string
-              description: error severity type.
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
             statusDesc:
               type: string
               description: Error description.

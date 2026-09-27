@@ -336,27 +336,74 @@ paths:
                         description: Error description.
 components:
   schemas:
-    '400':
+    refundRetrieveFinalized:
       type: object
       properties:
+        refundId:
+          type: string
+          description: ID of the refund
+          example: '5000000142'
+        extRefundId:
+          type: string
+          description: External refund ID.
+          example: hdjJduUEEH2
+        amount:
+          type: string
+          description: Amount of the refund. If this is left blank, all funds will be returned to the buyer.
+          example: 10000
+        description:
+          type: string
+          description: Refund description
+          example: Refund for order <orderId>
+        creationDateTime:
+          type: string
+          description: Date of refund creation.
+          example: '2020-07-02T09:19:03.896+02:00'
+        currencyCode:
+          type: string
+          description: Currency code compliant with ISO 4217.
+        statusDatetime:
+          type: string
+          description: Timestamp of the status.
+          example: '2020-07-02T09:19:04.016+02:00'
         status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            severity:
-              type: string
-              description: error severity type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
+          type: string
+          description: Refund status code.
+          example: FINALIZED
+    refundRetrievePending:
+      type: object
+      properties:
+        refundId:
+          type: string
+          description: ID of the refund
+          example: '5000000142'
+        extRefundId:
+          type: string
+          description: External refund ID.
+          example: hdjJduUEEH2
+        amount:
+          type: string
+          description: Amount of the refund. If this is left blank, all funds will be returned to the buyer.
+          example: 10000
+        description:
+          type: string
+          description: Refund description
+          example: Refund for order <orderId>
+        creationDateTime:
+          type: string
+          description: Date of refund creation.
+          example: '2020-07-02T09:19:03.896+02:00'
+        currencyCode:
+          type: string
+          description: Currency code compliant with ISO 4217.
+        statusDatetime:
+          type: string
+          description: Timestamp of the status.
+          example: '2020-07-02T09:19:04.016+02:00'
+        status:
+          type: string
+          description: Refund status code.
+          example: PENDING
     refundRetrieveCanceled:
       type: object
       properties:
@@ -400,40 +447,6 @@ components:
             description:
               type: string
               description: Error information.
-    refundRetrievePending:
-      type: object
-      properties:
-        refundId:
-          type: string
-          description: ID of the refund
-          example: '5000000142'
-        extRefundId:
-          type: string
-          description: External refund ID.
-          example: hdjJduUEEH2
-        amount:
-          type: string
-          description: Amount of the refund. If this is left blank, all funds will be returned to the buyer.
-          example: 10000
-        description:
-          type: string
-          description: Refund description
-          example: Refund for order <orderId>
-        creationDateTime:
-          type: string
-          description: Date of refund creation.
-          example: '2020-07-02T09:19:03.896+02:00'
-        currencyCode:
-          type: string
-          description: Currency code compliant with ISO 4217.
-        statusDatetime:
-          type: string
-          description: Timestamp of the status.
-          example: '2020-07-02T09:19:04.016+02:00'
-        status:
-          type: string
-          description: Refund status code.
-          example: PENDING
     '404':
       type: object
       properties:
@@ -449,40 +462,27 @@ components:
             statusDesc:
               type: string
               description: Error description.
-    refundRetrieveFinalized:
+    '400':
       type: object
       properties:
-        refundId:
-          type: string
-          description: ID of the refund
-          example: '5000000142'
-        extRefundId:
-          type: string
-          description: External refund ID.
-          example: hdjJduUEEH2
-        amount:
-          type: string
-          description: Amount of the refund. If this is left blank, all funds will be returned to the buyer.
-          example: 10000
-        description:
-          type: string
-          description: Refund description
-          example: Refund for order <orderId>
-        creationDateTime:
-          type: string
-          description: Date of refund creation.
-          example: '2020-07-02T09:19:03.896+02:00'
-        currencyCode:
-          type: string
-          description: Currency code compliant with ISO 4217.
-        statusDatetime:
-          type: string
-          description: Timestamp of the status.
-          example: '2020-07-02T09:19:04.016+02:00'
         status:
-          type: string
-          description: Refund status code.
-          example: FINALIZED
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
   securitySchemes:
     Bearer:
       type: http

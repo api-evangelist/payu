@@ -41,9 +41,9 @@ tags:
   - Payments
   - Payment Processing
   - Fintech
-  - Financial-Services
+  - Financial Services
   - Subscription
-  - Fraud Detection
+  - Fraud Prevention
   - Checkout
   - Marketplace
   - Tokenization
@@ -59,6 +59,7 @@ tags_raw:
   - Marketplace
   - Tokenization
   - Emerging Markets
+  - Financial-Services
 apis:
 - aid: payu:payu-india-rest-api
   name: PayU India REST API

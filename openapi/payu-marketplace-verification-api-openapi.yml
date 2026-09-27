@@ -1232,126 +1232,153 @@ paths:
                 $ref: '#/components/schemas/409'
 components:
   schemas:
-    '200':
-      type: object
-      description: ''
-      properties:
-        verificationId:
-          type: string
-          description: ''
-          example: 5002500000BVmycAAD
-        verificationType:
-          type: string
-          description: ''
-          example: FULL
-        verificationTransferStatus:
-          type: string
-          description: 'Indicates status of the verification transfer.
-
-            * **Success** - transfer was received by PayU.
-
-            * **Failure** - PayU did not received funds
-
-            * **Matched** - transfer has been matched properly.
-
-            * **null** - did not have enough information about the transfer.
-
-            '
-          enum:
-          - Success
-          - Failure
-          - Matched
-          - 'null'
-          example: 'null'
-        processType:
-          type: string
-          description: Type of the process.
-          enum:
-          - OCCASIONAL
-          - REGULAR
-          example: OCCASIONAL
-        status:
-          type: string
-          description: 'Possible statuses: <ul> <li><b>POSITIVE</b> - indicates that the seller is accepted and can process transactions with PayU.</li> <li><b>NEGATIVE</b> - indicates that the seller is rejected and can''t process transactions with PayU. There is an error code always send for negative scenario.</li> <li><b>REJECTED</b> -  indicates that provided data must be corrected.</li> <li><b>WAITING_FOR_DATA</b> - waiting for data is sent in the notification when the verification was initialized but the request to start verification was not yet received. Provide the necessary data and documents according to the type of submerchant and send POST request on <code complete</code> endpoint.</li> <li><b>WAITING_FOR_VERIFICATION</b> - waiting for verification indicates that data and documents submitted to PayU will be verified by PayU or  currently being verified. Wait for notification about status change.</li> <li><b>CANCELED</b> - canceled. Initiate new verification when it is necessary. Marketplace can not cancel verification intialized by PayU or after sending complete information.</li> </ul>'
-          example: REJECTED
-        sellerId:
-          type: string
-          description: ''
-          example: 123456test12
-        note:
-          type: string
-          description: ''
-          example: null
-        errors:
-          type: array
-          description: ''
-          items:
-            type: object
-            properties:
-              content:
-                type: object
-                description: Group of fields that indicate which data/document the error code applies to.
-                properties:
-                  itemType:
-                    type: string
-                    description: ''
-                    enum:
-                    - SELLER
-                    - SELLER_DOCUMENT
-                    - ASSOCIATE
-                    - ASSOCIATE_DOCUMENT
-                    - PAYOUT_ACCOUNT
-                    example: SELLER_DOCUMENT
-                  itemProperties:
-                    type: object
-                    description: ''
-                    properties:
-                      documentType:
-                        type: string
-                        description: ''
-                        enum:
-                        - ID_CARD
-                        - PASSPORT
-                        - DRIVING_LICENCE
-                        - RESIDENCE_PERMIT
-                        - OTHER
-                        example: PEP_STATEMENT
-                      documentId:
-                        type: string
-                        description: ''
-                        example: '2'
-                      associateId:
-                        type: string
-                        description: ''
-                        example: null
-              code:
-                type: string
-                description: Error Code.
-                example: '006'
-        updateDate:
-          type: string
-          description: ''
-          example: '2020-04-03T09:14:06.000Z'
-        createDate:
-          type: string
-          description: ''
-          example: '2020-04-03T06:36:15.000Z'
-    '403':
+    '401':
       type: object
       properties:
         status:
           type: object
           properties:
-            error:
+            statusCode:
               type: string
               description: Error type.
-              enum:
-              - access_denied
-            error_description:
+            code:
               type: string
-              description: Description of error.
-              enum:
-              - Access is denied
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    '409':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error type.
+              example: '409'
+            message:
+              type: string
+              description: Error message.
+    PrivatePerson:
+      type: object
+      description: Submerchant's data (if submerchant is a private person).
+      required:
+      - verificationId
+      - sellerId
+      - name
+      - surname
+      - legalForm
+      - address
+      - email
+      - dateOfBirth
+      properties:
+        verificationId:
+          type: string
+          description: Unique id of the verification provided by PayU.
+          maxLength: 18
+          example: BZx65uYW
+        sellerId:
+          type: string
+          description: Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).
+          maxLength: 50
+          example: seller_2"
+        email:
+          type: string
+          description: Contact email.
+          minLength: 5
+          maxLength: 80
+          example: test@test.com
+        phone:
+          type: string
+          description: Contact phone.
+          maxLength: 40
+          example: '111222333'
+        taxId:
+          type: string
+          description: Tax id. <b>Should be empty for private person</b>.
+          format: should be empty for private person
+          maxLength: 60
+          example: ''
+        name:
+          type: string
+          description: First name of the seller.
+          maxLength: 40
+          example: Jan
+        surname:
+          type: string
+          description: Last name of the seller.
+          maxLength: 40
+          example: Kowalski
+        legalForm:
+          type: string
+          description: <b>FOREIGN_COMPANY</b> type has been deprecated.
+          enum:
+          - AGENCY_OF_FOREIGN_COMPANY
+          - ASSOCIATION
+          - CHURCH_LEGAL_PERSON
+          - CIVIL_LAW_PARTNERSHIP
+          - COOPERATIVE
+          - EDUCATIONAL_INSTITUTION
+          - FOUNDATION
+          - GENERAL_PARTNERSHIP
+          - JOINT_STOCK_COMPANY
+          - LIMITED_JOINT_STOCK_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LOCAL_GOVERNMENT_UNIT
+          - PRIVATE_PERSON
+          - PROFESSIONAL_PARTNERSHIP
+          - LOCAL_GOVERNMENT_CULTURE_INSTITUTION
+          - RESEARCH_INSTITUTE
+          - SOLE_TRADER
+          - OTHER
+          example: PRIVATE_PERSON
+        personalIdentificationNumber:
+          type: string
+          description: National, personal identification number e.g. PESEL in Poland. <b>Required for private persons for full verification Not required for basic data</b>.
+          maxLength: 150
+          example: '90112322330'
+        dateOfBirth:
+          type: string
+          description: ''
+          format: YYYY-MM-DD
+          example: '1988-10-12'
+        registryNumber:
+          type: string
+          description: Company registry number (eg REGON in Poland). <b>Should be empty for private person</b>.
+          maxLength: 40
+          example: ''
+        address:
+          type: object
+          description: Address of the private person.
+          required:
+          - country
+          properties:
+            street:
+              type: string
+              description: Street with building and apartment number. <b>Required for full verification</b>.
+              maxLength: 255
+              example: Grunwaldzka 186
+            zipcode:
+              type: string
+              description: Private person's address zipcode. <b>Required for full verification</b>.
+              maxLength: 20
+              example: 60-166
+            city:
+              type: string
+              description: <b>Required for full verification</b>.
+              maxLength: 40
+              example: Poznan
+            country:
+              type: string
+              description: Two letter ISO country code.
+              maxLength: 80
+              example: PL
     PayoutWithoutVerificationTransfer:
       type: object
       required:
@@ -1489,140 +1516,6 @@ components:
           type: string
           description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
           example: 'false'
-    '400':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            severity:
-              type: string
-              description: error severity type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
-    PayoutBankStatement:
-      type: object
-      required:
-      - bankDataId
-      - verificationId
-      - accountNumberRequested
-      - hasDocument
-      - payoutDataVerificationType
-      - foreign
-      - verified
-      properties:
-        bankDataId:
-          type: string
-          description: Id of the bank account details assigned by marketplace.
-          maxLength: 100
-          example: '01102020'
-        verificationId:
-          type: string
-          description: Id of verification in context of which data are provided.
-          maxLength: 18
-          example: verification-123
-        accountNumberRequested:
-          type: string
-          description: Bank account number declared for withdrawals by submerchant.
-          format: IBAN
-          maxLength: 255
-          example: PL1122334455667788991010111223345
-        hasDocument:
-          type: string
-          enum:
-          - true
-          - false
-          description: 'Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is "BANK_STATEMENT**".
-
-            '
-          example: 'true'
-        payoutDataVerificationType:
-          type: string
-          enum:
-          - LIAN_LIAN
-          - PINGPONG
-          - OFX
-          - BANK_STATEMENT
-          - BANK_TRANSFER
-          - NO_VERIFICATION_NEEDED
-          description: 'Type of verification used for the provided payout details verification. Different for each verification type:
-
-            * **LIAN_LIAN** - special type for Chinese submerchants,
-
-            * **PINGPONG** - special type for Chinese submerchants,
-
-            * **OFX** - special type for Chinese submerchants,
-
-            * **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),
-
-            * **BANK_TRANSFER**,
-
-            * **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn''t have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.
-
-            '
-          example: BANK_STATEMENT
-        foreign:
-          type: string
-          enum:
-          - true
-          - false
-          description: 'Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.
-
-
-            **For domestic transfers set this parameter to `false`, specifically**:
-
-
-            - Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.
-
-            - Payouts in PLN (Polish Złoty) to an account held in Poland.
-
-            '
-          example: 'false'
-        verified:
-          type: string
-          description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
-          example: 'false'
-    '409':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error type.
-              example: '409'
-            message:
-              type: string
-              description: Error message.
-    '401':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
     CompanyData:
       type: object
       description: Submerchant's data (if submerchant is a company).
@@ -1731,122 +1624,244 @@ components:
               description: Two letter ISO country code.
               maxLength: 80
               example: PL
-    PrivatePerson:
+    '404':
       type: object
-      description: Submerchant's data (if submerchant is a private person).
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            statusDesc:
+              type: string
+              description: Error description.
+    '403':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Error type.
+              enum:
+              - access_denied
+            error_description:
+              type: string
+              description: Description of error.
+              enum:
+              - Access is denied
+    PayoutBankStatement:
+      type: object
       required:
+      - bankDataId
       - verificationId
-      - sellerId
-      - name
-      - surname
-      - legalForm
-      - address
-      - email
-      - dateOfBirth
+      - accountNumberRequested
+      - hasDocument
+      - payoutDataVerificationType
+      - foreign
+      - verified
+      properties:
+        bankDataId:
+          type: string
+          description: Id of the bank account details assigned by marketplace.
+          maxLength: 100
+          example: '01102020'
+        verificationId:
+          type: string
+          description: Id of verification in context of which data are provided.
+          maxLength: 18
+          example: verification-123
+        accountNumberRequested:
+          type: string
+          description: Bank account number declared for withdrawals by submerchant.
+          format: IBAN
+          maxLength: 255
+          example: PL1122334455667788991010111223345
+        hasDocument:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Flag informing that this bank account for payouts should be verified on base of bank document. **It must be set to true when the method used is "BANK_STATEMENT**".
+
+            '
+          example: 'true'
+        payoutDataVerificationType:
+          type: string
+          enum:
+          - LIAN_LIAN
+          - PINGPONG
+          - OFX
+          - BANK_STATEMENT
+          - BANK_TRANSFER
+          - NO_VERIFICATION_NEEDED
+          description: 'Type of verification used for the provided payout details verification. Different for each verification type:
+
+            * **LIAN_LIAN** - special type for Chinese submerchants,
+
+            * **PINGPONG** - special type for Chinese submerchants,
+
+            * **OFX** - special type for Chinese submerchants,
+
+            * **BANK_STATEMENT** - used if all data are present on the document (**`hasDocument` must be true**),
+
+            * **BANK_TRANSFER**,
+
+            * **NO_VERIFICATION_NEEDED** - used if the provided bank account number was not yet verified by 3rd party but it doesn''t have to be verified at the time of providing the bank details. It is used for the occasional transaction process when the bank account number is provided at the beginning of the process.
+
+            '
+          example: BANK_STATEMENT
+        foreign:
+          type: string
+          enum:
+          - true
+          - false
+          description: 'Foreign Transfer Indicator. Has to be `true` for all cross-border payouts and payouts in EUR.
+
+
+            **For domestic transfers set this parameter to `false`, specifically**:
+
+
+            - Payouts in CZK (Czech Koruna) to an account held in the Czech Republic.
+
+            - Payouts in PLN (Polish Złoty) to an account held in Poland.
+
+            '
+          example: 'false'
+        verified:
+          type: string
+          description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
+          example: 'false'
+    '400':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            severity:
+              type: string
+              description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    '200':
+      type: object
+      description: ''
       properties:
         verificationId:
           type: string
-          description: Unique id of the verification provided by PayU.
-          maxLength: 18
-          example: BZx65uYW
-        sellerId:
-          type: string
-          description: Unique id of seller (submerchant) given by marketplace side. This id must be constant for every verification concerning the same (submerchant).
-          maxLength: 50
-          example: seller_2"
-        email:
-          type: string
-          description: Contact email.
-          minLength: 5
-          maxLength: 80
-          example: test@test.com
-        phone:
-          type: string
-          description: Contact phone.
-          maxLength: 40
-          example: '111222333'
-        taxId:
-          type: string
-          description: Tax id. <b>Should be empty for private person</b>.
-          format: should be empty for private person
-          maxLength: 60
-          example: ''
-        name:
-          type: string
-          description: First name of the seller.
-          maxLength: 40
-          example: Jan
-        surname:
-          type: string
-          description: Last name of the seller.
-          maxLength: 40
-          example: Kowalski
-        legalForm:
-          type: string
-          description: <b>FOREIGN_COMPANY</b> type has been deprecated.
-          enum:
-          - AGENCY_OF_FOREIGN_COMPANY
-          - ASSOCIATION
-          - CHURCH_LEGAL_PERSON
-          - CIVIL_LAW_PARTNERSHIP
-          - COOPERATIVE
-          - EDUCATIONAL_INSTITUTION
-          - FOUNDATION
-          - GENERAL_PARTNERSHIP
-          - JOINT_STOCK_COMPANY
-          - LIMITED_JOINT_STOCK_PARTNERSHIP
-          - LIMITED_LIABILITY_COMPANY
-          - LIMITED_LIABILITY_PARTNERSHIP
-          - LIMITED_PARTNERSHIP
-          - LOCAL_GOVERNMENT_UNIT
-          - PRIVATE_PERSON
-          - PROFESSIONAL_PARTNERSHIP
-          - LOCAL_GOVERNMENT_CULTURE_INSTITUTION
-          - RESEARCH_INSTITUTE
-          - SOLE_TRADER
-          - OTHER
-          example: PRIVATE_PERSON
-        personalIdentificationNumber:
-          type: string
-          description: National, personal identification number e.g. PESEL in Poland. <b>Required for private persons for full verification Not required for basic data</b>.
-          maxLength: 150
-          example: '90112322330'
-        dateOfBirth:
+          description: ''
+          example: 5002500000BVmycAAD
+        verificationType:
           type: string
           description: ''
-          format: YYYY-MM-DD
-          example: '1988-10-12'
-        registryNumber:
+          example: FULL
+        verificationTransferStatus:
           type: string
-          description: Company registry number (eg REGON in Poland). <b>Should be empty for private person</b>.
-          maxLength: 40
-          example: ''
-        address:
-          type: object
-          description: Address of the private person.
-          required:
-          - country
-          properties:
-            street:
-              type: string
-              description: Street with building and apartment number. <b>Required for full verification</b>.
-              maxLength: 255
-              example: Grunwaldzka 186
-            zipcode:
-              type: string
-              description: Private person's address zipcode. <b>Required for full verification</b>.
-              maxLength: 20
-              example: 60-166
-            city:
-              type: string
-              description: <b>Required for full verification</b>.
-              maxLength: 40
-              example: Poznan
-            country:
-              type: string
-              description: Two letter ISO country code.
-              maxLength: 80
-              example: PL
+          description: 'Indicates status of the verification transfer.
+
+            * **Success** - transfer was received by PayU.
+
+            * **Failure** - PayU did not received funds
+
+            * **Matched** - transfer has been matched properly.
+
+            * **null** - did not have enough information about the transfer.
+
+            '
+          enum:
+          - Success
+          - Failure
+          - Matched
+          - 'null'
+          example: 'null'
+        processType:
+          type: string
+          description: Type of the process.
+          enum:
+          - OCCASIONAL
+          - REGULAR
+          example: OCCASIONAL
+        status:
+          type: string
+          description: 'Possible statuses: <ul> <li><b>POSITIVE</b> - indicates that the seller is accepted and can process transactions with PayU.</li> <li><b>NEGATIVE</b> - indicates that the seller is rejected and can''t process transactions with PayU. There is an error code always send for negative scenario.</li> <li><b>REJECTED</b> -  indicates that provided data must be corrected.</li> <li><b>WAITING_FOR_DATA</b> - waiting for data is sent in the notification when the verification was initialized but the request to start verification was not yet received. Provide the necessary data and documents according to the type of submerchant and send POST request on <code complete</code> endpoint.</li> <li><b>WAITING_FOR_VERIFICATION</b> - waiting for verification indicates that data and documents submitted to PayU will be verified by PayU or  currently being verified. Wait for notification about status change.</li> <li><b>CANCELED</b> - canceled. Initiate new verification when it is necessary. Marketplace can not cancel verification intialized by PayU or after sending complete information.</li> </ul>'
+          example: REJECTED
+        sellerId:
+          type: string
+          description: ''
+          example: 123456test12
+        note:
+          type: string
+          description: ''
+          example: null
+        errors:
+          type: array
+          description: ''
+          items:
+            type: object
+            properties:
+              content:
+                type: object
+                description: Group of fields that indicate which data/document the error code applies to.
+                properties:
+                  itemType:
+                    type: string
+                    description: ''
+                    enum:
+                    - SELLER
+                    - SELLER_DOCUMENT
+                    - ASSOCIATE
+                    - ASSOCIATE_DOCUMENT
+                    - PAYOUT_ACCOUNT
+                    example: SELLER_DOCUMENT
+                  itemProperties:
+                    type: object
+                    description: ''
+                    properties:
+                      documentType:
+                        type: string
+                        description: ''
+                        enum:
+                        - ID_CARD
+                        - PASSPORT
+                        - DRIVING_LICENCE
+                        - RESIDENCE_PERMIT
+                        - OTHER
+                        example: PEP_STATEMENT
+                      documentId:
+                        type: string
+                        description: ''
+                        example: '2'
+                      associateId:
+                        type: string
+                        description: ''
+                        example: null
+              code:
+                type: string
+                description: Error Code.
+                example: '006'
+        updateDate:
+          type: string
+          description: ''
+          example: '2020-04-03T09:14:06.000Z'
+        createDate:
+          type: string
+          description: ''
+          example: '2020-04-03T06:36:15.000Z'
     PayoutWithVerificationTransfer:
       type: object
       required:
@@ -1935,21 +1950,6 @@ components:
           type: string
           description: parameter indicating whether the bank account number was already verified e.g. by another provider. If set to **false** and the verification type is other than "NO_VERIFICATION_NEEDED" PayU must verify the bank account details.
           example: 'false'
-    '404':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            severity:
-              type: string
-              description: error severity type.
-            statusDesc:
-              type: string
-              description: Error description.
   securitySchemes:
     Bearer:
       type: http

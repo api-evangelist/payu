@@ -460,23 +460,18 @@ paths:
                 $ref: '#/components/schemas/401'
 components:
   schemas:
-    CardPbl:
+    Pbl:
       type: object
-      title: Card, PBL
+      title: PBL
       required:
       - notifyUrl
       - externalId
       - legalName
       - dbaName
       - address
-      - phone
       - websiteUrl
       - mcc
-      - riskClass
       - taxId
-      - representatives
-      - legalForm
-      - agreementDate
       properties:
         payTypeCategories:
           type: array
@@ -484,7 +479,6 @@ components:
           items:
             type: string
           example:
-          - Card
           - PBL
         externalId:
           type: string
@@ -580,36 +574,23 @@ components:
           type: string
           description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
           format: yyyy-mm-dd
-    '401':
+    CardPbl:
       type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
-    Pbl:
-      type: object
-      title: PBL
+      title: Card, PBL
       required:
       - notifyUrl
       - externalId
       - legalName
       - dbaName
       - address
+      - phone
       - websiteUrl
       - mcc
+      - riskClass
       - taxId
+      - representatives
+      - legalForm
+      - agreementDate
       properties:
         payTypeCategories:
           type: array
@@ -617,6 +598,7 @@ components:
           items:
             type: string
           example:
+          - Card
           - PBL
         externalId:
           type: string
@@ -830,6 +812,24 @@ components:
           type: string
           description: Date when PF signed agreement with the submerchant (required by Visa for reporting purposes).
           format: yyyy-mm-dd
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
   securitySchemes:
     Bearer:
       type: http
