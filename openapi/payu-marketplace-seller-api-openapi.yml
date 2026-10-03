@@ -457,149 +457,24 @@ paths:
                 $ref: '#/components/schemas/401'
 components:
   schemas:
-    RETURN:
+    '401':
       type: object
       properties:
-        operations:
-          type: array
-          description: List of operations.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: Operation type.
-                example: RETURN
-                enum:
-                - PAYMENT_SENT
-                - PAYMENT_RECEIVED
-                - PAYOUT
-                - REFUND_SENT
-                - REFUND_RECEIVED
-                - RETURN
-                - ADMIN_TRANSFER_SENT
-                - ADMIN_TRANSFER_RECEIVED
-                - FEE_TRANSFER_SENT
-                - FEE_TRANSFER_RECEIVED
-                - CHARGEBACK
-                - ADMIN_CORRECTION
-              amount:
-                type: string
-                description: Amount (of order, refund, payout).
-              currencyCode:
-                type: string
-                description: Currency code according to ISO-4217.
-                example: PLN
-              description:
-                type: string
-                description: Operation description.
-              status:
-                type: string
-                description: Operation status.
-                example: COMPLETED
-              creationDate:
-                type: string
-                description: Operation request moment.
-                format: '2019-11-30T20:33:44+02:00'
-              eventDate:
-                type: string
-                description: Operation ending moment.
-                format: '2019-11-30T22:33:44+02:00'
-              details:
-                type: object
-                properties:
-                  payoutId:
-                    type: string
-                    description: Payout identifier
-                  extPayoutId:
-                    type: string
-                    description: External payout identifier.
-                  funds:
-                    type: array
-                    items:
-                      type: object
-        pageResponse:
+        status:
           type: object
           properties:
-            records:
+            statusCode:
               type: string
-              description: Total number of records found.
-            size:
+              description: Error type.
+            code:
               type: string
-              description: Number of returned operations.
-            pageCount:
+              description: Identification code of specific error.
+            codeLiteral:
               type: string
-              description: Page count.
-    CHARGEBACK:
-      type: object
-      properties:
-        operations:
-          type: array
-          description: List of operations.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: Operation type.
-                example: CHARGEBACK
-                enum:
-                - PAYMENT_SENT
-                - PAYMENT_RECEIVED
-                - PAYOUT
-                - REFUND_SENT
-                - REFUND_RECEIVED
-                - RETURN
-                - ADMIN_TRANSFER_SENT
-                - ADMIN_TRANSFER_RECEIVED
-                - FEE_TRANSFER_SENT
-                - FEE_TRANSFER_RECEIVED
-                - CHARGEBACK
-                - ADMIN_CORRECTION
-              amount:
-                type: string
-                description: Amount (of order, refund, payout).
-              currencyCode:
-                type: string
-                description: Currency code according to ISO-4217.
-                example: PLN
-              description:
-                type: string
-                description: Operation description.
-              status:
-                type: string
-                description: Operation status.
-                example: COMPLETED
-              creationDate:
-                type: string
-                description: Operation request moment.
-                format: '2019-11-30T20:33:44+02:00'
-              eventDate:
-                type: string
-                description: Operation ending moment.
-                format: '2019-11-30T22:33:44+02:00'
-              details:
-                type: object
-                properties:
-                  correctionId:
-                    type: string
-                    description: Correction identifier
-                  funds:
-                    type: array
-                    items:
-                      type: object
-        pageResponse:
-          type: object
-          properties:
-            records:
+              description: Cause of the error.
+            statusDesc:
               type: string
-              description: Total number of records found.
-            size:
-              type: string
-              description: Number of returned operations.
-            pageCount:
-              type: string
-              description: Page count.
+              description: Error description.
     PAYMENT_RECEIVED:
       type: object
       properties:
@@ -704,6 +579,219 @@ components:
             pageCount:
               type: string
               description: Page count.
+    ADMIN_CORRECTION:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: ADMIN_CORRECTION
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  correctionId:
+                    type: string
+                    description: Correction identifier
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    CHARGEBACK:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: CHARGEBACK
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  correctionId:
+                    type: string
+                    description: Correction identifier
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
+    RETURN:
+      type: object
+      properties:
+        operations:
+          type: array
+          description: List of operations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Operation type.
+                example: RETURN
+                enum:
+                - PAYMENT_SENT
+                - PAYMENT_RECEIVED
+                - PAYOUT
+                - REFUND_SENT
+                - REFUND_RECEIVED
+                - RETURN
+                - ADMIN_TRANSFER_SENT
+                - ADMIN_TRANSFER_RECEIVED
+                - FEE_TRANSFER_SENT
+                - FEE_TRANSFER_RECEIVED
+                - CHARGEBACK
+                - ADMIN_CORRECTION
+              amount:
+                type: string
+                description: Amount (of order, refund, payout).
+              currencyCode:
+                type: string
+                description: Currency code according to ISO-4217.
+                example: PLN
+              description:
+                type: string
+                description: Operation description.
+              status:
+                type: string
+                description: Operation status.
+                example: COMPLETED
+              creationDate:
+                type: string
+                description: Operation request moment.
+                format: '2019-11-30T20:33:44+02:00'
+              eventDate:
+                type: string
+                description: Operation ending moment.
+                format: '2019-11-30T22:33:44+02:00'
+              details:
+                type: object
+                properties:
+                  payoutId:
+                    type: string
+                    description: Payout identifier
+                  extPayoutId:
+                    type: string
+                    description: External payout identifier.
+                  funds:
+                    type: array
+                    items:
+                      type: object
+        pageResponse:
+          type: object
+          properties:
+            records:
+              type: string
+              description: Total number of records found.
+            size:
+              type: string
+              description: Number of returned operations.
+            pageCount:
+              type: string
+              description: Page count.
     REFUND_SENT:
       type: object
       properties:
@@ -796,76 +884,6 @@ components:
             pageCount:
               type: string
               description: Page count.
-    ADMIN_CORRECTION:
-      type: object
-      properties:
-        operations:
-          type: array
-          description: List of operations.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: Operation type.
-                example: ADMIN_CORRECTION
-                enum:
-                - PAYMENT_SENT
-                - PAYMENT_RECEIVED
-                - PAYOUT
-                - REFUND_SENT
-                - REFUND_RECEIVED
-                - RETURN
-                - ADMIN_TRANSFER_SENT
-                - ADMIN_TRANSFER_RECEIVED
-                - FEE_TRANSFER_SENT
-                - FEE_TRANSFER_RECEIVED
-                - CHARGEBACK
-                - ADMIN_CORRECTION
-              amount:
-                type: string
-                description: Amount (of order, refund, payout).
-              currencyCode:
-                type: string
-                description: Currency code according to ISO-4217.
-                example: PLN
-              description:
-                type: string
-                description: Operation description.
-              status:
-                type: string
-                description: Operation status.
-                example: COMPLETED
-              creationDate:
-                type: string
-                description: Operation request moment.
-                format: '2019-11-30T20:33:44+02:00'
-              eventDate:
-                type: string
-                description: Operation ending moment.
-                format: '2019-11-30T22:33:44+02:00'
-              details:
-                type: object
-                properties:
-                  correctionId:
-                    type: string
-                    description: Correction identifier
-                  funds:
-                    type: array
-                    items:
-                      type: object
-        pageResponse:
-          type: object
-          properties:
-            records:
-              type: string
-              description: Total number of records found.
-            size:
-              type: string
-              description: Number of returned operations.
-            pageCount:
-              type: string
-              description: Page count.
     PAYOUT:
       type: object
       properties:
@@ -942,24 +960,6 @@ components:
             pageCount:
               type: string
               description: Page count.
-    '401':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
   securitySchemes:
     Bearer:
       type: http
