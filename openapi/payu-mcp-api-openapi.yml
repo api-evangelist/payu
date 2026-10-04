@@ -115,7 +115,7 @@ paths:
                 $ref: '#/components/schemas/404'
 components:
   schemas:
-    '404':
+    '400':
       type: object
       properties:
         status:
@@ -127,6 +127,12 @@ components:
             severity:
               type: string
               description: error severity type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
             statusDesc:
               type: string
               description: Error description.
@@ -148,7 +154,7 @@ components:
             statusDesc:
               type: string
               description: Error description.
-    '400':
+    '404':
       type: object
       properties:
         status:
@@ -160,12 +166,6 @@ components:
             severity:
               type: string
               description: error severity type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
             statusDesc:
               type: string
               description: Error description.

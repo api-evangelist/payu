@@ -107,74 +107,6 @@ paths:
                 $ref: '#/components/schemas/401'
 components:
   schemas:
-    '401':
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: Error type.
-            code:
-              type: string
-              description: Identification code of specific error.
-            codeLiteral:
-              type: string
-              description: Cause of the error.
-            statusDesc:
-              type: string
-              description: Error description.
-    clickToPayFeature:
-      type: object
-      description: Click to Pay feature.
-      title: clickToPay
-      properties:
-        brandImageUrl:
-          type: string
-          description: URL of the Click to Pay brand image.
-          example: https://static.payu.com/images/mobile/logos/pbl_cpt_on.png
-        mastercard:
-          $ref: '#/components/schemas/mastercardFeature'
-        visa:
-          $ref: '#/components/schemas/visaFeature'
-    payByLinks:
-      type: array
-      description: Section containing available PayByLink payment methods
-      items:
-        type: object
-        properties:
-          value:
-            type: string
-            example: sgb
-            description: <code>payType</code> value. You can find available values <b><a href="/europe/docs/get-started/introduction/#paymethods" target="_blank">here</a></b>.
-          brandImageUrl:
-            type: string
-            example: https://static.payu.com/images/mobile/logos/pbl_sgb_off.png
-            description: Link to <code><payType</code> logo graphic on PayU server.
-          name:
-            type: string
-            example: SGB Bank
-            description: Name of <code>payType</code> set by PayU
-          status:
-            type: string
-            enum:
-            - ENABLED
-            - DISABLED
-            - TEMPORARY_DISABLED
-            example: DISABLED
-          minAmount:
-            type: number
-            example: 50
-          maxAmount:
-            type: number
-            example: 99999999
-          features:
-            type: object
-            description: List of features available.
-            properties:
-              clickToPay:
-                $ref: '#/components/schemas/clickToPayFeature'
     blikTokens:
       type: array
       description: Section containing saved BLIK tokens
@@ -229,6 +161,114 @@ components:
                 description: Expiration date of the PAYID token. Maximum date is 10 years from the creation date of the token. If the value is not provided, token will be valid indifinitely.
                 example: '2026-10-01T00:00:00+02:00'
                 format: yyyy-MM-dd'T'HH:mm:ssXXX
+    payByLinks:
+      type: array
+      description: Section containing available PayByLink payment methods
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            example: sgb
+            description: <code>payType</code> value. You can find available values <b><a href="/europe/docs/get-started/introduction/#paymethods" target="_blank">here</a></b>.
+          brandImageUrl:
+            type: string
+            example: https://static.payu.com/images/mobile/logos/pbl_sgb_off.png
+            description: Link to <code><payType</code> logo graphic on PayU server.
+          name:
+            type: string
+            example: SGB Bank
+            description: Name of <code>payType</code> set by PayU
+          status:
+            type: string
+            enum:
+            - ENABLED
+            - DISABLED
+            - TEMPORARY_DISABLED
+            example: DISABLED
+          minAmount:
+            type: number
+            example: 50
+          maxAmount:
+            type: number
+            example: 99999999
+          features:
+            type: object
+            description: List of features available.
+            properties:
+              clickToPay:
+                $ref: '#/components/schemas/clickToPayFeature'
+    '401':
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: Error type.
+            code:
+              type: string
+              description: Identification code of specific error.
+            codeLiteral:
+              type: string
+              description: Cause of the error.
+            statusDesc:
+              type: string
+              description: Error description.
+    visaFeature:
+      type: object
+      description: Click to Pay feature.
+      title: visa
+      properties:
+        status:
+          Enum:
+          - ENABLED
+          - DISABLED
+          type: string
+          description: Status of the Click to Pay feature for Visa.
+          example: ENABLED
+        dpaId:
+          type: string
+          description: Merchant ID in Visa Click to Pay.
+          example: jI8iGo86
+        acquirerBIN:
+          type: string
+          description: Acquirer Bank Identification Number for Click to Pay transactions.
+          example: 123456
+        acquirerMerchantId:
+          type: string
+          description: Acquirer Merchant ID for Click to Pay transactions.
+          example: MARCH01
+    clickToPayFeature:
+      type: object
+      description: Click to Pay feature.
+      title: clickToPay
+      properties:
+        brandImageUrl:
+          type: string
+          description: URL of the Click to Pay brand image.
+          example: https://static.payu.com/images/mobile/logos/pbl_cpt_on.png
+        mastercard:
+          $ref: '#/components/schemas/mastercardFeature'
+        visa:
+          $ref: '#/components/schemas/visaFeature'
+    mastercardFeature:
+      type: object
+      description: Click to Pay Mastercard feature.
+      title: mastercard
+      properties:
+        status:
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
+          description: Status of the Click to Pay feature for Mastercard.
+          example: ENABLED
+        dpaId:
+          type: string
+          description: Merchant ID in Mastercard Click to Pay.
+          example: jI8iGo86
     cardTokens:
       type: array
       description: Section containing saved card tokens
@@ -266,46 +306,6 @@ components:
           cardBrand:
             type: string
             example: VISA
-    visaFeature:
-      type: object
-      description: Click to Pay feature.
-      title: visa
-      properties:
-        status:
-          Enum:
-          - ENABLED
-          - DISABLED
-          type: string
-          description: Status of the Click to Pay feature for Visa.
-          example: ENABLED
-        dpaId:
-          type: string
-          description: Merchant ID in Visa Click to Pay.
-          example: jI8iGo86
-        acquirerBIN:
-          type: string
-          description: Acquirer Bank Identification Number for Click to Pay transactions.
-          example: 123456
-        acquirerMerchantId:
-          type: string
-          description: Acquirer Merchant ID for Click to Pay transactions.
-          example: MARCH01
-    mastercardFeature:
-      type: object
-      description: Click to Pay Mastercard feature.
-      title: mastercard
-      properties:
-        status:
-          enum:
-          - ENABLED
-          - DISABLED
-          type: string
-          description: Status of the Click to Pay feature for Mastercard.
-          example: ENABLED
-        dpaId:
-          type: string
-          description: Merchant ID in Mastercard Click to Pay.
-          example: jI8iGo86
   securitySchemes:
     Bearer:
       type: http
