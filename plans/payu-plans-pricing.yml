@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: PayU Plans & Pricing
 description: >-
   PayU does not publicly publish fixed tiered plans with listed prices.
@@ -74,3 +78,28 @@ notes: >-
   PayU pricing information is not comprehensively published publicly.
   Contact regional offices for current rates. The Developer sandbox and
   test environment are available at no cost for integration testing.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Standard Merchant Account
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise / PayU Enterprise (PaymentsOS)
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: PayU Latam Installment Financing (Pricing API)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []

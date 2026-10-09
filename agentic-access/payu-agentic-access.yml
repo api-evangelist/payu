@@ -1,17 +1,23 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/payu-europe-rest-api.yaml
+source: openapi/payu-authorize-api-openapi.yml, openapi/payu-card-installments-api-openapi.yml,
+  openapi/payu-fx-reference-api-openapi.yml, openapi/payu-marketplace-seller-api-openapi.yml,
+  openapi/payu-marketplace-verification-api-openapi.yml, openapi/payu-mcp-api-openapi.yml, openapi/payu-order-api-openapi.yml,
+  openapi/payu-partner-merchant-registration-api-openapi.yml, openapi/payu-payment-methods-api-openapi.yml,
+  openapi/payu-payout-api-openapi.yml, openapi/payu-pf-submerchant-registration-api-openapi.yml,
+  openapi/payu-refund-api-openapi.yml, openapi/payu-shop-api-openapi.yml, openapi/payu-statements-api-openapi.yml,
+  openapi/payu-token-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 47
   by_action_class:
-    acting: 30
-    connected: 17
+    acting: 29
+    connected: 18
   by_consequence:
-    write: 18
-    read: 17
+    write: 17
+    read: 18
     physical: 12
   human_in_the_loop_required: 0
 operations:
@@ -33,233 +39,9 @@ operations:
     audit: required
     scope:
     - client_credentials
-- path: /api/v2_1/paymethods
-  method: get
-  operationId: retrieve-payment-methods
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - client_credentials
-    - trusted_merchant
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2_1/orders
+- path: /api/front/card-installments-options
   method: post
-  operationId: create-an-order
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - client_credentials
-    - trusted_merchant
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2_1/orders/{orderId}
-  method: get
-  operationId: retrieve-an-order
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}
-  method: delete
-  operationId: cancel-an-order
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/captures
-  method: post
-  operationId: capture-authorized-order
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/status
-  method: put
-  operationId: capture-authorized-order-deprecated
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/transactions
-  method: get
-  operationId: retrieve-a-transaction
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - oAuth token
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2_1/shops/{shopId}
-  method: get
-  operationId: retrieve-shop-data
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/refunds
-  method: post
-  operationId: create-a-refund
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/refunds
-  method: get
-  operationId: retrieve-all-refunds-for-the-specified-order
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-    scope:
-    - client_credentials
-- path: /api/v2_1/orders/{orderId}/refunds/{refundId}
-  method: get
-  operationId: retrieve-specific-refund
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-    scope:
-    - client_credentials
-- path: /api/v2_1/payouts
-  method: post
-  operationId: create-a-payout
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-    scope:
-    - client_credentials
-- path: /api/v2_1/payouts/{payoutId}
-  method: get
-  operationId: retrieve-a-payout
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-    scope:
-    - client_credentials
-- path: /api/v2_1/tokens/{token}
-  method: delete
-  operationId: delete-a-token
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - trusted_merchant
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2_1/mcp-partners/{mcpPartnerId}/fx-table
-  method: get
-  operationId: retrieve-rate-table
+  operationId: retrieve-card-installments
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -605,16 +387,63 @@ operations:
     audit: required
     scope:
     - client_credentials
-- path: /api/front/card-installments-options
+- path: /api/v2_1/mcp-partners/{mcpPartnerId}/fx-table
+  method: get
+  operationId: retrieve-rate-table
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders
   method: post
-  operationId: retrieve-card-installments
+  operationId: create-an-order
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
+    subject: required
+    scope:
+    - client_credentials
+    - trusted_merchant
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2_1/orders/{orderId}
+  method: get
+  operationId: retrieve-an-order
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders/{orderId}
+  method: delete
+  operationId: cancel-an-order
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -623,13 +452,55 @@ operations:
     audit: required
     scope:
     - client_credentials
-- path: /api/v2_1/reports/{reportId}
+- path: /api/v2_1/orders/{orderId}/captures
+  method: post
+  operationId: capture-authorized-order
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders/{orderId}/status
+  method: put
+  operationId: capture-authorized-order-deprecated
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders/{orderId}/transactions
   method: get
-  operationId: retrieve-statement
+  operationId: retrieve-a-transaction
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - oAuth token
     token:
       max-ttl: 3600
     audit: none
@@ -735,6 +606,51 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/v2_1/paymethods
+  method: get
+  operationId: retrieve-payment-methods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - client_credentials
+    - trusted_merchant
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2_1/payouts
+  method: post
+  operationId: create-a-payout
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - client_credentials
+- path: /api/v2_1/payouts/{payoutId}
+  method: get
+  operationId: retrieve-a-payout
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
 - path: /api/v2_1/firms/{firmPublicId}/submerchants
   method: post
   operationId: create-a-submerchant
@@ -783,3 +699,87 @@ operations:
     audit: none
     scope:
     - client_credentials
+- path: /api/v2_1/orders/{orderId}/refunds
+  method: post
+  operationId: create-a-refund
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders/{orderId}/refunds
+  method: get
+  operationId: retrieve-all-refunds-for-the-specified-order
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
+- path: /api/v2_1/orders/{orderId}/refunds/{refundId}
+  method: get
+  operationId: retrieve-specific-refund
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
+- path: /api/v2_1/shops/{shopId}
+  method: get
+  operationId: retrieve-shop-data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - client_credentials
+- path: /api/v2_1/reports/{reportId}
+  method: get
+  operationId: retrieve-statement
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2_1/tokens/{token}
+  method: delete
+  operationId: delete-a-token
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - trusted_merchant
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
