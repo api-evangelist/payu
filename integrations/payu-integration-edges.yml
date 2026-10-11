@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/payu/integrations
+- https://n8n.io/integrations/payu/
+- https://composio.dev/toolkits/payu
+- https://monid.ai/tools/payu
+checked:
+- https://composio.dev/toolkits/payu
+- https://monid.ai/tools/payu
+- https://n8n.io/integrations/payu/
+- https://zapier.com/apps/payu/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
