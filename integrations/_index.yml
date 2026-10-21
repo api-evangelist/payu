@@ -21,3 +21,29 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: payu-cocoapods-trunk
+  label: CocoaPods trunk
+  partner_name: CocoaPods trunk
+  category: iOS SDK (CocoaPods)
+  type: register
+  channel: package-registry
+  evidence: https://cocoapods.org/pods/PayULite
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: CocoaPods trunk (cdn.cocoapods.org Specs; github.com/CocoaPods/Specs)
+    spec_file: null
+    role: cocoapods-publisher
+    registered_name: PayU
+    matched_domain: payu.com
+    matched_by: domain
+    pods:
+    - pod: PayULite
+      version: 1.0.14
+      homepage: http://developers.payu.com/en/mobile_sdk.html
+      deprecated: false
+    signal_note: latest podspec homepage (domain) + authors (name); pods, versions and counts are context
+    detected_by: sweep-mobile-sdk-index.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null

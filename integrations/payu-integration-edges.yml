@@ -10,6 +10,10 @@ checked:
 - https://monid.ai/tools/payu
 - https://n8n.io/integrations/payu/
 - https://zapier.com/apps/payu/integrations
+- https://cdn.cocoapods.org/all_pods.txt
+- https://cert.appdefensealliance.org/certifications
+- https://play.google.com/sdks
+- https://search.maven.org/solrsearch/select
 summary: null
 marketplace_apps: []
 edges:
@@ -28,4 +32,30 @@ edges:
     property: components.schemas.PSP
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+- partner_name: CocoaPods trunk
+  partner: null
+  partner_match: register
+  type: register
+  channel: package-registry
+  relationship: distribution-channel
+  direction: provider-built
+  evidence: https://cocoapods.org/pods/PayULite
+  category: iOS SDK (CocoaPods)
+  contract_reference:
+    register: CocoaPods trunk (cdn.cocoapods.org Specs; github.com/CocoaPods/Specs)
+    spec_file: null
+    role: cocoapods-publisher
+    registered_name: PayU
+    matched_domain: payu.com
+    matched_by: domain
+    pods:
+    - pod: PayULite
+      version: 1.0.14
+      homepage: http://developers.payu.com/en/mobile_sdk.html
+      deprecated: false
+    signal_note: latest podspec homepage (domain) + authors (name); pods, versions and counts are context
+    detected_by: sweep-mobile-sdk-index.py
+    detected: '2026-10-21'
+  detected_by: sweep-mobile-sdk-index.py
+  first_seen: '2026-10-21'
 templates: []
