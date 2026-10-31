@@ -64,37 +64,171 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-PayU is a global payment platform operating in 50+ emerging markets across Central & Eastern Europe, Latin America, the Middle East, and Africa. It processes 4 million financial transactions daily for 450,000+ merchants through 450+ local payment methods.
+PayU is a global payment platform operating in 50+ emerging markets across Central & Eastern Europe, Latin America, the Middle East, and Africa. It provides REST APIs for payment processing, order management, refunds, payouts, subscriptions, fraud detection, checkout optimization, marketplace operations, tokenization, and financial services. PayU processes 4 million transactions daily for 450,000+ merchants through 450+ local payment methods.
 
-PayU provides REST APIs for payment processing, order management, refunds, payouts, subscriptions, fraud detection, checkout optimization, marketplace operations, tokenization, and financial services across multiple regional platforms.
+**Areas:** Payments · Payment Processing · Fintech · Financial Services · Subscription · Fraud Prevention · Checkout · Marketplace · Tokenization · Emerging Markets
 
-## APIs
+## PayU on APIs.io
 
-- **PayU Europe REST API** — Payment processing for CEE markets (Poland, Czech Republic, Hungary, Romania). OAuth 2.0 authentication. Supports orders, refunds, payouts, BLIK, 3DS 2.0, marketplace operations, and multi-currency pricing.
-- **PayU India REST API** — Payment processing for India. Covers hosted checkout, payment links, recurring payments, subscriptions, save cards/vault, split settlements, wallets, cross-border payments, pre-authorization, payouts, and settlements.
-- **PayU Latam Payments API** — Payment processing across Latin America (Argentina, Brazil, Chile, Colombia, Mexico, Peru). Includes HMAC-authenticated Pricing API for querying installment financing options.
-- **PayU Enterprise API (PaymentsOS)** — Enterprise payment orchestration via a single API across multiple payment providers. Dynamic routing, risk management, network tokens, webhooks, and settlement reporting.
+Everything profiled for PayU is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/payu/](https://apis.io/providers/payu/)** — or go straight to one of the APIs or properties below.
 
-## Developer Resources
+### APIs (18)
 
-- Developer Portal (Global): https://corporate.payu.com/developer-documentation/
-- Europe API Docs: https://developers.payu.com/europe/
-- India API Docs: https://docs.payu.in/
-- LatAm API Docs: https://developers.payulatam.com/
-- Enterprise/PaymentsOS Docs: https://developers.paymentsos.com/docs.html
-- GitHub Organization: https://github.com/PayU
-- Blog: https://corporate.payu.com/blog/
+- [PayU India REST API](https://apis.io/apis/payu/payu-india-rest-api/) — REST API for payment processing in India. Supports hosted checkout, payment links, recurring payments, subscription management, save cards / vault, split…
+- [PayU Latam Payments API](https://apis.io/apis/payu/payu-latam-payments-api/) — REST API for payment processing across Latin America including Argentina, Brazil, Chile, Colombia, Mexico, and Peru. Supports payments, refunds, recurring…
+- [PayU Enterprise API (PaymentsOS)](https://apis.io/apis/payu/payu-enterprise-api/) — Enterprise-grade payment orchestration API powered by PaymentsOS. Provides a single entry point for processing payments across multiple provider connections…
+- [PayU Authorize API](https://apis.io/apis/payu/payu-authorize-api/) — Authentication involves generating an OAuth token, which is used for further communication with PayU servers. To create a standard OAuth token, you will…
+- [PayU Card Installments API](https://apis.io/apis/payu/payu-card-installments-api/) — Retrieve available card installments options for specific card. For merchants operating on the Romanian market (Requires contact with a Payu representative…
+- [PayU FX-Reference API](https://apis.io/apis/payu/payu-fx-reference-api/) — According to regulations in the European Union countries, payment service providers and parties providing currency conversion services at the point of sale…
+- [PayU Marketplace-Seller API](https://apis.io/apis/payu/payu-marketplace-seller-api/) — In PayU, as a marketplace, you have the capability to manage various aspects of your submerchants.
+- [PayU Marketplace-Verification API](https://apis.io/apis/payu/payu-marketplace-verification-api/) — PayU is required by the Anti-Money Laundering Act to verify customers in this context. For this purpose, we provide a collection of endpoints to make it…
+- [PayU MCP API](https://apis.io/apis/payu/payu-mcp-api/) — We can convert your customers' payments to the currency of your shop set up with PayU.
+- [PayU Order API](https://apis.io/apis/payu/payu-order-api/) — Order is the basic payment request for the standard integration with PayU. > If the response to the payment creation request is returned with an **HTTP…
+- [PayU Partner-Merchant-Registration API](https://apis.io/apis/payu/payu-partner-merchant-registration-api/) — Below are the endpoints that enable you to create the necessary entities (Firm, Url, Shop, POS) for your partner.
+- [PayU Payment-Methods API](https://apis.io/apis/payu/payu-payment-methods-api/) — Retrieving payment methods allows you to remove the threat of presenting a disabled payment method with white-label integration. It also gives you the…
+- [PayU Payout API](https://apis.io/apis/payu/payu-payout-api/) — To widthraw funds from the PayU account you need to create a payout.
+- [PayU PF-Submerchant-Registration API](https://apis.io/apis/payu/payu-pf-submerchant-registration-api/) — Payment Facilitator (PF) is an advanced form of partnership where PayU cedes much of its own responsibilities, like e.g. Know Your Customer (KYC) and…
+- [PayU Refund API](https://apis.io/apis/payu/payu-refund-api/) — The PayU system fully supports refunds for the processed payments, the balance of which is transferred directly to the buyer's account.
+- [PayU Shop API](https://apis.io/apis/payu/payu-shop-api/) — Shop is the main entity in the management panel. It is the place where you can manage incoming transactions processed by PayU.
+- [PayU Statements API](https://apis.io/apis/payu/payu-statements-api/) — Statements in PayU are comprehensive reports that provide a detailed summary of completed purchase transactions, refunds, and payouts.
+- [PayU Token API](https://apis.io/apis/payu/payu-token-api/) — With tokenization, we are confident that your customers' card data is protected from third parties.
 
-## Status Pages
+### Published properties
 
-- Europe: https://status.secure.payu.com/
-- Hub (Enterprise): https://status.paymentsos.com/
-- LatAm: https://status.payulatam.com/
-- India: https://pp2admin.payu.in/
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Files
+#### Agentic access (1)
 
-- `apis.yml` — APIs.json 0.19 provider catalog
-- `plans/payu-plans-pricing.yml` — Plan and pricing information
-- `rate-limits/payu-rate-limits.yml` — Rate limit details by API region
-- `finops/payu-finops.yml` — FinOps guidance for cost optimization and governance
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Payu Agentic Access](https://apis.io/agentic-access/payu/payu-agentic-access/)
+
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [PayU GPO Europe REST API - JSON Schemas](https://apis.io/schemas/payu/payu-europe-rest-api/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Payu Europe Rest Api Context](https://apis.io/jsonld/payu/payu-europe-rest-api/)
+
+#### Collections (15)
+
+Postman and Open Collection request collections.
+
+- [PayU GPO Europe REST Authorize API](https://apis.io/collections/payu/open-payu-authorize-api/)
+- [PayU GPO Europe REST Authorize Card Installments API](https://apis.io/collections/payu/open-payu-card-installments-api/)
+- [PayU GPO Europe REST Authorize FX-Reference API](https://apis.io/collections/payu/open-payu-fx-reference-api/)
+- [PayU GPO Europe REST Authorize Marketplace-Seller API](https://apis.io/collections/payu/open-payu-marketplace-seller-api/)
+- [PayU GPO Europe REST Authorize Marketplace-Verification API](https://apis.io/collections/payu/open-payu-marketplace-verification-api/)
+- [PayU GPO Europe REST Authorize MCP API](https://apis.io/collections/payu/open-payu-mcp-api/)
+- [PayU GPO Europe REST Authorize Order API](https://apis.io/collections/payu/open-payu-order-api/)
+- [PayU GPO Europe REST Authorize Partner-Merchant-Registration API](https://apis.io/collections/payu/open-payu-partner-merchant-registration-api/)
+- [PayU GPO Europe REST Authorize Payment-Methods API](https://apis.io/collections/payu/open-payu-payment-methods-api/)
+- [PayU GPO Europe REST Authorize Payout API](https://apis.io/collections/payu/open-payu-payout-api/)
+- [PayU GPO Europe REST Authorize PF-Submerchant-Registration API](https://apis.io/collections/payu/open-payu-pf-submerchant-registration-api/)
+- [PayU GPO Europe REST Authorize Refund API](https://apis.io/collections/payu/open-payu-refund-api/)
+- [PayU GPO Europe REST Authorize Shop API](https://apis.io/collections/payu/open-payu-shop-api/)
+- [PayU GPO Europe REST Authorize Statements API](https://apis.io/collections/payu/open-payu-statements-api/)
+- [PayU GPO Europe REST Authorize Token API](https://apis.io/collections/payu/open-payu-token-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [PayU — jsonschema rules](https://apis.io/rules/payu/payu-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Payu Authentication](https://apis.io/security/payu/payu-authentication/)
+- [Payu Domain Security](https://apis.io/security/payu/payu-domain-security/)
+- [Payu Trust Center](https://apis.io/security/payu/payu-trust-center/)
+- [Payu Vulnerability Disclosure](https://apis.io/security/payu/payu-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Payu Plans Pricing](https://apis.io/plans/payu/payu-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Payu Rate Limits](https://apis.io/rate-limits/payu/payu-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Payu Finops](https://apis.io/finops/payu/payu-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://corporate.payu.com/)
+- [Documentation](https://corporate.payu.com/developer-documentation/)
+- [Pricing](https://corporate.payu.com/contact-us/)
+- [Blog](https://corporate.payu.com/blog/)
+- [Status](https://status.paymentsos.com/)
+
+## API Evangelist rating
+
+**Kin Score 41.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 60.4 |
+| Contract governance | 23.5 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
+
+**Agent readiness 30.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 25.0** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/payu/](https://apis.io/providers/payu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PayU: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/payu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
